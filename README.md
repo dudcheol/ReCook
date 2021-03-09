@@ -86,7 +86,6 @@
 
 #### 참고 URL
 
-```
 - 만개의 레시피 크롤링 방법
 
     [PYTHON 크롤링을 이용한 만개의 레시피 크롤링 - 1](https://da-nika.tistory.com/9)
@@ -96,4 +95,3 @@
 - 공공데이터 농수산물
 
     [공공데이터 포털](https://www.data.go.kr/data/15058981/openapi.do)
-```
