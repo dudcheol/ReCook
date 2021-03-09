@@ -4,8 +4,6 @@
 
 #### 디자인 관련 URL
 
-```
-
 - UI 템플릿 사이트
     - [https://uiplace.com/](https://uiplace.com/)
     - [https://dribbble.com/](https://dribbble.com/)
@@ -13,5 +11,3 @@
 
 - 색상 조합 사이트
     - [https://palettable.io/](https://palettable.io/)
-
-```
