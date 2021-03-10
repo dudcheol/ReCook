@@ -11,3 +11,4 @@
 ##### USER
 
 ![기능명세_USER](/uploads/5615d65555a2732a3aaa7fec1b461e93/기능명세_USER.png)
+![기능명세_MAIN](/uploads/ebc012609c5cf2b6935191ebeab02726/기능명세_MAIN.png)
