@@ -2,7 +2,7 @@
 
 #### 내 프로필
 
-![내_프로필_-_찜](/uploads/411b7f212803957fd52031d5c5c48fc7/내_프로필_-_찜.png)
+![profile_like](/uploads/49f8f5711ddd3803e02f9e20ee569803/profile_like.png)
 
-![내_프로필_-_리뷰](/uploads/67403110be787f9f0781d494b4690979/내_프로필_-_리뷰.png)
+![profile_review](/uploads/add51d5effa6fdfc88d535db3dcba558/profile_review.png)
 
