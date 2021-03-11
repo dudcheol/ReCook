@@ -16,7 +16,9 @@
 
 ![기능명세_MAIN](/uploads/ebc012609c5cf2b6935191ebeab02726/기능명세_MAIN.png)
 
+##### RECEIPE
 
+![레시피](/uploads/c21ceaca1f08b755a0cf63fa596a9b59/레시피.png)
 
 #### 재료분류
 
