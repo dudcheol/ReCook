@@ -14,7 +14,11 @@
 
 ##### MAIN
 
+##### Ver.1
 ![기능명세_MAIN](/uploads/ebc012609c5cf2b6935191ebeab02726/기능명세_MAIN.png)
+
+##### Ver.2
+![기능명세_MAIN_ver2](/uploads/4a2f2df66aff8a4a620a903660e9a0b4/기능명세_MAIN_ver2.png)
 
 ##### RECEIPE
 
@@ -39,4 +43,3 @@
 #### 알레르기 분류 상세 내용
 
 ![알레르기_분류](/uploads/45e0d545f3d055b2518fc97fe0f9f8e2/알레르기_분류.PNG)
-
