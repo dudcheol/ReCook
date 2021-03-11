@@ -30,3 +30,13 @@
 
 ![재료분류](/uploads/ed1fd7b32a36aeec90d0ff27fe12b47c/재료분류.PNG)
 
+#### 알레르기 분류
+
+#### 알레르기 분류 URL
+
+[https://docs.google.com/spreadsheets/d/13C0Zk1RRDbkOYTx92gF2Jab-xkozFhsOyMVCmViq4bM/edit#gid=1518512695](https://docs.google.com/spreadsheets/d/13C0Zk1RRDbkOYTx92gF2Jab-xkozFhsOyMVCmViq4bM/edit#gid=1518512695)
+
+#### 알레르기 분류 상세 내용
+
+![알레르기_분류](/uploads/45e0d545f3d055b2518fc97fe0f9f8e2/알레르기_분류.PNG)
+
