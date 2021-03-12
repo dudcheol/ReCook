@@ -1,24 +1,6 @@
 ## [ 특화 PJT 서울 2반 4팀 ]
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ebd2a839-b413-4161-b981-75038c80b41f/.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ebd2a839-b413-4161-b981-75038c80b41f/.png)
-
-윤지
-
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6c912703-ff01-48c3-a393-0f9decee988a/.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6c912703-ff01-48c3-a393-0f9decee988a/.png)
-
-영철
-
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a83a7069-65c1-4b71-85dc-6edc5623abc2/.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a83a7069-65c1-4b71-85dc-6edc5623abc2/.gif)
-
-유정
-
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a04affd9-126b-4eca-b211-80927c8d2fa0/.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a04affd9-126b-4eca-b211-80927c8d2fa0/.png)
-
-수영
-
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e2437d32-6692-41fc-b239-5b14eec25292/.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e2437d32-6692-41fc-b239-5b14eec25292/.png)
-
-일규
+![image](/uploads/c8b236b5dde6d25e0289f39dacda88e0/image.png)
 
 
 
@@ -32,16 +14,20 @@
 
 - **코로나19로 인한 외식 감소, 집에서 요리하는 횟수 증가**
 
-    ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/edfe0c3a-3d4b-44dc-8e8a-a5116171cdb5/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/edfe0c3a-3d4b-44dc-8e8a-a5116171cdb5/Untitled.png)
+    ![image](/uploads/b16ec610ff8611892a579225ec2f3f89/image.png)
 
 - **배달음식의 소비가 증가함에 따라, 남은 음식을 버리게 되어 음식물 쓰레기 증가**
 
-    ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1dc702df-59f1-4bd6-a791-dc363c7bc596/_2021-03-12__10.30.41.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1dc702df-59f1-4bd6-a791-dc363c7bc596/_2021-03-12__10.30.41.png)
+    ![image](/uploads/375c43ecefe4cb6bebe509f562ef5498/image.png)
+    
+    
 
 ## 😎  서비스 컨셉
 
 - **남은 재료로 만들 수 있는 요리의 레시피를 추천해주는 서비스**
 - **재료에 맞는 레시피를 일일이 찾아봐야 하는 불편함 해소**
+
+
 
 ## 🐣  **기존 서비스와의 차별성**
 
