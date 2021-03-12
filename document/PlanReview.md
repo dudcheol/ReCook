@@ -95,17 +95,17 @@
 ## 🔗  **참고사이트**
 
 - 만개의 레시피 크롤링 방법
-[https://da-nika.tistory.com/9] (https://da-nika.tistory.com/9)
+[https://da-nika.tistory.com/9](https://da-nika.tistory.com/9)
 
 -	공공데이터 농수산물
-[https://www.data.go.kr/data/15058981/openapi.do] (https://www.data.go.kr/data/15058981/openapi.do)
+[https://www.data.go.kr/data/15058981/openapi.do](https://www.data.go.kr/data/15058981/openapi.do)
 
 
 
 ## 🍯  **프로젝트 Honey Tip**
 
 - 색 조합 자동 추천 사이트
-[https://palettable.io/] (https://palettable.io/)
+[https://palettable.io/](https://palettable.io/)
 
 - 노션에서 간트차트 작성 가능 (프로젝트 일정 시각화) : 노션 - 타임라인 템플릿
 ![개발일정](/uploads/91e3ddfa6a4bf8354d1ef61f4c6ebbdc/개발일정.png)
