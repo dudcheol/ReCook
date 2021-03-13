@@ -1,5 +1,9 @@
 # 와이어프레임
 
+#### 메인
+
+![메인](/uploads/d595fedf4f3b68b6b5f27ca0e474da8c/메인.png)
+
 #### 내 프로필
 
 ![profile_like](/uploads/49f8f5711ddd3803e02f9e20ee569803/profile_like.png)
@@ -33,3 +37,4 @@
 #### 레시피
 ![레시피](/uploads/8ff469ae0d81977f7d014702c93ee1a4/레시피.png)
 ![레시피2](/uploads/a226d922b731859fe35adf8467b20899/레시피2.png)
+
