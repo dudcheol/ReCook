@@ -65,8 +65,7 @@
 
 - Backend : Spring Boot, MySQL
 
-- Frontend : Vue.js
-
+- Frontend : Vuejs
 
 ## 💎  **빅데이터 이용**
 
