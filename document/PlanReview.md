@@ -3,7 +3,6 @@
 ![image](/uploads/c8b236b5dde6d25e0289f39dacda88e0/image.png)
 
 
-
 # 🍩**"ReCook"**🍣
 
 #### 🍤🍔 **남은 재료를 이용한 레시피 추천 서비스** 🍕🍟
@@ -65,8 +64,7 @@
 
 - Backend : Spring Boot, MySQL
 
-- Frontend : Vue.js
-
+- Frontend : Vuejs
 
 ## 💎  **빅데이터 이용**
 
