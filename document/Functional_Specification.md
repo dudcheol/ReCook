@@ -8,6 +8,10 @@
 
 #### 기능 명세 상세 내용
 
+##### FINAL
+
+![기능명세_final](/uploads/a719f725c989d563437baec80aa891aa/기능명세_final.png)
+
 ##### USER
 
 ![기능명세_USER](/uploads/5615d65555a2732a3aaa7fec1b461e93/기능명세_USER.png)
