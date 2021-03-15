@@ -2,4 +2,4 @@
 
 ### Architecture
 
-![Architecture](/uploads/557030522371d8ee7248986b56dbfde9/Architecture.png)  
+![Architecture](/uploads/869cd96ea15dd3f5bed11a4df2dd78e8/Architecture.png)
