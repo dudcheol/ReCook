@@ -4,7 +4,9 @@
 
 ![메인](/uploads/42610da1ebbfb9f15133e00b8caeab01/메인.png)
 ![메인2](/uploads/0b2896438c64f315c0f0a64ccaa02348/메인2.png)
+
 ![전체보기클릭양식](/uploads/e5d63f1e59b78e0f8737bf676cf74032/전체보기클릭양식.png)
+![122](/uploads/7206180a58a55331cf9a78710a91d893/122.png)
 
 ### 2. 남은 재료 선택 
 
