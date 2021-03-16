@@ -2,7 +2,7 @@
 
 ### Architecture
 
-![Architecture](/uploads/869cd96ea15dd3f5bed11a4df2dd78e8/Architecture.png)
+![msa](/uploads/eeade2c59bb3831e856b325073876bce/msa.PNG)
 
 ### Usecase
 
