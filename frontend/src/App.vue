@@ -14,6 +14,10 @@ export default {
 </script>
 
 <style>
+* {
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+}
+
 .pointer {
   cursor: pointer;
 }
