@@ -105,4 +105,5 @@
 [https://palettable.io/](https://palettable.io/)
 
 - 노션에서 간트차트 작성 가능 (프로젝트 일정 시각화) : 노션 - 타임라인 템플릿
-![개발일정](/uploads/91e3ddfa6a4bf8354d1ef61f4c6ebbdc/개발일정.png)
+
+![전체개발일정](/uploads/9828fd89fbcbdf473784baa251490f4a/전체개발일정.png)
