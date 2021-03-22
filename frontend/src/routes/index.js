@@ -30,6 +30,17 @@ const routes = [
       },
     ],
   },
+  {
+    path: '/page',
+    component: () => import('@/views/Newpage'),
+    children: [
+      {
+        path: 'fridge',
+        name: 'Fridge',
+        component: () => import('@/views/fridge/Fridge'),
+      },
+    ],
+  },
 ];
 
 const router = new Router({
