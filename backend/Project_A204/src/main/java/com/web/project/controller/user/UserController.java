@@ -2,13 +2,10 @@ package com.web.project.controller.user;
 
 import com.web.project.dao.user.UserDao;
 import com.web.project.model.BasicResponse;
-import com.web.project.model.user.LoginRequest;
 import com.web.project.model.user.SignupRequest;
 import com.web.project.model.user.User;
 import com.web.project.service.user.JwtService;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 
@@ -40,30 +37,30 @@ public class UserController {
 
 	@Autowired
 	private JwtService jwtService;
-
+	
 	@Autowired
 	private UserDao userDao;
-
+	
 	public static final Logger logger = LoggerFactory.getLogger(UserController.class);
-
+	
 	@PostMapping("/signup")
 	@ApiOperation(value = "가입하기")
 	public Object signup(@Valid @RequestBody SignupRequest request) {
-
+		
 		ResponseEntity response = null;
 		HttpStatus status = null;
 		final BasicResponse result = new BasicResponse();
-
+		
 		Optional<User> userEmailOpt = userDao.findUserByUserEmail(request.getUserEmail());
 
 		try {
 			// 이메일 중복 확인
-			if (userEmailOpt.isPresent()) {
+			if(userEmailOpt.isPresent()) {
 				status = HttpStatus.INTERNAL_SERVER_ERROR;
-			} else {
+			}else {
 				result.status = true;
 				result.data = "success";
-
+				
 				User user = new User();
 				// 1. USER_ID => 13자리 랜덤 수 부여
 				user.setUserId(certified_key());
@@ -73,24 +70,24 @@ public class UserController {
 				user.setUserName(request.getUserName());
 				// 4. 비밀번호
 				user.setUserPassword(request.getUserPassword());
-
+				
 				result.object = userDao.save(user);
 				status = HttpStatus.OK;
 			}
 		} catch (RuntimeException e) {
-			logger.error("정보조회 실패 : {}", e);
-			status = HttpStatus.INTERNAL_SERVER_ERROR;
-		}
-
+            logger.error("정보조회 실패 : {}", e);
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+		
 		return new ResponseEntity<>(result, status);
 	}
-
+	
 	// 13자리 인증키 만들어주는 Method
 	private String certified_key() {
 		Random random = new Random();
 		StringBuilder sb = new StringBuilder();
 		int num = 0;
-
+		
 		sb.append('u');
 		do {
 			num = random.nextInt(75) + 48;
@@ -102,56 +99,5 @@ public class UserController {
 		} while (sb.length() < 13);
 
 		return sb.toString();
-	}
-
-	@PostMapping("/login")
-	@ApiOperation(value = "로그인")
-	public ResponseEntity<Map<String, Object>> login(@RequestBody LoginRequest loginRequest) {
-
-		Map<String, Object> resultMap = new HashMap<>();
-		HttpStatus status = null;
-
-		Optional<User> userOpt = userDao.findUserByUserEmailAndUserPassword(loginRequest.getUserEmail(),
-				loginRequest.getUserPassword());
-
-		try {
-			if (userOpt.isPresent()) {
-				// Swagger용!
-				final BasicResponse result = new BasicResponse();
-				result.status = true;
-				result.data = "success";
-
-				// Optional => 일반 객체
-				User loginUser = userOpt.get();
-
-				String token = jwtService.create(loginUser);
-				resultMap.put("auth-token", token);
-				logger.trace("로그인 토큰 정보 : {}", token);
-				// USER ID (KEY)
-				resultMap.put("user-id", loginUser.getUserId());
-				// 이메일
-				resultMap.put("user-email", loginUser.getUserEmail());
-				// 이름
-				resultMap.put("user-name", loginUser.getUserName());
-				// 비밀번호
-				resultMap.put("user-password", loginUser.getUserPassword());
-				// 이미지
-				resultMap.put("user-image", loginUser.getUserImage());
-				// 소개글
-				resultMap.put("user-introduce", loginUser.getUserIntroduce());
-				
-				result.object = resultMap;
-				status = HttpStatus.OK;
-			} else {
-				resultMap.put("message", "로그인 실패");
-				status = HttpStatus.INTERNAL_SERVER_ERROR;
-			}
-		} catch (RuntimeException e) {
-			logger.error("로그인 실패 : {}", e);
-			resultMap.put("message", e.getMessage());
-			status = HttpStatus.INTERNAL_SERVER_ERROR;
-		}
-
-		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
 }
