@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-baseUrl = 'http://www.10000recipe.com/recipe/'
+baseUrl = 'https://haemukja.com/recipes/'
 
 # def CrawlingBetweenRanges(mydb, startRecipeId, endRecipeId):
 #     for i in range(startRecipeId, endRecipeId):
@@ -25,15 +25,19 @@ def PageCrawler(recipeUrl):
 
     recipe_title = []  # 레시피 제목
     recipe_source = {}  # 레시피 재료
+    
     # recipe_step = [] #레시피 순서
 
     try:
+        #레시피 재료
         res = soup.find('div', 'view2_summary')
         res = res.find('h3')
         recipe_title.append(res.get_text())
         res = soup.find('div', 'view2_summary_info')
         recipe_title.append(res.get_text().replace('\n', ''))
         res = soup.find('div', 'ready_ingre3')
+
+
     except(AttributeError):
         return
 
@@ -58,9 +62,27 @@ def PageCrawler(recipeUrl):
         for name in value:
             if key == "[재료]" or key == "[양념]":
                 print(name)
-                
+    
+#레시피 조리 순서
+    soup = BeautifulSoup(page.content, 'html.parser')
+    try:
+        res_cook =soup.find('div', 'view_step')
+        # res_cook=soup1.find('div','view_step_cont')
+        for n in res_cook.find_all('div','media-body'):
+            step=n.get_text()#조리 설명
+            print(step)
+           
+        res_cook=soup.findAll('div', 'view_step_cont')       
+        for n in res_cook:
+            n=n.find("img") #이미지
+            print(n.get('src'))
+  
+
+    except(AttributeError):
+        return
+    
     return (recipe_all)
 
     
 if __name__ == "__main__":
-    PageCrawler('6894096')
+    PageCrawler('734')# 제육볶음
