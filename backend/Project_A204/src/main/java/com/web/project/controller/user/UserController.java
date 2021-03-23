@@ -4,6 +4,7 @@ import com.web.project.dao.user.UserDao;
 import com.web.project.model.BasicResponse;
 import com.web.project.model.user.LoginRequest;
 import com.web.project.model.user.SignupRequest;
+import com.web.project.model.user.UpdateRequest;
 import com.web.project.model.user.User;
 import com.web.project.service.user.JwtService;
 
@@ -12,6 +13,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -20,7 +22,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,30 +46,30 @@ public class UserController {
 
 	@Autowired
 	private JwtService jwtService;
-	
+
 	@Autowired
 	private UserDao userDao;
-	
+
 	public static final Logger logger = LoggerFactory.getLogger(UserController.class);
-	
+
 	@PostMapping("/signup")
-	@ApiOperation(value = "가입하기")
+	@ApiOperation(value = "회원가입")
 	public Object signup(@Valid @RequestBody SignupRequest request) {
-		
+
 		ResponseEntity response = null;
 		HttpStatus status = null;
 		final BasicResponse result = new BasicResponse();
-		
+
 		Optional<User> userEmailOpt = userDao.findUserByUserEmail(request.getUserEmail());
 
 		try {
 			// 이메일 중복 확인
-			if(userEmailOpt.isPresent()) {
+			if (userEmailOpt.isPresent()) {
 				status = HttpStatus.INTERNAL_SERVER_ERROR;
-			}else {
+			} else {
 				result.status = true;
 				result.data = "success";
-				
+
 				User user = new User();
 				// 1. USER_ID => 13자리 랜덤 수 부여
 				user.setUserId(certified_key());
@@ -73,24 +79,24 @@ public class UserController {
 				user.setUserName(request.getUserName());
 				// 4. 비밀번호
 				user.setUserPassword(request.getUserPassword());
-				
+
 				result.object = userDao.save(user);
 				status = HttpStatus.OK;
 			}
 		} catch (RuntimeException e) {
-            logger.error("정보조회 실패 : {}", e);
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-		
+			logger.error("정보조회 실패 : {}", e);
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+
 		return new ResponseEntity<>(result, status);
 	}
-	
+
 	// 13자리 인증키 만들어주는 Method
 	private String certified_key() {
 		Random random = new Random();
 		StringBuilder sb = new StringBuilder();
 		int num = 0;
-		
+
 		sb.append('u');
 		do {
 			num = random.nextInt(75) + 48;
@@ -139,7 +145,7 @@ public class UserController {
 				resultMap.put("user-image", loginUser.getUserImage());
 				// 소개글
 				resultMap.put("user-introduce", loginUser.getUserIntroduce());
-				
+
 				result.object = resultMap;
 				status = HttpStatus.OK;
 			} else {
@@ -153,5 +159,73 @@ public class UserController {
 		}
 
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+	
+	@GetMapping("/mypage")
+	@ApiOperation(value = "마이페이지")
+	public ResponseEntity<Map<String, Object>> mypage(HttpServletRequest req) {
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = HttpStatus.ACCEPTED;
+		try {
+			// 토큰에 저장되어 있는 정보를 가져올 map
+			resultMap.putAll(jwtService.get(req.getHeader("auth-token")));
+			status = HttpStatus.OK;
+		} catch (RuntimeException e) {
+			logger.error("정보조회 실패 : {}", e);
+			resultMap.put("message", e.getMessage());
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+
+	@PutMapping("/update/{userId}")
+	@ApiOperation(value = "정보 수정하기")
+	public ResponseEntity<Map<String, Object>> update(@RequestBody UpdateRequest updateRequest,
+			@PathVariable("userId") String userId) {
+		// 토큰에 저장되어 있는 정보를 가져올 map
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = null;
+
+		try {
+			Optional<User> userOpt = userDao.findUserByUserId(userId);
+
+			userOpt.ifPresent(selectUser -> {
+				selectUser.setUserName(updateRequest.getUserName());
+				selectUser.setUserPassword(updateRequest.getUserPassword());
+				selectUser.setUserImage(updateRequest.getUserImage());
+				selectUser.setUserIntroduce(updateRequest.getUserIntroduce());
+
+				userDao.save(selectUser);
+			});
+
+			status = HttpStatus.OK;
+		} catch (RuntimeException e) {
+			logger.error("정보 수정 실패 : {}", e);
+			resultMap.put("message", e.getMessage());
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+
+	@DeleteMapping("/delete/{userId}")
+	@ApiOperation(value = "정보 삭제하기")
+	public void delete(@PathVariable("userId") String userId) {
+
+		Map<String, Object> resultMap = new HashMap<>();
+
+		try {
+			Optional<User> userOpt = userDao.findUserByUserId(userId);
+
+			// DELETE(D)
+			userOpt.ifPresent(selectUser -> {
+				userDao.delete(selectUser);
+			});
+
+		} catch (RuntimeException e) {
+			logger.error("정보 삭제 실패 : {}", e);
+			resultMap.put("message", e.getMessage());
+		}
+
 	}
 }
