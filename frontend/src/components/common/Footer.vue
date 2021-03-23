@@ -10,7 +10,7 @@
       <v-icon>mdi-view-dashboard</v-icon>
     </v-btn>
 
-    <v-btn class="bottom-btn" value="Fridge" x-large>
+    <v-btn class="bottom-btn" value="Fridge" x-large @click="sheet = !sheet">
       <v-icon large>mdi-fridge-outline</v-icon>
     </v-btn>
 
@@ -23,6 +23,27 @@
       <span>Mypage</span>
       <v-icon>mdi-account</v-icon>
     </v-btn>
+
+    <v-bottom-sheet v-model="sheet">
+      <v-card class="rounded-t-xl pa-1">
+        <v-list>
+          <v-subheader>
+            <span class="text-h5 font-weight-black black--text">나의 냉장고</span>
+          </v-subheader>
+          <v-list-item v-for="tile in tiles" :key="tile.title" @click="sheet = false">
+            <!-- <v-list-item-avatar>
+              <v-avatar size="32px" tile>
+                <img
+                  :src="`https://cdn.vuetifyjs.com/images/bottom-sheets/${tile.img}`"
+                  :alt="tile.title"
+                />
+              </v-avatar>
+            </v-list-item-avatar> -->
+            <v-list-item-title class="pl-3">{{ tile.title }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-card>
+    </v-bottom-sheet>
   </v-bottom-navigation>
 </template>
 
@@ -32,13 +53,19 @@ export default {
   props: {},
   data() {
     return {
+      sheet: false,
       selectedView: 'Main',
+      tiles: [
+        { img: 'messenger.png', title: '남은 재료 고르기' },
+        { img: 'google.png', title: '남은 재료로 레시피 추천받기' },
+      ],
     };
   },
   computed: {},
   watch: {
     selectedView: function(val) {
-      this.$router.push({ name: val });
+      if (val == 'Fridge') return;
+      this.$router.replace({ name: val });
     },
   },
   methods: {},
