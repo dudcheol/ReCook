@@ -19,4 +19,7 @@ const opts = {
   },
 };
 
+const VBtn = Vue.component('VBtn');
+VBtn.options.props.ripple.default = false;
+
 export default new Vuetify(opts);
