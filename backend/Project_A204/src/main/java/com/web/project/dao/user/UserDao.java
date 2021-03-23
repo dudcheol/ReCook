@@ -10,7 +10,9 @@ import com.web.project.model.user.User;
 @Repository
 public interface UserDao extends JpaRepository<User, String>{
 	
-	Optional<User> findUserByUserEmail(String userEmail);
-	Optional<User> findUserByUserEmailAndUserPassword(String userEmail, String userPassword);
-	Optional<User> findUserByUserId(String userId);
+	User findUserByUserEmail(String userEmail);
+	User findUserByUserEmailAndUserPassword(String userEmail, String userPassword);
+	User findUserByUserId(String userId);
+	
+	Optional<User> findUserOptionalByUserId(String userId);
 }
