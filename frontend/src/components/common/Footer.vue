@@ -1,12 +1,10 @@
 <template>
-  <v-bottom-navigation v-model="selectedView" grow absolute flat>
+  <v-bottom-navigation v-model="selectedView" grow fixed flat>
     <v-btn class="bottom-btn" value="Main">
-      <span>Home</span>
       <v-icon>mdi-home</v-icon>
     </v-btn>
 
     <v-btn class="bottom-btn" value="Feed">
-      <span>Feed</span>
       <v-icon>mdi-view-dashboard</v-icon>
     </v-btn>
 
@@ -15,12 +13,10 @@
     </v-btn>
 
     <v-btn class="bottom-btn" value="Watch">
-      <span>Watch</span>
       <v-icon>mdi-play-circle</v-icon>
     </v-btn>
 
     <v-btn class="bottom-btn" value="Mypage">
-      <span>Mypage</span>
       <v-icon>mdi-account</v-icon>
     </v-btn>
 

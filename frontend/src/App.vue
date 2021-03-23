@@ -21,4 +21,8 @@ export default {
 .pointer {
   cursor: pointer;
 }
+
+.bg-color {
+  background-color: #f8f9fb;
+}
 </style>
