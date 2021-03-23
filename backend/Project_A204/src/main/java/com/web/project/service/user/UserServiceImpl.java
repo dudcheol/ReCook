@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.web.project.controller.user.UserController;
 import com.web.project.dao.user.UserDao;
+import com.web.project.model.user.LoginGoogleRequest;
 import com.web.project.model.user.LoginRequest;
 import com.web.project.model.user.SignupRequest;
 import com.web.project.model.user.UpdateRequest;
@@ -45,6 +46,30 @@ public class UserServiceImpl implements UserService {
 			user.setUserName(request.getUserName());
 			// 4. 비밀번호
 			user.setUserPassword(request.getUserPassword());
+		} catch (RuntimeException e) {
+			logger.error("회원가입 실패 : {}", e);
+		}
+
+		return userDao.save(user);
+	}
+	
+	@Override
+	public User signupGoogle(LoginGoogleRequest request) {
+		User user = new User();
+
+		try {
+			// 1. USER_ID => 13자리 랜덤 수 부여
+			user.setUserId(certified_key());
+			// 2. 이메일
+			user.setUserEmail(request.getUserEmail());
+			// 3. 이름
+			user.setUserName(request.getUserName());
+			// 4. 비밀번호
+			user.setUserPassword(request.getUserGid());
+			// 5. GID
+			user.setUserGid(request.getUserGid());
+			// 6. 이미지
+			user.setUserImage(request.getUserImage());
 		} catch (RuntimeException e) {
 			logger.error("회원가입 실패 : {}", e);
 		}
@@ -97,7 +122,49 @@ public class UserServiceImpl implements UserService {
 				resultMap.put("user-image", user.getUserImage());
 				// 소개글
 				resultMap.put("user-introduce", user.getUserIntroduce());
+				
+				status = HttpStatus.OK;
+			} else {
+				resultMap.put("message", "로그인 실패");
+				status = HttpStatus.INTERNAL_SERVER_ERROR;
+			}
+		} catch (Exception e) {
+			logger.error("로그인 실패 : {}", e);
+			resultMap.put("message", e.getMessage());
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
 
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+	
+	@Override
+	public ResponseEntity<Map<String, Object>> loginGoogle(LoginGoogleRequest loginGoogleRequest) {
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = null;
+
+		User user = userDao.findUserByUserEmailAndUserPassword(loginGoogleRequest.getUserEmail(),
+				loginGoogleRequest.getUserGid());
+
+		try {
+			if (user != null) {
+				String token = jwtService.create(user);
+				resultMap.put("auth-token", token);
+				logger.trace("로그인 토큰 정보 : {}", token);
+				// USER ID (KEY)
+				resultMap.put("user-id", user.getUserId());
+				// 이메일
+				resultMap.put("user-email", user.getUserEmail());
+				// 이름
+				resultMap.put("user-name", user.getUserName());
+				// 비밀번호
+				resultMap.put("user-password", user.getUserPassword());
+				// 이미지
+				resultMap.put("user-image", user.getUserImage());
+				// 소개글
+				resultMap.put("user-introduce", user.getUserIntroduce());
+				// GID
+				resultMap.put("user-gid", user.getUserGid());
+				
 				status = HttpStatus.OK;
 			} else {
 				resultMap.put("message", "로그인 실패");
@@ -175,7 +242,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User findByUserId(String userId) {
+	public User findUserByUserId(String userId) {
 		return userDao.findUserByUserId(userId);
 	}
 
@@ -188,5 +255,12 @@ public class UserServiceImpl implements UserService {
 	public User findUserByUserEmailAndUserPassword(String userEmail, String userPassword) {
 		return userDao.findUserByUserEmailAndUserPassword(userEmail, userPassword);
 	}
+
+	@Override
+	public User findUserByUserGid(String userGid) {
+		return userDao.findUserByUserGid(userGid);
+	}
+
+	
 
 }

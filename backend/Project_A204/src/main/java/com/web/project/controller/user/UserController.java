@@ -1,5 +1,6 @@
 package com.web.project.controller.user;
 
+import com.web.project.model.user.LoginGoogleRequest;
 import com.web.project.model.user.LoginRequest;
 import com.web.project.model.user.SignupRequest;
 import com.web.project.model.user.UpdateRequest;
@@ -48,6 +49,21 @@ public class UserController {
 		user = userService.signup(request);
 		
 		return new ResponseEntity<User>(user, HttpStatus.OK);
+	}
+	
+	@PostMapping("/login/google")
+	@ApiOperation(value = "구글 로그인", notes="회원인 경우 로그인, 아닌 경우 회원 가입")
+	public ResponseEntity<Map<String, Object>> loginGoogle(@RequestBody LoginGoogleRequest loginGoogleRequest) {
+		User googleUser = userService.findUserByUserGid(loginGoogleRequest.getUserGid());
+		
+		// 회원이 이미 있는 경우 => 로그인으로
+		if(googleUser != null) {
+			return userService.loginGoogle(loginGoogleRequest);
+		}
+		
+		// 회원이 없는 경우 => 가입 후 로그인으로
+		googleUser = userService.signupGoogle(loginGoogleRequest);
+		return userService.loginGoogle(loginGoogleRequest);
 	}
 
 	@PostMapping("/login")

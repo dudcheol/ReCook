@@ -30,4 +30,6 @@ public class User {
 	private String userImage;
 
 	private String userIntroduce;
+	
+	private String userGid;
 }

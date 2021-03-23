@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.ResponseEntity;
 
+import com.web.project.model.user.LoginGoogleRequest;
 import com.web.project.model.user.LoginRequest;
 import com.web.project.model.user.SignupRequest;
 import com.web.project.model.user.UpdateRequest;
@@ -15,7 +16,11 @@ public interface UserService {
 	
 	public User signup(SignupRequest request);
 	
+	public User signupGoogle(LoginGoogleRequest request);
+	
 	public ResponseEntity<Map<String, Object>> login(LoginRequest loginRequest);
+	
+	public ResponseEntity<Map<String, Object>> loginGoogle(LoginGoogleRequest loginGoogleRequest);
 	
 	public ResponseEntity<Map<String, Object>> mypage(HttpServletRequest request);
 	
@@ -23,7 +28,9 @@ public interface UserService {
 	
 	public void delete(String userId);
 	
-	public User findByUserId(String userId);
+	public User findUserByUserId(String userId);
+	
+	public User findUserByUserGid(String userGid);
 	
 	public User findUserByUserEmail(String userEmail);
 	
