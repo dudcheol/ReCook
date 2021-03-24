@@ -26,7 +26,8 @@ def PageCrawler(recipeUrl):
         time = title
         title= title.find('h1')
         recipe_title=title.find('strong').get_text()
-
+        #print(recipe_title)
+        
         #레시피 조리시간
         time=time.find('dl','info_basic')
         recipe_time += time.find('dd').get_text()+' '
@@ -67,8 +68,8 @@ def PageCrawler(recipeUrl):
         tag = tag.find_all('a')
         for n in tag:
             recipe_tag.append(n.get_text())# 태그
-        print(recipe_tag)
-        print(recipe_time)
+        # print(recipe_tag)
+        # print(recipe_time)
 
     except(AttributeError):
         return
