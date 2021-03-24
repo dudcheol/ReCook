@@ -2,8 +2,9 @@
   <div class="pb-2">
     <v-card rounded="xl" width="150" class="text-center mr-4" outlined>
       <v-img
-        src="https://lh3.googleusercontent.com/proxy/I12hFRFealT8Ol4CupTEmqXE0yFMb_ouy11p8Gp_LshlwbsitHRP4AuKKYVsP6MeVEs3PJFToQJ7DLLMsGzsVUol-Pxnj5P5Rn3RsceylJAd6UNrXLsmq10yeB_YwowhP2t_ziAW5wtA22vGwEvGpAtNr5mWh_1b6elG63DrfsdRZreVAR7x00G3zR4_QEEdFfeg4E_qCB883BTtDeEoLU9EQnesl_lbw14SJQ185En7msYA7QaAXHuzFKfzGyt0FbM8DJREBluUEzuBA_ZZSt4KhOBknfkBskYAy6Lf-O1DgEJODb47uSHI3m-ru1LNWXM-fPA8u83a9Y6OzxwSecGfzrPcdVrlTlk_mbjEWu6pVoKAMuy76bDmVkIafY_FR-9QlBzsHVcU"
+        src="https://news.kbs.co.kr/data/news/2017/01/04/3405677_bH6.jpg"
         max-height="150"
+        min-height="150"
       />
       <v-container class="mb-3">
         <v-row>
