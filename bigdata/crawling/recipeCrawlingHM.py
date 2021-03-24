@@ -1,9 +1,13 @@
 import requests
 from bs4 import BeautifulSoup
+import json, csv
 
 baseUrl = 'https://haemukja.com/recipes/'
 recipe = []
 
+def toJson():
+    with open('recipe3.json', 'w', encoding='utf-8') as file :
+        json.dump(recipe, file, ensure_ascii=False, indent='\t')
 
 def PageCrawler(recipeUrls, recipeUrlse):
     for num in range(recipeUrls,recipeUrlse):
@@ -87,7 +91,7 @@ def PageCrawler(recipeUrls, recipeUrlse):
                         }
 
             recipe.append(recipe_dict)
-            
+            print(num)
         # 존재하지 않는 레시피 건너뜀
         except(AttributeError):
             continue
@@ -96,4 +100,7 @@ def PageCrawler(recipeUrls, recipeUrlse):
 
 
 if __name__ == "__main__":
-    PageCrawler(734,739)  
+    #PageCrawler(1,5000)  
+    PageCrawler(5000,6000)  
+    # print(recipe)
+    toJson()
