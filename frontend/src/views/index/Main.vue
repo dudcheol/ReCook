@@ -16,7 +16,7 @@
         </v-row>
         <v-row>
           <v-col class="pa-0">
-            <div class="recipe-box"></div>
+            <recipe-list></recipe-list>
           </v-col>
         </v-row>
       </v-col>
@@ -59,7 +59,10 @@
 </template>
 
 <script>
-export default {};
+import RecipeList from '@/components/RecipeList.vue';
+export default {
+  components: { RecipeList },
+};
 </script>
 
 <style scoped>
