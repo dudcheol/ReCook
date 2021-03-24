@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar flat color="white">
+  <v-app-bar flat color="white" fixed>
     <v-row>
       <v-col cols="2" class="pa-0">
         <v-btn icon @click="$router.go(-1)">
@@ -33,31 +33,32 @@ export default {
       immediate: true,
       handler(type) {
         switch (type) {
-          case 'fridge-ingredient':
+          case 'FridgeIngredient':
             this.left = 'close';
             this.center = '남은 재료 선택';
             this.right = '';
             break;
-          case 'fridge-recomm':
+          case 'FridgeRecomm':
             this.left = 'close';
             this.center = '남은 재료로 추천받기';
             this.right = '';
             break;
-          case 'recipe-detail':
+          case 'RecipeDetail':
             this.left = 'chevron-left';
             this.center = '';
             this.right = 'heart';
             break;
-          case 'review-detail':
+          case 'ReviewDetail':
             this.left = 'close';
             this.center = '';
             this.right = '';
             break;
-          case 'profile-edit':
+          case 'ProfileEdit':
             this.left = 'close';
             this.center = '프로필 수정';
             this.right = '';
         }
+        console.log('%cHeaderNewpage.vue line:61 type', 'color: #007acc;', type);
       },
     },
   },

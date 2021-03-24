@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header />
-    <router-view></router-view>
+    <router-view class="mt-14"></router-view>
   </div>
 </template>
 
@@ -13,11 +13,7 @@ export default {
   },
   props: {},
   data() {
-    return {
-      left: '',
-      right: '',
-      center: '',
-    };
+    return {};
   },
   computed: {},
   watch: {},

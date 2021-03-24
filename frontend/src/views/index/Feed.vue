@@ -58,7 +58,7 @@ export default {
     },
     clickItem(index) {
       console.log('%cFeed.vue line:60 index', 'color: #007acc;', index);
-      // this.list.splice(index, 1);
+      this.$router.push({ name: 'ReviewDetail', params: { type: 'ReviewDetail', id: index } });
     },
     onAppend({ groupKey, startLoading }) {
       const list = this.list;

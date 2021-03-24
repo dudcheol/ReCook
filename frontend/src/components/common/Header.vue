@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar flat color="white">
+  <v-app-bar flat color="white" fixed>
     <v-app-bar-nav-icon></v-app-bar-nav-icon>
     <v-spacer></v-spacer>
     <v-toolbar-title>
@@ -30,13 +30,11 @@ export default {
         switch (type) {
           case 'main':
             break;
-          case 'fridge-recomm':
+          case 'feed':
             break;
-          case 'recipe-detail':
+          case 'watch':
             break;
-          case 'review-detail':
-            break;
-          case 'profile-edit':
+          case 'mypage':
             break;
           default:
         }
