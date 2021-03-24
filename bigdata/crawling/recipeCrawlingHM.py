@@ -4,10 +4,10 @@ import json, csv
 
 baseUrl = 'https://haemukja.com/recipes/'
 recipe = []
-
+recipe_list = {}
 def toJson():
-    with open('recipe3.json', 'w', encoding='utf-8') as file :
-        json.dump(recipe, file, ensure_ascii=False, indent='\t')
+    with open('recipesample.json', 'w', encoding='utf-8') as file :
+        json.dump(recipe_list, file, ensure_ascii=False, indent='\t')
 
 def PageCrawler(recipeUrls, recipeUrlse):
     for num in range(recipeUrls,recipeUrlse):
@@ -101,6 +101,7 @@ def PageCrawler(recipeUrls, recipeUrlse):
 
 if __name__ == "__main__":
     #PageCrawler(1,5000)  
-    PageCrawler(5000,6000)  
+    PageCrawler(1,50)  
     # print(recipe)
+    recipe_list={"recipe_list":recipe}
     toJson()
