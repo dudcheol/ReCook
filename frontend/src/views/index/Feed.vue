@@ -16,13 +16,14 @@
   >
     <!-- Loading element via named slot -->
     <div slot="loading">Loading...</div>
-    <div class="item" v-for="(item, i) in list" :key="item.key" @click="remove(i)">
+    <div class="review" v-for="(item, i) in list" :key="item.key" @click="clickItem(i)">
       <div class="thumbnail">
         <img
           :src="`https://naver.github.io/egjs-infinitegrid/assets/image/${(item.num + 1) % 59}.jpg`"
         />
       </div>
-      <div class="info">egjs {{ item.num }}</div>
+      <div class="text-subtitle-2 text-center font-weight-bold">레시피 리뷰 {{ item.num }}</div>
+      <div class="text-caption text-center">작성자</div>
     </div>
   </GridLayout>
 </template>
@@ -55,8 +56,9 @@ export default {
       this.start = start + num;
       return items;
     },
-    remove(index) {
-      this.list.splice(index, 1);
+    clickItem(index) {
+      console.log('%cFeed.vue line:60 index', 'color: #007acc;', index);
+      // this.list.splice(index, 1);
     },
     onAppend({ groupKey, startLoading }) {
       const list = this.list;
@@ -74,32 +76,26 @@ export default {
       this.list.splice(totalIndex, 1);
     },
   },
-  mounted() {
-    // this.$refs.ig.getStatus();
-  },
+  mounted() {},
 };
 </script>
 
 <style scoped>
-.item {
+.review {
   width: 172px;
   opacity: 1;
 }
-.item .thumbnail {
-  max-height: 300px;
+.review .thumbnail {
+  max-height: 500px;
   overflow: hidden;
-  border-radius: 8px;
+  /* border-radius: 8px; */
 }
-.item .thumbnail img {
+.review .thumbnail img {
   width: 100%;
-  border-radius: 8px;
+  border-radius: 10px;
+  line-height: 0 !important;
 }
-.item .info {
-  margin-top: 10px;
-  font-weight: bold;
-  color: #777;
-}
-.item.animate {
+.review.animate {
   transition: opacity ease 1s;
   transition-delay: 0.2s;
   opacity: 1;
