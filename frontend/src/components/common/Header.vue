@@ -23,7 +23,26 @@ export default {
     return {};
   },
   computed: {},
-  watch: {},
+  watch: {
+    '$route.params.type': {
+      immediate: true,
+      handler(type) {
+        switch (type) {
+          case 'main':
+            break;
+          case 'fridge-recomm':
+            break;
+          case 'recipe-detail':
+            break;
+          case 'review-detail':
+            break;
+          case 'profile-edit':
+            break;
+          default:
+        }
+      },
+    },
+  },
   methods: {},
 };
 </script>

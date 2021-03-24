@@ -35,7 +35,9 @@
                 />
               </v-avatar>
             </v-list-item-avatar> -->
-            <v-list-item-title class="pl-3">{{ tile.title }}</v-list-item-title>
+            <v-list-item-title class="pl-3" @click="openPage(tile.name, tile.type)">{{
+              tile.title
+            }}</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-card>
@@ -52,8 +54,18 @@ export default {
       sheet: false,
       selectedView: 'Main',
       tiles: [
-        { img: 'messenger.png', title: '남은 재료 고르기' },
-        { img: 'google.png', title: '남은 재료로 레시피 추천받기' },
+        {
+          img: 'messenger.png',
+          title: '남은 재료 고르기',
+          name: 'Fridge',
+          type: 'fridge-ingredient',
+        },
+        {
+          img: 'google.png',
+          title: '남은 재료로 추천받기',
+          name: 'Fridge',
+          type: 'fridge-recomm',
+        },
       ],
     };
   },
@@ -64,7 +76,11 @@ export default {
       this.$router.replace({ name: val });
     },
   },
-  methods: {},
+  methods: {
+    openPage(name, type) {
+      this.$router.push({ name, params: { type } });
+    },
+  },
 };
 </script>
 
