@@ -16,7 +16,7 @@
 ![레시피](/uploads/8ff469ae0d81977f7d014702c93ee1a4/레시피.png)
 ![레시피2](/uploads/a226d922b731859fe35adf8467b20899/레시피2.png)
 
-### 4. 리뷰 보기
+### 4. 리뷰 보기.
 
 ![1](/uploads/45e3d7064699afa5e29f120eee6b3b18/1.png)
 ![사진리뷰모음ver2](/uploads/27ce22af56ab7785c5453f8690814210/사진리뷰모음ver2.png)
