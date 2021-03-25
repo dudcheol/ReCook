@@ -52,35 +52,35 @@ public class RecipeServiceImpl implements RecipeService{
 				
 				JSONObject result = (JSONObject) recipeList.get(i);
 				
-				System.out.println("#" + i + " Recipe Read");
+//				System.out.println("#" + i + " Recipe Read");
 				
 				// 레시피 제목
 				String recipeTitle = (String) result.get("recipe_title");
 				recipe.setRecipeTitle(recipeTitle);
-				System.out.println("recipeTitle : " + recipeTitle);
+//				System.out.println("recipeTitle : " + recipeTitle);
 				
 				// 레시피의 조리 시간  ( x인분 )
 				String recipeTime = (String) result.get("recipe_time");
 				recipe.setRecipeTime(recipeTime);
-				System.out.println("recipeTime : " + recipeTime);
+//				System.out.println("recipeTime : " + recipeTime);
 			
 				// 레시피 재료 총 목록 + 수량 포함
 				String recipeIngredientString = (String) result.get("recipe_ingredient_string");
 				recipe.setRecipeIngredient(recipeIngredientString);
-				System.out.println("recipeIngredientString : " + recipeIngredientString);
+//				System.out.println("recipeIngredientString : " + recipeIngredientString);
 				
 				// 레시피 내용
 				String recipeContext = (String) result.get("recipe_context");
 				recipe.setRecipeContext(recipeContext);
-				System.out.println("recipeContext : " + recipeContext);
+//				System.out.println("recipeContext : " + recipeContext);
 				
 				// 레시피 이미지
 				String recipeImage = (String) result.get("recipe_image");
 				recipe.setRecipeImage(recipeImage);
-				System.out.println("recipeImage : " + recipeImage);
+//				System.out.println("recipeImage : " + recipeImage);
 				
 				// 레시피 메인 이미지
-				StringTokenizer st = new StringTokenizer(recipeImage, "\n");
+				StringTokenizer st = new StringTokenizer(recipeImage, "####");
 				String mainImage = "";
 				while(st.hasMoreTokens()) {
 					mainImage = st.nextToken();
@@ -97,7 +97,7 @@ public class RecipeServiceImpl implements RecipeService{
 //				System.out.print("recipeHashtagList : ");
 //				System.out.println(recipeHashtagList);
 				
-				System.out.println("===============================");
+//				System.out.println("===============================");
 				
 				// recipe DB에 저장
 				recipeDao.save(recipe);
@@ -129,8 +129,11 @@ public class RecipeServiceImpl implements RecipeService{
 				resultMap.put("recipe-context", recipe.getRecipeContext());
 				// 레시피 재료
 				resultMap.put("recipe-ingredient", recipe.getRecipeIngredient());
+				StringTokenizer st = new StringTokenizer(recipe.getRecipeTime(), "\n");
 				// 레시피 시간
-				resultMap.put("recipe-time", recipe.getRecipeTime());
+				resultMap.put("recipe-time", st.nextToken());
+				// 레시피 인분
+				resultMap.put("recipe-person", st.nextToken());
 				// 레시피 메인 사진
 				resultMap.put("recipe-main-image", recipe.getRecipeMainImage());
 				
@@ -174,8 +177,11 @@ public class RecipeServiceImpl implements RecipeService{
 					resultMap.put("recipe-context", recipe.getRecipeContext());
 					// 레시피 재료
 					resultMap.put("recipe-ingredient", recipe.getRecipeIngredient());
+					StringTokenizer st = new StringTokenizer(recipe.getRecipeTime(), "\n");
 					// 레시피 시간
-					resultMap.put("recipe-time", recipe.getRecipeTime());
+					resultMap.put("recipe-time", st.nextToken());
+					// 레시피 인분
+					resultMap.put("recipe-person", st.nextToken());
 					// 레시피 메인 사진
 					resultMap.put("recipe-main-image", recipe.getRecipeMainImage());
 					
