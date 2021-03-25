@@ -55,7 +55,7 @@ def PageCrawler(recipeUrls, recipeUrlse):
                 if(not cnt):
                     cnt = "적당히"
                 recipe_source.append(ingredient)
-                recipe_source_string += ingredient+' '+cnt+' '
+                recipe_source_string += ingredient+'####'+cnt+'####'
             # print(recipe_source_string)
 
 
@@ -67,8 +67,8 @@ def PageCrawler(recipeUrls, recipeUrlse):
             for n in step:
                 # 사진
                 recipe_step_img += n.find('div',
-                                        'img-cover').find("img").get("src")+'\n'
-                recipe_step_explain += n.find('p').get_text()+'\n'  # 설명
+                                        'img-cover').find("img").get("src")+'####'
+                recipe_step_explain += n.find('p').get_text()+'####'  # 설명
             # print(recipe_step_explain)
             # print(recipe_step_img)
 
@@ -100,8 +100,8 @@ def PageCrawler(recipeUrls, recipeUrlse):
 
 
 if __name__ == "__main__":
-    PageCrawler(1,6000)  
-    # PageCrawler(1,50)  
+    # PageCrawler(1,6000)  
+    PageCrawler(1,50)  
     # print(recipe)
     recipe_list={"recipe_list":recipe}
     toJson()
