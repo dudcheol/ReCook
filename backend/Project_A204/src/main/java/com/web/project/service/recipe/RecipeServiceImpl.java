@@ -1,6 +1,10 @@
 package com.web.project.service.recipe;
 
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 import org.json.simple.JSONArray;
@@ -9,6 +13,8 @@ import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.web.project.dao.recipe.RecipeDao;
@@ -65,15 +71,21 @@ public class RecipeServiceImpl implements RecipeService{
 				
 				// 레시피 내용
 				String recipeContext = (String) result.get("recipe_context");
-				recipe.setRecipeContext("hi");
-//				recipe.setRecipeContext(recipeContext);
+				recipe.setRecipeContext(recipeContext);
 				System.out.println("recipeContext : " + recipeContext);
 				
 				// 레시피 이미지
 				String recipeImage = (String) result.get("recipe_image");
-				recipe.setRecipeImage("hi");
-//				recipe.setRecipeImage(recipeImage);
+				recipe.setRecipeImage(recipeImage);
 				System.out.println("recipeImage : " + recipeImage);
+				
+				// 레시피 메인 이미지
+				StringTokenizer st = new StringTokenizer(recipeImage, "\n");
+				String mainImage = "";
+				while(st.hasMoreTokens()) {
+					mainImage = st.nextToken();
+				}
+				recipe.setRecipeMainImage(mainImage);
 				
 				// 레시피 재료 => Recipe_Ingredients 테이블로
 				JSONArray recipeIngredientList = (JSONArray) result.get("recipe_ingredient");
@@ -94,6 +106,91 @@ public class RecipeServiceImpl implements RecipeService{
 			logger.error("JSON File 읽어오기 실패 : {}", e);
 		}
 		
+	}
+
+	@Override
+	public ResponseEntity<Map<String, Object>> showRecipe(int recipeId) {
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = null;
+		
+		Recipe recipe = recipeDao.findRecipeByRecipeId(recipeId);
+		
+		try {
+			if(recipe != null) {
+				// 레시피 아이디
+				resultMap.put("recipe-id", recipe.getRecipeId());
+				// 레시피 제목
+				resultMap.put("recipe-title", recipe.getRecipeTitle());
+				// 레시피 생성 날짜
+				resultMap.put("recipe-created", recipe.getRecipeCreated());
+				// 레시피 이미지
+				resultMap.put("recipe-image", recipe.getRecipeImage());
+				// 레시피 내용
+				resultMap.put("recipe-context", recipe.getRecipeContext());
+				// 레시피 재료
+				resultMap.put("recipe-ingredient", recipe.getRecipeIngredient());
+				// 레시피 시간
+				resultMap.put("recipe-time", recipe.getRecipeTime());
+				// 레시피 메인 사진
+				resultMap.put("recipe-main-image", recipe.getRecipeMainImage());
+				
+				status = HttpStatus.OK;
+			}else {
+				resultMap.put("message", "해당 ID의 레시피 데이터가 없음");
+				status = HttpStatus.INTERNAL_SERVER_ERROR;
+			}
+		} catch (RuntimeException e) {
+			logger.error("레시피 정보 조회 실패 : {}", e);
+			resultMap.put("message", e.getMessage());
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		
+		return new ResponseEntity<Map<String,Object>>(resultMap, status);
+	}
+
+	@Override
+	public ResponseEntity<List<Map<String, Object>>> newRecipeList() {
+		List<Map<String, Object>> resultList = new ArrayList<Map<String,Object>>();
+		HttpStatus status = HttpStatus.OK;
+		
+		List<Recipe> newList = recipeDao.findTop10ByOrderByRecipeIdDesc();
+		
+		try {
+			if(newList != null) {
+				for (int i = 0; i < newList.size(); i++) {
+					Recipe recipe = newList.get(i);
+					
+					Map<String, Object> resultMap = new HashMap<>();
+					
+					// 레시피 아이디
+					resultMap.put("recipe-id", recipe.getRecipeId());
+					// 레시피 제목
+					resultMap.put("recipe-title", recipe.getRecipeTitle());
+					// 레시피 생성 날짜
+					resultMap.put("recipe-created", recipe.getRecipeCreated());
+					// 레시피 이미지
+					resultMap.put("recipe-image", recipe.getRecipeImage());
+					// 레시피 내용
+					resultMap.put("recipe-context", recipe.getRecipeContext());
+					// 레시피 재료
+					resultMap.put("recipe-ingredient", recipe.getRecipeIngredient());
+					// 레시피 시간
+					resultMap.put("recipe-time", recipe.getRecipeTime());
+					// 레시피 메인 사진
+					resultMap.put("recipe-main-image", recipe.getRecipeMainImage());
+					
+					resultList.add(resultMap);
+				}
+				status = HttpStatus.OK;
+			}else {
+				status = HttpStatus.INTERNAL_SERVER_ERROR;
+			}
+		} catch (RuntimeException e) {
+			logger.error("레시피 정보 조회 실패 : {}", e);
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		
+		return new ResponseEntity<List<Map<String,Object>>>(resultList, status);
 	}
 
 }
