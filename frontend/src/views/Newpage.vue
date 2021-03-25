@@ -1,19 +1,15 @@
 <template>
   <div>
     <Header />
-    <router-view class="pb-16 my-14"></router-view>
-    <Footer />
+    <router-view class="mt-14"></router-view>
   </div>
 </template>
 
 <script>
-import Header from '@/components/common/Header';
-import Footer from '@/components/common/Footer';
-
+import Header from '@/components/common/HeaderNewpage';
 export default {
   components: {
     Header,
-    Footer,
   },
   props: {},
   data() {
