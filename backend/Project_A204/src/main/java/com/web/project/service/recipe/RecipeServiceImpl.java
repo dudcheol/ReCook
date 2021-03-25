@@ -81,10 +81,7 @@ public class RecipeServiceImpl implements RecipeService{
 				
 				// 레시피 메인 이미지
 				StringTokenizer st = new StringTokenizer(recipeImage, "####");
-				String mainImage = "";
-				while(st.hasMoreTokens()) {
-					mainImage = st.nextToken();
-				}
+				String mainImage = st.nextToken();
 				recipe.setRecipeMainImage(mainImage);
 				
 				// 레시피 재료 => Recipe_Ingredients 테이블로
