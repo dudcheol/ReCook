@@ -58,7 +58,6 @@ export default {
             this.center = '프로필 수정';
             this.right = '';
         }
-        console.log('%cHeaderNewpage.vue line:61 type', 'color: #007acc;', type);
       },
     },
   },
