@@ -1,13 +1,13 @@
 <template>
   <div>
-    <WatchCardList />
+    <WatchCardItem v-for="(item, index) in 3" :key="index" />
   </div>
 </template>
 
 <script>
-import WatchCardList from '@/components/WatchCardList.vue';
+import WatchCardItem from './WatchCardItem.vue';
 export default {
-  components: { WatchCardList },
+  components: { WatchCardItem },
   data() {
     return {};
   },
