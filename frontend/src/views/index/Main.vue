@@ -16,7 +16,7 @@
         </v-row>
         <v-row>
           <v-col class="pa-0">
-            <recipe-list></recipe-list>
+            <RecipeCardList />
           </v-col>
         </v-row>
       </v-col>
@@ -59,9 +59,9 @@
 </template>
 
 <script>
-import RecipeList from '@/components/RecipeList.vue';
+import RecipeCardList from '@/components/RecipeCardList.vue';
 export default {
-  components: { RecipeList },
+  components: { RecipeCardList },
 };
 </script>
 

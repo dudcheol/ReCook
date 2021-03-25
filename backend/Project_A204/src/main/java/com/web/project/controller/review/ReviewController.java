@@ -3,7 +3,6 @@ package com.web.project.controller.review;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,11 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.web.project.model.review.Review;
 import com.web.project.model.review.ReviewUpload;
 import com.web.project.service.review.ReviewService;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -31,16 +28,14 @@ public class ReviewController {
 	@PostMapping("")
 	public ResponseEntity<String> createReview(ReviewUpload reviewUpload) {
 		
-		System.out.println(reviewUpload.getReviewImage().getContentType());
-		
-		String filePath = "/var/www/html/dist/img/review";
-		String fileName = "reviewId" + (reviewService.countAll() + 1) + "." + reviewUpload.getReviewImage().getContentType().split("/")[1];
+		String filePath = "/home/ubuntu/img";
+		String fileName = "review" + (reviewService.countAll() + 1) + "." + reviewUpload.getReviewImage().getContentType().split("/")[1];
 
 		File saveFile = new File(filePath, fileName);
 
 		try {
 			reviewUpload.getReviewImage().transferTo(saveFile);
-			fileName = "http://j4a204.p.ssafy.io/img/review/" + fileName;
+			fileName = "http://j4a204.p.ssafy.io/img/" + fileName;
 		}
 		catch (IOException e) {
 			e.printStackTrace();
@@ -82,6 +77,4 @@ public class ReviewController {
 		return new ResponseEntity<List<Review>>(reviewService.findByRecipe(recipeId), HttpStatus.OK);
 	}
 	
-	
-
 }
