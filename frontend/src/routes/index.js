@@ -30,6 +30,28 @@ const routes = [
       },
     ],
   },
+  {
+    path: '/',
+    component: () => import('@/views/Newpage'),
+    children: [
+      {
+        path: 'fridge/ingredient',
+        name: 'FridgeIngredient',
+        component: () => import('@/views/fridge/Ingredient'),
+      },
+      {
+        path: 'fridge/recomm',
+        name: 'FridgeRecomm',
+        component: () => import('@/views/fridge/Fridge'),
+      },
+      {
+        // path: 'review/:review_id',
+        path: 'review',
+        name: 'ReviewDetail',
+        component: () => import('@/views/user/ReviewDetail'),
+      },
+    ],
+  },
 ];
 
 const router = new Router({
