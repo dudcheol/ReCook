@@ -6,7 +6,7 @@ baseUrl = 'https://haemukja.com/recipes/'
 recipe = []
 recipe_list = {}
 def toJson():
-    with open('recipesample.json', 'w', encoding='utf-8') as file :
+    with open('recipe.json', 'w', encoding='utf-8') as file :
         json.dump(recipe_list, file, ensure_ascii=False, indent='\t')
 
 def PageCrawler(recipeUrls, recipeUrlse):
@@ -100,8 +100,8 @@ def PageCrawler(recipeUrls, recipeUrlse):
 
 
 if __name__ == "__main__":
-    #PageCrawler(1,5000)  
-    PageCrawler(1,50)  
+    PageCrawler(1,6000)  
+    # PageCrawler(1,50)  
     # print(recipe)
     recipe_list={"recipe_list":recipe}
     toJson()
