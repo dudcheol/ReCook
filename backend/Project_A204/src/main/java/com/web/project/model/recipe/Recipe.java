@@ -26,6 +26,8 @@ public class Recipe {
 	@Column(insertable = false, updatable = false)
 	private LocalDateTime recipeCreated;
 	
+	private String recipeMainImage;
+	
 	private String recipeImage;
 	
 	private String recipeContext;

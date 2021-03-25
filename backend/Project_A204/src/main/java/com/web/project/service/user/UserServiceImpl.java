@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDao userDao;
 
-	public static final Logger logger = LoggerFactory.getLogger(UserController.class);
+	public static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
 	@Override
 	public User signup(SignupRequest request) {
