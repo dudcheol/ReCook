@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex pl-4" style="overflow:auto">
-    <RecipeCardItem v-for="item in 5" :key="'listime-' + item" />
+    <RecipeCardItem v-for="item in datas" :key="item['recipe-id']" :data="item" />
   </div>
 </template>
 
@@ -11,12 +11,20 @@ export default {
   components: {
     RecipeCardItem,
   },
-  props: {},
+  props: {
+    datas: Array,
+  },
   data() {
     return {};
   },
   computed: {},
-  watch: {},
+  watch: {
+    // datas:{
+    //   immediate:true,
+    //   handler(val){
+    //   }
+    // }
+  },
   methods: {},
 };
 </script>
