@@ -3,7 +3,6 @@ package com.web.project.service.review;
 import java.util.List;
 import com.web.project.model.review.Review;
 
-
 public interface ReviewService {
 	
 	public Review createReview(Review review);

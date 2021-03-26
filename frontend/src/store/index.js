@@ -3,11 +3,13 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
-import user from '@/store/modules/user';
+import user from './modules/user';
+import recipe from './modules/recipe';
 
 const store = new Vuex.Store({
   modules: {
     user,
+    recipe,
   },
 });
 

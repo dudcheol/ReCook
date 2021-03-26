@@ -1,11 +1,20 @@
 <template>
   <div>
-    <h2>Watch</h2>
+    <WatchCardList />
   </div>
 </template>
 
 <script>
-export default {};
+import WatchCardList from '@/components/WatchCardList.vue';
+export default {
+  components: { WatchCardList },
+  data() {
+    return {};
+  },
+  computed: {},
+  watch: {},
+  methods: {},
+};
 </script>
 
 <style scoped></style>
