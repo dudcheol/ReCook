@@ -59,7 +59,6 @@ def PageCrawler(recipeUrls, recipeUrlse):
             # print(recipe_source_string)
 
 
-
             # 조리 순서
             step = soup.find('section', 'sec_detail')
             step = step.find("section", 'sec_rcp_step')
