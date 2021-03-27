@@ -24,6 +24,7 @@ def PageCrawler(recipeUrls, recipeUrlse):
         recipe_tag = []
         recipe_time = ''
 
+
         try:
 
             res = soup.find('section', 'sec_info')
