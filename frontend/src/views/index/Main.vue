@@ -2,11 +2,11 @@
   <v-container fluid>
     <v-row>
       <v-col class="pa-0">
-        <div class="banner"></div>
+        <div class="banner">banner area</div>
       </v-col>
     </v-row>
     <!-- 추천 레시피 -->
-    <v-row>
+    <v-row class="pb-4">
       <v-col>
         <v-row>
           <v-col class="d-flex justify-space-between align-center">
@@ -16,14 +16,14 @@
         </v-row>
         <v-row>
           <v-col class="pa-0">
-            <recipe-list></recipe-list>
+            <RecipeCardList :datas="recipeNewList" />
           </v-col>
         </v-row>
       </v-col>
     </v-row>
 
     <!-- 인기 레시피 -->
-    <v-row>
+    <v-row class="pb-4">
       <v-col>
         <v-row>
           <v-col class="d-flex justify-space-between align-center">
@@ -33,7 +33,7 @@
         </v-row>
         <v-row>
           <v-col class="pa-0">
-            <div class="recipe-box"></div>
+            <RecipeCardList :datas="recipeNewList" />
           </v-col>
         </v-row>
       </v-col>
@@ -50,7 +50,7 @@
         </v-row>
         <v-row>
           <v-col class="pa-0">
-            <div class="recipe-box"></div>
+            <RecipeCardList :datas="recipeNewList" />
           </v-col>
         </v-row>
       </v-col>
@@ -59,19 +59,36 @@
 </template>
 
 <script>
-import RecipeList from '@/components/RecipeList.vue';
+import RecipeCardList from '@/components/RecipeCardList.vue';
+import { mapActions, mapState } from 'vuex';
 export default {
-  components: { RecipeList },
+  components: { RecipeCardList },
+  props: {},
+  data() {
+    return {};
+  },
+  computed: {
+    ...mapState({
+      recipeNewList: (state) => state.recipe.recipeNewList,
+    }),
+  },
+  watch: {},
+  methods: {
+    ...mapActions(['addRecipeNewList']),
+  },
+  mounted() {
+    this.addRecipeNewList();
+  },
 };
 </script>
 
 <style scoped>
 .banner {
   height: 128px;
-  background-color: red;
+  background-color: lightgrey;
 }
 .recipe-box {
   height: 196px;
-  background-color: yellow;
+  background-color: lightgrey;
 }
 </style>
