@@ -100,7 +100,7 @@ export default {
     return {
       title: '연어 샐러드',
       hashtag: ['연어', '샐러드', '간편', '채식'],
-      rating: 3.5,
+      rating: 4.5,
       allergy: true,
       windowTop: 0,
     };
