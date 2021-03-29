@@ -8,4 +8,6 @@ import com.web.project.model.hashtag.Hashtag;
 @Repository
 public interface HashtagDao extends JpaRepository<Hashtag, String>{
 
+	Hashtag findHashtagByHashtagName(String hashtag);
+	
 }

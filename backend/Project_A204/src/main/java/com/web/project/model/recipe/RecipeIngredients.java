@@ -1,5 +1,7 @@
 package com.web.project.model.recipe;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,17 +14,15 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@IdClass(RecipeIngredientsPK.class)
+//@IdClass(RecipeIngredientsPK.class)
 @NoArgsConstructor
 @AllArgsConstructor
-public class RecipeIngredients {
+public class RecipeIngredients{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int ingredientsId;
 	
-	@Id
 	private int recipeId;
 	
-	@Id
 	private int smallId;
 }
