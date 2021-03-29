@@ -50,7 +50,7 @@ const routes = [
         component: () => import('@/views/user/ReviewDetail'),
       },
       {
-        path: 'recipe',
+        path: 'recipe/:recipe_id',
         name: 'RecipeDetail',
         component: () => import('@/views/recipe/RecipeDetail'),
       },
@@ -62,6 +62,13 @@ const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { x: 0, y: 0 };
+    }
+  },
 });
 
 export default router;
