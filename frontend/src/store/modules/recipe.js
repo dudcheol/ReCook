@@ -1,7 +1,8 @@
-import { getRecipeNewList } from '../../api/recipe';
+import { getRecipeById, getRecipeNewList } from '../../api/recipe';
 
 // initial state
 const state = () => ({
+  recipeInfo: {},
   recipeNewList: [],
 });
 
@@ -10,6 +11,18 @@ const getters = {};
 
 // actions
 const actions = {
+  addRecipeById({ commit }, recipe_id) {
+    getRecipeById(
+      recipe_id,
+      (response) => {
+        console.log('%crecipe.js line:18 response.data', 'color: #007acc;', response.data);
+        commit('setRecipeInfo', response.data);
+      },
+      (error) => {
+        console.log('%crecipe.js line:21 error', 'color: #007acc;', error);
+      }
+    );
+  },
   addRecipeNewList({ commit }) {
     getRecipeNewList(
       (response) => {
@@ -24,6 +37,9 @@ const actions = {
 
 // mutations
 const mutations = {
+  setRecipeInfo(state, payload) {
+    state.recipeInfo = payload;
+  },
   setRecipeNewList(state, payload) {
     state.recipeNewList = payload;
   },
