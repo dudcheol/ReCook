@@ -274,4 +274,52 @@ public class RecipeServiceImpl implements RecipeService {
 		return new ResponseEntity<List<Map<String, Object>>>(resultList, status);
 	}
 
+	@Override
+	public ResponseEntity<List<Map<String, Object>>> hotRecipeList() {
+		List<Map<String, Object>> resultList = new ArrayList<Map<String, Object>>();
+		HttpStatus status = HttpStatus.OK;
+
+		List<Recipe> hotList = recipeDao.findTop10ByOrderByRecipeCountDesc();
+
+		try {
+			if (hotList != null) {
+				for (int i = 0; i < hotList.size(); i++) {
+					Recipe recipe = hotList.get(i);
+
+					Map<String, Object> resultMap = new HashMap<>();
+
+					// 레시피 아이디
+					resultMap.put("recipe-id", recipe.getRecipeId());
+					// 레시피 제목
+					resultMap.put("recipe-title", recipe.getRecipeTitle());
+					// 레시피 생성 날짜
+					resultMap.put("recipe-created", recipe.getRecipeCreated());
+					// 레시피 이미지
+					resultMap.put("recipe-image", recipe.getRecipeImage());
+					// 레시피 내용
+					resultMap.put("recipe-context", recipe.getRecipeContext());
+					// 레시피 재료
+					resultMap.put("recipe-ingredient", recipe.getRecipeIngredient());
+					StringTokenizer st = new StringTokenizer(recipe.getRecipeTime(), "\n");
+					// 레시피 시간
+					resultMap.put("recipe-time", st.nextToken());
+					// 레시피 인분
+					resultMap.put("recipe-person", st.nextToken());
+					// 레시피 메인 사진
+					resultMap.put("recipe-main-image", recipe.getRecipeMainImage());
+
+					resultList.add(resultMap);
+				}
+				status = HttpStatus.OK;
+			} else {
+				status = HttpStatus.INTERNAL_SERVER_ERROR;
+			}
+		} catch (RuntimeException e) {
+			logger.error("레시피 정보 조회 실패 : {}", e);
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+
+		return new ResponseEntity<List<Map<String, Object>>>(resultList, status);
+	}
+
 }
