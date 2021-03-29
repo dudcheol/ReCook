@@ -62,11 +62,6 @@ export default {
   methods: {},
   mounted() {
     this.windowHeight = window.innerHeight - 56;
-    console.log(
-      '%cRecipeSlideItem.vue line:26 this.windowHeight',
-      'color: #007acc;',
-      this.windowHeight
-    );
   },
 };
 </script>
