@@ -101,8 +101,8 @@ def PageCrawler(recipeUrls, recipeUrlse):
 
 
 if __name__ == "__main__":
-    # PageCrawler(1,6000)  
-    PageCrawler(1,50)  
+    PageCrawler(1,6000)  
+    # PageCrawler(1,50)  
     # print(recipe)
     recipe_list={"recipe_list":recipe}
     toJson()
