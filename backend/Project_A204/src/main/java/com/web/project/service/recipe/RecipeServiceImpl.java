@@ -74,10 +74,10 @@ public class RecipeServiceImpl implements RecipeService {
 
 //				System.out.println("#" + i + " Recipe Read");
 				
-				Recipe skipTitle = recipeDao.findRecipeByRecipeTitle((String) result.get("recipe_title"));
+				Recipe skipRecipe = recipeDao.findRecipeByRecipeTitle((String) result.get("recipe_title"));
 				
 				// 이미 들어가 있는 데이터는 제외
-				if(skipTitle == null) {
+				if(skipRecipe == null) {
 					// 레시피 제목
 					String recipeTitle = (String) result.get("recipe_title");
 					recipe.setRecipeTitle(recipeTitle);
