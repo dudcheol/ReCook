@@ -1,6 +1,9 @@
 package com.web.project.dao.review;
 
 import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import com.web.project.model.review.Review;
@@ -14,5 +17,5 @@ public interface ReviewDao extends JpaRepository<Review, String> {
 	
 	public List<Review> findAllByRecipeId(int recipeId);
 	
-	public List<Review> findAllByOrderByReviewIdDesc();
+	public Page<Review> findAllByOrderByReviewIdDesc(Pageable pageable);
 }

@@ -7,6 +7,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -59,9 +61,9 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 	
 	@Override
-	public ResponseEntity<List<Review>> findAll() {
+	public ResponseEntity<Page<Review>> findAll(Pageable pageable) {
 		HttpStatus status = null;
-		List<Review> reviewList = reviewDao.findAllByOrderByReviewIdDesc();
+		Page<Review> reviewList = reviewDao.findAllByOrderByReviewIdDesc(pageable);
 		
 		try {
 			if(reviewList != null) {
@@ -75,7 +77,7 @@ public class ReviewServiceImpl implements ReviewService{
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
 		
-		return new ResponseEntity<List<Review>>(reviewList, status);
+		return new ResponseEntity<Page<Review>>(reviewList, status);
 	}
 	
 	@Override

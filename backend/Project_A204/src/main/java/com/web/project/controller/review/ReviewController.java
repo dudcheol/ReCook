@@ -3,6 +3,8 @@ package com.web.project.controller.review;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,8 +33,8 @@ public class ReviewController {
 	
 	@ApiOperation(value = "모든 리뷰 조회", notes = "모든 리뷰를 최신순으로 조회합니다.")
 	@GetMapping("/all")
-	public ResponseEntity<List<Review>> findAll() {
-		return reviewService.findAll();
+	public ResponseEntity<Page<Review>> findAll(Pageable pageable) {
+		return reviewService.findAll(pageable);
 	}
 	
 	@ApiOperation(value = "리뷰 세부 조회", notes = "리뷰 ID에 맞는 리뷰 내용을 조회합니다.")
