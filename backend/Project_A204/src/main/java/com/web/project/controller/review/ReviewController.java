@@ -1,6 +1,7 @@
 package com.web.project.controller.review;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -39,7 +40,7 @@ public class ReviewController {
 	
 	@ApiOperation(value = "리뷰 세부 조회", notes = "리뷰 ID에 맞는 리뷰 내용을 조회합니다.")
 	@GetMapping("/detail/{reviewId}")
-	public ResponseEntity<Review> findByReview(@PathVariable("reviewId") int reviewId) {
+	public ResponseEntity<Map<String, Object>> findByReview(@PathVariable("reviewId") int reviewId) {
 		return reviewService.findByReview(reviewId);
 	}
 	

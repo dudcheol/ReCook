@@ -2,7 +2,9 @@ package com.web.project.service.review;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,17 +15,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.web.project.dao.recipe.RecipeDao;
 import com.web.project.dao.review.ReviewDao;
-import com.web.project.exception.NoDataFoundException;
+import com.web.project.model.recipe.Recipe;
 import com.web.project.model.review.Review;
 import com.web.project.model.review.ReviewUpload;
-import com.web.project.service.recipe.RecipeServiceImpl;
 
 @Service
 public class ReviewServiceImpl implements ReviewService{
 	
 	@Autowired
 	private ReviewDao reviewDao;
+	
+	@Autowired
+	private RecipeDao recipeDao;
 	
 	public static final Logger logger = LoggerFactory.getLogger(ReviewServiceImpl.class);
 	
@@ -81,12 +86,21 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 	
 	@Override
-	public ResponseEntity<Review> findByReview(int reviewId) {
+	public ResponseEntity<Map<String, Object>> findByReview(int reviewId) {
 		HttpStatus status = null;
+		Map<String, Object> resultMap = new HashMap<>();
+		
 		Review review = reviewDao.findReviewByReviewId(reviewId);
 		
 		try {
 			if(review != null) {
+				resultMap.put("review", review);
+				
+				Recipe recipe = recipeDao.findRecipeByRecipeId(review.getRecipeId());
+				resultMap.put("recipeTitle", recipe.getRecipeTitle());
+				resultMap.put("recipeRating", recipe.getRecipeCount());
+				resultMap.put("recipeImage", recipe.getRecipeMainImage());
+				
 				status = HttpStatus.OK;
 			}else {
 				status = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -97,7 +111,7 @@ public class ReviewServiceImpl implements ReviewService{
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
 		
-		return new ResponseEntity<Review>(review, status);
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
 
 	@Override

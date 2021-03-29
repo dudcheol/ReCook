@@ -1,6 +1,7 @@
 package com.web.project.service.review;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +16,7 @@ public interface ReviewService {
 
 	public ResponseEntity<Page<Review>> findAll(Pageable pageable);
 	
-	public ResponseEntity<Review> findByReview(int reviewId);
+	public ResponseEntity<Map<String, Object>> findByReview(int reviewId);
 	
 	public ResponseEntity<List<Review>> findByUser(String userId);
 	
