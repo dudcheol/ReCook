@@ -3,30 +3,32 @@
     <v-row>
       <v-col>
         <ProfileSimpleItem
-          v-if="reviewInfo.user"
-          :username="reviewInfo.user.userName"
-          :src="reviewInfo.user.userImage"
+          v-if="info.review.user"
+          :username="info.review.user.userName"
+          :src="info.review.user.userImage"
+          @click="$router.push({ path: `/user/${info.review.user.userName}` })"
         />
       </v-col>
     </v-row>
     <v-row>
       <v-col class="pa-0">
-        <v-img :src="reviewInfo.reviewImage" max-height="500" aspect-ratio="1"> </v-img>
+        <v-img :src="info.review.reviewImage" max-height="500" aspect-ratio="1"> </v-img>
       </v-col>
     </v-row>
     <v-row>
-      <v-col @click="$router.push({ path: `/recipe/${reviewInfo.recipeId}` })">
+      <v-col>
         <RecipeSimpleItem
-          :title="reviewInfo.recipeTitle"
-          :rating="reviewInfo.recipeRating"
-          :src="reviewInfo.recipeImage"
+          :title="info.recipeTitle"
+          :rating="info.recipeRating"
+          :src="info.recipeImage"
+          @click="$router.push({ path: `/recipe/${info.review.recipeId}` })"
         />
       </v-col>
     </v-row>
     <v-divider class="my-3"></v-divider>
     <v-row>
       <v-col class="text-body-1 font-weight-regular">
-        {{ reviewInfo.reviewContext }}
+        {{ info.review.reviewContext }}
       </v-col>
     </v-row>
   </v-container>
@@ -41,13 +43,11 @@ export default {
   components: { ProfileSimpleItem, RecipeSimpleItem },
   props: {},
   data() {
-    return {
-      content: '리뷰 테스트 화면입니다.',
-    };
+    return {};
   },
   computed: {
     ...mapState({
-      reviewInfo: (state) => state.review.reviewInfo,
+      info: (state) => state.review.reviewInfo,
     }),
   },
   watch: {

@@ -10,9 +10,9 @@ function getReviewById(reviewId, success, fail) {
     .catch(fail);
 }
 
-function getAllReviews(pageNumber, pageSize, success, fail) {
+function getAllReviews(page, size, success, fail) {
   instance
-    .get(`${COMMON}/all`, { params: { pageNumber, pageSize } })
+    .get(`${COMMON}/all`, { params: { page, size } })
     .then(success)
     .catch(fail);
 }

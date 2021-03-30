@@ -35,9 +35,8 @@
       class="review"
       v-for="item in list"
       :key="'reviewItem' + item.reviewId"
-      @click="$router.push({ path: `review/${1}` })"
+      @click="$router.push({ path: `review/${item.reviewId}` })"
     >
-      asdffas
       <div class="thumbnail">
         <img :src="item.reviewImage" />
       </div>
@@ -50,7 +49,7 @@
 </template>
 
 <script>
-// import { getAllReviews } from '@/api/review';
+import { getAllReviews } from '@/api/review';
 export default {
   components: {},
   props: {},
@@ -65,49 +64,24 @@ export default {
   computed: {},
   watch: {},
   methods: {
-    // loadItems(groupKey, num) {
-    //   const items = [];
-    //   const start = this.start || 0;
-
-    //   for (let i = 0; i < num; ++i) {
-    //     items.push({
-    //       groupKey,
-    //       num: start + i,
-    //       key: start + i,
-    //     });
-    //   }
-    //   this.start = start + num;
-    //   return items;
-    // },
-    onAppend({ groupKey, startLoading, endLoading }) {
-      console.log('%cFeed.vue line:82 groupKey', 'color: #007acc;', groupKey);
-      console.log('%cFeed.vue line:82 groupKey', 'color: #007acc;', startLoading);
-      console.log('%cFeed.vue line:82 groupKey', 'color: #007acc;', endLoading);
-      // getAllReviews(
-      //   this.pageNumber,
-      //   this.pageSize,
-      //   (response) => {
-      //     console.log('%cFeed.vue line:85 response.data', 'color: #007acc;', response.data.content);
-      //     // this.list.push(response.data.content);
-      //     const list = this.list;
-      //     this.pageNumber++;
-
-      //     startLoading();
-      //     this.list = list.concat(response.data.content);
-      //     endLoading();
-
-      //     console.log('%cFeed.vue line:90 this.list', 'color: #007acc;', this.list);
-      //   },
-      //   (error) => {
-      //     console.log('%cFeed.vue line:88 error', 'color: #007acc;', error);
-      //   }
-      // );
-
-      // const list = this.list;
-      // const items = this.loadItems(parseFloat(groupKey || 0) + 1, 5);
-
-      // startLoading();
-      // this.list = list.concat(items);
+    onAppend({ startLoading, endLoading }) {
+      getAllReviews(
+        this.pageNumber,
+        this.pageSize,
+        (response) => {
+          if (!response.data.content.length) {
+            endLoading();
+          } else {
+            const list = this.list;
+            this.pageNumber++;
+            startLoading();
+            this.list = list.concat(response.data.content);
+          }
+        },
+        (error) => {
+          console.log('%cFeed.vue line:88 error', 'color: #007acc;', error);
+        }
+      );
     },
     onLayoutComplete({ isLayout, endLoading }) {
       if (!isLayout) {

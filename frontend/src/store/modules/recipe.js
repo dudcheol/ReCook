@@ -15,7 +15,6 @@ const actions = {
     getRecipeById(
       recipe_id,
       (response) => {
-        console.log('%crecipe.js line:18 response.data', 'color: #007acc;', response.data);
         commit('setRecipeInfo', response.data);
       },
       (error) => {
