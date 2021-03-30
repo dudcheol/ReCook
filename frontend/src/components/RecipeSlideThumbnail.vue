@@ -1,10 +1,15 @@
 <template>
-  <div :style="{ minHeight: windowHeight + 'px' }" class="d-flex flex-column primary">
+  <div :style="{ minHeight: windowHeight + 'px' }" class="d-flex flex-column black">
     <v-img
       :src="imageUrl"
-      gradient="to bottom, rgba(255, 69, 0, 0.144), rgba(0, 0, 0, 0.718)"
+      gradient="to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8)"
       class="d-flex align-end white--text"
     >
+      <template v-slot:placeholder>
+        <v-row class="fill-height ma-0" align="center" justify="center">
+          <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+        </v-row>
+      </template>
       <div
         :style="{ height: (windowHeight / 5) * 3 + 'px' }"
         class="d-flex flex-column justify-space-between"
@@ -65,4 +70,4 @@ export default {
   },
 };
 </script>
-<style lang=""></style>
+<style></style>
