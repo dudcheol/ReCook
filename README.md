@@ -36,7 +36,7 @@
 ```
 
 #### 필요 기술 스택
-- 빅데이터 : Python
+- 빅데이터 : Python, Django
 - Backend : Spring Boot, MariaDB
 - Frontend : Vue.js
 
@@ -58,4 +58,3 @@
 
 - 공공데이터 농수산물 :
 [공공데이터 포털](https://www.data.go.kr/data/15058981/openapi.do)
-

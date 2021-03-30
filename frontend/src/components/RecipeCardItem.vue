@@ -8,8 +8,7 @@
       outlined
       @click="
         $router.push({
-          name: 'RecipeDetail',
-          params: { type: 'RecipeDetail', id: data['recipe-id'] },
+          path: `recipe/${data['recipe-id']}`,
         })
       "
     >
@@ -18,7 +17,7 @@
         <v-row>
           <v-col>
             <span class="font-weight-bold">
-              {{ data['recipe-title'] | truncate(8, '..') }}
+              {{ data['recipe-title'] | truncate(7, '..') }}
             </span>
           </v-col>
         </v-row>
@@ -42,15 +41,6 @@
 <script>
 export default {
   components: {},
-  filters: {
-    truncate: function(text, length, suffix) {
-      if (text.length > length) {
-        return text.substring(0, length) + suffix;
-      } else {
-        return text;
-      }
-    },
-  },
   props: {
     data: Object,
   },
