@@ -45,7 +45,7 @@ const routes = [
         component: () => import('@/views/fridge/Fridge'),
       },
       {
-        path: 'review',
+        path: 'review/:review_id',
         name: 'ReviewDetail',
         component: () => import('@/views/user/ReviewDetail'),
       },

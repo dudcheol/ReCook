@@ -7,9 +7,7 @@ import { mapState } from 'vuex';
 
 export default {
   components: {},
-  props: {
-    type: String,
-  },
+  props: {},
   data() {
     return {
       header: '',
