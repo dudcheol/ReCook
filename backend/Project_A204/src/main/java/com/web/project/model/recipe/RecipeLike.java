@@ -1,14 +1,20 @@
 package com.web.project.model.recipe;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import lombok.Data;
 
+@Entity
 @Data
 public class RecipeLike {
-	
-	private boolean isLike;
-	
-	private int recipeId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int likeId;
 	
 	private String userId;
 	
+	private int recipeId;
 }
