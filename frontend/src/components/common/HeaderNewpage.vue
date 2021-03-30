@@ -29,7 +29,7 @@ export default {
   },
   computed: {},
   watch: {
-    '$route.params.type': {
+    '$router.currentRoute.name': {
       immediate: true,
       handler(type) {
         switch (type) {

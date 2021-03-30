@@ -42,4 +42,10 @@ public class RecipeController {
 	public ResponseEntity<List<Map<String, Object>>> newRecipeList(){
 		return recipeService.newRecipeList();
 	}
+	
+	@GetMapping("/show/hot/list")
+	@ApiOperation(value = "인기 레시피 10개 불러오기")
+	public ResponseEntity<List<Map<String, Object>>> hotRecipeList(){
+		return recipeService.hotRecipeList();
+	}
 }

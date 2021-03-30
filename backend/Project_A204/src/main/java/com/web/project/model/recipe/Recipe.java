@@ -35,4 +35,6 @@ public class Recipe {
 	private String recipeIngredient;
 	
 	private String recipeTime;
+	
+	private int recipeCount;
 }

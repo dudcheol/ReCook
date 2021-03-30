@@ -13,4 +13,5 @@ public interface RecipeService {
 	
 	public ResponseEntity<List<Map<String, Object>>> newRecipeList();
 	
+	public ResponseEntity<List<Map<String, Object>>> hotRecipeList();
 }
