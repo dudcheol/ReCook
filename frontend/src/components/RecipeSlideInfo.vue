@@ -4,18 +4,10 @@
       <v-col class="d-flex flex-column align-center justify-center">
         <v-img height="200" width="200" :src="data['recipe-main-image']" class="rounded-xl">
         </v-img>
-        <div class="text-h5 font-weight-bold pt-2">{{ data['recipe-title'] }}</div>
-        <div>
-          <v-chip
-            small
-            class="ml-1"
-            color="blue-grey lighten-5"
-            v-for="(item, index) in hashtag"
-            :key="data['recipe-id'] + 'hashtag' + index"
-            >{{ item }}</v-chip
-          >
+        <div class="text-h4 font-weight-bold pt-3 px-16 text-center">
+          {{ data['recipe-title'] }}
         </div>
-        <div class="text-caption pt-2">
+        <div class="text-caption pt-1">
           <v-icon small>mdi-timer</v-icon>
           <span>
             {{ data['recipe-time'] }}
@@ -64,6 +56,23 @@
     </v-row>
     <v-row>
       <v-col class="d-flex justify-space-between align-center">
+        <span class="text-h6 font-weight-black">태그</span>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col class="pt-0">
+        <v-chip
+          small
+          class="mx-1 my-1"
+          color="blue-grey lighten-5"
+          v-for="(item, index) in hashtag"
+          :key="data['recipe-id'] + 'hashtag' + index"
+          >{{ item }}</v-chip
+        >
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col class="d-flex justify-space-between align-center">
         <span class="text-h6 font-weight-black">리뷰</span>
         <v-btn text x-small class="pa-1">전체보기</v-btn>
       </v-col>
@@ -81,11 +90,10 @@ export default {
   components: {},
   props: {
     data: Object,
+    hashtag: Array,
   },
   data() {
     return {
-      title: '연어 샐러드',
-      hashtag: ['연어', '샐러드', '간편', '채식'],
       rating: 4.5,
       allergy: true,
     };

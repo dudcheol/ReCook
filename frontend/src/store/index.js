@@ -8,6 +8,7 @@ import recipe from './modules/recipe';
 import ingredients from './modules/ingredients';
 import header from './modules/header';
 import review from './modules/review';
+import hashtag from './modules/hashtag';
 
 const store = new Vuex.Store({
   modules: {
@@ -16,6 +17,7 @@ const store = new Vuex.Store({
     ingredients,
     header,
     review,
+    hashtag,
   },
 });
 

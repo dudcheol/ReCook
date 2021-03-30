@@ -9,7 +9,7 @@
       />
     </swiper-slide>
     <swiper-slide class="py-3">
-      <RecipeSlideInfo :data="recipeInfo" />
+      <RecipeSlideInfo :data="recipeInfo" :hashtag="hashtag" />
     </swiper-slide>
     <swiper-slide v-for="(item, index) in recipeContext" :key="item['recipe_id']">
       <RecipeSlideItem :imageUrl="recipeImages[index]" :content="item" />
@@ -51,6 +51,7 @@ export default {
   computed: {
     ...mapState({
       recipeInfo: (state) => state.recipe.recipeInfo,
+      hashtag: (state) => state.hashtag.curRecipeHashtag,
     }),
     thumbnailBoxHeight: function() {
       return this.$refs.thumbnailBox.clientHeight;
@@ -82,11 +83,12 @@ export default {
       immediate: true,
       handler(value) {
         this.addRecipeById(value.params['recipe_id']);
+        this.GET_HASHTAGS_BY_RECIPE_ID(value.params['recipe_id']);
       },
     },
   },
   methods: {
-    ...mapActions(['addRecipeById']),
+    ...mapActions(['addRecipeById', 'GET_HASHTAGS_BY_RECIPE_ID']),
     parseString(str) {
       if (str) return str.split('####');
       return [];
