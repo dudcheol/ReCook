@@ -55,7 +55,7 @@ const routes = [
         component: () => import('@/views/recipe/RecipeDetail'),
       },
       {
-        path: 'recipe/:review_id/write',
+        path: 'recipe/:recipe_id/write',
         name: 'ReviewWrite',
         component: () => import('@/views/review/ReviewWrite'),
       },
