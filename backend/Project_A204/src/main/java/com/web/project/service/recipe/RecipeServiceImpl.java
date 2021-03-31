@@ -321,4 +321,25 @@ public class RecipeServiceImpl implements RecipeService {
 		return new ResponseEntity<List<Map<String, Object>>>(resultList, status);
 	}
 
+	@Override
+	public ResponseEntity<List<String>> recipeIngredients(int recipeId) {
+		List<String> resultList = new ArrayList<String>();
+		HttpStatus status = null;
+		
+		List<RecipeIngredients> recipeIngredientsList = recipeIngredientsDao.findAllByRecipeId(recipeId);
+		
+		try {
+			for (int i = 0; i < recipeIngredientsList.size(); i++) {
+				resultList.add(ingredientsSmallDao.findIngredientsSmallBySmallId(recipeIngredientsList.get(i).getSmallId()).getSmallName());
+			}
+			
+			status = HttpStatus.OK;
+		} catch (Exception e) {
+			logger.error("재료 찾기 실패 : {}", e);
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		
+		return new ResponseEntity<List<String>>(resultList, status);
+	}
+
 }

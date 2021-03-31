@@ -14,4 +14,6 @@ public interface RecipeService {
 	public ResponseEntity<List<Map<String, Object>>> newRecipeList();
 	
 	public ResponseEntity<List<Map<String, Object>>> hotRecipeList();
+	
+	public ResponseEntity<List<String>> recipeIngredients(int recipeId);
 }
