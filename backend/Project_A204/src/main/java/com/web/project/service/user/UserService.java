@@ -22,7 +22,7 @@ public interface UserService {
 	
 	public ResponseEntity<Map<String, Object>> loginGoogle(LoginGoogleRequest loginGoogleRequest);
 	
-	public ResponseEntity<Map<String, Object>> mypage(String userId);
+	public ResponseEntity<Map<String, Object>> mypage(String userName);
 	
 	public ResponseEntity<Map<String, Object>> update(UpdateRequest updateRequest, String userId);
 	
