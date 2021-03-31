@@ -6,7 +6,7 @@
           <v-icon>mdi-{{ left }}</v-icon>
         </v-btn>
       </v-col>
-      <v-col class="d-flex justify-space-around">
+      <v-col class="d-flex justify-space-around align-center">
         <span class="font-weight-medium text-subtitle-1">{{ center }}</span>
       </v-col>
       <v-col cols="2" class="d-flex align-center justify-center">
@@ -51,6 +51,11 @@ export default {
             this.right = 'heart';
             break;
           case 'ReviewDetail':
+            this.left = 'close';
+            this.center = '';
+            this.right = '';
+            break;
+          case 'ReviewWrite':
             this.left = 'close';
             this.center = '';
             this.right = '';

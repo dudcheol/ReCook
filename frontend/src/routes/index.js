@@ -50,14 +50,14 @@ const routes = [
         component: () => import('@/views/review/ReviewDetail'),
       },
       {
-        path: 'review/:review_id/write',
-        name: 'ReviewWrite',
-        component: () => import('@/views/review/ReviewWrite'),
-      },
-      {
         path: 'recipe/:recipe_id',
         name: 'RecipeDetail',
         component: () => import('@/views/recipe/RecipeDetail'),
+      },
+      {
+        path: 'recipe/:review_id/write',
+        name: 'ReviewWrite',
+        component: () => import('@/views/review/ReviewWrite'),
       },
     ],
   },
