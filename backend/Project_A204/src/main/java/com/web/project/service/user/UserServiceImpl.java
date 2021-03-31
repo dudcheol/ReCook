@@ -180,13 +180,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public ResponseEntity<Map<String, Object>> mypage(String userId) {
+	public ResponseEntity<Map<String, Object>> mypage(String userName) {
 
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = null;
 
 		try {
-			User user = userDao.findUserByUserId(userId);
+			User user = userDao.findUserByUserName(userName);
 			
 			resultMap.put("userName", user.getUserName());
 			resultMap.put("userImage", user.getUserImage());
