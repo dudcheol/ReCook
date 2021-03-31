@@ -18,7 +18,7 @@ import com.web.project.service.ingredients.IngredientsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api(tags = "Ingredients", description = "재료 선택")
+@Api(tags = "Ingredients", description = "재료 선택 API")
 @CrossOrigin
 @RestController
 @RequestMapping("/ingredients")
