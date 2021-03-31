@@ -101,6 +101,9 @@ export default {
     },
   },
   created() {},
+  beforeDestroy() {
+    this.$store.commit('clearRecipeInfo');
+  },
 };
 </script>
 

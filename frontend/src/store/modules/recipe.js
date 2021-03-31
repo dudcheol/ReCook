@@ -56,6 +56,9 @@ const mutations = {
   setRecipeHotList(state, payload) {
     state.recipeHotList = payload;
   },
+  clearRecipeInfo(state) {
+    state.recipeInfo = {};
+  },
 };
 
 export default {

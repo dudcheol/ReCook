@@ -3,7 +3,7 @@
     <v-row>
       <v-col>
         <ProfileSimpleItem
-          v-if="info.review.user || false"
+          v-if="info.review || false"
           :username="info.review.user.userName"
           :src="info.review.user.userImage"
           @click="$router.push({ path: `/user/${info.review.user.userName}` })"
@@ -12,7 +12,8 @@
     </v-row>
     <v-row>
       <v-col class="pa-0">
-        <v-img :src="info.review.reviewImage" max-height="500" aspect-ratio="1"> </v-img>
+        <v-img :src="info.review ? info.review.reviewImage : ''" max-height="500" aspect-ratio="1">
+        </v-img>
       </v-col>
     </v-row>
     <v-row>
@@ -28,7 +29,7 @@
     <v-divider class="my-3"></v-divider>
     <v-row>
       <v-col class="text-body-1 font-weight-regular">
-        {{ info.review.reviewContext }}
+        {{ info.review ? info.review.reviewContext : '' }}
       </v-col>
     </v-row>
   </v-container>
@@ -60,6 +61,9 @@ export default {
   },
   methods: {
     ...mapActions(['GET_REVIEW_INFO']),
+  },
+  beforeDestroy() {
+    this.$store.commit('clearReviewInfo');
   },
 };
 </script>

@@ -28,6 +28,9 @@ const mutations = {
   setReviewInfo(state, payload) {
     state.reviewInfo = payload;
   },
+  clearReviewInfo(state) {
+    state.reviewInfo = {};
+  },
 };
 
 export default {
