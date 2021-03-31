@@ -17,4 +17,11 @@ function getAllReviews(page, size, success, fail) {
     .catch(fail);
 }
 
-export { getReviewById, getAllReviews };
+function writeReview(recipeId, reviewContext, reviewImage, reviewRating, userId, success, fail) {
+  instance
+    .post(`${COMMON}/create`, { recipeId, reviewContext, reviewImage, reviewRating, userId })
+    .then(success)
+    .catch(fail);
+}
+
+export { getReviewById, getAllReviews, writeReview };
