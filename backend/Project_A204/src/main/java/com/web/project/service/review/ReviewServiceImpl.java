@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import com.web.project.dao.recipe.RecipeDao;
 import com.web.project.dao.review.ReviewDao;
+import com.web.project.dao.user.UserDao;
 import com.web.project.model.recipe.Recipe;
 import com.web.project.model.review.Review;
 import com.web.project.model.review.ReviewUpload;
@@ -29,6 +30,9 @@ public class ReviewServiceImpl implements ReviewService{
 	
 	@Autowired
 	private RecipeDao recipeDao;
+	
+	@Autowired
+	private UserDao userDao;
 	
 	public static final Logger logger = LoggerFactory.getLogger(ReviewServiceImpl.class);
 	
@@ -115,9 +119,9 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public ResponseEntity<List<Review>> findByUser(String userId) {
+	public ResponseEntity<List<Review>> findByUser(String userName) {
 		HttpStatus status = null;
-		List<Review> reviewList = reviewDao.findAllByUserId(userId);
+		List<Review> reviewList = reviewDao.findAllByUserId(userDao.findUserByUserName(userName).getUserId());
 		
 		try {
 			if(reviewList != null) {
