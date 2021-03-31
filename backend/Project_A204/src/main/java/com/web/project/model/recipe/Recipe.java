@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,10 +17,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@IdClass(RecipePK.class)
 public class Recipe {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int recipeId;
+	
+	@Id
+	private int recipeSubId;
 	
 	private String recipeTitle;
 	

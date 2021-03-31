@@ -47,7 +47,7 @@ public class ReviewServiceImpl implements ReviewService{
 			reviewUpload.getReviewImage().transferTo(saveFile);
 			fileName = "http://j4a204.p.ssafy.io/img/" + fileName;
 			
-			review.setRecipeId(reviewUpload.getRecipeId());
+			review.setRecipeSubId(recipeDao.findRecipeByRecipeId(reviewUpload.getRecipeId()).getRecipeSubId());
 			review.setUserId(reviewUpload.getUserId());
 			review.setReviewContext(reviewUpload.getReviewContext());
 			review.setReviewRating(reviewUpload.getReviewRating());
@@ -96,7 +96,7 @@ public class ReviewServiceImpl implements ReviewService{
 			if(review != null) {
 				resultMap.put("review", review);
 				
-				Recipe recipe = recipeDao.findRecipeByRecipeId(review.getRecipeId());
+				Recipe recipe = recipeDao.findRecipeByRecipeSubId(review.getRecipeSubId());
 				resultMap.put("recipeTitle", recipe.getRecipeTitle());
 				resultMap.put("recipeRating", recipe.getRecipeCount());
 				resultMap.put("recipeImage", recipe.getRecipeMainImage());
@@ -137,7 +137,8 @@ public class ReviewServiceImpl implements ReviewService{
 	@Override
 	public ResponseEntity<List<Review>> findByRecipe(int recipeId) {
 		HttpStatus status = null;
-		List<Review> reviewList = reviewDao.findAllByRecipeId(recipeId);
+		Recipe recipe = recipeDao.findRecipeByRecipeId(recipeId);
+		List<Review> reviewList = reviewDao.findAllByRecipeSubId(recipe.getRecipeSubId());
 		
 		try {
 			if(reviewList != null) {
