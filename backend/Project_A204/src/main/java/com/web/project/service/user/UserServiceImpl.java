@@ -180,14 +180,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public ResponseEntity<Map<String, Object>> mypage(HttpServletRequest request) {
+	public ResponseEntity<Map<String, Object>> mypage(String userId) {
 
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = null;
 
 		try {
-			// 토큰에 저장되어 있는 정보를 가져올 map
-			resultMap.putAll(jwtService.get(request.getHeader("auth-token")));
+			User user = userDao.findUserByUserId(userId);
+			
+			resultMap.put("userName", user.getUserName());
+			resultMap.put("userImage", user.getUserImage());
+			resultMap.put("userIntroduce", user.getUserIntroduce());
+			
 			status = HttpStatus.OK;
 		} catch (RuntimeException e) {
 			logger.error("정보조회 실패 : {}", e);
