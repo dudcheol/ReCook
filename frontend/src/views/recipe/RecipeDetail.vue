@@ -14,7 +14,7 @@
     <swiper-slide v-for="(item, index) in recipeContext" :key="item['recipe_id']">
       <RecipeSlideItem :imageUrl="recipeImages[index]" :content="item" />
     </swiper-slide>
-    <div class="swiper-pagination" slot="pagination"></div>
+    <div class="swiper-pagination mt-14" slot="pagination"></div>
   </swiper>
 </template>
 

@@ -14,8 +14,10 @@ public interface ReviewDao extends JpaRepository<Review, String> {
 	public Review findReviewByReviewId(int reviewId);
 	
 	public List<Review> findAllByUserId(String userId);
-	
-	public List<Review> findAllByRecipeId(int recipeId);
+
+//	public List<Review> findAllByRecipeId(int recipeId);
 	
 	public Page<Review> findAllByOrderByReviewIdDesc(Pageable pageable);
+	
+	public List<Review> findAllByRecipeSubId(int recipeSubId);
 }

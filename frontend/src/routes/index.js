@@ -47,12 +47,17 @@ const routes = [
       {
         path: 'review/:review_id',
         name: 'ReviewDetail',
-        component: () => import('@/views/user/ReviewDetail'),
+        component: () => import('@/views/review/ReviewDetail'),
       },
       {
         path: 'recipe/:recipe_id',
         name: 'RecipeDetail',
         component: () => import('@/views/recipe/RecipeDetail'),
+      },
+      {
+        path: 'recipe/:recipe_id/write',
+        name: 'ReviewWrite',
+        component: () => import('@/views/review/ReviewWrite'),
       },
     ],
   },
