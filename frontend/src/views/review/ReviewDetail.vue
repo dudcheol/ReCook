@@ -3,7 +3,7 @@
     <v-row>
       <v-col>
         <ProfileSimpleItem
-          v-if="info.review.user"
+          v-if="info.review.user || false"
           :username="info.review.user.userName"
           :src="info.review.user.userImage"
           @click="$router.push({ path: `/user/${info.review.user.userName}` })"
@@ -21,7 +21,7 @@
           :title="info.recipeTitle"
           :rating="info.recipeRating"
           :src="info.recipeImage"
-          @click="$router.push({ path: `/recipe/${info.review.recipeId}` })"
+          @click="$router.push({ path: `/recipe/${info.review.recipeSubId}` })"
         />
       </v-col>
     </v-row>

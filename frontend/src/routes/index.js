@@ -24,9 +24,21 @@ const routes = [
         component: () => import('@/views/index/Watch'),
       },
       {
-        path: 'mypage',
+        path: '',
         name: 'Mypage',
         component: () => import('@/views/index/Mypage'),
+        children: [
+          {
+            path: ':user_name',
+            name: 'Mypage',
+            component: () => import('@/views/user/UserReview'),
+          },
+          {
+            path: ':user_name/like',
+            name: 'Mypage',
+            component: () => import('@/views/user/UserLike'),
+          },
+        ],
       },
     ],
   },

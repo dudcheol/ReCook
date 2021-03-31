@@ -7,7 +7,10 @@
         class="text-subtitle-1"
         :color="toggle ? 'dahong' : 'white'"
         :class="toggle ? 'font-weight-black white--text' : 'font-weight-medium'"
-        @click="toggle = !toggle"
+        @click="
+          $router.replace({ path: `/${$route.params['user_name']}` }).catch(() => {});
+          toggle = true;
+        "
         >리뷰</v-btn
       >
       <v-btn
@@ -16,7 +19,10 @@
         class="text-subtitle-1"
         :color="!toggle ? 'dahong' : 'white'"
         :class="!toggle ? 'font-weight-black white--text' : 'font-weight-medium'"
-        @click="toggle = !toggle"
+        @click="
+          $router.replace({ path: `/${$route.params['user_name']}/like` }).catch(() => {});
+          toggle = false;
+        "
         >찜</v-btn
       >
     </div>
