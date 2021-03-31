@@ -11,5 +11,8 @@ import com.web.project.model.ingredients.IngredientsSmall;
 public interface IngredientsSmallDao extends JpaRepository<IngredientsSmall,String>{
 
 	List<IngredientsSmall> findAllIngredientsSmallByMidId(int midId);
+	
 	IngredientsSmall findIngredientsSmallBySmallName(String smallName);
+	
+	IngredientsSmall findIngredientsSmallBySmallId(int smallId);
 }
