@@ -33,7 +33,7 @@
         </v-row>
         <v-row>
           <v-col class="pa-0">
-            <RecipeCardList :datas="recipeNewList" />
+            <RecipeCardList :datas="recipeHotList" />
           </v-col>
         </v-row>
       </v-col>
@@ -70,14 +70,16 @@ export default {
   computed: {
     ...mapState({
       recipeNewList: (state) => state.recipe.recipeNewList,
+      recipeHotList: (state) => state.recipe.recipeHotList,
     }),
   },
   watch: {},
   methods: {
-    ...mapActions(['addRecipeNewList']),
+    ...mapActions(['addRecipeNewList', 'addRecipeHotList']),
   },
   mounted() {
     this.addRecipeNewList();
+    this.addRecipeHotList();
   },
 };
 </script>

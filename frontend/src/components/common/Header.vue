@@ -4,6 +4,10 @@
 
 <script>
 import { mapState } from 'vuex';
+import HeaderMain from './HeaderMain';
+import HeaderFeed from './HeaderFeed';
+import HeaderMypage from './HeaderMypage';
+import HeaderWatch from './HeaderWatch';
 
 export default {
   components: {},
@@ -22,11 +26,26 @@ export default {
     pageName: {
       immediate: true,
       handler(value) {
-        this.header = () => import(`./Header${value}`);
+        this.header = this.getHeader(value);
       },
     },
   },
-  methods: {},
+  methods: {
+    getHeader(value) {
+      switch (value) {
+        case 'Main':
+          return HeaderMain;
+        case 'Feed':
+          return HeaderFeed;
+        case 'Watch':
+          return HeaderWatch;
+        case 'Mypage':
+          return HeaderMypage;
+        default:
+          return HeaderMain;
+      }
+    },
+  },
 };
 </script>
 

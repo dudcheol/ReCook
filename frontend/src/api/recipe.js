@@ -17,4 +17,11 @@ function getRecipeNewList(success, fail) {
     .catch(fail);
 }
 
-export { getRecipeById, getRecipeNewList };
+function getRecipeHotList(success, fail) {
+  instance
+    .get(`${COMMON}/show/hot/list`)
+    .then(success)
+    .catch(fail);
+}
+
+export { getRecipeById, getRecipeNewList, getRecipeHotList };

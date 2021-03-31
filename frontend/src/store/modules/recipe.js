@@ -1,9 +1,10 @@
-import { getRecipeById, getRecipeNewList } from '../../api/recipe';
+import { getRecipeById, getRecipeNewList, getRecipeHotList } from '../../api/recipe';
 
 // initial state
 const state = () => ({
   recipeInfo: {},
   recipeNewList: [],
+  recipeHotList: [],
 });
 
 // getters
@@ -32,6 +33,16 @@ const actions = {
       }
     );
   },
+  addRecipeHotList({ commit }) {
+    getRecipeHotList(
+      (response) => {
+        commit('setRecipeHotList', response.data);
+      },
+      (error) => {
+        console.log('%crecipe.js line:19 error', 'color: #007acc;', error);
+      }
+    );
+  },
 };
 
 // mutations
@@ -41,6 +52,9 @@ const mutations = {
   },
   setRecipeNewList(state, payload) {
     state.recipeNewList = payload;
+  },
+  setRecipeHotList(state, payload) {
+    state.recipeHotList = payload;
   },
 };
 
