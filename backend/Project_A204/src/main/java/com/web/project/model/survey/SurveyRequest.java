@@ -7,8 +7,8 @@ import lombok.Data;
 @Data
 public class SurveyRequest {
 
-	private List<Integer> foodList;
+	private List<String> foodList;
 	
-	private List<Integer> allergyList; 
+	private List<String> allergyList; 
 	
 }

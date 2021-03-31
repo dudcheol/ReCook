@@ -15,7 +15,7 @@ public class FoodLike {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int foodLikeId;
 
-	private int userId;
+	private String userId;
 	
 	private int foodId;
 }

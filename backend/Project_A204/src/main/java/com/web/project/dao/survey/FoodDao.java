@@ -7,5 +7,7 @@ import com.web.project.model.survey.Food;
 
 @Repository
 public interface FoodDao extends JpaRepository<Food, String>{
-
+	
+	Food findFoodByRecipeId(int recipeId);
+	
 }

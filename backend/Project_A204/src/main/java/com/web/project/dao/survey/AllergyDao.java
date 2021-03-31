@@ -8,4 +8,6 @@ import com.web.project.model.survey.Allergy;
 @Repository
 public interface AllergyDao extends JpaRepository<Allergy, String>{
 
+	Allergy findAllergyByAllergyName(String allergyName);
+	
 }

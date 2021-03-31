@@ -17,6 +17,6 @@ public class AllergyGroup {
 	
 	private int allergyId;
 	
-	private int userId;
+	private String userId;
 	
 }
