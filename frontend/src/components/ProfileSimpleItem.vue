@@ -1,7 +1,7 @@
 <template>
-  <div class="d-flex align-center">
+  <div class="d-flex align-center" @click="$emit('click')">
     <v-avatar :size="iconSize || 36">
-      <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
+      <v-img :src="src" />
     </v-avatar>
     <span class="font-weight-medium pl-3" :style="{ fontSize: (fontSize || 18) + 'px' }">{{
       username
@@ -12,7 +12,7 @@
 <script>
 export default {
   components: {},
-  props: { username: String, iconSize: Number, fontSize: Number },
+  props: { username: String, src: String, iconSize: Number, fontSize: Number },
   data() {
     return {};
   },

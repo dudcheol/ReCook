@@ -72,10 +72,16 @@ public class UserController {
 		return userService.login(loginRequest);
 	}
 
-	@GetMapping("/mypage")
+//	@GetMapping("/mypage")
+//	@ApiOperation(value = "마이페이지")
+//	public ResponseEntity<Map<String, Object>> mypage(HttpServletRequest request) {
+//		return userService.mypage(request);
+//	}
+	
+	@GetMapping("/mypage/{userId}")
 	@ApiOperation(value = "마이페이지")
-	public ResponseEntity<Map<String, Object>> mypage(HttpServletRequest request) {
-		return userService.mypage(request);
+	public ResponseEntity<Map<String, Object>> mypage(@PathVariable("userId") String userId) {
+		return userService.mypage(userId);
 	}
 
 	@PutMapping("/update/{userId}")

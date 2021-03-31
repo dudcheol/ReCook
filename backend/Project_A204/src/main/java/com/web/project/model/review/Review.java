@@ -23,7 +23,7 @@ public class Review {
 	
 	private String userId;
 	
-	private int recipeId;
+	private int recipeSubId;
 	
 	private String reviewContext;
 	

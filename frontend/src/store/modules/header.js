@@ -1,5 +1,7 @@
 // initial state
-const state = () => ({});
+const state = () => ({
+  pageName: 'Main',
+});
 
 // getters
 const getters = {};
@@ -8,7 +10,11 @@ const getters = {};
 const actions = {};
 
 // mutations
-const mutations = {};
+const mutations = {
+  setPageName(state, payload) {
+    state.pageName = payload;
+  },
+};
 
 export default {
   //   namespaced: true,

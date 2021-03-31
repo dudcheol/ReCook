@@ -17,4 +17,6 @@ public interface RecipeDao extends JpaRepository<Recipe, String>{
 	List<Recipe> findTop10ByOrderByRecipeCountDesc();
 	
 	Recipe findRecipeByRecipeTitle(String recipeTitle);
+	
+	Recipe findRecipeByRecipeSubId(int recipeSubId);
 }

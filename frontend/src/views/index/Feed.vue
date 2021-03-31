@@ -15,26 +15,48 @@
     @image-error="onImageError"
   >
     <!-- Loading element via named slot -->
-    <div slot="loading">Loading...</div>
-    <div class="review" v-for="(item, i) in list" :key="item.key" @click="clickItem(i)">
+    <div slot="loading" style="width:100%">
+      <v-row>
+        <v-col>
+          <v-skeleton-loader class="mx-auto ml-3 rounded-xl" type="image"></v-skeleton-loader>
+          <div class="d-flex align-center">
+            <v-skeleton-loader class="mx-auto pt-3" type="chip"></v-skeleton-loader>
+          </div>
+        </v-col>
+        <v-col>
+          <v-skeleton-loader class="mx-auto mr-3 rounded-xl" type="image"></v-skeleton-loader>
+          <div class="d-flex align-center">
+            <v-skeleton-loader class="mx-auto pt-3" type="chip"></v-skeleton-loader>
+          </div>
+        </v-col>
+      </v-row>
+    </div>
+    <div
+      class="review"
+      v-for="item in list"
+      :key="'reviewItem' + item.reviewId"
+      @click="$router.push({ path: `review/${item.reviewId}` })"
+    >
       <div class="thumbnail">
-        <img
-          :src="`https://naver.github.io/egjs-infinitegrid/assets/image/${(item.num + 1) % 59}.jpg`"
-        />
+        <img :src="item.reviewImage" />
       </div>
-      <div class="text-subtitle-2 text-center font-weight-bold">레시피 리뷰 {{ item.num }}</div>
-      <div class="text-caption text-center">작성자</div>
+      <div class="text-subtitle-2 text-center font-weight-bold">
+        {{ item.reviewContext | truncate(12, '..') }}
+      </div>
+      <div class="text-caption text-center">{{ item.user.userName | truncate(10, '..') }}</div>
     </div>
   </GridLayout>
 </template>
 
 <script>
+import { getAllReviews } from '@/api/review';
 export default {
   components: {},
   props: {},
   data() {
     return {
-      start: 0,
+      pageNumber: 0,
+      pageSize: 10,
       loading: false,
       list: [],
     };
@@ -42,30 +64,24 @@ export default {
   computed: {},
   watch: {},
   methods: {
-    loadItems(groupKey, num) {
-      const items = [];
-      const start = this.start || 0;
-
-      for (let i = 0; i < num; ++i) {
-        items.push({
-          groupKey,
-          num: start + i,
-          key: start + i,
-        });
-      }
-      this.start = start + num;
-      return items;
-    },
-    clickItem(index) {
-      console.log('%cFeed.vue line:60 index', 'color: #007acc;', index);
-      this.$router.push({ name: 'ReviewDetail', params: { type: 'ReviewDetail', id: index } });
-    },
-    onAppend({ groupKey, startLoading }) {
-      const list = this.list;
-      const items = this.loadItems(parseFloat(groupKey || 0) + 1, 5);
-
-      startLoading();
-      this.list = list.concat(items);
+    onAppend({ startLoading, endLoading }) {
+      getAllReviews(
+        this.pageNumber,
+        this.pageSize,
+        (response) => {
+          if (!response.data.content.length) {
+            endLoading();
+          } else {
+            const list = this.list;
+            this.pageNumber++;
+            startLoading();
+            this.list = list.concat(response.data.content);
+          }
+        },
+        (error) => {
+          console.log('%cFeed.vue line:88 error', 'color: #007acc;', error);
+        }
+      );
     },
     onLayoutComplete({ isLayout, endLoading }) {
       if (!isLayout) {
