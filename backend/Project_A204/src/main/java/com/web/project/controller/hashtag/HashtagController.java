@@ -17,7 +17,7 @@ import com.web.project.service.hashtag.HashtagService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api(tags = "hashtag", description = "해시태그")
+@Api(tags = "Hashtag", description = "해시태그 API")
 @CrossOrigin
 @RestController
 @RequestMapping("/hashtag")
