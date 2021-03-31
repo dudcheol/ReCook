@@ -1,8 +1,9 @@
-import { getReviewById } from '@/api/review';
+import { getReviewById, getReviewByUserName } from '@/api/review';
 
 // initial state
 const state = () => ({
   reviewInfo: {},
+  selectedUserReviewList: [],
 });
 
 // getters
@@ -21,6 +22,21 @@ const actions = {
       }
     );
   },
+  GET_REVIEW_LIST_BY_USERNAME({ commit }, userName) {
+    getReviewByUserName(
+      userName,
+      (response) => {
+        commit('setSelectedUserReviewList', response.data);
+      },
+      (error) => {
+        console.log(
+          '%cerror review.js line:32 ',
+          'color: red; display: block; width: 100%;',
+          error
+        );
+      }
+    );
+  },
 };
 
 // mutations
@@ -30,6 +46,9 @@ const mutations = {
   },
   clearReviewInfo(state) {
     state.reviewInfo = {};
+  },
+  setSelectedUserReviewList(state, payload) {
+    state.selectedUserReviewList = payload;
   },
 };
 

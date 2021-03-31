@@ -1,26 +1,35 @@
 <template>
   <v-container fluid>
-    <v-row class="header-profile white pt-16">
+    <v-row class="header-profile white pt-14">
       <v-col>
         <profile-simple-item
           :username="user.userName || ''"
           :src="user.userImage || ''"
-          class="px-3"
         ></profile-simple-item>
       </v-col>
     </v-row>
-    <v-row class="pt-16 pb-4" no-gutters>
+    <v-row class="pt-10" no-gutters>
       <v-col>
         {{ user.userIntroduce }}
       </v-col>
     </v-row>
+    <v-row class="pt-16">
+      <v-col>
+        <span class="text-h6 font-weight-black">리뷰</span>
+      </v-col>
+    </v-row>
     <v-row>
-      <v-col v-for="n in 20" :key="n" class="d-flex child-flex pa-0" cols="4">
+      <v-col
+        v-for="item in reviewList"
+        :key="'review' + item.reviewId"
+        class="d-flex child-flex pa-0"
+        cols="4"
+      >
         <v-img
-          :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
-          :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
+          :src="item.reviewImage"
           aspect-ratio="1"
           class="grey lighten-2"
+          @click="$router.push({ path: `review/${item.reviewId}` })"
         >
           <template v-slot:placeholder>
             <v-row class="fill-height ma-0" align="center" justify="center">
@@ -34,6 +43,7 @@
 </template>
 <script>
 import ProfileSimpleItem from '@/components/ProfileSimpleItem.vue';
+import { mapActions, mapState } from 'vuex';
 export default {
   components: {
     ProfileSimpleItem,
@@ -44,9 +54,22 @@ export default {
   data() {
     return {};
   },
-  computed: {},
-  watch: {},
-  methods: {},
+  computed: {
+    ...mapState({
+      reviewList: (state) => state.review.selectedUserReviewList,
+    }),
+  },
+  watch: {
+    user: {
+      immediate: true,
+      handler(value) {
+        this.GET_REVIEW_LIST_BY_USERNAME(value.userName);
+      },
+    },
+  },
+  methods: {
+    ...mapActions(['GET_REVIEW_LIST_BY_USERNAME']),
+  },
 };
 </script>
 <style scoped>

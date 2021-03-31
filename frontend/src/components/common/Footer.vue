@@ -70,6 +70,7 @@ export default {
   computed: {
     ...mapState({
       pageName: (state) => state.header.pageName,
+      user: (state) => state.user.user,
     }),
     selectedView: {
       get() {
@@ -80,8 +81,11 @@ export default {
           return;
         }
         if (value === 'Mypage') {
-          const userName = 'userName';
-          this.$router.replace({ path: `${userName}` }).catch(() => {});
+          this.$router
+            .replace({
+              path: `${this.user.userName}/${this.$store.state.user.mypageTabState}`,
+            })
+            .catch(() => {});
           return;
         }
         this.$router.replace({ name: value }).catch(() => {});

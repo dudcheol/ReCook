@@ -2,6 +2,10 @@ import { getUserInfoByName } from '@/api/user';
 
 // initial state
 const state = () => ({
+  user: {
+    userName: '김바뀜',
+  },
+  mypageTabState: 'review',
   selectedUserInfo: {},
 });
 
@@ -27,6 +31,9 @@ const actions = {
 const mutations = {
   setSelectedUserInfo(state, payload) {
     state.selectedUserInfo = payload;
+  },
+  setMypageTabState(state, payload) {
+    state.mypageTabState = payload;
   },
 };
 

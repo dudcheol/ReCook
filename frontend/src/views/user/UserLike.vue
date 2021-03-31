@@ -1,26 +1,35 @@
 <template>
   <v-container fluid>
-    <v-row class="header-profile white pt-16">
-      <v-col>
+    <v-row class="header-profile white pt-14">
+      <v-col cols="12">
         <profile-simple-item
           :username="user.userName || ''"
           :src="user.userImage || ''"
-          class="px-3"
         ></profile-simple-item>
       </v-col>
+      <!-- <v-col cols="12" class="pa-0 dahong text-center text-caption white--text font-weight-medium">
+        {{ user.userName }}님이 <strong>좋아요</strong>한 <strong>레시피</strong>입니다
+      </v-col> -->
     </v-row>
     <v-row class="pt-14 pb-4" no-gutters>
       <v-col>
-        <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+        <watch-card-list></watch-card-list>
       </v-col>
     </v-row>
+    <infinite-loading @infinite="infiniteHandler">
+      <div slot="spinner">
+        <v-skeleton-loader class="mx-auto px-4" max-width="100%" type="card"></v-skeleton-loader>
+      </div>
+    </infinite-loading>
   </v-container>
 </template>
 <script>
 import ProfileSimpleItem from '@/components/ProfileSimpleItem.vue';
+import WatchCardList from '@/components/WatchCardList.vue';
 export default {
   components: {
     ProfileSimpleItem,
+    WatchCardList,
   },
   props: {
     user: Object,

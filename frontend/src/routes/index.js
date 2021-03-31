@@ -29,7 +29,7 @@ const routes = [
         component: () => import('@/views/index/Mypage'),
         children: [
           {
-            path: ':user_name',
+            path: ':user_name/review',
             name: 'Mypage',
             component: () => import('@/views/user/UserReview'),
           },
