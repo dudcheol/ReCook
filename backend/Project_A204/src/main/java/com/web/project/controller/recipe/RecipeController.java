@@ -8,9 +8,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.web.project.model.recipe.RecipeLikeRequest;
+import com.web.project.service.recipe.RecipeLikeService;
 import com.web.project.service.recipe.RecipeService;
 
 import io.swagger.annotations.Api;
@@ -24,6 +27,9 @@ public class RecipeController {
 
 	@Autowired
 	private RecipeService recipeService;
+	
+	@Autowired
+	private RecipeLikeService recipeLikeService;
 	
 	@GetMapping("/read")
 	@ApiOperation(value = "Json File 읽기")
@@ -47,5 +53,11 @@ public class RecipeController {
 	@ApiOperation(value = "인기 레시피 10개 불러오기")
 	public ResponseEntity<List<Map<String, Object>>> hotRecipeList(){
 		return recipeService.hotRecipeList();
+	}
+	
+	@PostMapping("/like")
+	@ApiOperation(value = "좋아요", notes="좋아요No => recipe 좋아요+1/좋아요 데이터 추가, 좋아요Yes => recipe 좋아요-1/좋아요 데이터 삭제")
+	public Object like(RecipeLikeRequest recipeLikeRequest) {
+		return recipeLikeService.like(recipeLikeRequest);
 	}
 }
