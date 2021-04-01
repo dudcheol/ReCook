@@ -25,6 +25,8 @@ public class Review {
 	
 	private int recipeSubId;
 	
+	private int recipeId;
+	
 	private String reviewContext;
 	
 	private String reviewImage;
