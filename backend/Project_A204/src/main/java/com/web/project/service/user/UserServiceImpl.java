@@ -119,20 +119,20 @@ public class UserServiceImpl implements UserService {
 		try {
 			if (user != null) {
 				String token = jwtService.create(user);
-				resultMap.put("auth-token", token);
+				resultMap.put("authToken", token);
 				logger.trace("로그인 토큰 정보 : {}", token);
 				// USER ID (KEY)
-				resultMap.put("user-id", user.getUserId());
+				resultMap.put("userId", user.getUserId());
 				// 이메일
-				resultMap.put("user-email", user.getUserEmail());
+				resultMap.put("userEmail", user.getUserEmail());
 				// 이름
-				resultMap.put("user-name", user.getUserName());
+				resultMap.put("userName", user.getUserName());
 				// 비밀번호
-				resultMap.put("user-password", user.getUserPassword());
+				resultMap.put("userPassword", user.getUserPassword());
 				// 이미지
-				resultMap.put("user-image", user.getUserImage());
+				resultMap.put("userImage", user.getUserImage());
 				// 소개글
-				resultMap.put("user-introduce", user.getUserIntroduce());
+				resultMap.put("userIntroduce", user.getUserIntroduce());
 
 				status = HttpStatus.OK;
 			} else {
@@ -159,22 +159,22 @@ public class UserServiceImpl implements UserService {
 		try {
 			if (user != null) {
 				String token = jwtService.create(user);
-				resultMap.put("auth-token", token);
+				resultMap.put("authToken", token);
 				logger.trace("로그인 토큰 정보 : {}", token);
 				// USER ID (KEY)
-				resultMap.put("user-id", user.getUserId());
+				resultMap.put("userId", user.getUserId());
 				// 이메일
-				resultMap.put("user-email", user.getUserEmail());
+				resultMap.put("userEmail", user.getUserEmail());
 				// 이름
-				resultMap.put("user-name", user.getUserName());
+				resultMap.put("userName", user.getUserName());
 				// 비밀번호
-				resultMap.put("user-password", user.getUserPassword());
+				resultMap.put("userPassword", user.getUserPassword());
 				// 이미지
-				resultMap.put("user-image", user.getUserImage());
+				resultMap.put("userImage", user.getUserImage());
 				// 소개글
-				resultMap.put("user-introduce", user.getUserIntroduce());
+				resultMap.put("userIntroduce", user.getUserIntroduce());
 				// GID
-				resultMap.put("user-gid", user.getUserGid());
+				resultMap.put("userGid", user.getUserGid());
 
 				status = HttpStatus.OK;
 			} else {
