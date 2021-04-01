@@ -39,6 +39,8 @@ export default {
     return {
       windowTop: 0,
       swiperOption: {
+        observer: true,
+        observeParents: true,
         autoHeight: true,
         slidesPerView: 1,
         spaceBetween: 30,
