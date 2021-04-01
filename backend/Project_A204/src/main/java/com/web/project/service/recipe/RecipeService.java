@@ -3,6 +3,7 @@ package com.web.project.service.recipe;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
@@ -26,4 +27,6 @@ public interface RecipeService {
 	public ResponseEntity<List<Recipe>> selectIngredinets(IngredientsRequest ingredientsRequest, Pageable pageable);
 	
 	public ResponseEntity<List<Recipe>> selectIngredinetsWithAllergy(IngredientsRequest ingredientsRequest, Pageable pageable);
+
+	public ResponseEntity<Page<Recipe>> allRecipeByTitle(String title, Pageable pageable);
 }

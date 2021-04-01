@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -90,4 +91,11 @@ public class RecipeController {
 	public ResponseEntity<List<Recipe>> selectIngredinetsWithAllergy(@Valid @RequestBody IngredientsRequest ingredientsRequest, Pageable pageable){
 		return recipeService.selectIngredinetsWithAllergy(ingredientsRequest, pageable);
 	}
+	
+	@GetMapping("/recipe/title/{title}")
+	@ApiOperation(value = "title을 포함하고 있는 레시피 전부 전달")
+	public ResponseEntity<Page<Recipe>> allRecipeByTitle(@PathVariable("title") String title, Pageable pageable){
+		return recipeService.allRecipeByTitle(title, pageable);
+	}
+	
 }
