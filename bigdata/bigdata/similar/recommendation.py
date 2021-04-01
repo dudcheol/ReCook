@@ -18,6 +18,11 @@ from django.db import connection
 
 from .models import Recipe
 from .models import RecipeIngredients
+from .models import Review
+from .models import FoodLike
+from .models import Food
+
+from . import Similar
 
 # movies데이터 갖고오기
 
@@ -110,9 +115,23 @@ def allergy_remove(recommend_list, small_id_list):
 
     return remove_result
 
+def check(user_id):
+    review = Review.objects.filter(user=user_id).values()
+   # 3개이상이면 collaborative filtering
+    if(review.count()>=3):
+        sub_id=review[review.count()-1]['recipe_sub_id']
+        recipe = Recipe.objects.filter(recipe_sub_id=sub_id).values()
+        recommend(recipe[0]['recipe_title'],user_id)
+    #3개 미만이면 content based
+    else:
+        foodLike=FoodLike.objects.filter(user=user_id).values()
+        i=0
+        for f in foodLike:
+            food=Food.objects.filter(food_id=f['food_id']).values()
+            recipe = Recipe.objects.filter(recipe_id=food[0]['recipe_id']).values()
+            Similar.similar_recommend(recipe[0]['recipe_title'],user_id)
+
 # Collaborative Filtering
-
-
 def recommend(title, user_id):
     recipe_data = recipe_list()
     rating_data = rating_list()
@@ -147,5 +166,5 @@ def recommend(title, user_id):
 
     # 레시피중 알러지 포함 레시피 제거하기
     real_result = allergy_remove(result, small_id_list)
-
+    print(real_result)
     return real_result
