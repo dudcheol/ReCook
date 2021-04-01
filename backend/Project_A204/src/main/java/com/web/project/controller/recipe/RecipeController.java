@@ -40,13 +40,13 @@ public class RecipeController {
 		recipeService.read();
 	}
 	
-	@GetMapping("/show/{recipeId}")
+	@GetMapping("/show/main/{recipeId}")
 	@ApiOperation(value = "recipeId로 레시피 하나 불러오기")
 	public ResponseEntity<Map<String, Object>> showRecipeByRecipeId(@PathVariable("recipeId") int recipeId){
 		return recipeService.showRecipeByRecipeId(recipeId);
 	}
 	
-	@GetMapping("/show/{recipeSubId}")
+	@GetMapping("/show/sub/{recipeSubId}")
 	@ApiOperation(value = "recipeSubId로 레시피 하나 불러오기")
 	public ResponseEntity<Map<String, Object>> showRecipeByRecipeSubId(@PathVariable("recipeSubId") int recipeSubId){
 		return recipeService.showRecipeByRecipeSubId(recipeSubId);
