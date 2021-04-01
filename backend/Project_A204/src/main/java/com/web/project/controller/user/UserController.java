@@ -1,5 +1,6 @@
 package com.web.project.controller.user;
 
+import com.web.project.model.recipe.Recipe;
 import com.web.project.model.user.LoginGoogleRequest;
 import com.web.project.model.user.LoginRequest;
 import com.web.project.model.user.SignupRequest;
@@ -7,12 +8,15 @@ import com.web.project.model.user.UpdateRequest;
 import com.web.project.model.user.User;
 import com.web.project.service.user.UserService;
 
+import java.util.List;
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -101,5 +105,11 @@ public class UserController {
 	@ApiOperation(value = "정보 삭제하기")
 	public void delete(@PathVariable("userId") String userId) {
 		userService.delete(userId);
+	}
+	
+	@GetMapping("/like/{userId}")
+	@ApiOperation(value = "유저가 좋아요 누른 레시피 목록 가져오기")
+	public ResponseEntity<List<Recipe>> userLike(@PathVariable("userId") String userId, Pageable pageable) {
+		return userService.userLike(userId, pageable);
 	}
 }

@@ -51,6 +51,7 @@ public class ReviewServiceImpl implements ReviewService{
 			reviewUpload.getReviewImage().transferTo(saveFile);
 			fileName = "http://j4a204.p.ssafy.io/img/" + fileName;
 			
+			review.setRecipeId(reviewUpload.getRecipeId());
 			review.setRecipeSubId(recipeDao.findRecipeByRecipeId(reviewUpload.getRecipeId()).getRecipeSubId());
 			review.setUserId(reviewUpload.getUserId());
 			review.setReviewContext(reviewUpload.getReviewContext());
