@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -212,6 +215,23 @@ public class UserServiceImpl implements UserService {
 
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
+	
+	@Override
+	public ResponseEntity<Map<String, Object>> mypageWithToken(HttpServletRequest request) {
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = null;
+
+		try {
+			resultMap.putAll(jwtService.get(request.getHeader("authToken")));
+			status = HttpStatus.OK;
+		} catch (RuntimeException e) {
+			logger.error("정보조회 실패 : {}", e);
+			resultMap.put("message", e.getMessage());
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
 
 	@Override
 	public ResponseEntity<Map<String, Object>> update(UpdateRequest updateRequest, String userId) {
@@ -298,5 +318,7 @@ public class UserServiceImpl implements UserService {
 	public User findUserByUserGid(String userGid) {
 		return userDao.findUserByUserGid(userGid);
 	}
+
+	
 
 }

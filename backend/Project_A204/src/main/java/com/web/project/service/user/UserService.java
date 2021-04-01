@@ -3,6 +3,8 @@ package com.web.project.service.user;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.RequestEntity;
@@ -26,6 +28,8 @@ public interface UserService {
 	public ResponseEntity<Map<String, Object>> loginGoogle(LoginGoogleRequest loginGoogleRequest);
 	
 	public ResponseEntity<Map<String, Object>> mypage(String userName);
+	
+	public ResponseEntity<Map<String, Object>> mypageWithToken(HttpServletRequest request);
 	
 	public ResponseEntity<Map<String, Object>> update(UpdateRequest updateRequest, String userId);
 	
