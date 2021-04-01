@@ -41,9 +41,15 @@ public class RecipeController {
 	}
 	
 	@GetMapping("/show/{recipeId}")
-	@ApiOperation(value = "레시피 하나 불러오기")
-	public ResponseEntity<Map<String, Object>> showRecipe(@PathVariable("recipeId") int recipeId){
-		return recipeService.showRecipe(recipeId);
+	@ApiOperation(value = "recipeId로 레시피 하나 불러오기")
+	public ResponseEntity<Map<String, Object>> showRecipeByRecipeId(@PathVariable("recipeId") int recipeId){
+		return recipeService.showRecipeByRecipeId(recipeId);
+	}
+	
+	@GetMapping("/show/{recipeSubId}")
+	@ApiOperation(value = "recipeSubId로 레시피 하나 불러오기")
+	public ResponseEntity<Map<String, Object>> showRecipeByRecipeSubId(@PathVariable("recipeSubId") int recipeSubId){
+		return recipeService.showRecipeByRecipeSubId(recipeSubId);
 	}
 	
 	@GetMapping("/show/new/list")

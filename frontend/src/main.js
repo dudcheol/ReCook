@@ -8,7 +8,9 @@ import VueAwesomeSwiper from 'vue-awesome-swiper';
 import 'swiper/css/swiper.css';
 import './utils/filters';
 import VueLottiePlayer from 'vue-lottie-player';
+import InfiniteLoading from 'vue-infinite-loading';
 
+Vue.use(InfiniteLoading);
 Vue.use(VueLottiePlayer);
 Vue.use(VueInfiniteGrid);
 Vue.use(VueAwesomeSwiper);

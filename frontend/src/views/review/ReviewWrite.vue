@@ -137,7 +137,7 @@ export default {
     onReviewWrited() {
       this.loading = true;
       writeReview(
-        this.$route.params.recipeId,
+        this.$route.params['recipe_id'],
         this.content,
         this.selectedFile,
         this.rating,
