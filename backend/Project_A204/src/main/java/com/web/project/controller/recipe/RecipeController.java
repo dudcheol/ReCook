@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.web.project.model.ingredients.IngredientsRequest;
+import com.web.project.model.recipe.Recipe;
 import com.web.project.model.recipe.RecipeLikeRequest;
 import com.web.project.service.recipe.RecipeLikeService;
 import com.web.project.service.recipe.RecipeService;
@@ -76,4 +79,15 @@ public class RecipeController {
 		return recipeService.recipeIngredients(recipeId);
 	}
 	
+	@PostMapping("/select/ingredients")
+	@ApiOperation(value = "선택된 재료로 레시피 전달")
+	public ResponseEntity<List<Recipe>> selectIngredinets(@Valid @RequestBody IngredientsRequest ingredientsRequest, Pageable pageable){
+		return recipeService.selectIngredinets(ingredientsRequest, pageable);
+	}
+	
+	@PostMapping("/select/allergy")
+	@ApiOperation(value = "선택된 재료로 레시피 전달시 알레르기 정보로 걸러줌")
+	public ResponseEntity<List<Recipe>> selectIngredinetsWithAllergy(@Valid @RequestBody IngredientsRequest ingredientsRequest, Pageable pageable){
+		return recipeService.selectIngredinetsWithAllergy(ingredientsRequest, pageable);
+	}
 }

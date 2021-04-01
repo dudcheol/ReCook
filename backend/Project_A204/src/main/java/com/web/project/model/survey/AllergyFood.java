@@ -15,6 +15,6 @@ public class AllergyFood {
 	private int allergyId;
 	
 	@Id
-	private int foodId;
+	private int smallId;
 	
 }

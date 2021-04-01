@@ -3,6 +3,7 @@ package com.web.project.service.recipe;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -13,6 +14,8 @@ import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -22,11 +25,16 @@ import com.web.project.dao.ingredients.IngredientsSmallDao;
 import com.web.project.dao.recipe.RecipeDao;
 import com.web.project.dao.recipe.RecipeHashtagDao;
 import com.web.project.dao.recipe.RecipeIngredientsDao;
+import com.web.project.dao.survey.AllergyFoodDao;
+import com.web.project.dao.survey.AllergyGroupDao;
 import com.web.project.model.hashtag.Hashtag;
+import com.web.project.model.ingredients.IngredientsRequest;
 import com.web.project.model.ingredients.IngredientsSmall;
 import com.web.project.model.recipe.Recipe;
 import com.web.project.model.recipe.RecipeHashtag;
 import com.web.project.model.recipe.RecipeIngredients;
+import com.web.project.model.survey.AllergyFood;
+import com.web.project.model.survey.AllergyGroup;
 
 @Service
 public class RecipeServiceImpl implements RecipeService {
@@ -42,7 +50,13 @@ public class RecipeServiceImpl implements RecipeService {
 
 	@Autowired
 	private HashtagDao hashtagDao;
-	
+
+	@Autowired
+	private AllergyGroupDao allergyGroupDao;
+
+	@Autowired
+	private AllergyFoodDao allergyFoodDao;
+
 	@Autowired
 	private RecipeHashtagDao recipeHashtagDao;
 
@@ -72,11 +86,11 @@ public class RecipeServiceImpl implements RecipeService {
 				JSONObject result = (JSONObject) recipeList.get(i);
 
 //				System.out.println("#" + i + " Recipe Read");
-				
+
 				Recipe skipRecipe = recipeDao.findRecipeByRecipeTitle((String) result.get("recipe_title"));
-				
+
 				// 이미 들어가 있는 데이터는 제외
-				if(skipRecipe == null) {
+				if (skipRecipe == null) {
 					// 레시피 제목
 					String recipeTitle = (String) result.get("recipe_title");
 					recipe.setRecipeTitle(recipeTitle);
@@ -129,7 +143,7 @@ public class RecipeServiceImpl implements RecipeService {
 						}
 
 						IngredientsSmall small = ingredientsSmallDao.findIngredientsSmallBySmallName(ingredient);
-						
+
 						RecipeIngredients recipeIngredients = new RecipeIngredients();
 						if (small == null) { // 데이터가 없다면 생성!
 							IngredientsSmall ingredientsSmall = new IngredientsSmall();
@@ -147,26 +161,26 @@ public class RecipeServiceImpl implements RecipeService {
 					JSONArray recipeHashtagList = (JSONArray) result.get("recipe_hashtag");
 //					System.out.print("recipeHashtagList : ");
 //					System.out.println(recipeHashtagList);
-					
+
 					for (int j = 0; j < recipeHashtagList.size(); j++) {
 						String recipehashtag = (String) recipeHashtagList.get(j);
-						
+
 						// 1. 해당 해시태그가 테이블에 존재하는지 확인
 						Hashtag hashtagOpt = hashtagDao.findHashtagByHashtagName(recipehashtag);
-						
+
 						Hashtag resultHashtag = null;
-						if(hashtagOpt != null) {
+						if (hashtagOpt != null) {
 							// 2. 있으면 해시태그 count + 1
-							hashtagOpt.setHashtagCount(hashtagOpt.getHashtagCount()+1);
+							hashtagOpt.setHashtagCount(hashtagOpt.getHashtagCount() + 1);
 							resultHashtag = hashtagDao.save(hashtagOpt);
-						}else {
+						} else {
 							// 3. 없으면 해시태그 데이터 추가
 							Hashtag hashtag = new Hashtag();
 							hashtag.setHashtagCount(1);
 							hashtag.setHashtagName(recipehashtag);
 							resultHashtag = hashtagDao.save(hashtag);
 						}
-						
+
 						// 4. 레시피랑 해시태그랑 연결
 						RecipeHashtag recipeHashtag = new RecipeHashtag();
 						recipeHashtag.setHashtagId(resultHashtag.getHashtagId());
@@ -209,7 +223,7 @@ public class RecipeServiceImpl implements RecipeService {
 				resultMap.put("recipe-person", st.nextToken());
 				// 레시피 메인 사진
 				resultMap.put("recipe-main-image", recipe.getRecipeMainImage());
-				// 레시피 서브  ID
+				// 레시피 서브 ID
 				resultMap.put("recipe-sub-id", recipe.getRecipeSubId());
 
 				status = HttpStatus.OK;
@@ -225,7 +239,7 @@ public class RecipeServiceImpl implements RecipeService {
 
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
-	
+
 	@Override
 	public ResponseEntity<Map<String, Object>> showRecipeByRecipeSubId(int recipeSubId) {
 		Map<String, Object> resultMap = new HashMap<>();
@@ -254,7 +268,7 @@ public class RecipeServiceImpl implements RecipeService {
 				resultMap.put("recipe-person", st.nextToken());
 				// 레시피 메인 사진
 				resultMap.put("recipe-main-image", recipe.getRecipeMainImage());
-				// 레시피 서브  ID
+				// 레시피 서브 ID
 				resultMap.put("recipe-sub-id", recipe.getRecipeSubId());
 
 				status = HttpStatus.OK;
@@ -371,23 +385,128 @@ public class RecipeServiceImpl implements RecipeService {
 	public ResponseEntity<List<String>> recipeIngredients(int recipeId) {
 		List<String> resultList = new ArrayList<String>();
 		HttpStatus status = null;
-		
+
 		List<RecipeIngredients> recipeIngredientsList = recipeIngredientsDao.findAllByRecipeId(recipeId);
-		
+
 		try {
 			for (int i = 0; i < recipeIngredientsList.size(); i++) {
-				resultList.add(ingredientsSmallDao.findIngredientsSmallBySmallId(recipeIngredientsList.get(i).getSmallId()).getSmallName());
+				resultList.add(ingredientsSmallDao
+						.findIngredientsSmallBySmallId(recipeIngredientsList.get(i).getSmallId()).getSmallName());
 			}
-			
+
 			status = HttpStatus.OK;
 		} catch (Exception e) {
 			logger.error("재료 찾기 실패 : {}", e);
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
-		
+
 		return new ResponseEntity<List<String>>(resultList, status);
 	}
 
-	
+	@Override
+	public ResponseEntity<List<Recipe>> selectIngredinets(IngredientsRequest ingredientsRequest, Pageable pageable) {
+		List<Recipe> resultList = new ArrayList<Recipe>();
+		HttpStatus status = null;
+
+		int ingredientsSize = ingredientsRequest.getIngredientList().size();
+
+		try {
+			// 재료의 개수에 따라 레시피 가져오기
+
+			Page<Recipe> recipeList = null;
+
+			if (ingredientsSize == 1) {
+				recipeList = recipeDao.findRecipeWithIngredientOne(ingredientsRequest.getIngredientList().get(0),
+						pageable);
+			} else if (ingredientsSize == 2) {
+				recipeList = recipeDao.findRecipeWithIngredientTwo(ingredientsRequest.getIngredientList().get(0),
+						ingredientsRequest.getIngredientList().get(1), pageable);
+			} else if (ingredientsSize == 3) {
+				recipeList = recipeDao.findRecipeWithIngredientThree(ingredientsRequest.getIngredientList().get(0),
+						ingredientsRequest.getIngredientList().get(1), ingredientsRequest.getIngredientList().get(2),
+						pageable);
+			} else {
+				return new ResponseEntity<List<Recipe>>(resultList, HttpStatus.BAD_REQUEST);
+			}
+
+			Iterator<Recipe> iterator = recipeList.iterator();
+			while (iterator.hasNext()) {
+				resultList.add(iterator.next());
+			}
+
+			status = HttpStatus.OK;
+		} catch (Exception e) {
+			logger.error("재료로 레시피 찾기 실패 : {}", e);
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+
+		return new ResponseEntity<List<Recipe>>(resultList, status);
+	}
+
+	@Override
+	public ResponseEntity<List<Recipe>> selectIngredinetsWithAllergy(IngredientsRequest ingredientsRequest,
+			Pageable pageable) {
+		List<Recipe> resultList = new ArrayList<Recipe>();
+		HttpStatus status = null;
+
+		int ingredientsSize = ingredientsRequest.getIngredientList().size();
+
+		try {
+			// 재료의 개수에 따라 레시피 가져오기
+
+			Page<Recipe> recipeList = null;
+
+			if (ingredientsSize == 1) {
+				recipeList = recipeDao.findRecipeWithIngredientOne(ingredientsRequest.getIngredientList().get(0),
+						pageable);
+			} else if (ingredientsSize == 2) {
+				recipeList = recipeDao.findRecipeWithIngredientTwo(ingredientsRequest.getIngredientList().get(0),
+						ingredientsRequest.getIngredientList().get(1), pageable);
+			} else if (ingredientsSize == 3) {
+				recipeList = recipeDao.findRecipeWithIngredientThree(ingredientsRequest.getIngredientList().get(0),
+						ingredientsRequest.getIngredientList().get(1), ingredientsRequest.getIngredientList().get(2),
+						pageable);
+			} else {
+				return new ResponseEntity<List<Recipe>>(resultList, HttpStatus.BAD_REQUEST);
+			}
+
+			// 가져온 레시피에서 사용자의 알레르기 종류에 따라 재료가 들어가 있는 경우 제외시키기
+			// 1. ID로 알레르기 정보 가져오기
+			List<AllergyGroup> allergyGroupList = allergyGroupDao.findAllByUserId(ingredientsRequest.getUserId());
+
+			List<String> allergyIngredientList = new ArrayList<String>();
+
+			// 2. 소분류 재료 저장
+			for (int i = 0; i < allergyGroupList.size(); i++) {
+				List<AllergyFood> allergyFoodList = allergyFoodDao
+						.findAllByAllergyId(allergyGroupList.get(i).getAllergyId());
+
+				for (int j = 0; j < allergyFoodList.size(); j++) {
+					allergyIngredientList.add(ingredientsSmallDao
+							.findIngredientsSmallBySmallId(allergyFoodList.get(j).getSmallId()).getSmallName());
+				}
+			}
+
+			Iterator<Recipe> iterator = recipeList.iterator();
+			O: while (iterator.hasNext()) {
+				Recipe recipe = iterator.next();
+				
+				for (int i = 0; i < allergyIngredientList.size(); i++) {
+					if(recipe.getRecipeIngredient().contains(allergyIngredientList.get(i))) {
+						continue O;
+					}
+				}
+				
+				resultList.add(recipe);
+			}
+
+			status = HttpStatus.OK;
+		} catch (Exception e) {
+			logger.error("재료로 레시피 찾기 실패 : {}", e);
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+
+		return new ResponseEntity<List<Recipe>>(resultList, status);
+	}
 
 }
