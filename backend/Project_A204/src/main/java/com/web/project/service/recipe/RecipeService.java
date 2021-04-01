@@ -9,7 +9,9 @@ public interface RecipeService {
 	
 	public void read();
 	
-	public ResponseEntity<Map<String, Object>> showRecipe(int recipeId);
+	public ResponseEntity<Map<String, Object>> showRecipeByRecipeId(int recipeId);
+	
+	public ResponseEntity<Map<String, Object>> showRecipeByRecipeSubId(int recipeSubId);
 	
 	public ResponseEntity<List<Map<String, Object>>> newRecipeList();
 	

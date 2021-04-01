@@ -179,11 +179,10 @@ public class RecipeServiceImpl implements RecipeService {
 		} catch (Exception e) {
 			logger.error("JSON File 읽어오기 실패 : {}", e);
 		}
-
 	}
 
 	@Override
-	public ResponseEntity<Map<String, Object>> showRecipe(int recipeId) {
+	public ResponseEntity<Map<String, Object>> showRecipeByRecipeId(int recipeId) {
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = null;
 
@@ -210,6 +209,53 @@ public class RecipeServiceImpl implements RecipeService {
 				resultMap.put("recipe-person", st.nextToken());
 				// 레시피 메인 사진
 				resultMap.put("recipe-main-image", recipe.getRecipeMainImage());
+				// 레시피 서브  ID
+				resultMap.put("recipe-sub-id", recipe.getRecipeSubId());
+
+				status = HttpStatus.OK;
+			} else {
+				resultMap.put("message", "해당 ID의 레시피 데이터가 없음");
+				status = HttpStatus.INTERNAL_SERVER_ERROR;
+			}
+		} catch (RuntimeException e) {
+			logger.error("레시피 정보 조회 실패 : {}", e);
+			resultMap.put("message", e.getMessage());
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+	
+	@Override
+	public ResponseEntity<Map<String, Object>> showRecipeByRecipeSubId(int recipeSubId) {
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = null;
+
+		Recipe recipe = recipeDao.findRecipeByRecipeSubId(recipeSubId);
+
+		try {
+			if (recipe != null) {
+				// 레시피 아이디
+				resultMap.put("recipe-id", recipe.getRecipeId());
+				// 레시피 제목
+				resultMap.put("recipe-title", recipe.getRecipeTitle());
+				// 레시피 생성 날짜
+				resultMap.put("recipe-created", recipe.getRecipeCreated());
+				// 레시피 이미지
+				resultMap.put("recipe-image", recipe.getRecipeImage());
+				// 레시피 내용
+				resultMap.put("recipe-context", recipe.getRecipeContext());
+				// 레시피 재료
+				resultMap.put("recipe-ingredient", recipe.getRecipeIngredient());
+				StringTokenizer st = new StringTokenizer(recipe.getRecipeTime(), "\n");
+				// 레시피 시간
+				resultMap.put("recipe-time", st.nextToken());
+				// 레시피 인분
+				resultMap.put("recipe-person", st.nextToken());
+				// 레시피 메인 사진
+				resultMap.put("recipe-main-image", recipe.getRecipeMainImage());
+				// 레시피 서브  ID
+				resultMap.put("recipe-sub-id", recipe.getRecipeSubId());
 
 				status = HttpStatus.OK;
 			} else {
@@ -341,5 +387,7 @@ public class RecipeServiceImpl implements RecipeService {
 		
 		return new ResponseEntity<List<String>>(resultList, status);
 	}
+
+	
 
 }
