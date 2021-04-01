@@ -5,7 +5,7 @@ const COMMON = 'recipe';
 
 function getRecipeById(recipe_id, success, fail) {
   instance
-    .get(`${COMMON}/show/${recipe_id}`)
+    .get(`${COMMON}/show/main/${recipe_id}`)
     .then(success)
     .catch(fail);
 }

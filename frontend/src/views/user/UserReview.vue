@@ -26,10 +26,11 @@
         cols="4"
       >
         <v-img
+          v-if="item.reviewImage"
           :src="item.reviewImage"
           aspect-ratio="1"
           class="grey lighten-2"
-          @click="$router.push({ path: `review/${item.reviewId}` })"
+          @click="$router.push({ path: `/review/${item.reviewId}` })"
         >
           <template v-slot:placeholder>
             <v-row class="fill-height ma-0" align="center" justify="center">

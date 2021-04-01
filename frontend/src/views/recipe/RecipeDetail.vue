@@ -1,5 +1,5 @@
 <template>
-  <swiper class="swiper" :options="swiperOption">
+  <swiper ref="swiper" class="swiper" :options="swiperOption">
     <swiper-slide>
       <RecipeSlideThumbnail
         :imageUrl="recipeInfo['recipe-main-image']"
@@ -42,7 +42,6 @@ export default {
         autoHeight: true,
         slidesPerView: 1,
         spaceBetween: 30,
-        loop: false,
         pagination: { el: '.swiper-pagination', type: 'progressbar' },
         navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
       },
@@ -101,6 +100,7 @@ export default {
     },
   },
   created() {},
+  mounted() {},
   beforeDestroy() {
     this.$store.commit('clearRecipeInfo');
   },
