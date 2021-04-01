@@ -37,7 +37,7 @@
 
 #### 필요 기술 스택
 - 빅데이터 : Python
-- Backend : Spring Boot, MySQL
+- Backend : Spring Boot, MariaDB
 - Frontend : Vue.js
 
 #### 빅데이터 이용
