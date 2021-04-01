@@ -1,10 +1,8 @@
-import { getUserInfoByName } from '@/api/user';
+import { getUserInfoByAuthToken, getUserInfoByName, login, setAuthTokenToHeader } from '@/api/user';
 
 // initial state
 const state = () => ({
-  user: {
-    userName: '김바뀜',
-  },
+  user: {},
   mypageTabState: 'review',
   selectedUserInfo: {},
 });
@@ -14,6 +12,23 @@ const getters = {};
 
 // actions
 const actions = {
+  async LOGIN({ commit }, userInfo) {
+    let result = false;
+    await login(
+      userInfo,
+      (response) => {
+        console.log('%cuser.js line:21 response.data', 'color: #007acc;', response.data);
+        commit('setUser', response.data);
+        localStorage.setItem('authToken', response.data['authToken']);
+        setAuthTokenToHeader(response.data['authToken']);
+        result = true;
+      },
+      (error) => {
+        console.log('%cuser.js line:21 error', 'color: #007acc;', error);
+      }
+    );
+    return result;
+  },
   GET_USERINFO_BY_NAME({ commit }, userName) {
     getUserInfoByName(
       userName,
@@ -25,10 +40,23 @@ const actions = {
       }
     );
   },
+  async GET_USERINFO_BY_AUTHTOKEN({ commit }, authToken) {
+    setAuthTokenToHeader(authToken);
+    await getUserInfoByAuthToken(
+      (response) => {
+        response.data.user.authToken = authToken;
+        commit('setUser', response.data.user);
+      },
+      () => {}
+    );
+  },
 };
 
 // mutations
 const mutations = {
+  setUser(state, payload) {
+    state.user = payload;
+  },
   setSelectedUserInfo(state, payload) {
     state.selectedUserInfo = payload;
   },

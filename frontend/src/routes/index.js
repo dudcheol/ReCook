@@ -1,7 +1,17 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import store from '../store';
 
 Vue.use(Router);
+
+const requireAuth = () => async (to, from, next) => {
+  let token = localStorage.getItem('authToken');
+  if (store.state.user.user.authToken === undefined && token)
+    await store.dispatch('GET_USERINFO_BY_AUTHTOKEN', token);
+
+  if (store.state.user.user.authToken) next();
+  else next('/login');
+};
 
 const routes = [
   {
@@ -26,16 +36,17 @@ const routes = [
       {
         path: '',
         name: 'Mypage',
+        beforeEnter: requireAuth(),
         component: () => import('@/views/index/Mypage'),
         children: [
           {
             path: ':user_name/review',
-            name: 'Mypage',
+            name: 'Mypage#Review',
             component: () => import('@/views/user/UserReview'),
           },
           {
             path: ':user_name/like',
-            name: 'Mypage',
+            name: 'Mypage#Like',
             component: () => import('@/views/user/UserLike'),
           },
         ],
@@ -69,7 +80,13 @@ const routes = [
       {
         path: 'recipe/:recipe_id/write',
         name: 'ReviewWrite',
+        beforeEnter: requireAuth(),
         component: () => import('@/views/review/ReviewWrite'),
+      },
+      {
+        path: 'login',
+        name: 'Login',
+        component: () => import('@/views/login/Login'),
       },
     ],
   },

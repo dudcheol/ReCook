@@ -1,31 +1,29 @@
 <template>
-  <router-view :user="userInfo"></router-view>
+  <router-view :user="$store.state.user.user"></router-view>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
 export default {
   components: {},
   props: {},
   data() {
     return {};
   },
-  computed: {
-    ...mapState({
-      userInfo: (state) => state.user.selectedUserInfo,
-    }),
-  },
+  computed: {},
   watch: {
     $route: {
       immediate: true,
       handler(value) {
-        this.GET_USERINFO_BY_NAME(value.params['user_name']);
+        if (value.name === 'Mypage')
+          this.$router
+            .replace({
+              path: `/${this.$store.state.user.user.userName}/${this.$store.state.user.mypageTabState}`,
+            })
+            .catch(() => {});
       },
     },
   },
-  methods: {
-    ...mapActions(['GET_USERINFO_BY_NAME']),
-  },
+  methods: {},
 };
 </script>
 
