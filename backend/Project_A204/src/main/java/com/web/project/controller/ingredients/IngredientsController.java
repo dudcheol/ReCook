@@ -30,25 +30,25 @@ public class IngredientsController {
 	@GetMapping("/getBigList")
 	@ApiOperation(value="대분류 전체 리스트 가져오기")
 	public ResponseEntity<List<IngredientsBig>> getIngredientsBigList(){
-		
 		return ingredientsService.getIngredientsBigList();
 	}
 	
 	@GetMapping("/getMiddleList/{bigId}")
 	@ApiOperation(value="특정 대분류에 해당하는 중분류 리스트 가져오기")
-	public ResponseEntity<List<IngredientsMiddle>> getIngredientsMiddleList(@PathVariable("bigId")int bigId){
-		System.out.println(bigId);
+	public ResponseEntity<List<IngredientsMiddle>> getIngredientsMiddleList(@PathVariable("bigId")int bigId) {
 		return ingredientsService.getIngredientsMiddleList(bigId);
 	}
 	
 	@GetMapping("/getSmallList/{midId}")
 	@ApiOperation(value="특정 중분류에 해당하는 소분류 리스트 가져오기")
-	public ResponseEntity<List<IngredientsSmall>> getIngredientsSmallList(@PathVariable("midId")int midId){
-		
+	public ResponseEntity<List<IngredientsSmall>> getIngredientsSmallList(@PathVariable("midId")int midId) {
 		return ingredientsService.getIngredientsSmallList(midId);
 	}
 	
-	
-	
+	@GetMapping("/allergy/{userId}")
+	@ApiOperation(value="사용자에 해당되는 알레르기의 재료 정보 전달")
+	public ResponseEntity<List<String>> allergyIngredient(@PathVariable("userId") String userId) {
+		return ingredientsService.allergyIngredient(userId);
+	}
 	
 }

@@ -13,6 +13,6 @@ public interface IngredientsService {
 	public ResponseEntity<List<IngredientsBig>> getIngredientsBigList();
 	public ResponseEntity<List<IngredientsMiddle>> getIngredientsMiddleList(int bigId);
 	public ResponseEntity<List<IngredientsSmall>> getIngredientsSmallList(int midId);
-		
+	public ResponseEntity<List<String>> allergyIngredient(String userId);
 	
 }
