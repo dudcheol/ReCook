@@ -35,11 +35,9 @@
                 />
               </v-avatar>
             </v-list-item-avatar> -->
-            <v-list-item-title
-              class="pl-3"
-              @click="$router.push({ name: tile.type, params: { type: tile.type } })"
-              >{{ tile.title }}</v-list-item-title
-            >
+            <v-list-item-title class="pl-3" @click="$router.push({ name: tile.type })">{{
+              tile.title
+            }}</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-card>
@@ -79,6 +77,11 @@ export default {
       },
       set(value) {
         if (value === 'Fridge') {
+          return;
+        }
+        if (value === 'Mypage') {
+          const userName = 'userName';
+          this.$router.replace({ path: `${userName}` }).catch(() => {});
           return;
         }
         this.$router.replace({ name: value }).catch(() => {});

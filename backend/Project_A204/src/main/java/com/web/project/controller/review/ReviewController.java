@@ -46,16 +46,22 @@ public class ReviewController {
 		return reviewService.findByReview(reviewId);
 	}
 	
-	@ApiOperation(value = "유저ID로 리뷰 조회", notes = "유저ID에 맞는 리뷰를 조회합니다.")
-	@GetMapping("/user/{userId}")
-	public ResponseEntity<List<Review>> findByUser(@PathVariable("userId") String userId) {
-		return reviewService.findByUser(userId);
+//	@ApiOperation(value = "유저ID로 리뷰 조회", notes = "유저ID에 맞는 리뷰를 조회합니다.")
+//	@GetMapping("/user/{userId}")
+//	public ResponseEntity<List<Review>> findByUser(@PathVariable("userId") String userId) {
+//		return reviewService.findByUser(userId);
+//	}
+	
+	@ApiOperation(value = "유저 이름으로 리뷰 조회", notes = "유저 이름에 맞는 리뷰를 조회합니다.")
+	@GetMapping("/user/{userName}")
+	public ResponseEntity<List<Review>> findByUser(@PathVariable("userName") String userName) {
+		return reviewService.findByUser(userName);
 	}
 	
-	@ApiOperation(value = "레시피ID로 리뷰 조회", notes = "레시피 ID에 맞는 리뷰를 조회합니다.")
-	@GetMapping("/recipe/{recipeId}")
-	public ResponseEntity<List<Review>> findByRecipe(@PathVariable("recipeId") int recipeId) {
-		return reviewService.findByRecipe(recipeId);
+	@ApiOperation(value = "레시피 SUB ID로 리뷰 조회", notes = "레시피 SUB ID에 맞는 리뷰를 조회합니다.")
+	@GetMapping("/recipe/{recipeSubId}")
+	public ResponseEntity<List<Review>> findByRecipe(@PathVariable("recipeSubId") int recipeSubId) {
+		return reviewService.findByRecipe(recipeSubId);
 	}
 	
 }

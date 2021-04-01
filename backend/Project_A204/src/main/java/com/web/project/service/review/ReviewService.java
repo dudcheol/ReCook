@@ -18,8 +18,8 @@ public interface ReviewService {
 	
 	public ResponseEntity<Map<String, Object>> findByReview(int reviewId);
 	
-	public ResponseEntity<List<Review>> findByUser(String userId);
+	public ResponseEntity<List<Review>> findByUser(String userName);
 	
-	public ResponseEntity<List<Review>> findByRecipe(int recipeId);
+	public ResponseEntity<List<Review>> findByRecipe(int recipeSubId);
 	
 }

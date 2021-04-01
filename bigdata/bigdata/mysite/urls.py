@@ -1,4 +1,4 @@
-"""backend URL Configuration
+"""mysite URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.2/topics/http/urls/
@@ -14,11 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path,include
+from rest_framework_swagger.views import get_swagger_view
 
-# fmt: off
+schema_view = get_swagger_view(title='Rest API Document')
+
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("api/", include("api.urls"))
+    path('admin/', admin.site.urls),
+    path('similar/',include('similar.urls'),name="content_based_filtering"),
+    path('docs/', schema_view)
 ]
-# fmt: on
