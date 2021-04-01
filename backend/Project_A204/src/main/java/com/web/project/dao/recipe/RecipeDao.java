@@ -33,4 +33,6 @@ public interface RecipeDao extends JpaRepository<Recipe, String>{
 	@Query(value = "SELECT * FROM recipe WHERE recipe_ingredient LIKE %:ingredientNameOne% AND recipe_ingredient LIKE %:ingredientNameTwo% AND recipe_ingredient LIKE %:ingredientNameThree% ORDER BY recipe_count DESC", nativeQuery = true)
 	Page<Recipe> findRecipeWithIngredientThree(@Param("ingredientNameOne") String ingredientNameOne, @Param("ingredientNameTwo") String ingredientNameTwo, @Param("ingredientNameThree") String ingredientNameThree, Pageable pageable);
 	
+	@Query(value = "SELECT * FROM recipe WHERE recipe_title LIKE %:title% ORDER BY recipe_count DESC", nativeQuery = true)
+	Page<Recipe> findAllByTitle(@Param("title") String Title, Pageable pageable);
 }

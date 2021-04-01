@@ -509,4 +509,9 @@ public class RecipeServiceImpl implements RecipeService {
 		return new ResponseEntity<List<Recipe>>(resultList, status);
 	}
 
+	@Override
+	public ResponseEntity<Page<Recipe>> allRecipeByTitle(String title, Pageable pageable) {		
+		return new ResponseEntity<Page<Recipe>> (recipeDao.findAllByTitle(title, pageable), HttpStatus.OK);
+	}
+
 }
