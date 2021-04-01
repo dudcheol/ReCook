@@ -9,6 +9,6 @@ public class AllergyFoodPK implements Serializable{
 
 	private int allergyId;
 	
-	private int foodId;
+	private int smallId;
 	
 }
