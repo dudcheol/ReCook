@@ -10,6 +10,8 @@ import com.web.project.service.user.UserService;
 
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,11 +78,11 @@ public class UserController {
 		return userService.login(loginRequest);
 	}
 
-//	@GetMapping("/mypage")
-//	@ApiOperation(value = "마이페이지")
-//	public ResponseEntity<Map<String, Object>> mypage(HttpServletRequest request) {
-//		return userService.mypage(request);
-//	}
+	@GetMapping("/mypage/Token")
+	@ApiOperation(value = "마이페이지", notes="token으로 사용자 정보 가져오기")
+	public ResponseEntity<Map<String, Object>> mypageWithToken(HttpServletRequest request) {
+		return userService.mypageWithToken(request);
+	}
 	
 //	@GetMapping("/mypage/{userId}")
 //	@ApiOperation(value = "마이페이지")
