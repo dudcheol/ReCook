@@ -36,6 +36,7 @@ const actions = {
     );
   },
   GET_SMALL_LIST({ commit }, midId) {
+    commit('setSmallList', []);
     getSmallList(
       midId,
       (response) => {
