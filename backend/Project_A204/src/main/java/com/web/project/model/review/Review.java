@@ -19,14 +19,23 @@ public class Review {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long reviewId;
+	private int reviewId;
+	
 	private String userId;
-	private Long recipeId;
+	
+	private int recipeSubId;
+	
+	private int recipeId;
+	
 	private String reviewContext;
+	
 	private String reviewImage;
+	
 	@Column(insertable = false, updatable = false)
 	private LocalDateTime reviewCreated;
 
+	private double reviewRating;
+	
 	@OneToOne
 	@JoinColumn(name = "userId", insertable = false, updatable = false)
 	private User user;

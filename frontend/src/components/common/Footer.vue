@@ -1,5 +1,5 @@
 <template>
-  <v-bottom-navigation v-model="selectedView" grow fixed flat>
+  <v-bottom-navigation ref="nav" v-model="selectedView" grow fixed flat>
     <v-btn class="bottom-btn" value="Main">
       <v-icon>mdi-home</v-icon>
     </v-btn>
@@ -35,7 +35,7 @@
                 />
               </v-avatar>
             </v-list-item-avatar> -->
-            <v-list-item-title class="pl-3" @click="openPage(tile.type)">{{
+            <v-list-item-title class="pl-3" @click="$router.push({ name: tile.type })">{{
               tile.title
             }}</v-list-item-title>
           </v-list-item>
@@ -46,13 +46,13 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
   components: {},
   props: {},
   data() {
     return {
       sheet: false,
-      selectedView: 'Main',
       tiles: [
         {
           // img: 'messenger.png',
@@ -67,16 +67,38 @@ export default {
       ],
     };
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      pageName: (state) => state.header.pageName,
+    }),
+    selectedView: {
+      get() {
+        return this.pageName;
+      },
+      set(value) {
+        if (value === 'Fridge') {
+          return;
+        }
+        if (value === 'Mypage') {
+          const userName = 'userName';
+          this.$router.replace({ path: `${userName}` }).catch(() => {});
+          return;
+        }
+        this.$router.replace({ name: value }).catch(() => {});
+      },
+    },
+  },
   watch: {
-    selectedView: function(val) {
-      if (val == 'Fridge') return;
-      this.$router.replace({ name: val });
+    $route: {
+      immediate: true,
+      handler(value) {
+        this.$store.commit('setPageName', value.name);
+      },
     },
   },
   methods: {
-    openPage(type) {
-      this.$router.push({ name: type, params: { type } });
+    fridgeActive() {
+      console.log('%cFooter.vue line:97 active!!', 'color: #007acc;');
     },
   },
 };

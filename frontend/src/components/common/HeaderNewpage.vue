@@ -1,16 +1,18 @@
 <template>
   <v-app-bar flat color="white" fixed>
     <v-row>
-      <v-col cols="2" class="pa-0">
+      <v-col cols="2" class="d-flex align-center justify-center">
         <v-btn icon @click="$router.go(-1)">
           <v-icon>mdi-{{ left }}</v-icon>
         </v-btn>
       </v-col>
-      <v-col class="d-flex justify-space-around">
+      <v-col class="d-flex justify-space-around align-center">
         <span class="font-weight-medium text-subtitle-1">{{ center }}</span>
       </v-col>
-      <v-col cols="2" class="d-flex justify-end">
-        <v-icon>mdi-{{ right }}</v-icon>
+      <v-col cols="2" class="d-flex align-center justify-center">
+        <v-btn icon>
+          <v-icon>mdi-{{ right }}</v-icon>
+        </v-btn>
       </v-col>
     </v-row>
   </v-app-bar>
@@ -29,7 +31,7 @@ export default {
   },
   computed: {},
   watch: {
-    '$route.params.type': {
+    '$router.currentRoute.name': {
       immediate: true,
       handler(type) {
         switch (type) {
@@ -53,12 +55,16 @@ export default {
             this.center = '';
             this.right = '';
             break;
+          case 'ReviewWrite':
+            this.left = 'close';
+            this.center = '';
+            this.right = '';
+            break;
           case 'ProfileEdit':
             this.left = 'close';
             this.center = '프로필 수정';
             this.right = '';
         }
-        console.log('%cHeaderNewpage.vue line:61 type', 'color: #007acc;', type);
       },
     },
   },

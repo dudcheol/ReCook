@@ -24,9 +24,21 @@ const routes = [
         component: () => import('@/views/index/Watch'),
       },
       {
-        path: 'mypage',
+        path: '',
         name: 'Mypage',
         component: () => import('@/views/index/Mypage'),
+        children: [
+          {
+            path: ':user_name',
+            name: 'Mypage',
+            component: () => import('@/views/user/UserReview'),
+          },
+          {
+            path: ':user_name/like',
+            name: 'Mypage',
+            component: () => import('@/views/user/UserLike'),
+          },
+        ],
       },
     ],
   },
@@ -45,10 +57,19 @@ const routes = [
         component: () => import('@/views/fridge/Fridge'),
       },
       {
-        // path: 'review/:review_id',
-        path: 'review',
+        path: 'review/:review_id',
         name: 'ReviewDetail',
-        component: () => import('@/views/user/ReviewDetail'),
+        component: () => import('@/views/review/ReviewDetail'),
+      },
+      {
+        path: 'recipe/:recipe_id',
+        name: 'RecipeDetail',
+        component: () => import('@/views/recipe/RecipeDetail'),
+      },
+      {
+        path: 'recipe/:recipe_id/write',
+        name: 'ReviewWrite',
+        component: () => import('@/views/review/ReviewWrite'),
       },
     ],
   },
@@ -58,6 +79,13 @@ const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { x: 0, y: 0 };
+    }
+  },
 });
 
 export default router;

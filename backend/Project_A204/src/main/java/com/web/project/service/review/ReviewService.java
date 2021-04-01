@@ -1,20 +1,25 @@
 package com.web.project.service.review;
 
 import java.util.List;
+import java.util.Map;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+
 import com.web.project.model.review.Review;
+import com.web.project.model.review.ReviewUpload;
 
 public interface ReviewService {
 	
-	public Review createReview(Review review);
+	public ResponseEntity<Review> createReview(ReviewUpload reviewUpload);
 
-	public List<Review> findAll();
-
-	public Review findByReview(long reviewId);
+	public ResponseEntity<Page<Review>> findAll(Pageable pageable);
 	
-	public List<Review> findByUser(String userId);
+	public ResponseEntity<Map<String, Object>> findByReview(int reviewId);
 	
-	public List<Review> findByRecipe(Long recipeId);
+	public ResponseEntity<List<Review>> findByUser(String userName);
 	
-	public long countAll();
-
+	public ResponseEntity<List<Review>> findByRecipe(int recipeSubId);
+	
 }

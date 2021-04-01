@@ -7,8 +7,13 @@ import lombok.Data;
 public class ReviewUpload {
 	
 	private String userId;
-	private Long recipeId;
+	
+	private int recipeId;
+	
 	private String reviewContext;
+	
 	private MultipartFile reviewImage;
+	
+	private double reviewRating;
 
 }

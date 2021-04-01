@@ -1,21 +1,27 @@
 package com.web.project.service.user;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.web.project.controller.user.UserController;
+import com.web.project.dao.recipe.RecipeDao;
+import com.web.project.dao.recipe.RecipeLikeDao;
 import com.web.project.dao.user.UserDao;
+import com.web.project.model.recipe.Recipe;
+import com.web.project.model.recipe.RecipeLike;
 import com.web.project.model.user.LoginGoogleRequest;
 import com.web.project.model.user.LoginRequest;
 import com.web.project.model.user.SignupRequest;
@@ -30,6 +36,11 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDao userDao;
+
+	@Autowired
+	private RecipeDao recipeDao;
+	
+	@Autowired RecipeLikeDao recipeLikeDao;
 
 	public static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
@@ -52,7 +63,7 @@ public class UserServiceImpl implements UserService {
 
 		return userDao.save(user);
 	}
-	
+
 	@Override
 	public User signupGoogle(LoginGoogleRequest request) {
 		User user = new User();
@@ -122,7 +133,7 @@ public class UserServiceImpl implements UserService {
 				resultMap.put("user-image", user.getUserImage());
 				// 소개글
 				resultMap.put("user-introduce", user.getUserIntroduce());
-				
+
 				status = HttpStatus.OK;
 			} else {
 				resultMap.put("message", "로그인 실패");
@@ -136,7 +147,7 @@ public class UserServiceImpl implements UserService {
 
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
-	
+
 	@Override
 	public ResponseEntity<Map<String, Object>> loginGoogle(LoginGoogleRequest loginGoogleRequest) {
 		Map<String, Object> resultMap = new HashMap<>();
@@ -164,7 +175,7 @@ public class UserServiceImpl implements UserService {
 				resultMap.put("user-introduce", user.getUserIntroduce());
 				// GID
 				resultMap.put("user-gid", user.getUserGid());
-				
+
 				status = HttpStatus.OK;
 			} else {
 				resultMap.put("message", "로그인 실패");
@@ -180,14 +191,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public ResponseEntity<Map<String, Object>> mypage(HttpServletRequest request) {
+	public ResponseEntity<Map<String, Object>> mypage(String userName) {
 
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = null;
 
 		try {
-			// 토큰에 저장되어 있는 정보를 가져올 map
-			resultMap.putAll(jwtService.get(request.getHeader("auth-token")));
+			User user = userDao.findUserByUserName(userName);
+
+			resultMap.put("userName", user.getUserName());
+			resultMap.put("userImage", user.getUserImage());
+			resultMap.put("userIntroduce", user.getUserIntroduce());
+
 			status = HttpStatus.OK;
 		} catch (RuntimeException e) {
 			logger.error("정보조회 실패 : {}", e);
@@ -242,6 +257,29 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public ResponseEntity<List<Recipe>> userLike(String userId, Pageable pageable) {
+		List<Recipe> resultList = new ArrayList<Recipe>();
+		HttpStatus status = null;
+
+		try {
+			Page<RecipeLike> page = recipeLikeDao.findAllByUserId(userId, pageable);
+			
+			Iterator<RecipeLike> iterator = page.iterator();
+			while(iterator.hasNext()) {
+				RecipeLike recipeLike = iterator.next();
+				resultList.add(recipeDao.findRecipeByRecipeId(recipeLike.getRecipeId()));
+			}
+
+			status = HttpStatus.OK;
+		} catch (RuntimeException e) {
+			logger.error("정보 수정 실패 : {}", e);
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+
+		return new ResponseEntity<List<Recipe>> (resultList, status);
+	}
+
+	@Override
 	public User findUserByUserId(String userId) {
 		return userDao.findUserByUserId(userId);
 	}
@@ -260,7 +298,5 @@ public class UserServiceImpl implements UserService {
 	public User findUserByUserGid(String userGid) {
 		return userDao.findUserByUserGid(userGid);
 	}
-
-	
 
 }
