@@ -134,6 +134,6 @@ def similar_recommend(title, userid):
     real_result = allergy_remove(result, small_id_list)
 
     print(data[data['title'] == title])
-    # print(real_result)
+    print(real_result)
 
     return real_result
