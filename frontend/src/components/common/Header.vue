@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     getHeader(value) {
-      switch (value) {
+      switch (value.split('#')[0]) {
         case 'Main':
           return HeaderMain;
         case 'Feed':

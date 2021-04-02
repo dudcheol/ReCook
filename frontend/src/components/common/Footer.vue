@@ -74,18 +74,10 @@ export default {
     }),
     selectedView: {
       get() {
-        return this.pageName;
+        return this.pageName.split('#')[0];
       },
       set(value) {
         if (value === 'Fridge') {
-          return;
-        }
-        if (value === 'Mypage') {
-          this.$router
-            .replace({
-              path: `${this.user.userName}/${this.$store.state.user.mypageTabState}`,
-            })
-            .catch(() => {});
           return;
         }
         this.$router.replace({ name: value }).catch(() => {});

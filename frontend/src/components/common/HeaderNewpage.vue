@@ -33,8 +33,8 @@ export default {
   watch: {
     '$router.currentRoute.name': {
       immediate: true,
-      handler(type) {
-        switch (type) {
+      handler(value) {
+        switch (value) {
           case 'FridgeIngredient':
             this.left = 'close';
             this.center = '남은 재료 선택';
@@ -64,6 +64,17 @@ export default {
             this.left = 'close';
             this.center = '프로필 수정';
             this.right = '';
+            break;
+          case 'Login':
+            this.left = 'close';
+            this.center = 'RECOOK';
+            this.right = '';
+            break;
+          case 'WatchDetail':
+            this.left = 'chevron-left';
+            this.center = '';
+            this.right = '';
+            break;
         }
       },
     },
