@@ -2,64 +2,81 @@
   <v-container fluid>
     <v-row class="header-profile white pt-14">
       <v-col cols="12">
-        <profile-simple-item
-          :username="user.userName || ''"
-          :src="user.userImage || ''"
-        ></profile-simple-item>
+        <ProfileSimpleItem :username="user.userName || ''" :src="user.userImage || ''" />
       </v-col>
-      <!-- <v-col cols="12" class="pa-0 dahong text-center text-caption white--text font-weight-medium">
-        {{ user.userName }}님이 <strong>좋아요</strong>한 <strong>레시피</strong>입니다
-      </v-col> -->
+      <v-col
+        cols="12"
+        class="pa-1 grey lighten-4 text-center text-caption white--text font-weight-medium"
+      >
+      </v-col>
     </v-row>
     <v-row class="pt-14 pb-4" no-gutters>
       <v-col>
-        <watch-card-list></watch-card-list>
+        <WatchCardItem
+          v-for="item in likeRecipeList"
+          :key="'likelist' + item.recipeId"
+          :src="item.recipeMainImage"
+          :title="item.recipeTitle"
+          :username="item.recipeTime"
+          :usersrc="'mdi-information-outline'"
+          @click="$router.push(`/recipe/${item.recipeId}`)"
+        />
       </v-col>
     </v-row>
     <infinite-loading @infinite="infiniteHandler">
       <div slot="spinner">
         <v-skeleton-loader class="mx-auto px-4" max-width="100%" type="card"></v-skeleton-loader>
       </div>
+      <div slot="no-results"></div>
+      <div slot="no-more"></div>
+      <div slot="error"></div>
     </infinite-loading>
   </v-container>
 </template>
 <script>
 import ProfileSimpleItem from '@/components/ProfileSimpleItem.vue';
-import WatchCardList from '@/components/WatchCardList.vue';
+import WatchCardItem from '@/components/WatchCardItem';
+import { getLikeListByUserId } from '@/api/user';
 export default {
   components: {
     ProfileSimpleItem,
-    WatchCardList,
+    WatchCardItem,
   },
   props: {
     user: Object,
   },
   data() {
     return {
-      page: 1,
-      list: [],
+      page: 0,
+      size: 5,
+      likeRecipeList: [],
     };
   },
   computed: {},
   watch: {},
   methods: {
     infiniteHandler($state) {
-      console.log('%cUserLike.vue line:38 $state', 'color: #007acc;', $state);
-      // axios
-      //   .get(api, {
-      //     params: {
-      //       page: this.page,
-      //     },
-      //   })
-      //   .then(({ data }) => {
-      //     if (data.hits.length) {
-      //       this.page += 1;
-      //       this.list.push(...data.hits);
-      //       $state.loaded();
-      //     } else {
-      //       $state.complete();
-      //     }
-      //   });
+      getLikeListByUserId(
+        this.$store.state.user.user.userId,
+        this.page,
+        this.size,
+        (response) => {
+          const data = response.data;
+
+          console.log('%cUserLike.vue line:53 response.data', 'color: #007acc;', response.data);
+
+          if (data.length) {
+            this.page += 1;
+            this.likeRecipeList.push(...data);
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        },
+        (error) => {
+          console.log('%cUserLike.vue line:61 error', 'color: #007acc;', error);
+        }
+      );
     },
   },
 };

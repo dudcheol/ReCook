@@ -8,7 +8,7 @@ function setAuthTokenToHeader(token) {
 }
 
 function removeAuthTokenToHeader() {
-  instance.defaults.headers['authToken'] = undefined;
+  instance.defaults.headers.common['authToken'] = undefined;
 }
 
 async function login(userInfo, success, fail) {
@@ -32,10 +32,18 @@ function getUserInfoByName(userName, success, fail) {
     .catch(fail);
 }
 
+function getLikeListByUserId(userId, page, size, success, fail) {
+  instance
+    .get(`${COMMON}/like/${userId}`, { params: { page, size } })
+    .then(success)
+    .catch(fail);
+}
+
 export {
   login,
   getUserInfoByName,
   getUserInfoByAuthToken,
   setAuthTokenToHeader,
   removeAuthTokenToHeader,
+  getLikeListByUserId,
 };
