@@ -20,7 +20,7 @@ from rest_framework_swagger.views import get_swagger_view
 schema_view = get_swagger_view(title='Rest API Document')
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('similar/',include('similar.urls'),name="content_based_filtering"),
-    path('docs/', schema_view)
+    path('bigdata/admin/', admin.site.urls),
+    path('bigdata/similar/',include('similar.urls'),name="content_based_filtering"),
+    path('bigdata/docs/', schema_view)
 ]
