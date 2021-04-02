@@ -9,5 +9,7 @@ import com.web.project.model.video.Video;
 public interface VideoService {
 
 	public ResponseEntity<Page<Video>> allVideo(Pageable pageable);
+
+	public ResponseEntity<Video> videoDetail(int videoId);
 	
 }
