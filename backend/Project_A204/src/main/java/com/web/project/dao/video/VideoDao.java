@@ -11,5 +11,7 @@ import com.web.project.model.video.Video;
 public interface VideoDao extends JpaRepository<Video, String>{
 
 	Page<Video> findAll(Pageable pageable);
+
+	Video findVideoByVideoId(int videoId);
 	
 }

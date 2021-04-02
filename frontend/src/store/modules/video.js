@@ -1,5 +1,8 @@
 // initial state
-const state = () => ({});
+const state = () => ({
+
+  
+});
 
 // getters
 const getters = {};

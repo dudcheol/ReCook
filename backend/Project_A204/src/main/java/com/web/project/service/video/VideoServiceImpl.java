@@ -20,5 +20,10 @@ public class VideoServiceImpl implements VideoService{
 	public ResponseEntity<Page<Video>> allVideo(Pageable pageable) {
 		return new ResponseEntity<Page<Video>> (videoDao.findAll(pageable), HttpStatus.OK);
 	}
+
+	@Override
+	public ResponseEntity<Video> videoDetail(int videoId) {
+		return new ResponseEntity<Video> (videoDao.findVideoByVideoId(videoId), HttpStatus.OK);
+	}
 	
 }
