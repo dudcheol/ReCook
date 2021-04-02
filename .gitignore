@@ -1,6 +1,12 @@
 # Created by https://www.toptal.com/developers/gitignore/api/java,eclipse,macos,windows,netbeans,vscode,maven
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,eclipse,macos,windows,netbeans,vscode,maven
 
+# bigdata
+bigdata/bigdata/mysite/__pycache__/
+bigdata/bigdata/similar/__pycache__/
+#bigdata
+
+
 ### Eclipse ###
 .metadata
 bin/

@@ -131,6 +131,7 @@ def check(user_id):
         for f in foodLike:
             food=Food.objects.filter(food_id=f['food_id']).values()
             recipe = Recipe.objects.filter(recipe_id=food[0]['recipe_id']).values()
+            print(recipe[0]['recipe_title'])
             return_result.append(Similar.similar_recommend(recipe[0]['recipe_title'],user_id))
     
     return return_result
