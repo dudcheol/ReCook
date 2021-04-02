@@ -70,6 +70,11 @@ export default {
             this.center = 'RECOOK';
             this.right = '';
             break;
+          case 'WatchDetail':
+            this.left = 'chevron-left';
+            this.center = '';
+            this.right = '';
+            break;
         }
       },
     },

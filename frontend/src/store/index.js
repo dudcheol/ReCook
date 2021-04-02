@@ -9,6 +9,7 @@ import header from './modules/header';
 import review from './modules/review';
 import hashtag from './modules/hashtag';
 import user from './modules/user';
+import video from './modules/video';
 
 const store = new Vuex.Store({
   modules: {
@@ -18,6 +19,7 @@ const store = new Vuex.Store({
     review,
     hashtag,
     user,
+    video,
   },
 });
 

@@ -88,6 +88,11 @@ const routes = [
         name: 'Login',
         component: () => import('@/views/login/Login'),
       },
+      {
+        path: 'watch/:video_id',
+        name: 'WatchDetail',
+        component: () => import('@/views/watch/WatchDetail'),
+      },
     ],
   },
 ];
