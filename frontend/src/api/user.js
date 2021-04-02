@@ -7,7 +7,7 @@ function setAuthTokenToHeader(token) {
   instance.defaults.headers.common['authToken'] = token;
 }
 
-function logout() {
+function removeAuthTokenToHeader() {
   instance.defaults.headers['authToken'] = undefined;
 }
 
@@ -32,4 +32,10 @@ function getUserInfoByName(userName, success, fail) {
     .catch(fail);
 }
 
-export { login, getUserInfoByName, getUserInfoByAuthToken, setAuthTokenToHeader, logout };
+export {
+  login,
+  getUserInfoByName,
+  getUserInfoByAuthToken,
+  setAuthTokenToHeader,
+  removeAuthTokenToHeader,
+};

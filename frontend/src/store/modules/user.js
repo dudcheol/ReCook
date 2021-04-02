@@ -1,4 +1,10 @@
-import { getUserInfoByAuthToken, getUserInfoByName, login, setAuthTokenToHeader } from '@/api/user';
+import {
+  getUserInfoByAuthToken,
+  getUserInfoByName,
+  login,
+  setAuthTokenToHeader,
+  removeAuthTokenToHeader,
+} from '@/api/user';
 
 // initial state
 const state = () => ({
@@ -49,6 +55,10 @@ const actions = {
       },
       () => {}
     );
+  },
+  LOGOUT() {
+    removeAuthTokenToHeader();
+    localStorage.setItem('authToken', undefined);
   },
 };
 
