@@ -9,8 +9,8 @@ def index(request,title,userid):
     return Response( Similar.similar_recommend(title,userid))
 
 @api_view(['GET'])
-def choice(request,userid):       
-    return Response( 'dsdf')
+def choice(request,user_id):       
+    return Response(recommendation.check(user_id))
 
 @api_view(['GET'])
 def main_index(request,title,user_id):

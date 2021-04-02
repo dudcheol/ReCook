@@ -15,11 +15,13 @@ public class Video {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int videoId;
 	
-	private String videoName;
+	private String videoTitle;
 	
 	private String videoUrl;
 	
-	private String videoUploader;
+	private String videoChannel;
+	
+	private String videoChannelImg;
 	
 	private String videoThumbnail;
 }

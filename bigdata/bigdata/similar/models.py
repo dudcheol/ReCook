@@ -113,6 +113,7 @@ class IngredientsSmall(models.Model):
 
 class Recipe(models.Model):
     recipe_id = models.AutoField(primary_key=True)
+    recipe_sub_id = models.IntegerField()
     recipe_title = models.CharField(max_length=100)
     recipe_created = models.DateTimeField()
     recipe_image = models.TextField()
@@ -121,7 +122,6 @@ class Recipe(models.Model):
     recipe_time = models.CharField(max_length=45)
     recipe_main_image = models.TextField()
     recipe_count = models.IntegerField()
-    recipe_sub_id = models.IntegerField()
 
     class Meta:
         managed = False
@@ -165,15 +165,15 @@ class Review(models.Model):
     review_id = models.AutoField(primary_key=True)
     user = models.ForeignKey('User', models.DO_NOTHING)
     review_context = models.CharField(max_length=1000, blank=True, null=True)
-    review_image = models.CharField(max_length=1500)
+    review_image = models.CharField(max_length=1500, blank=True, null=True)
     review_created = models.DateTimeField()
     review_rating = models.FloatField()
-    recipe_sub = models.ForeignKey(Recipe, models.DO_NOTHING)
+    recipe_sub = models.ForeignKey(Recipe, models.DO_NOTHING, related_name='recipe_sub_id_use')
+    recipe = models.ForeignKey(Recipe, models.DO_NOTHING,  related_name='recipe_id_use')
 
     class Meta:
         managed = False
         db_table = 'review'
-        unique_together = (('review_id', 'user', 'recipe_sub'),)
 
 
 class Sequence(models.Model):
@@ -190,7 +190,7 @@ class Sequence(models.Model):
 class User(models.Model):
     user_id = models.CharField(primary_key=True, max_length=45)
     user_email = models.CharField(max_length=45)
-    user_name = models.CharField(max_length=45)
+    user_name = models.CharField(unique=True, max_length=45)
     user_password = models.CharField(max_length=45)
     user_image = models.CharField(max_length=300, blank=True, null=True)
     user_introduce = models.CharField(max_length=300, blank=True, null=True)
@@ -209,13 +209,14 @@ class UserHashtag(models.Model):
     class Meta:
         managed = False
         db_table = 'user_hashtag'
-        unique_together = (('hashtag', 'user'),)
 
 
 class Video(models.Model):
     video_id = models.AutoField(primary_key=True)
-    video_name = models.CharField(max_length=45)
-    video_url = models.CharField(max_length=300)
+    video_name = models.CharField(max_length=1000, blank=True, null=True)
+    video_url = models.CharField(max_length=1000)
+    video_uploader = models.CharField(max_length=100)
+    video_thumbnail = models.CharField(max_length=1000)
 
     class Meta:
         managed = False
