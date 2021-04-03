@@ -123,7 +123,7 @@ def check(user_id):
         sub_id=review[review.count()-1]['recipe_sub_id']
         recipe = Recipe.objects.filter(recipe_sub_id=sub_id).values()
         return_result.append(recommend(recipe[0]['recipe_title'],user_id))
-    #3개 미만이면 content based
+    #3개 미만이면 content based filtering
     else:
         foodLike=FoodLike.objects.filter(user=user_id).values()
         i=0
