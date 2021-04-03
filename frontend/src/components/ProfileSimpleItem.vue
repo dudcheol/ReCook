@@ -2,7 +2,7 @@
   <div class="d-flex align-center" @click="$emit('click')">
     <div>
       <v-avatar :size="iconSize || 36">
-        <v-img :src="src" />
+        <v-img v-if="!icon" :src="src" /> <v-icon v-else>{{ src }}</v-icon>
       </v-avatar>
       <span class="font-weight-medium pl-3" :style="{ fontSize: (fontSize || 18) + 'px' }">{{
         username
@@ -22,7 +22,7 @@
 <script>
 export default {
   components: {},
-  props: { username: String, src: String, iconSize: Number, fontSize: Number },
+  props: { username: String, src: String, iconSize: Number, fontSize: Number, icon: Boolean },
   data() {
     return {};
   },

@@ -334,6 +334,11 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	@Override
+	public ResponseEntity<Page<Recipe>> newRecipeListAll(Pageable pageable) {
+		return new ResponseEntity<Page<Recipe>> (recipeDao.findAllByOrderByRecipeIdDesc(pageable), HttpStatus.OK);
+	}
+	
+	@Override
 	public ResponseEntity<List<Map<String, Object>>> hotRecipeList() {
 		List<Map<String, Object>> resultList = new ArrayList<Map<String, Object>>();
 		HttpStatus status = HttpStatus.OK;
@@ -379,6 +384,11 @@ public class RecipeServiceImpl implements RecipeService {
 		}
 
 		return new ResponseEntity<List<Map<String, Object>>>(resultList, status);
+	}
+	
+	@Override
+	public ResponseEntity<Page<Recipe>> hotRecipeListAll(Pageable pageable) {
+		return new ResponseEntity<Page<Recipe>> (recipeDao.findAllByOrderByRecipeCountDesc(pageable), HttpStatus.OK);
 	}
 
 	@Override

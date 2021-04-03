@@ -11,12 +11,14 @@
         <v-row>
           <v-col class="d-flex justify-space-between align-center">
             <span class="text-h5 font-weight-black">추천 Recipe</span>
-            <v-btn text small class="pa-1">전체보기</v-btn>
+            <v-btn text small class="pa-1" @click="$router.push({ path: `recipe/list/recommend` })"
+              >전체보기</v-btn
+            >
           </v-col>
         </v-row>
         <v-row>
           <v-col class="pa-0">
-            <RecipeCardList :datas="recipeNewList" />
+            <RecipeCardList :datas="recipeNewList" :type="'recommend'" />
           </v-col>
         </v-row>
       </v-col>
@@ -28,12 +30,14 @@
         <v-row>
           <v-col class="d-flex justify-space-between align-center">
             <span class="text-h5 font-weight-black">인기 Recipe</span>
-            <v-btn text small class="pa-1">전체보기</v-btn>
+            <v-btn text small class="pa-1" @click="$router.push({ path: `recipe/list/popular` })"
+              >전체보기</v-btn
+            >
           </v-col>
         </v-row>
         <v-row>
           <v-col class="pa-0">
-            <RecipeCardList :datas="recipeHotList" />
+            <RecipeCardList :datas="recipeHotList" :type="'popular'" />
           </v-col>
         </v-row>
       </v-col>
@@ -45,12 +49,14 @@
         <v-row>
           <v-col class="d-flex justify-space-between align-center">
             <span class="text-h5 font-weight-black">최신 Recipe</span>
-            <v-btn text small class="pa-1">전체보기</v-btn>
+            <v-btn text small class="pa-1" @click="$router.push({ path: `recipe/list/recent` })"
+              >전체보기</v-btn
+            >
           </v-col>
         </v-row>
         <v-row>
           <v-col class="pa-0">
-            <RecipeCardList :datas="recipeNewList" />
+            <RecipeCardList :datas="recipeNewList" :type="'recent'" />
           </v-col>
         </v-row>
       </v-col>
