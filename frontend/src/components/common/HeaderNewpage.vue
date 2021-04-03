@@ -75,11 +75,30 @@ export default {
             this.center = '';
             this.right = '';
             break;
+          case 'RecipeList':
+            this.left = 'chevron-left';
+            this.center = `${this.convertRecipeListTitle(
+              this.$route.path.split('/')[3]
+            )} 레시피 전체`;
+            this.right = '';
+            break;
         }
       },
     },
   },
-  methods: {},
+  methods: {
+    convertRecipeListTitle(type) {
+      switch (type) {
+        case 'recommend':
+          return '추천';
+        case 'popular':
+          return '인기';
+        case 'recent':
+        default:
+          return '최신';
+      }
+    },
+  },
 };
 </script>
 
