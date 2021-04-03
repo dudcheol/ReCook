@@ -20,7 +20,11 @@ public interface RecipeService {
 	
 	public ResponseEntity<List<Map<String, Object>>> newRecipeList();
 	
+	public ResponseEntity<Page<Recipe>> newRecipeListAll(Pageable pageable);
+	
 	public ResponseEntity<List<Map<String, Object>>> hotRecipeList();
+	
+	public ResponseEntity<Page<Recipe>> hotRecipeListAll(Pageable pageable);
 	
 	public ResponseEntity<List<String>> recipeIngredients(int recipeId);
 	

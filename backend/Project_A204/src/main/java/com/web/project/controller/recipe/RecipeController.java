@@ -62,10 +62,22 @@ public class RecipeController {
 		return recipeService.newRecipeList();
 	}
 	
+	@GetMapping("/show/new/list/all")
+	@ApiOperation(value = "최신 레시피 모두 불러오기")
+	public ResponseEntity<Page<Recipe>> newRecipeListAll(Pageable pageable){
+		return recipeService.newRecipeListAll(pageable);
+	}
+	
 	@GetMapping("/show/hot/list")
 	@ApiOperation(value = "인기 레시피 10개 불러오기")
 	public ResponseEntity<List<Map<String, Object>>> hotRecipeList(){
 		return recipeService.hotRecipeList();
+	}
+	
+	@GetMapping("/show/hot/list/all")
+	@ApiOperation(value = "인기 레시피 모두 불러오기")
+	public ResponseEntity<Page<Recipe>> hotRecipeListAll(Pageable pageable){
+		return recipeService.hotRecipeListAll(pageable);
 	}
 	
 	@PostMapping("/like")
