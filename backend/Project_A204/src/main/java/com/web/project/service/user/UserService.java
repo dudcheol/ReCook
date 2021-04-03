@@ -45,4 +45,5 @@ public interface UserService {
 	
 	public User findUserByUserEmailAndUserPassword(String userEmail, String userPassword);
 	
+	public ResponseEntity<String> userSurvey(String userId);
 }

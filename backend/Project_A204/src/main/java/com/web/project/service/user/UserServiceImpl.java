@@ -22,9 +22,11 @@ import org.springframework.stereotype.Service;
 
 import com.web.project.dao.recipe.RecipeDao;
 import com.web.project.dao.recipe.RecipeLikeDao;
+import com.web.project.dao.survey.AllergyGroupDao;
 import com.web.project.dao.user.UserDao;
 import com.web.project.model.recipe.Recipe;
 import com.web.project.model.recipe.RecipeLike;
+import com.web.project.model.survey.AllergyGroup;
 import com.web.project.model.user.LoginGoogleRequest;
 import com.web.project.model.user.LoginRequest;
 import com.web.project.model.user.SignupRequest;
@@ -43,7 +45,11 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private RecipeDao recipeDao;
 	
-	@Autowired RecipeLikeDao recipeLikeDao;
+	@Autowired
+	private RecipeLikeDao recipeLikeDao;
+	
+	@Autowired
+	private AllergyGroupDao allergyGroupDao;
 
 	public static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
@@ -317,6 +323,29 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User findUserByUserGid(String userGid) {
 		return userDao.findUserByUserGid(userGid);
+	}
+
+	@Override
+	public ResponseEntity<String> userSurvey(String userId) {
+		String check = "";
+		HttpStatus status = null;
+		
+		List<AllergyGroup> allergyGroupList = allergyGroupDao.findAllByUserId(userId);
+		
+		try {
+			if(allergyGroupList.size() > 0) {
+				check = "Yes";
+			}else {
+				check = "No";
+			}
+			
+			status = HttpStatus.OK;
+		} catch (Exception e) {
+			logger.error("알러지 여부 확인 실패 : {}", e);
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		
+		return new ResponseEntity<String> (check, status);
 	}
 
 	

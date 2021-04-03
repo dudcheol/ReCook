@@ -114,4 +114,10 @@ public class UserController {
 	public ResponseEntity<List<Recipe>> userLike(@PathVariable("userId") String userId, Pageable pageable) {
 		return userService.userLike(userId, pageable);
 	}
+	
+	@GetMapping("/check/survey/{userId}")
+	@ApiOperation(value = "취향 조사를 한 유저인지 확인")
+	public ResponseEntity<String> userSurvey(@PathVariable("userId") String userId) {
+		return userService.userSurvey(userId);
+	}
 }
