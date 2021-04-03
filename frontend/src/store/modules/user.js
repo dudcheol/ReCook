@@ -11,6 +11,10 @@ const state = () => ({
   user: {},
   mypageTabState: 'review',
   selectedUserInfo: {},
+  allergyCheck: false,
+  // selectedIngredients: [],
+  selectedIngredients: [],
+  selectedBigIdx: 0,
 });
 
 // getters
@@ -72,6 +76,23 @@ const mutations = {
   },
   setMypageTabState(state, payload) {
     state.mypageTabState = payload;
+  },
+  setAllergyCheck(state, payload) {
+    state.allergyCheck = payload;
+  },
+  setSelectedIngredients(state, payload) {
+    state.selectedIngredients = payload;
+  },
+  setSelectedBigIdx(state, payload) {
+    state.selectedBigIdx = payload;
+  },
+  addIngredientItem(state, payload) {
+    state.selectedIngredients.push(payload);
+    const set = new Set(state.selectedIngredients);
+    state.selectedIngredients = Array.from(set);
+  },
+  toggleAllergyCheck(state) {
+    state.allergyCheck = !state.allergyCheck;
   },
 };
 

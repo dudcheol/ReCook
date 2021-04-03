@@ -65,7 +65,7 @@ const routes = [
       {
         path: 'fridge/recomm',
         name: 'FridgeRecomm',
-        component: () => import('@/views/fridge/Fridge'),
+        component: () => import('@/views/fridge/Recommend'),
       },
       {
         path: 'review/:review_id',

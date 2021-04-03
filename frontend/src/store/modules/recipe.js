@@ -1,10 +1,16 @@
-import { getRecipeById, getRecipeNewList, getRecipeHotList } from '../../api/recipe';
+import {
+  getRecipeById,
+  getRecipeNewList,
+  getRecipeHotList,
+  getRecommIngredients,
+} from '../../api/recipe';
 
 // initial state
 const state = () => ({
   recipeInfo: {},
   recipeNewList: [],
   recipeHotList: [],
+  recipeRecomm: [],
 });
 
 // getters
@@ -43,6 +49,20 @@ const actions = {
       }
     );
   },
+  GET_RECOMM_RECIPE_LIST({ commit }, info) {
+    commit('clearRecipeRecommList');
+    getRecommIngredients(
+      info.ingredientList.map((v) => {
+        return v.smallName;
+      }),
+      info.userId,
+      info.allergy,
+      (response) => {
+        commit('setRecipeRecomm', response.data);
+      },
+      () => {}
+    );
+  },
 };
 
 // mutations
@@ -58,6 +78,12 @@ const mutations = {
   },
   clearRecipeInfo(state) {
     state.recipeInfo = {};
+  },
+  setRecipeRecomm(state, payload) {
+    state.recipeRecomm = payload;
+  },
+  clearRecipeRecommList(state) {
+    state.recipeRecomm = [];
   },
 };
 
