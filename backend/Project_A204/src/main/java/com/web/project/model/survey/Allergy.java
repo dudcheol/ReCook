@@ -14,4 +14,6 @@ public class Allergy {
 	
 	private String allergyName;
 	
+	private String allergyImage;
+	
 }
