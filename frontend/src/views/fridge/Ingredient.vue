@@ -2,17 +2,31 @@
   <v-container class="pa-0">
     <div class="footer px-5 pb-3">
       <v-card rounded="xl" elevation="15">
-        <v-card-title
-          >선택된 재료 총 <strong>{{ selectedIngredients.length }}</strong
-          >개</v-card-title
+        <v-card-title>
+          <div class="d-flex align-center justify-space-between" style="width:100%">
+            <span class="pl-1">
+              선택된 재료 총
+              <span class="dahong--text font-weight-black">{{ selectedIngredients.length }}</span
+              >개</span
+            >
+            <v-btn icon @click="isExpanded = !isExpanded">
+              <v-icon>mdi-unfold-{{ isExpanded ? 'less' : 'more' }}-horizontal</v-icon>
+            </v-btn>
+          </div></v-card-title
         >
-        <v-chip-group active-class="none" v-if="selectedIngredients.length" class="px-3">
+        <v-chip-group
+          active-class="none"
+          v-if="selectedIngredients.length"
+          class="px-3"
+          :column="isExpanded"
+        >
           <v-chip
             color="grey lighten-3"
             text-color="grey darken-2"
             v-for="(ingredient, index) in selectedIngredients"
             :key="ingredient.smallName + index"
             @click:close="REMOVE_INGREDIENT_ITEM(ingredient.smallId)"
+            @click="REMOVE_INGREDIENT_ITEM(ingredient.smallId)"
             close
           >
             {{ ingredient.smallName }}
@@ -33,6 +47,7 @@
             rounded
             block
             :disabled="selectedIngredients.length == 0 ? true : false"
+            @click="$router.push({ path: `/fridge/recomm` })"
           >
             요리 시작하기
           </v-btn>
@@ -105,6 +120,7 @@ export default {
   props: {},
   data() {
     return {
+      isExpanded: true,
       getIngredients: Set,
     };
   },
@@ -113,8 +129,8 @@ export default {
       bigList: (state) => state.ingredients.bigList,
       middleList: (state) => state.ingredients.middleList,
       smallList: (state) => state.ingredients.smallList,
-      selectedIngredients: (state) => state.ingredients.selectedIngredients,
-      selectedBigIdx: (state) => state.ingredients.selectedBigIdx,
+      selectedIngredients: (state) => state.user.selectedIngredients,
+      selectedBigIdx: (state) => state.user.selectedBigIdx,
     }),
   },
   watch: {

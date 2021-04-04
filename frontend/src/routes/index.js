@@ -65,7 +65,7 @@ const routes = [
       {
         path: 'fridge/recomm',
         name: 'FridgeRecomm',
-        component: () => import('@/views/fridge/Fridge'),
+        component: () => import('@/views/fridge/Recommend'),
       },
       {
         path: 'review/:review_id',
@@ -98,6 +98,28 @@ const routes = [
         path: 'watch/:video_id',
         name: 'WatchDetail',
         component: () => import('@/views/watch/WatchDetail'),
+      },
+    ],
+  },
+  {
+    path: '/survey',
+    name: 'Survey',
+    component: () => import('@/views/survey/SurveyFrame'),
+    children: [
+      {
+        path: '',
+        name: 'SurveyMain',
+        component: () => import('@/views/survey/SurveyMain'),
+      },
+      {
+        path: 'allergy',
+        name: 'SurveyAllergy',
+        component: () => import('@/views/survey/SurveyAllergy'),
+      },
+      {
+        path: 'food',
+        name: 'SurveyFood',
+        component: () => import('@/views/survey/SurveyFood'),
       },
     ],
   },
