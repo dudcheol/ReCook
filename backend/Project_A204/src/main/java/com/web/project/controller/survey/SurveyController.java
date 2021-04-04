@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.web.project.model.recipe.Recipe;
+import com.web.project.model.survey.Allergy;
 import com.web.project.model.survey.SurveyRequest;
 import com.web.project.model.user.User;
 import com.web.project.service.survey.SurveyService;
@@ -45,7 +46,7 @@ public class SurveyController {
 	
 	@GetMapping("/allergy")
 	@ApiOperation(value = "알레르기 리스트 전달", notes = "모든 알레르기 리스트를 전달")
-	public ResponseEntity<List<String>> alleryList(){
+	public ResponseEntity<List<Allergy>> alleryList(){
 		return surveyService.alleryList();
 	}
 }
