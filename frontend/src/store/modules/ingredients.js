@@ -5,8 +5,6 @@ const state = () => ({
   bigList: [],
   middleList: [],
   smallList: [],
-  selectedIngredients: [],
-  selectedBigIdx: 0,
 });
 
 // getters
@@ -67,23 +65,23 @@ const mutations = {
     state.smallList = payload;
   },
   addIngredientItem(state, payload) {
-    state.selectedIngredients.push(payload);
-    const set = new Set(state.selectedIngredients);
-    state.selectedIngredients = Array.from(set);
+    const tmp = [];
+    this.state.user.selectedIngredients.forEach((e) => {
+      if (payload.smallId !== e.smallId) {
+        tmp.push(e);
+      }
+    });
+    this.state.user.selectedIngredients = tmp;
   },
   removeIngredientItem(state, payload) {
-    const idx = state.selectedIngredients.findIndex(function(item) {
+    const idx = this.state.user.selectedIngredients.findIndex(function(item) {
       return item.smallId === payload;
     });
-    if (idx > -1) state.selectedIngredients.splice(idx, 1);
-  },
-  setSelectedBigIdx(state, payload) {
-    state.selectedBigIdx = payload;
+    if (idx > -1) this.state.user.selectedIngredients.splice(idx, 1);
   },
 };
 
 export default {
-  //   namespaced: true,
   state,
   getters,
   actions,
