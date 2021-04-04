@@ -23,6 +23,7 @@ from .models import FoodLike
 from .models import Food
 
 from . import Similar
+import random
 
 # movies데이터 갖고오기
 
@@ -100,43 +101,46 @@ def allergy_remove(recommend_list, small_id_list):
         # 알레르기 재료가 포함되지 않았을 때 list 넣기
         if(flag == True):
             recipe_dict = {
-                "recipe_id": recipe[0].recipe_id,
-                "recipe_title": recipe[0].recipe_title,
-                "recipe_created": recipe[0].recipe_created,
-                "recipe_image": recipe[0].recipe_image,
-                "recipe_context": recipe[0].recipe_context,
-                "recipe_ingredient": recipe[0].recipe_ingredient,
-                "recipe_time": recipe[0].recipe_time,
-                "recipe_main_image": recipe[0].recipe_main_image,
-                "recipe_count": recipe[0].recipe_count,
-                "recipe_sub_id": recipe[0].recipe_sub_id,
+                "recipeId": recipe[0].recipe_id,
+                "recipeTitle": recipe[0].recipe_title,
+                "recipeCreated": recipe[0].recipe_created,
+                "recipeImage": recipe[0].recipe_image,
+                "recipeContext": recipe[0].recipe_context,
+                "recipeIngredient": recipe[0].recipe_ingredient,
+                "recipeTime": recipe[0].recipe_time,
+                "recipeMainImage": recipe[0].recipe_main_image,
+                "recipeCount": recipe[0].recipe_count,
+                "recipeSubId": recipe[0].recipe_sub_id,
             }
             remove_result.append(recipe_dict)
 
     return remove_result
 
+
 def check(user_id):
     review = Review.objects.filter(user=user_id).values()
-    return_result=[]
+    return_result = []
    # 3개이상이면 collaborative filtering
-    if(review.count()>=3):
-        sub_id=review[review.count()-1]['recipe_sub_id']
+    if(review.count() >= 3):
+        sub_id = review[review.count()-1]['recipe_sub_id']
         recipe = Recipe.objects.filter(recipe_sub_id=sub_id).values()
         return_result.append(recommend(recipe[0]['recipe_title'],user_id))
-    #3개 미만이면 content based
+    #3개 미만이면 content based filtering
     else:
-        foodLike=FoodLike.objects.filter(user=user_id).values()
-        i=0
-        
-        for f in foodLike:
-            food=Food.objects.filter(food_id=f['food_id']).values()
-            recipe = Recipe.objects.filter(recipe_id=food[0]['recipe_id']).values()
-            print(recipe[0]['recipe_title'])
-            return_result.append(Similar.similar_recommend(recipe[0]['recipe_title'],user_id))
-    
+        foodLike = FoodLike.objects.filter(user=user_id).values()
+        print(len(foodLike))
+        num = random.randrange(0, len(foodLike))
+        print(num)
+        food = Food.objects.filter(food_id=foodLike[num]['food_id']).values()
+        recipe = Recipe.objects.filter(recipe_id=food[0]['recipe_id']).values()
+
+        return_result.append(Similar.similar_recommend(recipe[0]['recipe_title'], user_id))
+
     return return_result
 
 # Collaborative Filtering
+
+
 def recommend(title, user_id):
     recipe_data = recipe_list()
     rating_data = rating_list()
