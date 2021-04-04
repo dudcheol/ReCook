@@ -6,6 +6,7 @@ import {
   removeAuthTokenToHeader,
   getCheckSurvey,
 } from '@/api/user';
+import router from '@/routes';
 
 // initial state
 const state = () => ({
@@ -67,6 +68,7 @@ const actions = {
     removeAuthTokenToHeader();
     localStorage.removeItem('authToken');
     commit('setUser', {});
+    router.replace({ path: '/' });
   },
   async GET_USER_CHECK_SURVEY({ commit }, userId) {
     await getCheckSurvey(

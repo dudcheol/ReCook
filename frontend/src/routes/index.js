@@ -13,7 +13,8 @@ const requireAuth = () => async (to, from, next) => {
 };
 
 const requireSurvey = () => (to, from, next) => {
-  if (store.state.user.user.authToken && store.state.user.user.survey === 'No') next('/survey');
+  // if (store.state.user.user.authToken && store.state.user.user.survey === 'No') next('/survey');
+  if (store.state.user.user.authToken && store.state.user.user.survey === 'No') next();
   else next();
 };
 
