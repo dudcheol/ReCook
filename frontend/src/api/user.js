@@ -39,6 +39,13 @@ function getLikeListByUserId(userId, page, size, success, fail) {
     .catch(fail);
 }
 
+async function getCheckSurvey(userId, success, fail) {
+  await instance
+    .get(`${COMMON}/check/survey/${userId}`)
+    .then(success)
+    .catch(fail);
+}
+
 export {
   login,
   getUserInfoByName,
@@ -46,4 +53,5 @@ export {
   setAuthTokenToHeader,
   removeAuthTokenToHeader,
   getLikeListByUserId,
+  getCheckSurvey,
 };

@@ -4,6 +4,7 @@ import {
   login,
   setAuthTokenToHeader,
   removeAuthTokenToHeader,
+  getCheckSurvey,
 } from '@/api/user';
 
 // initial state
@@ -23,15 +24,15 @@ const getters = {};
 
 // actions
 const actions = {
-  async LOGIN({ commit }, userInfo) {
+  async LOGIN({ commit, dispatch }, userInfo) {
     let result = false;
     await login(
       userInfo,
-      (response) => {
-        console.log('%cuser.js line:21 response.data', 'color: #007acc;', response.data);
+      async (response) => {
         commit('setUser', response.data);
         localStorage.setItem('authToken', response.data['authToken']);
         setAuthTokenToHeader(response.data['authToken']);
+        await dispatch('GET_USER_CHECK_SURVEY', response.data['userId']);
         result = true;
       },
       (error) => {
@@ -51,19 +52,30 @@ const actions = {
       }
     );
   },
-  async GET_USERINFO_BY_AUTHTOKEN({ commit }, authToken) {
+  async GET_USERINFO_BY_AUTHTOKEN({ commit, dispatch }, authToken) {
     setAuthTokenToHeader(authToken);
     await getUserInfoByAuthToken(
-      (response) => {
+      async (response) => {
         response.data.user.authToken = authToken;
         commit('setUser', response.data.user);
+        await dispatch('GET_USER_CHECK_SURVEY', response.data['userId']);
       },
       () => {}
     );
   },
-  LOGOUT() {
+  LOGOUT({ commit }) {
     removeAuthTokenToHeader();
-    localStorage.setItem('authToken', undefined);
+    localStorage.removeItem('authToken');
+    commit('setUser', {});
+  },
+  async GET_USER_CHECK_SURVEY({ commit }, userId) {
+    await getCheckSurvey(
+      userId,
+      (response) => {
+        commit('setUserCheckSurvey', response.data);
+      },
+      () => {}
+    );
   },
 };
 
@@ -71,6 +83,9 @@ const actions = {
 const mutations = {
   setUser(state, payload) {
     state.user = payload;
+  },
+  setUserCheckSurvey(state, payload) {
+    state.user['survey'] = payload;
   },
   setSelectedUserInfo(state, payload) {
     state.selectedUserInfo = payload;
