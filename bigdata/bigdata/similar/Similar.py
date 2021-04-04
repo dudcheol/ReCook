@@ -55,16 +55,16 @@ def allergy_remove(recommend_list, small_id_list):
         # 알레르기 재료가 포함되지 않았을 때 list 넣기
         if(flag == True):
             recipe_dict = {
-                "recipeId": recipe[0].recipe_id,
-                "recipeTitle": recipe[0].recipe_title,
-                "recipeCreated": recipe[0].recipe_created,
-                "recipeImage": recipe[0].recipe_image,
-                "recipeContext": recipe[0].recipe_context,
-                "recipeIngredient": recipe[0].recipe_ingredient,
-                "recipeTime": recipe[0].recipe_time,
-                "recipeMainImage": recipe[0].recipe_main_image,
-                "recipeCount": recipe[0].recipe_count,
-                "recipeSubId": recipe[0].recipe_sub_id,
+                "recipe_id": recipe[0].recipe_id,
+                "recipe_title": recipe[0].recipe_title,
+                "recipe_created": recipe[0].recipe_created,
+                "recipe_image": recipe[0].recipe_image,
+                "recipe_context": recipe[0].recipe_context,
+                "recipe_ingredient": recipe[0].recipe_ingredient,
+                "recipe_time": recipe[0].recipe_time,
+                "recipe_main_image": recipe[0].recipe_main_image,
+                "recipe_count": recipe[0].recipe_count,
+                "recipe_sub_id": recipe[0].recipe_sub_id,
             }
             remove_result.append(recipe_dict)
     return remove_result
