@@ -225,6 +225,7 @@ public class RecipeServiceImpl implements RecipeService {
 				resultMap.put("recipe-main-image", recipe.getRecipeMainImage());
 				// 레시피 서브 ID
 				resultMap.put("recipe-sub-id", recipe.getRecipeSubId());
+				resultMap.put("recipe-count", recipe.getRecipeCount());
 
 				status = HttpStatus.OK;
 			} else {
@@ -270,6 +271,7 @@ public class RecipeServiceImpl implements RecipeService {
 				resultMap.put("recipe-main-image", recipe.getRecipeMainImage());
 				// 레시피 서브 ID
 				resultMap.put("recipe-sub-id", recipe.getRecipeSubId());
+				resultMap.put("recipe-count", recipe.getRecipeCount());
 
 				status = HttpStatus.OK;
 			} else {
