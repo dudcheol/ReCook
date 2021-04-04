@@ -62,6 +62,7 @@ export default {
             this.bgClass = 'dahong white--text';
             this.btnDark = false;
             this.btnBack = () => {
+              this.LOGOUT();
               this.$router.replace({ path: '/' });
             };
             this.btnFunc = () => {
@@ -101,7 +102,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['SAVE_SURVEY_RESULT']),
+    ...mapActions(['SAVE_SURVEY_RESULT', 'LOGOUT']),
     async saveSurvey() {
       this.overlay = true;
       if (await this.SAVE_SURVEY_RESULT()) {

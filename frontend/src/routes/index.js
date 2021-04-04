@@ -8,15 +8,21 @@ const requireAuth = () => async (to, from, next) => {
   let token = localStorage.getItem('authToken');
   if (store.state.user.user.authToken === undefined && token)
     await store.dispatch('GET_USERINFO_BY_AUTHTOKEN', token);
-
   if (store.state.user.user.authToken) next();
   else next('/login');
+};
+
+const requireSurvey = () => (to, from, next) => {
+  // if (store.state.user.user.authToken && store.state.user.user.survey === 'No') next('/survey');
+  if (store.state.user.user.authToken && store.state.user.user.survey === 'No') next();
+  else next();
 };
 
 const routes = [
   {
     path: '/',
     component: () => import('@/views/Index'),
+    beforeEnter: requireSurvey(),
     children: [
       {
         path: '',
@@ -56,6 +62,7 @@ const routes = [
   {
     path: '/',
     component: () => import('@/views/Newpage'),
+    beforeEnter: requireSurvey(),
     children: [
       {
         path: 'fridge/ingredient',

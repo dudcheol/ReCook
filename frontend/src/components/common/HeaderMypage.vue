@@ -25,7 +25,34 @@
         "
         >찜</v-btn
       >
+      <v-btn icon color="grey" small absolute right class="mt-1" @click="dialog = true">
+        <v-icon size="20">mdi-logout</v-icon>
+      </v-btn>
     </div>
+    <v-dialog v-model="dialog" max-width="290">
+      <v-card rounded="xl">
+        <v-card-title class="headline">
+          알림
+        </v-card-title>
+        <v-card-text>로그아웃할까요? 🥺</v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="dahong" text @click="dialog = false">
+            아니오
+          </v-btn>
+          <v-btn
+            color="dahong"
+            text
+            @click="
+              dialog = false;
+              $store.dispatch('LOGOUT');
+            "
+          >
+            네
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-app-bar>
 </template>
 
@@ -36,6 +63,7 @@ export default {
   data() {
     return {
       path: '',
+      dialog: false,
     };
   },
   computed: {
