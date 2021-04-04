@@ -24,4 +24,14 @@ function getRecipeHotList(success, fail) {
     .catch(fail);
 }
 
-export { getRecipeById, getRecipeNewList, getRecipeHotList };
+function getRecommIngredients(ingredientList, userId, allergy, success, fail) {
+  instance
+    .post(`${COMMON}/select/${allergy ? 'allergy' : 'ingredients'}`, {
+      ingredientList,
+      userId,
+    })
+    .then(success)
+    .catch(fail);
+}
+
+export { getRecipeById, getRecipeNewList, getRecipeHotList, getRecommIngredients };

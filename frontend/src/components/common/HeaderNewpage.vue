@@ -1,7 +1,27 @@
 <template>
   <v-app-bar flat color="white" fixed>
+    <!-- <div class="d-flex justify-space-between align-center" style="width:100%">
+      <div class="d-flex align-center justify-center">
+        <v-btn icon @click="$router.go(-1)">
+          <v-icon>mdi-{{ left }}</v-icon>
+        </v-btn>
+      </div>
+      <div class="d-flex justify-space-around align-center">
+        <span class="font-weight-medium text-subtitle-1">{{ center }}</span>
+      </div>
+      <div class="d-flex align-center justify-center">
+        <div v-if="right">
+          <v-btn
+            icon
+            @click="$router.push({ path: `${$route.params.recipe_id}/write`, name: 'RecipeWrite' })"
+            ><v-icon>mdi-pencil</v-icon></v-btn
+          >
+          <v-btn icon><v-icon>mdi-heart</v-icon></v-btn>
+        </div>
+      </div>
+    </div> -->
     <v-row>
-      <v-col cols="2" class="d-flex align-center justify-center">
+      <v-col cols="3" class="d-flex align-center pa-0">
         <v-btn icon @click="$router.go(-1)">
           <v-icon>mdi-{{ left }}</v-icon>
         </v-btn>
@@ -9,10 +29,16 @@
       <v-col class="d-flex justify-space-around align-center">
         <span class="font-weight-medium text-subtitle-1">{{ center }}</span>
       </v-col>
-      <v-col cols="2" class="d-flex align-center justify-center">
-        <v-btn icon>
-          <v-icon>mdi-{{ right }}</v-icon>
-        </v-btn>
+      <v-col cols="3" class="d-flex align-center justify-end pa-0 mr-1">
+        <!-- <v-btn v-for="(item, index) in right.split('#')" :key="'nheader' + index" icon>
+          <v-icon>mdi-{{ item }}</v-icon>
+        </v-btn> -->
+        <div v-if="right" class="d-flex">
+          <v-btn icon @click="$router.push({ path: `${$route.params.recipe_id}/write` })"
+            ><v-icon>mdi-pencil</v-icon></v-btn
+          >
+          <v-btn icon><v-icon>mdi-heart</v-icon></v-btn>
+        </div>
       </v-col>
     </v-row>
   </v-app-bar>
@@ -31,24 +57,24 @@ export default {
   },
   computed: {},
   watch: {
-    '$router.currentRoute.name': {
+    $route: {
       immediate: true,
       handler(value) {
-        switch (value) {
+        switch (value.name) {
           case 'FridgeIngredient':
             this.left = 'close';
             this.center = '남은 재료 선택';
             this.right = '';
             break;
           case 'FridgeRecomm':
-            this.left = 'close';
+            this.left = 'chevron-left';
             this.center = '남은 재료로 추천받기';
             this.right = '';
             break;
           case 'RecipeDetail':
             this.left = 'chevron-left';
             this.center = '';
-            this.right = 'heart';
+            this.right = 'pencil#heart';
             break;
           case 'ReviewDetail':
             this.left = 'close';
