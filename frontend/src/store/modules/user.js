@@ -12,9 +12,10 @@ const state = () => ({
   mypageTabState: 'review',
   selectedUserInfo: {},
   allergyCheck: false,
-  // selectedIngredients: [],
   selectedIngredients: [],
   selectedBigIdx: 0,
+  selectedSurveyFoodIdx: [],
+  selectedSurveyAllergyIdx: [],
 });
 
 // getters
@@ -93,6 +94,12 @@ const mutations = {
   },
   toggleAllergyCheck(state) {
     state.allergyCheck = !state.allergyCheck;
+  },
+  setSelectedSurveyFoodIdx(state, payload) {
+    state.selectedSurveyFoodIdx = payload;
+  },
+  setSelectedSurveyAllergyIdx(state, payload) {
+    state.selectedSurveyAllergyIdx = payload;
   },
 };
 

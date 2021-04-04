@@ -11,6 +11,7 @@ import review from './modules/review';
 import hashtag from './modules/hashtag';
 import user from './modules/user';
 import video from './modules/video';
+import survey from './modules/survey';
 
 const store = new Vuex.Store({
   modules: {
@@ -21,6 +22,7 @@ const store = new Vuex.Store({
     hashtag,
     user,
     video,
+    survey,
   },
   plugins: [
     createPersistedState({

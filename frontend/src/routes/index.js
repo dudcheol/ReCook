@@ -101,6 +101,28 @@ const routes = [
       },
     ],
   },
+  {
+    path: '/survey',
+    name: 'Survey',
+    component: () => import('@/views/survey/SurveyFrame'),
+    children: [
+      {
+        path: '',
+        name: 'SurveyMain',
+        component: () => import('@/views/survey/SurveyMain'),
+      },
+      {
+        path: 'allergy',
+        name: 'SurveyAllergy',
+        component: () => import('@/views/survey/SurveyAllergy'),
+      },
+      {
+        path: 'food',
+        name: 'SurveyFood',
+        component: () => import('@/views/survey/SurveyFood'),
+      },
+    ],
+  },
 ];
 
 const router = new Router({
