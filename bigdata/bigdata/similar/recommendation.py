@@ -124,7 +124,7 @@ def check(user_id):
     if(review.count() >= 3):
         sub_id = review[review.count()-1]['recipe_sub_id']
         recipe = Recipe.objects.filter(recipe_sub_id=sub_id).values()
-        return_result.append(recommend(recipe[0]['recipe_title'],user_id))
+        return_result=recommend(recipe[0]['recipe_title'],user_id)
     #3개 미만이면 content based filtering
     else:
         foodLike = FoodLike.objects.filter(user=user_id).values()
@@ -134,7 +134,7 @@ def check(user_id):
         food = Food.objects.filter(food_id=foodLike[num]['food_id']).values()
         recipe = Recipe.objects.filter(recipe_id=food[0]['recipe_id']).values()
 
-        return_result.append(Similar.similar_recommend(recipe[0]['recipe_title'], user_id))
+        return_result=Similar.similar_recommend(recipe[0]['recipe_title'], user_id)
 
     return return_result
 
