@@ -10,7 +10,6 @@ def review_test():
     for hi in review:
         print(hi.review_context)
 
-
 def recipe_test():
     total_recipe = {}
     total_recipe['id'] = []
