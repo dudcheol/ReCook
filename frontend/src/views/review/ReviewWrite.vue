@@ -136,12 +136,17 @@ export default {
     },
     onReviewWrited() {
       this.loading = true;
+
+      let formData = new FormData();
+
+      formData.append('recipeId', this.$route.params['recipe_id']);
+      formData.append('reviewContext', this.content);
+      formData.append('reviewImage', this.selectedFile);
+      formData.append('reviewRating', this.rating);
+      formData.append('userId', this.$store.state.user.user.userId);
+
       writeReview(
-        this.$route.params['recipe_id'],
-        this.content,
-        this.selectedFile,
-        this.rating,
-        'u3Y00NaQze1ZG',
+        formData,
         () => {
           this.loading = false;
           this.$router.go(-1);

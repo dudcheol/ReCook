@@ -17,9 +17,9 @@ function getAllReviews(page, size, success, fail) {
     .catch(fail);
 }
 
-function writeReview(recipeId, reviewContext, reviewImage, reviewRating, userId, success, fail) {
+function writeReview(formData, success, fail) {
   instance
-    .post(`${COMMON}/create`, { recipeId, reviewContext, reviewImage, reviewRating, userId })
+    .post(`${COMMON}/create`, formData)
     .then(success)
     .catch(fail);
 }
