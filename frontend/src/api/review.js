@@ -12,7 +12,7 @@ function getReviewById(reviewId, success, fail) {
 
 function getAllReviews(page, size, success, fail) {
   instance
-    .get(`${COMMON}/all`, { params: { page, size } })
+    .get(`${COMMON}/all/image`, { params: { page, size } })
     .then(success)
     .catch(fail);
 }
