@@ -6,11 +6,7 @@
       height="230"
       class="text-center mr-4"
       outlined
-      @click="
-        $router.push({
-          path: `recipe/${data['recipe-id']}`,
-        })
-      "
+      @click="$emit('click')"
     >
       <v-img :src="data['recipe-main-image']" max-height="150" min-height="150" />
       <v-container class="mb-3">
@@ -25,11 +21,15 @@
           <v-col class="text-caption pa-0">
             <v-icon small>mdi-timer</v-icon>
             <span>
-              {{ data['recipe-time'] }}
+              {{ data['recipe-time'].split(' ')[0] }}
             </span>
             <v-icon small>mdi-account-outline</v-icon>
             <span>
-              {{ data['recipe-person'].replace('인기준', '인분') }}
+              {{
+                data['recipe-person']
+                  ? data['recipe-person'].replace('인기준', '인분')
+                  : data['recipe-time'].split(' ')[1].replace('인기준', '인분')
+              }}
             </span>
           </v-col>
         </v-row>

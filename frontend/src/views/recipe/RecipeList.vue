@@ -1,11 +1,88 @@
 <template>
-  <div>
-    <h1>RecipeList</h1>
+  <div class="grey lighten-4 px-4 pb-4">
+    <RecipeRecommCardItem
+      v-for="item in list"
+      :key="item.recipeId"
+      :data="item"
+      class="mt-4"
+      @click="$router.push({ path: `/recipe/${item.recipeId || item['recipe-id']}` })"
+    />
+    <infinite-loading @infinite="infiniteHandler">
+      <div slot="spinner">
+        <v-skeleton-loader class="mx-auto px-4" max-width="100%" type="card"></v-skeleton-loader>
+      </div>
+      <div slot="no-results"></div>
+      <div slot="no-more"></div>
+      <div slot="error"></div>
+    </infinite-loading>
   </div>
 </template>
 
 <script>
-export default {};
+import { getRecipeNewListAll, getRecipeHotListAll } from '@/api/recipe';
+import RecipeRecommCardItem from '@/components/RecipeRecommCardItem.vue';
+export default {
+  components: { RecipeRecommCardItem },
+  props: {},
+  data() {
+    return {
+      page: 0,
+      size: 5,
+      list: [],
+    };
+  },
+  computed: {},
+  watch: {},
+  methods: {
+    infiniteHandler($state) {
+      switch (this.$route.path.split('/')[3]) {
+        case 'recommend':
+          this.list = this.$store.state.recipe.recipeRecommMainList;
+          $state.complete();
+          break;
+        case 'popular':
+          getRecipeHotListAll(
+            this.page,
+            this.size,
+            (response) => {
+              const data = response.data.content;
+              if (data.length) {
+                this.page += 1;
+                this.list.push(...data);
+                $state.loaded();
+              } else {
+                $state.complete();
+              }
+            },
+            () => {
+              $state.error();
+            }
+          );
+          break;
+        case 'recent':
+          getRecipeNewListAll(
+            this.page,
+            this.size,
+            (response) => {
+              const data = response.data.content;
+              if (data.length) {
+                this.page += 1;
+                this.list.push(...data);
+                $state.loaded();
+              } else {
+                $state.complete();
+              }
+            },
+            () => {
+              $state.error();
+            }
+          );
+          break;
+        default:
+      }
+    },
+  },
+};
 </script>
 
 <style scoped></style>

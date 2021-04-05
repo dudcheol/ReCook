@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_BASE_URL } from '../../config';
+import { API_BASE_URL, API_BIGDATA_URL } from '../../config';
 
 function createInstance() {
   const instance = axios.create({
@@ -11,4 +11,14 @@ function createInstance() {
   return instance;
 }
 
-export { createInstance };
+function createBigdataInstance() {
+  const instance = axios.create({
+    baseURL: API_BIGDATA_URL,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  return instance;
+}
+
+export { createInstance, createBigdataInstance };

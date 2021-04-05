@@ -1,6 +1,13 @@
 <template>
   <div>
-    <WatchCardItem v-for="(item, index) in 3" :key="index" />
+    <WatchCardItem
+      v-for="item in datas"
+      :key="'likelist' + item.recipeId"
+      :src="item.recipeMainImage"
+      :title="item.recipeTitle"
+      :username="item.recipeTime"
+      :usersrc="'mdi-information-outline'"
+    />
   </div>
 </template>
 
@@ -8,6 +15,9 @@
 import WatchCardItem from './WatchCardItem.vue';
 export default {
   components: { WatchCardItem },
+  props: {
+    datas: Array,
+  },
   data() {
     return {};
   },

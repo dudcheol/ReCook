@@ -8,15 +8,21 @@ const requireAuth = () => async (to, from, next) => {
   let token = localStorage.getItem('authToken');
   if (store.state.user.user.authToken === undefined && token)
     await store.dispatch('GET_USERINFO_BY_AUTHTOKEN', token);
-
   if (store.state.user.user.authToken) next();
   else next('/login');
+};
+
+const requireSurvey = () => (to, from, next) => {
+  if (store.state.user.user.authToken && store.state.user.user.survey === 'No') next('/survey');
+  // if (store.state.user.user.authToken && store.state.user.user.survey === 'No') next();
+  else next();
 };
 
 const routes = [
   {
     path: '/',
     component: () => import('@/views/Index'),
+    beforeEnter: requireSurvey(),
     children: [
       {
         path: '',
@@ -56,6 +62,7 @@ const routes = [
   {
     path: '/',
     component: () => import('@/views/Newpage'),
+    beforeEnter: requireSurvey(),
     children: [
       {
         path: 'fridge/ingredient',
@@ -65,7 +72,7 @@ const routes = [
       {
         path: 'fridge/recomm',
         name: 'FridgeRecomm',
-        component: () => import('@/views/fridge/Fridge'),
+        component: () => import('@/views/fridge/Recommend'),
       },
       {
         path: 'review/:review_id',
@@ -76,6 +83,12 @@ const routes = [
         path: 'recipe/:recipe_id',
         name: 'RecipeDetail',
         component: () => import('@/views/recipe/RecipeDetail'),
+      },
+      {
+        path: 'recipe/list/:type',
+        name: 'RecipeList',
+        beforeEnter: requireAuth(),
+        component: () => import('@/views/recipe/RecipeList'),
       },
       {
         path: 'recipe/:recipe_id/write',
@@ -95,19 +108,41 @@ const routes = [
       },
     ],
   },
+  {
+    path: '/survey',
+    name: 'Survey',
+    component: () => import('@/views/survey/SurveyFrame'),
+    children: [
+      {
+        path: '',
+        name: 'SurveyMain',
+        component: () => import('@/views/survey/SurveyMain'),
+      },
+      {
+        path: 'allergy',
+        name: 'SurveyAllergy',
+        component: () => import('@/views/survey/SurveyAllergy'),
+      },
+      {
+        path: 'food',
+        name: 'SurveyFood',
+        component: () => import('@/views/survey/SurveyFood'),
+      },
+    ],
+  },
 ];
 
 const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes,
-  scrollBehavior(to, from, savedPosition) {
-    if (savedPosition) {
-      return savedPosition;
-    } else {
-      return { x: 0, y: 0 };
-    }
-  },
+  // scrollBehavior(to, from, savedPosition) {
+  //   if (savedPosition) {
+  //     return savedPosition;
+  //   } else {
+  //     return { x: 0, y: 0 };
+  //   }
+  // },
 });
 
 export default router;

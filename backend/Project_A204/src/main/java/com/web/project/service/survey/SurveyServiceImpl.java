@@ -115,18 +115,13 @@ public class SurveyServiceImpl implements SurveyService{
 	}
 
 	@Override
-	public ResponseEntity<List<String>> alleryList() {
-		List<String> resultList = new ArrayList<String>();
+	public ResponseEntity<List<Allergy>> alleryList() {
 		HttpStatus status = null;
 		
 		List<Allergy> allergyList = allergyDao.findAll();
 		
 		try {
 			if(allergyList != null) { // 전달할 레시피 정보가 존재할 때
-				for (int i = 0; i < allergyList.size(); i++) {
-					resultList.add(allergyList.get(i).getAllergyName());
-				}
-				
 				status = HttpStatus.OK;
 			}
 		} catch (Exception e) {
@@ -134,7 +129,7 @@ public class SurveyServiceImpl implements SurveyService{
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
 	
-		return new ResponseEntity<List<String>>(resultList, status);
+		return new ResponseEntity<List<Allergy>> (allergyList, status);
 	}
 	
 }

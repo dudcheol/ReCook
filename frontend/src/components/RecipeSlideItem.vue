@@ -1,9 +1,9 @@
 <template>
-  <div :style="{ minHeight: windowHeight + 'px' }" class="d-flex flex-column">
-    <v-img :src="imageUrl" contain>
+  <div :style="{ minHeight: windowHeight + 'px' }" class="d-flex flex-column align-center">
+    <v-img :src="imageUrl" contain max-width="400">
       <template v-slot:placeholder>
         <v-row class="fill-height ma-0" align="center" justify="center">
-          <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+          <v-progress-circular indeterminate color="grey lighten-1"></v-progress-circular>
         </v-row>
       </template>
     </v-img>
