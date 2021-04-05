@@ -1,10 +1,11 @@
-import { createInstance } from './index.js';
+import { createInstance, createBigdataInstance } from './index.js';
 
 const instance = createInstance();
+const bigdataInstance = createBigdataInstance();
 const COMMON = 'recipe';
 
-function getRecipeById(recipe_id, success, fail) {
-  instance
+async function getRecipeById(recipe_id, success, fail) {
+  await instance
     .get(`${COMMON}/show/main/${recipe_id}`)
     .then(success)
     .catch(fail);
@@ -17,6 +18,13 @@ function getRecipeNewList(success, fail) {
     .catch(fail);
 }
 
+function getRecipeNewListAll(page, size, success, fail) {
+  instance
+    .get(`${COMMON}/show/new/list/all`, { params: { page, size } })
+    .then(success)
+    .catch(fail);
+}
+
 function getRecipeHotList(success, fail) {
   instance
     .get(`${COMMON}/show/hot/list`)
@@ -24,7 +32,28 @@ function getRecipeHotList(success, fail) {
     .catch(fail);
 }
 
-function getRecommIngredients(ingredientList, userId, allergy, success, fail) {
+function getRecipeHotListAll(page, size, success, fail) {
+  instance
+    .get(`${COMMON}/show/hot/list/all`, { params: { page, size } })
+    .then(success)
+    .catch(fail);
+}
+
+function getRecommRecipeListByUser(userId, success, fail) {
+  bigdataInstance
+    .get(`bigdata/similar/recommend/${userId}`)
+    .then(success)
+    .catch(fail);
+}
+
+function getRecommRecipeByRecipeTitle(recipeTitle, userId, success, fail) {
+  bigdataInstance
+    .get(`bigdata/similar/recipe/${recipeTitle}/${userId}`)
+    .then(success)
+    .catch(fail);
+}
+
+function getRecommRecipeByIngredients(ingredientList, userId, allergy, success, fail) {
   instance
     .post(`${COMMON}/select/${allergy ? 'allergy' : 'ingredients'}`, {
       ingredientList,
@@ -34,4 +63,13 @@ function getRecommIngredients(ingredientList, userId, allergy, success, fail) {
     .catch(fail);
 }
 
-export { getRecipeById, getRecipeNewList, getRecipeHotList, getRecommIngredients };
+export {
+  getRecipeById,
+  getRecipeNewList,
+  getRecipeNewListAll,
+  getRecipeHotList,
+  getRecipeHotListAll,
+  getRecommRecipeListByUser,
+  getRecommRecipeByRecipeTitle,
+  getRecommRecipeByIngredients,
+};

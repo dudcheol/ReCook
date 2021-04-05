@@ -2,19 +2,23 @@
   <v-card class="pa-2" rounded="xl" elevation="0" @click="$emit('click')">
     <div class="d-flex flex-no-wrap">
       <v-avatar class="ma-3" size="125">
-        <v-img :src="data.recipeMainImage"></v-img>
+        <v-img :src="data.recipeMainImage || data['recipe-main-image']"></v-img>
       </v-avatar>
       <div class="pa-3 my-auto">
-        <div class="headline pt-2">{{ data.recipeTitle | truncate(14, '..') }}</div>
+        <div class="headline pt-2">
+          {{ (data.recipeTitle || data['recipe-title']) | truncate(14, '..') }}
+        </div>
 
         <div class="text-caption pt-2">
           <v-icon small>mdi-timer</v-icon>
           <span>
-            {{ data['recipeTime'].split(' ')[0] }}
+            {{ (data['recipeTime'] || data['recipe-time']).split(' ')[0] }}
           </span>
           <v-icon small>mdi-account-outline</v-icon>
           <span>
-            {{ data['recipeTime'].split(' ')[1].replace('인기준', '인분') }}
+            {{
+              (data['recipeTime'] || data['recipe-time']).split(' ')[1].replace('인기준', '인분')
+            }}
           </span>
         </div>
         <!-- <v-chip-group active-class="none">
@@ -41,16 +45,14 @@ export default {
     data: Object,
   },
   data() {
-    return {
-      items: ['asdf', 'asdf', 'asdf', 'asdf', 'asdf', 'asdf', 'asdf', 'asdf', 'asdf'],
-    };
+    return {};
   },
   computed: {
-    ingredients() {
-      const ret = this.data.recipeIngredient.split('####');
-      ret.splice(ret.length - 1, 1);
-      return ret;
-    },
+    // ingredients() {
+    //   const ret = (this.data.recipeIngredient || this.data['recipe-ingredient']).split('####');
+    //   ret.splice(ret.length - 1, 1);
+    //   return ret;
+    // },
   },
   watch: {},
   methods: {},

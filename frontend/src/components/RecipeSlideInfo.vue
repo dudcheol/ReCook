@@ -83,10 +83,34 @@
         <v-btn text x-small class="pa-1">전체보기</v-btn>
       </v-col>
     </v-row>
+    <!-- <v-row>
+      <v-col style="height:300px;">
+        <div v-if="recipeRecommRelateList.length">
+          <RecipeCardList :datas="recipeRecommRelateList" />
+        </div>
+        <div v-else class="d-flex flex-column justify-center align-center">
+          <VueLottiePlayer
+            name="survey"
+            loop
+            height="100%"
+            width="200px"
+            path="https://assets7.lottiefiles.com/packages/lf20_fefIZO.json"
+          />
+          <span class="caption font-weight-regular grey--text text--darken-1"
+            >현재 레시피와 <span class="font-weight-black dahong--text">관련된 레시피</span>를
+            불러오고 있어요</span
+          >
+        </div>
+      </v-col>
+    </v-row> -->
   </div>
 </template>
 <script>
+// import RecipeCardList from '@/components/RecipeCardList.vue';
+// import VueLottiePlayer from 'vue-lottie-player';
+// import { mapActions, mapState } from 'vuex';
 export default {
+  // components: { VueLottiePlayer, RecipeCardList },
   components: {},
   props: {
     data: Object,
@@ -99,6 +123,9 @@ export default {
     };
   },
   computed: {
+    // ...mapState({
+    //   recipeRecommRelateList: (state) => state.recipe.recipeRecommRelateList,
+    // }),
     recipeIngredient: function() {
       const tmp = [];
       const parse = this.parseString(this.data['recipe-ingredient']);
@@ -109,8 +136,20 @@ export default {
       return tmp;
     },
   },
-  watch: {},
+  watch: {
+    // data: {
+    //   immediate: true,
+    //   handler(value) {
+    //     if (this.$store.state.user.user.userId)
+    //       this.GET_RECOMM_RECIPE_BY_RECIPETITLE(
+    //         value['recipe-title'],
+    //         this.$store.state.user.user.userId
+    //       );
+    //   },
+    // },
+  },
   methods: {
+    // ...mapActions(['GET_RECOMM_RECIPE_BY_RECIPETITLE']),
     onScroll() {
       this.windowTop = window.top.scrollY;
       if (this.windowTop >= this.thumbnailBoxHeight) {
@@ -122,12 +161,8 @@ export default {
       return [];
     },
   },
-  mounted() {
-    window.addEventListener('scroll', this.onScroll);
-  },
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.onScroll);
-  },
+  created() {},
+  beforeDestroy() {},
 };
 </script>
 <style lang=""></style>

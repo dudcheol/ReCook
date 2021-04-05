@@ -13,8 +13,8 @@ const requireAuth = () => async (to, from, next) => {
 };
 
 const requireSurvey = () => (to, from, next) => {
-  // if (store.state.user.user.authToken && store.state.user.user.survey === 'No') next('/survey');
-  if (store.state.user.user.authToken && store.state.user.user.survey === 'No') next();
+  if (store.state.user.user.authToken && store.state.user.user.survey === 'No') next('/survey');
+  // if (store.state.user.user.authToken && store.state.user.user.survey === 'No') next();
   else next();
 };
 
@@ -136,13 +136,13 @@ const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes,
-  scrollBehavior(to, from, savedPosition) {
-    if (savedPosition) {
-      return savedPosition;
-    } else {
-      return { x: 0, y: 0 };
-    }
-  },
+  // scrollBehavior(to, from, savedPosition) {
+  //   if (savedPosition) {
+  //     return savedPosition;
+  //   } else {
+  //     return { x: 0, y: 0 };
+  //   }
+  // },
 });
 
 export default router;

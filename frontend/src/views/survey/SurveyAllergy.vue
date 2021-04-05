@@ -13,7 +13,7 @@
       <v-item-group v-model="selected" multiple class="d-flex flex-wrap">
         <v-col v-for="item in $store.state.survey.allergyList" :key="item.recipeId" cols="6" md="4">
           <v-item v-slot="{ active, toggle }">
-            <v-card
+            <!-- <v-card
               :color="active ? 'deep-orange lighten-5' : ''"
               class="d-flex align-center py-4 align-center justify-center"
               rounded="lg"
@@ -22,6 +22,28 @@
               <span :class="active ? 'font-weight-bold' : 'font-weight-regular'">
                 {{ item.split(' ')[0] }}
               </span>
+            </v-card> -->
+            <v-card
+              :color="active ? 'primary' : ''"
+              class="d-flex align-center"
+              rounded="xl"
+              @click="toggle"
+            >
+              <v-img
+                :src="item.allergyImage"
+                min-height="200"
+                max-height="200"
+                :gradient="active ? 'to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0)' : ''"
+              >
+                <div v-if="active" class="d-flex justify-center align-center fill-height">
+                  <v-icon color="white" x-large>mdi-check-circle</v-icon>
+                </div>
+                <div v-else class="d-flex justify-center align-end fill-height">
+                  <span class="px-2 mb-2 pt-1 rounded-xl white font-weight-medium elevation-24">
+                    {{ item.allergyName.split(' ')[0] }}
+                  </span>
+                </div>
+              </v-img>
             </v-card>
           </v-item>
         </v-col>
