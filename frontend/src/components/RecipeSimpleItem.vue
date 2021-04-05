@@ -10,9 +10,7 @@
       </v-img>
     </v-avatar>
     <div class="d-flex flex-column align-self-center pl-3">
-      <span class="text-subtitle-1 font-weight-medium pa-1 mt-3" style="line-height:0">{{
-        title
-      }}</span>
+      <span class="subtitle-1 font-weight-medium pa-1 mt-3" style="line-height:0">{{ title }}</span>
       <v-rating
         :value="rating"
         empty-icon="mdi-star-outline"

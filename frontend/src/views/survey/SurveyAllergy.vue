@@ -2,11 +2,11 @@
   <v-container>
     <v-row class="mt-14 pt-3">
       <v-col>
-        <span class="text-h3 font-weight-thin"
+        <span class="h3 font-weight-thin"
           ><span class="font-weight-bold">알레르기</span>가<br />
           있으신가요?</span
         ><br />
-        <span class="caption">먹을 수 없는 음식을 선택해주세요. (중복선택가능)</span>
+        <span class="caption-1">먹을 수 없는 음식을 선택해주세요. (중복선택가능)</span>
       </v-col>
     </v-row>
     <v-row class="mb-14 pb-3">
@@ -23,28 +23,23 @@
                 {{ item.split(' ')[0] }}
               </span>
             </v-card> -->
-            <v-card
-              :color="active ? 'primary' : ''"
-              class="d-flex align-center"
-              rounded="xl"
-              @click="toggle"
-            >
-              <v-img
-                :src="item.allergyImage"
-                min-height="200"
-                max-height="200"
-                :gradient="active ? 'to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0)' : ''"
-              >
-                <div v-if="active" class="d-flex justify-center align-center fill-height">
-                  <v-icon color="white" x-large>mdi-check-circle</v-icon>
-                </div>
-                <div v-else class="d-flex justify-center align-end fill-height">
-                  <span class="px-2 mb-2 pt-1 rounded-xl white font-weight-medium elevation-24">
-                    {{ item.allergyName.split(' ')[0] }}
-                  </span>
-                </div>
-              </v-img>
-            </v-card>
+            <div>
+              <v-card class="d-flex align-center" rounded="xl" outlined @click="toggle">
+                <v-img
+                  :src="item.allergyImage"
+                  min-height="150"
+                  max-height="150"
+                  :gradient="active ? 'to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0)' : ''"
+                >
+                  <div v-if="active" class="d-flex justify-center align-center fill-height">
+                    <v-icon color="white" x-large>mdi-check-circle</v-icon>
+                  </div>
+                </v-img>
+              </v-card>
+              <div class="d-flex justify-center align-end pt-2">
+                {{ item.allergyName.split(' ')[0] }}
+              </div>
+            </div>
           </v-item>
         </v-col>
       </v-item-group>

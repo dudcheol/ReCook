@@ -4,7 +4,7 @@
       <v-btn
         rounded
         depressed
-        class="text-subtitle-1"
+        class="subtitle-1"
         :color="toggle ? 'dahong' : 'white'"
         :class="toggle ? 'font-weight-black white--text' : 'font-weight-medium'"
         @click="
@@ -16,7 +16,7 @@
       <v-btn
         rounded
         depressed
-        class="text-subtitle-1"
+        class="subtitle-1"
         :color="!toggle ? 'dahong' : 'white'"
         :class="!toggle ? 'font-weight-black white--text' : 'font-weight-medium'"
         @click="
