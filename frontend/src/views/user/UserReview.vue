@@ -71,18 +71,15 @@ export default {
     }),
   },
   watch: {
-    user: {
-      immediate: true,
-      handler(value) {
-        if (value) this.GET_REVIEW_LIST_BY_USERNAME(value.userName);
-      },
-    },
     $route: {
       immediate: true,
       handler(value) {
-        this.query = value.query.user;
-        this.GET_REVIEW_LIST_BY_USERNAME(this.query.userName);
-        console.log('%cUserReview.vue line:83 this.query', 'color: #007acc;', this.query);
+        if (value.query.user) {
+          this.query = value.query.user;
+          this.GET_REVIEW_LIST_BY_USERNAME(this.query.userName);
+        } else {
+          this.GET_REVIEW_LIST_BY_USERNAME(value.params.user_name);
+        }
       },
     },
   },

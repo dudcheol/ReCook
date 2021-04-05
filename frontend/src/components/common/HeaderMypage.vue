@@ -30,11 +30,11 @@
       </v-btn>
     </div>
     <v-dialog v-model="dialog" max-width="290">
-      <v-card rounded="xl">
+      <v-card>
         <v-card-title class="headline">
-          알림
+          🥺
         </v-card-title>
-        <v-card-text>로그아웃할까요? 🥺</v-card-text>
+        <v-card-text>정말 로그아웃하시겠습니까?</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="dahong" text @click="dialog = false">

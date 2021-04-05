@@ -92,7 +92,7 @@ const actions = {
       () => {}
     );
   },
-  GET_RECOMM_RECIPE_BY_RECIPETITLE({ commit }, recipeTitle, userId) {
+  GET_RECOMM_RECIPE_BY_RECIPETITLE({ commit }, { recipeTitle, userId }) {
     console.log('현재 레시피와 관련된 추천 레시피 리스트를 받아오고 있습니다.');
     getRecommRecipeByRecipeTitle(
       recipeTitle,

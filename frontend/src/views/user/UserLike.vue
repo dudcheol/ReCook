@@ -67,8 +67,6 @@ export default {
         (response) => {
           const data = response.data;
 
-          console.log('%cUserLike.vue line:53 response.data', 'color: #007acc;', response.data);
-
           if (data.length) {
             this.page += 1;
             this.likeRecipeList.push(...data);
