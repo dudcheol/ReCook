@@ -14,7 +14,7 @@
               ><span class="pa-1 dahong white--text rounded-lg font-weight-black">{{
                 isLogin ? `${$store.state.user.user.userName}` : '추천'
               }}</span>
-              {{ isLogin ? '님을 위한' : '' }} 레시피</span
+              {{ isLogin ? ' 위한' : '' }} 레시피</span
             >
             <!-- <v-btn
               v-if="isLogin && recipeRecommMainList.length"

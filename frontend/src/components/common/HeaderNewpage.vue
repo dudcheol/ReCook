@@ -37,7 +37,9 @@
           <v-btn icon @click="$router.push({ path: `${$route.params.recipe_id}/write` })"
             ><v-icon>mdi-pencil</v-icon></v-btn
           >
-          <v-btn icon><v-icon>mdi-heart</v-icon></v-btn>
+          <v-btn v-if=!isLogin icon><v-icon>mdi-heart</v-icon></v-btn>
+          <v-btn v-if="isLogin && likeFlag=='No'" icon @click=clickLike><v-icon>mdi-heart-outline</v-icon></v-btn>
+          <v-btn v-if="isLogin && likeFlag=='Yes'" icon @click=clickLike><v-icon color='red'>mdi-heart</v-icon></v-btn>
         </div>
       </v-col>
     </v-row>
@@ -45,6 +47,7 @@
 </template>
 
 <script>
+import {checkLike,likePush} from '../../api/Like';
 export default {
   components: {},
   props: {},
@@ -53,10 +56,32 @@ export default {
       left: '',
       center: '',
       right: '',
+      isLogin:'',
+      likeFlag:'',
+      recipe_id:'',
+      user_id:'',
     };
+  },
+  created(){
+    if(this.isLogin){
+      checkLike(this.$route.params.recipe_id,this.user_id,(response)=>{this.likeFlag=response.data},(error) => {
+        console.log(error);
+      });
+    }
   },
   computed: {},
   watch: {
+    '$store.state.user.user': {
+      immediate: true,
+      handler(value) {
+        if (value.userId) {
+          this.user_id=value.userId
+          this.isLogin = true;
+        } else {
+          this.isLogin = false;
+        }
+      },
+    },
     $route: {
       immediate: true,
       handler(value) {
@@ -124,6 +149,18 @@ export default {
           return '최신';
       }
     },
+    clickLike(){
+      likePush(this.$route.params.recipe_id,this.user_id,(response)=>{
+        if(response.data=='Like'){
+            this.likeFlag='Yes';
+        }
+        else{
+            this.likeFlag='No';
+        }
+      },(error) => {
+        console.log(error);
+      });
+    }
   },
 };
 </script>
