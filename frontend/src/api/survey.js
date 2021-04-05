@@ -17,9 +17,9 @@ function getAllergySurveyList(success, fail) {
     .catch(fail);
 }
 
-async function saveSurveyResult(userId, allergyList, foodList, success, fail) {
+async function saveSurveyResult(userId, foodList, allergyList, success, fail) {
   await instance
-    .post(`${COMMON}/save/${userId}`, allergyList, foodList)
+    .post(`${COMMON}/save/${userId}`, { foodList, allergyList })
     .then(success)
     .catch(fail);
 }
