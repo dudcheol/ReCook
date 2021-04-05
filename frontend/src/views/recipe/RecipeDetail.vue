@@ -146,10 +146,10 @@ export default {
           await this.addRecipeById(value.params['recipe_id']);
           this.GET_HASHTAGS_BY_RECIPE_ID(value.params['recipe_id']);
           if (this.$store.state.user.user.userId) {
-            this.GET_RECOMM_RECIPE_BY_RECIPETITLE(
-              this.recipeInfo['recipe-title'],
-              this.$store.state.user.user.userId
-            );
+            this.GET_RECOMM_RECIPE_BY_RECIPETITLE({
+              recipeTitle: this.recipeInfo['recipe-title'],
+              userId: this.$store.state.user.user.userId,
+            });
           }
         }
       },

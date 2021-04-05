@@ -45,21 +45,29 @@
     </div>
     <div class="footer">
       <div
-        class="grey lighten-4 py-2 ma-4 d-flex flex-column align-center justify-center rounded-lg elevation-24"
+        class="grey lighten-4 pa-2 ma-4 d-flex align-center justify-start rounded-lg elevation-24"
       >
-        <span class="caption-1">레시피를 <strong>평가</strong>해주세요</span>
-        <v-rating
-          v-model="rating"
-          dense
-          empty-icon="mdi-star-outline"
-          full-icon="mdi-star"
-          half-icon="mdi-star-half"
-          half-increments
-          length="5"
-          size="24"
-          color="yellow"
-          background-color="grey lighten-2"
-        ></v-rating>
+        <v-avatar rounded="lg" size="68">
+          <v-img :src="recipeInfo['recipe-image']"></v-img>
+        </v-avatar>
+        <div class="d-flex flex-wrap align-center justify-center">
+          <span class="caption-1"
+            ><strong>{{ recipeInfo['recipe-title'] | truncate(14, '..') }}</strong
+            >을(를) 평가해주세요</span
+          >
+          <v-rating
+            v-model="rating"
+            dense
+            empty-icon="mdi-star-outline"
+            full-icon="mdi-star"
+            half-icon="mdi-star-half"
+            half-increments
+            length="5"
+            size="24"
+            color="yellow"
+            background-color="grey lighten-2"
+          ></v-rating>
+        </div>
       </div>
       <v-btn
         block
@@ -83,6 +91,7 @@
 <script>
 import { writeReview } from '@/api/review';
 import LoadingCheers from '@/components/common/LoadingCheers.vue';
+import { mapState } from 'vuex';
 export default {
   components: {
     LoadingCheers,
@@ -100,6 +109,9 @@ export default {
     };
   },
   computed: {
+    ...mapState({
+      recipeInfo: (state) => state.recipe.recipeInfo,
+    }),
     btnActive() {
       return !(this.content.trim() && this.selectedFile && this.rating > 0);
     },

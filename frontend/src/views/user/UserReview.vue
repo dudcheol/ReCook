@@ -3,14 +3,15 @@
     <v-row class="header-profile white pt-14">
       <v-col>
         <profile-simple-item
-          :username="user.userName || ''"
-          :src="user.userImage || ''"
+          v-if="user || query"
+          :username="(user || query).userName || ''"
+          :src="(user || query).userImage || ''"
         ></profile-simple-item>
       </v-col>
     </v-row>
     <v-row class="pt-10" no-gutters>
       <v-col>
-        {{ user.userIntroduce }}
+        {{ (user || query).userIntroduce }}
       </v-col>
     </v-row>
     <v-row class="pt-16">
@@ -18,7 +19,7 @@
         <span class="h6 font-weight-black">리뷰</span>
       </v-col>
     </v-row>
-    <v-row>
+    <v-row v-if="reviewList.length">
       <v-col
         v-for="item in reviewList"
         :key="'review' + item.reviewId"
@@ -40,20 +41,29 @@
         </v-img>
       </v-col>
     </v-row>
+    <v-row v-else>
+      <v-col class="pa-0">
+        <message-empty :width="200" :text="'작성한 리뷰가 없어요'"></message-empty>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 <script>
 import ProfileSimpleItem from '@/components/ProfileSimpleItem.vue';
 import { mapActions, mapState } from 'vuex';
+import MessageEmpty from '@/components/common/MessageEmpty.vue';
 export default {
   components: {
     ProfileSimpleItem,
+    MessageEmpty,
   },
   props: {
     user: Object,
   },
   data() {
-    return {};
+    return {
+      query: {},
+    };
   },
   computed: {
     ...mapState({
@@ -61,10 +71,15 @@ export default {
     }),
   },
   watch: {
-    user: {
+    $route: {
       immediate: true,
       handler(value) {
-        this.GET_REVIEW_LIST_BY_USERNAME(value.userName);
+        if (value.query.user) {
+          this.query = value.query.user;
+          this.GET_REVIEW_LIST_BY_USERNAME(this.query.userName);
+        } else {
+          this.GET_REVIEW_LIST_BY_USERNAME(value.params.user_name);
+        }
       },
     },
   },

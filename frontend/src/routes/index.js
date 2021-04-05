@@ -57,6 +57,21 @@ const routes = [
           },
         ],
       },
+      {
+        path: 'watch/:video_id',
+        name: 'Watch#Detail',
+        component: () => import('@/views/watch/WatchDetail'),
+      },
+      {
+        path: 'user/:user_name',
+        name: 'Feed#User',
+        component: () => import('@/views/user/UserReview'),
+      },
+      {
+        path: 'review/:review_id',
+        name: 'Feed#Detail',
+        component: () => import('@/views/review/ReviewDetail'),
+      },
     ],
   },
   {
@@ -73,11 +88,6 @@ const routes = [
         path: 'fridge/recomm',
         name: 'FridgeRecomm',
         component: () => import('@/views/fridge/Recommend'),
-      },
-      {
-        path: 'review/:review_id',
-        name: 'ReviewDetail',
-        component: () => import('@/views/review/ReviewDetail'),
       },
       {
         path: 'recipe/:recipe_id',
@@ -100,11 +110,6 @@ const routes = [
         path: 'login',
         name: 'Login',
         component: () => import('@/views/login/Login'),
-      },
-      {
-        path: 'watch/:video_id',
-        name: 'WatchDetail',
-        component: () => import('@/views/watch/WatchDetail'),
       },
     ],
   },

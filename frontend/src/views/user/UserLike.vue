@@ -10,7 +10,7 @@
       >
       </v-col>
     </v-row>
-    <v-row class="pt-14 pb-4" no-gutters>
+    <v-row class="pt-14 pb-4 mt-14" no-gutters>
       <v-col>
         <WatchCardItem
           v-for="item in likeRecipeList"
@@ -27,7 +27,9 @@
       <div slot="spinner">
         <v-skeleton-loader class="mx-auto px-4" max-width="100%" type="card"></v-skeleton-loader>
       </div>
-      <div slot="no-results"></div>
+      <div slot="no-results">
+        <message-empty :width="200" :text="'찜한 레시피가 없어요'"></message-empty>
+      </div>
       <div slot="no-more"></div>
       <div slot="error"></div>
     </infinite-loading>
@@ -37,10 +39,12 @@
 import ProfileSimpleItem from '@/components/ProfileSimpleItem.vue';
 import WatchCardItem from '@/components/WatchCardItem';
 import { getLikeListByUserId } from '@/api/user';
+import MessageEmpty from '@/components/common/MessageEmpty.vue';
 export default {
   components: {
     ProfileSimpleItem,
     WatchCardItem,
+    MessageEmpty,
   },
   props: {
     user: Object,
@@ -62,8 +66,6 @@ export default {
         this.size,
         (response) => {
           const data = response.data;
-
-          console.log('%cUserLike.vue line:53 response.data', 'color: #007acc;', response.data);
 
           if (data.length) {
             this.page += 1;

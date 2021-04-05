@@ -8,6 +8,7 @@ import HeaderMain from './HeaderMain';
 import HeaderFeed from './HeaderFeed';
 import HeaderMypage from './HeaderMypage';
 import HeaderWatch from './HeaderWatch';
+import HeaderBack from './HeaderBack';
 
 export default {
   components: {},
@@ -32,10 +33,12 @@ export default {
   },
   methods: {
     getHeader(value) {
-      switch (value.split('#')[0]) {
+      const split = value.split('#');
+      switch (split[0]) {
         case 'Main':
           return HeaderMain;
         case 'Feed':
+          if (split[1]) return HeaderBack;
           return HeaderFeed;
         case 'Watch':
           return HeaderWatch;
