@@ -16,14 +16,14 @@
               }}</span>
               {{ isLogin ? '님을 위한' : '' }} 레시피</span
             >
-            <v-btn
+            <!-- <v-btn
               v-if="isLogin && recipeRecommMainList.length"
               text
               small
               class="pa-1"
               @click="$router.push({ path: `recipe/list/recommend` })"
               >전체보기</v-btn
-            >
+            > -->
           </v-col>
         </v-row>
         <v-row>

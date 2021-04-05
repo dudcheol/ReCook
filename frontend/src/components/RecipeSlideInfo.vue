@@ -27,7 +27,7 @@
             ><v-icon color="red" small>mdi-alert</v-icon>알러지 재료가 포함된 레시피입니다</span
           >
         </div>
-        <v-btn text x-small class="pa-1">전체보기</v-btn>
+        <!-- <v-btn text x-small class="pa-1">전체보기</v-btn> -->
       </v-col>
     </v-row>
     <v-row>
@@ -74,13 +74,13 @@
     <v-row>
       <v-col class="d-flex justify-space-between align-center">
         <span class="text-h6 font-weight-black">리뷰</span>
-        <v-btn text x-small class="pa-1">전체보기</v-btn>
+        <!-- <v-btn text x-small class="pa-1">전체보기</v-btn> -->
       </v-col>
     </v-row>
     <v-row>
       <v-col class="d-flex justify-space-between align-center">
         <span class="text-h6 font-weight-black">추천</span>
-        <v-btn text x-small class="pa-1">전체보기</v-btn>
+        <!-- <v-btn text x-small class="pa-1">전체보기</v-btn> -->
       </v-col>
     </v-row>
     <!-- <v-row>

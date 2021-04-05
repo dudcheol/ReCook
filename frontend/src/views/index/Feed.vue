@@ -69,13 +69,18 @@ export default {
         this.pageNumber,
         this.pageSize,
         (response) => {
-          if (!response.data.content.length) {
-            endLoading();
-          } else {
+          // console.log('%cFeed.vue line:72 response.data', 'color: #007acc;', response.data.content);
+          if (response.data.content.length) {
+            // const responseList = response.data.content;
+            const result = response.data.content.filter((e) => e.reviewImage);
             const list = this.list;
-            this.pageNumber++;
+
+            this.pageNumber += 1;
             startLoading();
-            this.list = list.concat(response.data.content);
+            this.list = list.concat(result);
+            console.log('%cFeed.vue line:82 this.list', 'color: #007acc;', this.list);
+          } else {
+            endLoading();
           }
         },
         (error) => {

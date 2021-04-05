@@ -16,6 +16,8 @@ public interface ReviewService {
 
 	public ResponseEntity<Page<Review>> findAll(Pageable pageable);
 	
+	public ResponseEntity<Page<Review>> findAllImage(Pageable pageable);
+	
 	public ResponseEntity<Map<String, Object>> findByReview(int reviewId);
 	
 	public ResponseEntity<List<Review>> findByUser(String userName);
