@@ -18,7 +18,7 @@
         <span class="h6 font-weight-black">리뷰</span>
       </v-col>
     </v-row>
-    <v-row>
+    <v-row v-if="reviewList.length">
       <v-col
         v-for="item in reviewList"
         :key="'review' + item.reviewId"
@@ -40,14 +40,21 @@
         </v-img>
       </v-col>
     </v-row>
+    <v-row v-else>
+      <v-col class="pa-0">
+        <message-empty :width="200" :text="'작성한 리뷰가 없어요'"></message-empty>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 <script>
 import ProfileSimpleItem from '@/components/ProfileSimpleItem.vue';
 import { mapActions, mapState } from 'vuex';
+import MessageEmpty from '@/components/common/MessageEmpty.vue';
 export default {
   components: {
     ProfileSimpleItem,
+    MessageEmpty,
   },
   props: {
     user: Object,

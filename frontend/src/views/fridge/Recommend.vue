@@ -62,7 +62,7 @@
 <script>
 import RecipeRecommCardItem from '@/components/RecipeRecommCardItem.vue';
 import { mapActions } from 'vuex';
-import MessageEmpty from '@/components/common/MessageEmpty.vue';
+import MessageEmpty from '@/components/common/MessageNoResult.vue';
 export default {
   components: { RecipeRecommCardItem, MessageEmpty },
   props: {},

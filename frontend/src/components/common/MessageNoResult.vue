@@ -5,9 +5,9 @@
       loop
       :height="height + 'px'"
       :width="width + 'px'"
-      path="https://assets4.lottiefiles.com/packages/lf20_v4d0iG.json"
+      path="https://assets5.lottiefiles.com/private_files/lf30_ddv0lsnp.json"
     />
-    <span class="grey--text text--darken-1">{{ text }}</span>
+    <span class="pt-2 grey--text text--darken-1">{{ text }}</span>
   </div>
 </template>
 <script>
