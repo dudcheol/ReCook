@@ -46,13 +46,11 @@ export default {
   font-weight: 400;
   font-size: 1.5rem;
   letter-spacing: normal;
-  line-height: 1.1;
 }
 .h6 {
   font-weight: 500;
   font-size: 1.25rem;
   letter-spacing: -0.0125em;
-  line-height: 1.1;
 }
 .subtitle-1 {
   font-weight: 400;
