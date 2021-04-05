@@ -12,9 +12,9 @@
       <v-btn
         @click="btnFunc"
         rounded
+        depressed
         block
         x-large
-        elevation="24"
         :color="btnColor"
         :disabled="$route.path == '/survey/food' && !$store.state.user.selectedSurveyFoodIdx.length"
         :class="btnDark ? 'white--text' : 'dahong--text'"
@@ -25,7 +25,7 @@
       <div class="rounded-circle white">
         <LoadingCheers :width="128" :height="128" />
       </div>
-      <div class="pt-2 text-center caption-1 font-weight-bold">정보 저장 중..</div>
+      <div class="pt-2 text-center caption font-weight-bold">정보 저장 중..</div>
     </v-overlay>
   </v-container>
 </template>
