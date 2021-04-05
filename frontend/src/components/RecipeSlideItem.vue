@@ -11,10 +11,17 @@
       </template>
     </v-img>
     <div
+      v-if="content"
       class="pa-4 grey lighten-4 rounded-xl ma-5"
-      style="position:fixed; bottom:0; width:80%; height:80px; overflow:auto"
+      style="position:fixed; bottom:0; width:80%;"
+      @click="more = !more"
     >
-      <span class="black--text">{{ content }}</span>
+      <span v-if="more" class="black--text">{{ content }}</span>
+      <span
+        v-else
+        class="black--text"
+        v-html="$options.filters.truncate(content, 60, moreBtn)"
+      ></span>
     </div>
   </div>
 </template>
@@ -27,7 +34,10 @@ export default {
   },
   data() {
     return {
+      more: false,
       windowHeight: 0,
+      moreBtn:
+        '...<span class="font-weight-bold subtitle-2 grey--text text--darken-1">더 보기</span>',
     };
   },
   computed: {},
