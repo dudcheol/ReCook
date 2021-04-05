@@ -18,7 +18,7 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col class="text-caption pa-0">
+          <v-col class="caption-1 pa-0">
             <v-icon small>mdi-timer</v-icon>
             <span>
               {{ data['recipe-time'].split(' ')[0] }}
