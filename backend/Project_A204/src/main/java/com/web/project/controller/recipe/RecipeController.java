@@ -86,6 +86,12 @@ public class RecipeController {
 		return recipeLikeService.like(recipeLikeRequest);
 	}
 	
+	@PostMapping("/check/like")
+	@ApiOperation(value = "좋아요 여부 확인")
+	public Object checkLike(@Valid @RequestBody RecipeLikeRequest recipeLikeRequest) {
+		return recipeLikeService.checkLike(recipeLikeRequest);
+	}
+	
 	@GetMapping("/ingredients/{recipeId}")
 	@ApiOperation(value = "레시피에 저장된 재료 전달", notes="재료의 이름들만 가져오도록 만들었음")
 	public ResponseEntity<List<String>> recipeIngredients(@PathVariable("recipeId") int recipeId){
