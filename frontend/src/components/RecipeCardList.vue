@@ -1,7 +1,17 @@
 <template>
   <div class="d-flex pl-4" style="overflow:auto">
-    <RecipeCardItem v-for="item in datas" :key="item['recipe-id']" :data="item" />
-    <div v-if="datas.length">
+    <RecipeCardItem
+      v-for="item in datas"
+      :key="item['recipe-id']"
+      :data="item"
+      @click="
+        $router.push({
+          path: `/recipe/${item['recipe-id']}`,
+        });
+        $emit('click');
+      "
+    />
+    <div v-if="datas.length && !total">
       <v-card
         rounded="xl"
         width="120"
@@ -29,6 +39,7 @@ export default {
   props: {
     datas: Array,
     type: String,
+    total: Boolean,
   },
   data() {
     return {};
