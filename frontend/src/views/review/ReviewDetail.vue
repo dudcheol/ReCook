@@ -1,12 +1,17 @@
 <template>
-  <v-container>
+  <v-container class="pt-14">
     <v-row>
       <v-col>
         <ProfileSimpleItem
           v-if="info.review || false"
           :username="info.review.user.userName"
           :src="info.review.user.userImage"
-          @click="$router.push({ path: `/user/${info.review.user.userName}` })"
+          @click="
+            $router.push({
+              path: `/user/${info.review.user.userName}`,
+              query: { user: info.review.user },
+            })
+          "
         />
       </v-col>
     </v-row>

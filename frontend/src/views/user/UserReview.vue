@@ -3,14 +3,15 @@
     <v-row class="header-profile white pt-14">
       <v-col>
         <profile-simple-item
-          :username="user.userName || ''"
-          :src="user.userImage || ''"
+          v-if="user || query"
+          :username="(user || query).userName || ''"
+          :src="(user || query).userImage || ''"
         ></profile-simple-item>
       </v-col>
     </v-row>
     <v-row class="pt-10" no-gutters>
       <v-col>
-        {{ user.userIntroduce }}
+        {{ (user || query).userIntroduce }}
       </v-col>
     </v-row>
     <v-row class="pt-16">
@@ -60,7 +61,9 @@ export default {
     user: Object,
   },
   data() {
-    return {};
+    return {
+      query: {},
+    };
   },
   computed: {
     ...mapState({
@@ -71,7 +74,15 @@ export default {
     user: {
       immediate: true,
       handler(value) {
-        this.GET_REVIEW_LIST_BY_USERNAME(value.userName);
+        if (value) this.GET_REVIEW_LIST_BY_USERNAME(value.userName);
+      },
+    },
+    $route: {
+      immediate: true,
+      handler(value) {
+        this.query = value.query.user;
+        this.GET_REVIEW_LIST_BY_USERNAME(this.query.userName);
+        console.log('%cUserReview.vue line:83 this.query', 'color: #007acc;', this.query);
       },
     },
   },
