@@ -2,11 +2,12 @@
   <div>
     <WatchCardItem
       v-for="item in datas"
-      :key="'likelist' + item.recipeId"
-      :src="item.recipeMainImage"
-      :title="item.recipeTitle"
-      :username="item.recipeTime"
-      :usersrc="'mdi-information-outline'"
+      :key="'watchlist' + item.videoId"
+      :src="item.videoThumbnail"
+      :title="item.videoTitle"
+      :username="item.videoChannel"
+      :usersrc="item.videoChannelImg"
+      @click="$router.push({ path: `/watch/${item.videoId}` })"
     />
   </div>
 </template>

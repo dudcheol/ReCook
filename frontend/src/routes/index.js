@@ -57,6 +57,11 @@ const routes = [
           },
         ],
       },
+      {
+        path: 'watch/:video_id',
+        name: 'Watch#Detail',
+        component: () => import('@/views/watch/WatchDetail'),
+      },
     ],
   },
   {
@@ -100,11 +105,6 @@ const routes = [
         path: 'login',
         name: 'Login',
         component: () => import('@/views/login/Login'),
-      },
-      {
-        path: 'watch/:video_id',
-        name: 'WatchDetail',
-        component: () => import('@/views/watch/WatchDetail'),
       },
     ],
   },

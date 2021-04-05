@@ -1,26 +1,22 @@
 <template>
-  <div>
-    <br>
-    <youtube 
-      :video-id="videoSubId"
-      player-width="375" 
-      player-height="200"
-      @ready="ready"
-      @playing="playing"
-    />
-    <br>
-    <h4 style="margin: 10px">{{ videoInfo.videoTitle }}</h4>
-
-    <v-row>
-      <v-col cols="3" style="margin: 10px">
-        <img :src="videoInfo.videoChannelImg" alt="왜 안돼">
-      </v-col>
-
-      <v-col style="margin: 10px">
-        <div>{{ videoInfo.videoChannel }}</div>
-      </v-col>
-    </v-row>
-
+  <div class="d-flex flex-wrap align-center justify-center fill-height">
+    <div>
+      <div>
+        <div class="d-flex align-center pa-3">
+          <v-avatar size="48">
+            <img :src="videoInfo.videoChannelImg" />
+          </v-avatar>
+          <span class="pl-2 h6">{{ videoInfo.videoChannel }}</span>
+        </div>
+      </div>
+      <youtube
+        :video-id="videoSubId"
+        :player-width="windowWidth"
+        @ready="ready"
+        @playing="playing"
+      />
+      <div class="pa-3 subtitle-1">{{ videoInfo.videoTitle }}</div>
+    </div>
   </div>
 </template>
 
@@ -28,9 +24,8 @@
 import { mapState, mapActions } from 'vuex';
 import Vue from 'vue';
 import VueYouTubeEmbed from 'vue-youtube-embed';
-// import { getIdFromURL } from 'vue-youtube-embed';
- 
-Vue.use(VueYouTubeEmbed)
+
+Vue.use(VueYouTubeEmbed);
 
 export default {
   components: {},
@@ -38,47 +33,45 @@ export default {
   data() {
     return {
       videoId: '',
+      windowWidth: 375,
     };
   },
   computed: {
     ...mapState({
       videoInfo: (state) => state.video.videoInfo,
     }),
-    videoSubId(){ return this.videoId }
+    videoSubId() {
+      return this.videoId;
+    },
   },
   watch: {
     $route: {
       immediate: true,
       async handler(value) {
         await this.addVideoById(value.params['video_id']);
-        console.log(
-          '%cWatchDetail.vue line:19 value.params',
-          'color: #007acc;',
-          value.params['video_id']
-        );
         this.getVideoId(this.videoInfo.videoUrl);
       },
     },
   },
   methods: {
     ...mapActions(['addVideoById']),
-    
-    ready (event) {
-      this.player = event.target
+
+    ready(event) {
+      this.player = event.target;
     },
-    getVideoId (url) {
-      this.videoId = this.$youtube.getIdFromURL(url)
-      // console.log(this.videoId)
+    getVideoId(url) {
+      this.videoId = this.$youtube.getIdFromURL(url);
     },
-    playing () {
-      // console.log("playing")
+    playing() {},
+    stop() {
+      this.player.stopVideo();
     },
-    stop () {
-      this.player.stopVideo()
+    pause() {
+      this.player.pauseVideo();
     },
-    pause () {
-      this.player.pauseVideo()
-    }
+  },
+  mounted() {
+    this.windowWidth = window.innerWidth;
   },
 };
 </script>

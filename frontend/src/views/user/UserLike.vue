@@ -10,7 +10,7 @@
       >
       </v-col>
     </v-row>
-    <v-row class="pt-14 pb-4" no-gutters>
+    <v-row class="pt-14 pb-4 mt-14" no-gutters>
       <v-col>
         <WatchCardItem
           v-for="item in likeRecipeList"

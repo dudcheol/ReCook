@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container fluid class="pb-10 my-14">
     <v-row>
       <v-col class="pa-0">
         <div class="banner">banner area</div>
