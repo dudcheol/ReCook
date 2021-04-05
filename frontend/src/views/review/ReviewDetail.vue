@@ -22,13 +22,13 @@
           :title="info.recipeTitle"
           :rating="info.recipeRating"
           :src="info.recipeImage"
-          @click="$router.push({ path: `/recipe/${info.review.recipeSubId}` })"
+          @click="$router.push({ path: `/recipe/${info.review.recipeId}` })"
         />
       </v-col>
     </v-row>
     <v-divider class="my-3"></v-divider>
     <v-row>
-      <v-col class="text-body-1 font-weight-regular">
+      <v-col class="font-weight-regular">
         {{ info.review ? info.review.reviewContext : '' }}
       </v-col>
     </v-row>

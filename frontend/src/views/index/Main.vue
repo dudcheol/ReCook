@@ -6,12 +6,12 @@
       </v-col>
     </v-row>
     <!-- 추천 레시피 -->
-    <v-row class="pb-4">
+    <v-row class="py-4">
       <v-col>
         <v-row>
-          <v-col class="d-flex justify-space-between align-center">
+          <v-col class="d-flex justify-space-between align-center pb-5">
             <span class="h6 font-weight-regular"
-              ><span class="pa-1 grey lighten-3 rounded-lg font-weight-black">{{
+              ><span class="pa-1 dahong white--text rounded-lg font-weight-black">{{
                 isLogin ? `${$store.state.user.user.userName}` : '추천'
               }}</span>
               {{ isLogin ? '님을 위한' : '' }} 레시피</span
@@ -50,7 +50,7 @@
           <v-col v-else class="py-0 px-4">
             <v-sheet
               rounded="xl"
-              color="grey lighten-4"
+              color="grey lighten-5"
               class="pa-4 text-center caption-1 grey--text"
               @click="$router.push({ path: '/login' })"
               >추천 레시피를 보려면 <span class="dahong--text"><u>로그인</u></span
@@ -67,8 +67,8 @@
         <v-row>
           <v-col class="d-flex justify-space-between align-center">
             <span class="h6 font-weight-regular"><strong>인기</strong> 레시피</span>
-            <v-btn text small class="pa-1" @click="$router.push({ path: `recipe/list/popular` })"
-              >전체보기</v-btn
+            <v-btn icon small class="pa-1" @click="$router.push({ path: `recipe/list/popular` })"
+              ><v-icon>mdi-chevron-right</v-icon></v-btn
             >
           </v-col>
         </v-row>
@@ -86,8 +86,8 @@
         <v-row>
           <v-col class="d-flex justify-space-between align-center">
             <span class="h6 font-weight-regular"><strong>최신</strong> 레시피</span>
-            <v-btn text small class="pa-1" @click="$router.push({ path: `recipe/list/recent` })"
-              >전체보기</v-btn
+            <v-btn icon small class="pa-1" @click="$router.push({ path: `recipe/list/recent` })"
+              ><v-icon>mdi-chevron-right</v-icon></v-btn
             >
           </v-col>
         </v-row>
