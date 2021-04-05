@@ -26,7 +26,7 @@ const getters = {
     let idx = 0;
     state.allergyList.forEach((e, i) => {
       if (i == idxs[idx]) {
-        ret.push(e);
+        ret.push(e.allergyName);
         idx++;
       }
     });
@@ -59,7 +59,7 @@ const actions = {
       getters.selectedSurveyFoods,
       getters.selectedSurveyAllergys,
       (response) => {
-        console.log('%csurvey.js line:61 response.data', 'color: #007acc;', response.data);
+        this.state.user.user.survey = response.data;
         res = true;
       },
       () => {}
