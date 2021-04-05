@@ -40,8 +40,8 @@ def recipe_test():
                    'order by a.recipe_sub_id;')
 
     for c in cursor:
-        total_recipe['vote_average'].append(c[0])
-        total_recipe['vote_count'].append(c[1])
+        total_recipe['vote_average'].append(c[2])
+        total_recipe['vote_count'].append(c[3])
 
     # print(total_recipe)
     return DataFrame(total_recipe)
