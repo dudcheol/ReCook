@@ -1,21 +1,25 @@
 <template>
   <div>
-    <h2>{{ videoInfo.videoTitle }}</h2>
-
-    <v-img
-      min-height="200"
-      max-height="200"
-      :src="videoInfo.videoThumbnail"
-      class="rounded-lg"
-    >
-    </v-img>
-
+    <br>
     <youtube 
-      :video-id=getVideoId(videoInfo.videoUrl) 
+      :video-id="videoSubId"
       player-width="375" 
       player-height="200"
-    >
-    </youtube>
+      @ready="ready"
+      @playing="playing"
+    />
+    <br>
+    <h4 style="margin: 10px">{{ videoInfo.videoTitle }}</h4>
+
+    <v-row>
+      <v-col cols="3" style="margin: 10px">
+        <img :src="videoInfo.videoChannelImg" alt="왜 안돼">
+      </v-col>
+
+      <v-col style="margin: 10px">
+        <div>{{ videoInfo.videoChannel }}</div>
+      </v-col>
+    </v-row>
 
   </div>
 </template>
@@ -40,29 +44,34 @@ export default {
     ...mapState({
       videoInfo: (state) => state.video.videoInfo,
     }),
+    videoSubId(){ return this.videoId }
   },
   watch: {
     $route: {
       immediate: true,
-      handler(value) {
-        this.addVideoById(value.params['video_id']);
+      async handler(value) {
+        await this.addVideoById(value.params['video_id']);
         console.log(
           '%cWatchDetail.vue line:19 value.params',
           'color: #007acc;',
           value.params['video_id']
         );
+        this.getVideoId(this.videoInfo.videoUrl);
       },
     },
   },
   methods: {
     ...mapActions(['addVideoById']),
-    getVideoId (url) {
-      this.videoId = this.$youtube.getIdFromURL(url)
-    },
+    
     ready (event) {
       this.player = event.target
     },
+    getVideoId (url) {
+      this.videoId = this.$youtube.getIdFromURL(url)
+      // console.log(this.videoId)
+    },
     playing () {
+      // console.log("playing")
     },
     stop () {
       this.player.stopVideo()

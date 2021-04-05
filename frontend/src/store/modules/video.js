@@ -13,11 +13,11 @@ const getters = {};
 // actions
 const actions = {
 
-  addVideoById({ commit }, video_id) {
-    getVideoById(
+  async addVideoById({ commit }, video_id) {
+    await getVideoById(
       video_id,
       (response) => {
-        console.log(response.data);
+        // console.log(response.data);
         commit('setVideoInfo', response.data);
       },
       (error) => {
