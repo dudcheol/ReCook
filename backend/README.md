@@ -16,3 +16,11 @@
 - 레시피 데이터 보내기
 
 #### Review
+
+#### Video
+
+#### Hashtag
+
+#### Ingredient
+
+#### Survey
