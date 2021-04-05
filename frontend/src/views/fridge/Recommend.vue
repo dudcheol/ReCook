@@ -3,7 +3,7 @@
     <v-container fluid class="white rounded-b-xl elevation-24" style="position:fixed; z-index:1">
       <v-row>
         <v-col cols="12" class="d-flex align-center justify-space-between pt-1 pb-2">
-          <span class="text-h5 font-weight-black pl-2">나의 냉장고</span>
+          <span class="h5 font-weight-black pl-2">나의 냉장고</span>
           <v-checkbox
             class="px-0 ma-0"
             color="dahong"
@@ -52,7 +52,7 @@
         :text="'추천 결과를 찾지 못했어요'"
         style="width:100%"
       />
-      <span class="mx-14 my-2 px-5 py-2 text-caption rounded-xl grey lighten-2"
+      <span class="mx-14 my-2 px-5 py-2 caption-1 rounded-xl grey lighten-2"
         >너무 많은 재료를 선택하거나, 관련없는 재료를 선택하면 추천이 안될 수 있습니다</span
       >
     </div>

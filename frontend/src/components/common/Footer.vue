@@ -24,7 +24,7 @@
       <v-card class="rounded-t-xl pa-1">
         <v-list>
           <v-subheader>
-            <span class="text-h5 font-weight-black black--text">나의 냉장고</span>
+            <span class="h5 font-weight-black black--text">나의 냉장고</span>
           </v-subheader>
           <v-list-item v-for="tile in tiles" :key="tile.title" @click="sheet = false">
             <!-- <v-list-item-avatar>

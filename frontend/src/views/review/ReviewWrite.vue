@@ -47,7 +47,7 @@
       <div
         class="grey lighten-4 py-2 ma-4 d-flex flex-column align-center justify-center rounded-lg elevation-24"
       >
-        <span class="text-caption">레시피를 <strong>평가</strong>해주세요</span>
+        <span class="caption-1">레시피를 <strong>평가</strong>해주세요</span>
         <v-rating
           v-model="rating"
           dense
@@ -66,7 +66,7 @@
         color="dahong"
         height="56"
         tile
-        class="white--text font-weight-black text-subtitle-1 pt-1"
+        class="white--text font-weight-black subtitle-1 pt-1"
         :disabled="btnActive || loading"
         depressed
         @click="onReviewWrited"

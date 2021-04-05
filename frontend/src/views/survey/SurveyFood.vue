@@ -2,11 +2,11 @@
   <v-container>
     <v-row class="mt-14 pt-3">
       <v-col>
-        <span class="text-h3 font-weight-thin"
+        <span class="h3 font-weight-thin"
           >어떤 <span class="font-weight-bold">음식</span>을<br />
           좋아하시나요?</span
         ><br />
-        <span class="caption">취향에 맞은 음식을 선택해주세요. (중복선택가능)</span>
+        <span class="caption-1">취향에 맞은 음식을 선택해주세요. (중복선택가능)</span>
       </v-col>
     </v-row>
     <v-row class="mb-14 pb-3">

@@ -6,7 +6,7 @@
       </v-col>
       <v-col
         cols="12"
-        class="pa-1 grey lighten-4 text-center text-caption white--text font-weight-medium"
+        class="pa-1 grey lighten-4 text-center caption-1 white--text font-weight-medium"
       >
       </v-col>
     </v-row>

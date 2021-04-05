@@ -5,7 +5,7 @@
         <v-row>
           <v-col>
             <div class="pl-3">
-              <span class="text-h2"
+              <span class="h2"
                 ><strong>로그인</strong>이<br />
                 필요한<br />
                 서비스입니다</span
@@ -34,7 +34,7 @@
                   width="18"
                   contain
                 ></v-img>
-                <span class="black--text text-subtitle-2 pl-3" style="font-size:14px"
+                <span class="black--text subtitle-2 pl-3" style="font-size:14px"
                   >Google 계정으로 로그인</span
                 >
               </v-btn>

@@ -20,11 +20,11 @@
         />
         <v-container v-else :style="{ minHeight: windowHeight + 'px' }">
           <v-row>
-            <v-col cols="12" class="text-h4 mt-4">모두 보셨습니다</v-col>
+            <v-col cols="12" class="h4 mt-4">모두 보셨습니다</v-col>
             <v-col class="pa-0 pl-3">
               <v-btn dark depressed rounded @click="swiper.slideTo(0)">첫 페이지로 가기</v-btn>
             </v-col>
-            <v-col class="font-weight-thin text-h5" style="position:absolute; bottom:0px"
+            <v-col class="font-weight-thin h5" style="position:absolute; bottom:0px"
               >이런 <strong>레시피</strong>는 어때요?
             </v-col>
           </v-row>
@@ -49,7 +49,7 @@
             width="200px"
             path="https://assets7.lottiefiles.com/packages/lf20_fefIZO.json"
           />
-          <span class="caption font-weight-regular grey--text text--darken-1"
+          <span class="caption-1 font-weight-regular grey--text text--darken-1"
             >현재 레시피와 <span class="font-weight-black dahong--text">관련된 추천 레시피</span>를
             불러오고 있어요</span
           >
