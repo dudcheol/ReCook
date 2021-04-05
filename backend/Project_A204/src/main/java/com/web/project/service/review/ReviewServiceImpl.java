@@ -91,6 +91,26 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 	
 	@Override
+	public ResponseEntity<Page<Review>> findAllImage(Pageable pageable) {
+		HttpStatus status = null;
+		Page<Review> reviewList = reviewDao.findAllImageByOrderByReviewIdDesc(pageable);
+		
+		try {
+			if(reviewList != null) {
+				status = HttpStatus.OK;
+			}else {
+				status = HttpStatus.INTERNAL_SERVER_ERROR;
+			}
+		} catch (Exception e) {
+			logger.error("리뷰 중 사진 있는거 가져오기 실패 : {}", e);
+			e.printStackTrace();
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+		
+		return new ResponseEntity<Page<Review>>(reviewList, status);
+	}
+	
+	@Override
 	public ResponseEntity<Map<String, Object>> findByReview(int reviewId) {
 		HttpStatus status = null;
 		Map<String, Object> resultMap = new HashMap<>();
@@ -158,5 +178,7 @@ public class ReviewServiceImpl implements ReviewService{
 		
 		return new ResponseEntity<List<Review>>(reviewList, status);
 	}
+
+	
 
 }
