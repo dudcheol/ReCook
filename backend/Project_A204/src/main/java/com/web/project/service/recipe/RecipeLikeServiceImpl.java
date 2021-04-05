@@ -61,5 +61,28 @@ public class RecipeLikeServiceImpl implements RecipeLikeService{
 		return new ResponseEntity<>(result, status);
 	}
 
+	@Override
+	public Object checkLike(RecipeLikeRequest recipeLikeReqeust) {
+		HttpStatus status = null;
+		String result = "";
+		
+		RecipeLike recipeLike = recipeLikeDao.findRecipeLikeByUserIdAndRecipeId(recipeLikeReqeust.getUserId(), recipeLikeReqeust.getRecipeId());
+		
+		try {
+			if(recipeLike != null) { // 이미 좋아요가 눌려있는 경우
+				result = "Yes";
+			}else { // 좋아요를 새롭게 누른 경우
+				result = "No";
+			}
+			
+			status = HttpStatus.OK;
+		} catch (Exception e) {
+			logger.error("좋아요 확인 실패 : {}", e);
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+		}
+	
+		return new ResponseEntity<>(result, status);
+	}
+
 	
 }

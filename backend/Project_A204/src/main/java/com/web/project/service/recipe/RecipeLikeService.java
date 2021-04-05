@@ -6,4 +6,6 @@ public interface RecipeLikeService {
 
 	public Object like(RecipeLikeRequest recipeLikeReqeust);
 	
+	public Object checkLike(RecipeLikeRequest recipeLikeReqeust);
+	
 }
