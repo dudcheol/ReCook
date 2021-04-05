@@ -4,10 +4,10 @@
       <v-col class="d-flex flex-column align-center justify-center">
         <v-img height="200" width="200" :src="data['recipe-main-image']" class="rounded-xl">
         </v-img>
-        <div class="text-h4 font-weight-bold pt-3 px-16 text-center">
+        <div class="h4 font-weight-bold pt-3 px-16 text-center">
           {{ data['recipe-title'] }}
         </div>
-        <div class="text-caption pt-1">
+        <div class="caption-1 pt-1">
           <v-icon small>mdi-timer</v-icon>
           <span>
             {{ data['recipe-time'] }}
@@ -22,12 +22,12 @@
     <v-row @scroll.passive="onScroll">
       <v-col class="d-flex justify-space-between align-center">
         <div v-if="allergy" class="d-flex align-center">
-          <span class="text-h6 font-weight-black">재료</span>
-          <span class="text-caption pl-2 red--text"
+          <span class="h6 font-weight-black">재료</span>
+          <span class="caption-1 pl-2 red--text"
             ><v-icon color="red" small>mdi-alert</v-icon>알러지 재료가 포함된 레시피입니다</span
           >
         </div>
-        <v-btn text x-small class="pa-1">전체보기</v-btn>
+        <!-- <v-btn text x-small class="pa-1">전체보기</v-btn> -->
       </v-col>
     </v-row>
     <v-row>
@@ -56,7 +56,7 @@
     </v-row>
     <v-row>
       <v-col class="d-flex justify-space-between align-center">
-        <span class="text-h6 font-weight-black">태그</span>
+        <span class="h6 font-weight-black">태그</span>
       </v-col>
     </v-row>
     <v-row>
@@ -73,14 +73,14 @@
     </v-row>
     <v-row>
       <v-col class="d-flex justify-space-between align-center">
-        <span class="text-h6 font-weight-black">리뷰</span>
-        <v-btn text x-small class="pa-1">전체보기</v-btn>
+        <span class="h6 font-weight-black">리뷰</span>
+        <!-- <v-btn text x-small class="pa-1">전체보기</v-btn> -->
       </v-col>
     </v-row>
     <v-row>
       <v-col class="d-flex justify-space-between align-center">
-        <span class="text-h6 font-weight-black">추천</span>
-        <v-btn text x-small class="pa-1">전체보기</v-btn>
+        <span class="h6 font-weight-black">추천</span>
+        <!-- <v-btn text x-small class="pa-1">전체보기</v-btn> -->
       </v-col>
     </v-row>
     <!-- <v-row>

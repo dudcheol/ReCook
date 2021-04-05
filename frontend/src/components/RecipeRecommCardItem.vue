@@ -9,7 +9,7 @@
           {{ (data.recipeTitle || data['recipe-title']) | truncate(14, '..') }}
         </div>
 
-        <div class="text-caption pt-2">
+        <div class="caption-1 pt-2">
           <v-icon small>mdi-timer</v-icon>
           <span>
             {{ (data['recipeTime'] || data['recipe-time']).split(' ')[0] }}

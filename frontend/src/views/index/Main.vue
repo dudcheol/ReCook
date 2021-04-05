@@ -10,20 +10,20 @@
       <v-col>
         <v-row>
           <v-col class="d-flex justify-space-between align-center">
-            <span class="text-h6 font-weight-regular"
+            <span class="h6 font-weight-regular"
               ><span class="pa-1 grey lighten-3 rounded-lg font-weight-black">{{
                 isLogin ? `${$store.state.user.user.userName}` : '추천'
               }}</span>
               {{ isLogin ? '님을 위한' : '' }} 레시피</span
             >
-            <v-btn
+            <!-- <v-btn
               v-if="isLogin && recipeRecommMainList.length"
               text
               small
               class="pa-1"
               @click="$router.push({ path: `recipe/list/recommend` })"
               >전체보기</v-btn
-            >
+            > -->
           </v-col>
         </v-row>
         <v-row>
@@ -41,7 +41,7 @@
                 width="200px"
                 path="https://assets7.lottiefiles.com/packages/lf20_fefIZO.json"
               />
-              <span class="caption font-weight-regular grey--text text--darken-1"
+              <span class="caption-1 font-weight-regular grey--text text--darken-1"
                 ><span class="font-weight-black dahong--text">추천 레시피</span>를 불러오고
                 있어요</span
               >
@@ -51,7 +51,7 @@
             <v-sheet
               rounded="xl"
               color="grey lighten-4"
-              class="pa-4 text-center caption grey--text"
+              class="pa-4 text-center caption-1 grey--text"
               @click="$router.push({ path: '/login' })"
               >추천 레시피를 보려면 <span class="dahong--text"><u>로그인</u></span
               >이 필요합니다</v-sheet
@@ -66,7 +66,7 @@
       <v-col>
         <v-row>
           <v-col class="d-flex justify-space-between align-center">
-            <span class="text-h6 font-weight-regular"><strong>인기</strong> 레시피</span>
+            <span class="h6 font-weight-regular"><strong>인기</strong> 레시피</span>
             <v-btn text small class="pa-1" @click="$router.push({ path: `recipe/list/popular` })"
               >전체보기</v-btn
             >
@@ -85,7 +85,7 @@
       <v-col>
         <v-row>
           <v-col class="d-flex justify-space-between align-center">
-            <span class="text-h6 font-weight-regular"><strong>최신</strong> 레시피</span>
+            <span class="h6 font-weight-regular"><strong>최신</strong> 레시피</span>
             <v-btn text small class="pa-1" @click="$router.push({ path: `recipe/list/recent` })"
               >전체보기</v-btn
             >

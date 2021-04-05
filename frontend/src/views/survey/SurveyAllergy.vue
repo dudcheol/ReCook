@@ -2,11 +2,11 @@
   <v-container>
     <v-row class="mt-14 pt-3">
       <v-col>
-        <span class="text-h3 font-weight-thin"
+        <span class="h3 font-weight-thin"
           ><span class="font-weight-bold">알레르기</span>가<br />
           있으신가요?</span
         ><br />
-        <span class="caption">먹을 수 없는 음식을 선택해주세요. (중복선택가능)</span>
+        <span class="caption-1">먹을 수 없는 음식을 선택해주세요. (중복선택가능)</span>
       </v-col>
     </v-row>
     <v-row class="mb-14 pb-3">

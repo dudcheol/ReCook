@@ -12,7 +12,7 @@
       v-if="$store.state.user.user.userName === username"
       class="d-flex align-center justify-center ml-auto"
     >
-      <v-btn text x-small class="px-1 text-caption">
+      <v-btn text x-small class="px-1 caption-1">
         프로필 수정
       </v-btn>
     </div>

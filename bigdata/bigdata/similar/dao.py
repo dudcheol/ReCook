@@ -33,10 +33,10 @@ def recipe_test():
         total_recipe['genres'].append(c[3])
 
     cursor = connection.cursor()
-    cursor.execute('select a.recipe_sub_id ,a.recipe_title, avg(f.review_rating) as vote_average, count(f.review_id) ' +
-                   'from recipe a inner join review f on a.recipe_id=f.recipe_id ' +
-                   'group by a.recipe_sub_id ' +
-                   'order by a.recipe_sub_id;')
+    cursor.execute('select avg(f.review_rating) as vote_average, count(f.review_id) ' +
+                   'from review f ' +
+                   'group by f.recipe_sub_id ' +
+                   'order by f.recipe_sub_id;')
 
     for c in cursor:
         total_recipe['vote_average'].append(c[0])

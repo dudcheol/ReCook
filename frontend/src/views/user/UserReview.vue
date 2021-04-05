@@ -15,7 +15,7 @@
     </v-row>
     <v-row class="pt-16">
       <v-col>
-        <span class="text-h6 font-weight-black">리뷰</span>
+        <span class="h6 font-weight-black">리뷰</span>
       </v-col>
     </v-row>
     <v-row>

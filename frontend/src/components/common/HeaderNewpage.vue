@@ -27,7 +27,7 @@
         </v-btn>
       </v-col>
       <v-col class="d-flex justify-space-around align-center">
-        <span class="font-weight-medium text-subtitle-1">{{ center }}</span>
+        <span class="font-weight-medium subtitle-1">{{ center }}</span>
       </v-col>
       <v-col cols="3" class="d-flex align-center justify-end pa-0 mr-1">
         <!-- <v-btn v-for="(item, index) in right.split('#')" :key="'nheader' + index" icon>

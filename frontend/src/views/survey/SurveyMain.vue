@@ -9,7 +9,7 @@
         >님,
       </v-col>
       <v-col cols="12">
-        <span class="text-h2 font-weight-thin"
+        <span class="h2 font-weight-thin"
           ><span class="font-weight-black">취향</span>을<br />
           알려주세요</span
         >

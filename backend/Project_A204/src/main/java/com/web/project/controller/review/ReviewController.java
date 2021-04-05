@@ -40,6 +40,12 @@ public class ReviewController {
 		return reviewService.findAll(pageable);
 	}
 	
+	@ApiOperation(value = "모든 리뷰 중 사진 있는 것만 조회", notes = "모든 리뷰 중 사진 있는 것만 최신순으로 조회합니다.")
+	@GetMapping("/all/image")
+	public ResponseEntity<Page<Review>> findAllImage(Pageable pageable) {
+		return reviewService.findAllImage(pageable);
+	}
+	
 	@ApiOperation(value = "리뷰 세부 조회", notes = "리뷰 ID에 맞는 리뷰 내용을 조회합니다.")
 	@GetMapping("/detail/{reviewId}")
 	public ResponseEntity<Map<String, Object>> findByReview(@PathVariable("reviewId") int reviewId) {
