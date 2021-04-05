@@ -1,14 +1,20 @@
 <template>
-  <div :style="{ minHeight: windowHeight + 'px' }" class="d-flex flex-column align-center">
-    <v-img :src="imageUrl" contain max-width="400">
+  <div
+    :style="{ minHeight: windowHeight + 'px' }"
+    class="d-flex flex-column align-center justify-center"
+  >
+    <v-img :src="imageUrl" max-width="400" contain class="pb-16 mb-16">
       <template v-slot:placeholder>
         <v-row class="fill-height ma-0" align="center" justify="center">
           <v-progress-circular indeterminate color="grey lighten-1"></v-progress-circular>
         </v-row>
       </template>
     </v-img>
-    <div class="pa-3">
-      {{ content }}
+    <div
+      class="pa-4 grey lighten-4 rounded-xl ma-5"
+      style="position:fixed; bottom:0; width:80%; height:80px; overflow:auto"
+    >
+      <span class="black--text">{{ content }}</span>
     </div>
   </div>
 </template>
@@ -32,4 +38,4 @@ export default {
   },
 };
 </script>
-<style lang=""></style>
+<style scoped></style>

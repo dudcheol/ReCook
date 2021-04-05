@@ -13,7 +13,7 @@
     @append="onAppend"
     @layout-complete="onLayoutComplete"
     @image-error="onImageError"
-    class="pb-10 my-14"
+    class="my-14 white"
   >
     <!-- Loading element via named slot -->
     <div slot="loading" style="width:100%">

@@ -4,9 +4,10 @@
       <v-col class="d-flex flex-column align-center justify-center">
         <v-img height="200" width="200" :src="data['recipe-main-image']" class="rounded-xl">
         </v-img>
-        <div class="h4 font-weight-bold pt-3 px-16 text-center">
-          {{ data['recipe-title'] }}
-        </div>
+        <div
+          class="h4 font-weight-bold pt-3 px-8 text-center"
+          v-html="$options.filters.spaceCutter(data['recipe-title'])"
+        ></div>
         <div class="caption-1 pt-1">
           <v-icon small>mdi-timer</v-icon>
           <span>
@@ -78,9 +79,10 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col class="d-flex justify-space-between align-center">
-        <span class="h6 font-weight-black">추천</span>
-        <!-- <v-btn text x-small class="pa-1">전체보기</v-btn> -->
+      <v-col class="d-flex justify-space-between align-center pt-3 px-2 pb-1">
+        <span class="h6 font-weight-black"
+          ><span class="dahong rounded-lg white--text pa-1">추천</span> 레시피</span
+        >
       </v-col>
     </v-row>
     <!-- <v-row>

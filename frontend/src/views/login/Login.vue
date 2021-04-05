@@ -59,6 +59,7 @@ export default {
   data() {
     return {
       prevRoute: null,
+      windowWidth: 0,
     };
   },
   computed: {},
@@ -89,11 +90,10 @@ export default {
         });
     },
   },
-  // beforeRouteEnter(to, from, next) {
-  //   next((vm) => {
-  //     vm.prevRoute = to;
-  //   });
-  // },
+  mounted() {
+    this.windowWidth = window.innerWidth;
+    console.log('%cLogin.vue line:95 window.innerHeight', 'color: #007acc;', this.windowWidth);
+  },
 };
 </script>
 

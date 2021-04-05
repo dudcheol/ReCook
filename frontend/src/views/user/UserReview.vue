@@ -14,7 +14,7 @@
         {{ (user || query).userIntroduce }}
       </v-col>
     </v-row>
-    <v-row class="pt-16">
+    <v-row class="pt-16 white">
       <v-col>
         <span class="h6 font-weight-black">리뷰</span>
       </v-col>

@@ -6,7 +6,7 @@
       </v-col>
     </v-row>
     <!-- 추천 레시피 -->
-    <v-row class="py-4">
+    <v-row class="mb-2 py-2 white">
       <v-col>
         <v-row>
           <v-col class="d-flex justify-space-between align-center pb-5">
@@ -14,7 +14,7 @@
               ><span class="pa-1 dahong white--text rounded-lg font-weight-black">{{
                 isLogin ? `${$store.state.user.user.userName}` : '추천'
               }}</span>
-              {{ isLogin ? ' 위한' : '' }} 레시피</span
+              {{ isLogin ? '님을 위한' : '' }} 레시피</span
             >
             <!-- <v-btn
               v-if="isLogin && recipeRecommMainList.length"
@@ -41,7 +41,7 @@
                 width="200px"
                 path="https://assets7.lottiefiles.com/packages/lf20_fefIZO.json"
               />
-              <span class="caption-1 font-weight-regular grey--text text--darken-1"
+              <span class="caption-1 font-weight-regular grey--text text--darken-1 pt-4"
                 ><span class="font-weight-black dahong--text">추천 레시피</span>를 불러오고
                 있어요</span
               >
@@ -50,11 +50,10 @@
           <v-col v-else class="py-0 px-4">
             <v-sheet
               rounded="xl"
-              color="grey lighten-5"
               class="pa-4 text-center caption-1 grey--text"
               @click="$router.push({ path: '/login' })"
-              >추천 레시피를 보려면 <span class="dahong--text"><u>로그인</u></span
-              >이 필요합니다</v-sheet
+              >레시피를 추천받고 싶다면 <span class="dahong--text"><u>로그인</u></span
+              >해주세요</v-sheet
             >
           </v-col>
         </v-row>
@@ -62,7 +61,7 @@
     </v-row>
 
     <!-- 인기 레시피 -->
-    <v-row class="pb-4">
+    <v-row class="pb-2 mb-2 white">
       <v-col>
         <v-row>
           <v-col class="d-flex justify-space-between align-center">
@@ -81,7 +80,7 @@
     </v-row>
 
     <!-- 최신 레시피 -->
-    <v-row>
+    <v-row class="pb-2 white">
       <v-col>
         <v-row>
           <v-col class="d-flex justify-space-between align-center">

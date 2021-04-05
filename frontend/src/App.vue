@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <v-app>
-      <router-view class="fill-height"></router-view>
+      <transition name="slide">
+        <router-view class="fill-height"></router-view>
+      </transition>
     </v-app>
   </div>
 </template>
@@ -16,6 +18,12 @@ export default {
 <style>
 * {
   font-family: 'Spoqa Han Sans Neo', 'sans-serif' !important;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
 }
 
 .h1 {
@@ -70,7 +78,6 @@ export default {
 .pointer {
   cursor: pointer;
 }
-
 .bg-color {
   background-color: #f8f9fb;
 }

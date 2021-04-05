@@ -1,5 +1,5 @@
 <template>
-  <v-container class="pt-14">
+  <v-container class="pt-14 white">
     <v-row>
       <v-col>
         <ProfileSimpleItem
