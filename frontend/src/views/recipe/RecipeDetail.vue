@@ -62,7 +62,7 @@
               >를 불러오고 있어요</span
             >
           </div>
-          <div v-else class="py-0 px-4">
+          <div v-else class="py-0 px-4 mt-8">
             <v-sheet
               rounded="xl"
               class="pa-4 text-center caption-1 grey--text"
