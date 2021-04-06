@@ -25,9 +25,13 @@
         ></recipe-recomm-card-item>
       </v-col>
     </v-row>
-    <infinite-loading @infinite="infiniteHandler">
-      <div slot="spinner">
-        <v-skeleton-loader class="mx-auto px-4" max-width="100%" type="card"></v-skeleton-loader>
+    <infinite-loading ref="InfiniteLoading" @infinite="infiniteHandler">
+      <div slot="spinner" class="">
+        <loading-cheers
+          :width="150"
+          :height="150"
+          class="white rounded-circle mx-auto"
+        ></loading-cheers>
       </div>
       <div slot="no-results">
         <message-empty :width="200" :text="'찜한 레시피가 없어요'"></message-empty>
@@ -43,12 +47,14 @@ import ProfileSimpleItem from '@/components/ProfileSimpleItem.vue';
 import { getLikeListByUserId } from '@/api/user';
 import MessageEmpty from '@/components/common/MessageEmpty.vue';
 import RecipeRecommCardItem from '@/components/RecipeRecommCardItem.vue';
+import LoadingCheers from '@/components/common/LoadingCheers.vue';
 export default {
   components: {
     ProfileSimpleItem,
     // WatchCardItem,
     MessageEmpty,
     RecipeRecommCardItem,
+    LoadingCheers,
   },
   props: {
     user: Object,
@@ -69,6 +75,7 @@ export default {
         this.page,
         this.size,
         (response) => {
+          console.log('%cUserLike.vue line:72 response.data', 'color: #007acc;', response.data);
           const data = response.data;
 
           if (data.length) {
@@ -85,6 +92,13 @@ export default {
       );
     },
   },
+  created() {
+    // console.log('%cUserLike.vue line:107 ', 'color: #007acc;');
+    // if (this.$refs.InfiniteLoading) {
+    //   this.$refs.InfiniteLoading.stateChanger.reset();
+    // }
+  },
+  mounted() {},
 };
 </script>
 <style scoped>

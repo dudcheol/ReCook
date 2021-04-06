@@ -42,7 +42,7 @@
         <img :src="item.reviewImage" />
       </div>
       <div class="subtitle-2 text-center font-weight-bold">
-        {{ item.reviewContext | truncate(12, '..') }}
+        {{ item.recipeTitle | truncate(12, '..') }}
       </div>
       <div class="caption-1 text-center">{{ item.user.userName | truncate(10, '..') }}</div>
     </div>

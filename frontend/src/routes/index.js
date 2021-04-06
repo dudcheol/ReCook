@@ -97,7 +97,7 @@ const routes = [
       {
         path: 'recipe/list/:type',
         name: 'RecipeList',
-        beforeEnter: requireAuth(),
+        // beforeEnter: requireAuth(),
         component: () => import('@/views/recipe/RecipeList'),
       },
       {

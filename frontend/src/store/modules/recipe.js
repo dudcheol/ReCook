@@ -7,6 +7,7 @@ import {
   getRecommRecipeByRecipeTitle,
   getRecipeHotListAll,
   getRecipeNewListAll,
+  getIngredientsInRecipe,
 } from '../../api/recipe';
 
 // initial state
@@ -19,18 +20,31 @@ const state = () => ({
   recipeRecomm: [],
   recipeRecommMainList: [],
   recipeRecommRelateList: [],
+  recipeIngredients: [],
 });
 
 // getters
-const getters = {};
+const getters = {
+  hasAllergyOfUser(state, getters, rootState) {
+    const allergyList = rootState.user.user.allergyList;
+    for (let i = 0; i < state.recipeIngredients.length; i++) {
+      const e = state.recipeIngredients[i];
+      if (allergyList.includes(e)) {
+        return true;
+      }
+    }
+    return false;
+  },
+};
 
 // actions
 const actions = {
-  async addRecipeById({ commit }, recipe_id) {
+  async addRecipeById({ commit, dispatch }, recipe_id) {
     await getRecipeById(
       recipe_id,
       (response) => {
         commit('setRecipeInfo', response.data);
+        dispatch('GET_RECIPE_INGREDIENTS', response.data['recipe-id']);
       },
       (error) => {
         console.log('%crecipe.js line:21 error', 'color: #007acc;', error);
@@ -117,6 +131,15 @@ const actions = {
       () => {}
     );
   },
+  GET_RECIPE_INGREDIENTS({ commit }, recipeId) {
+    getIngredientsInRecipe(
+      recipeId,
+      (response) => {
+        commit('setRecipeIngredients', response.data);
+      },
+      () => {}
+    );
+  },
 };
 
 // mutations
@@ -153,6 +176,9 @@ const mutations = {
   },
   clearRecipeRecommRelateList(state) {
     state.recipeRecommRelateList = [];
+  },
+  setRecipeIngredients(state, payload) {
+    state.recipeIngredients = payload;
   },
 };
 

@@ -10,6 +10,7 @@
         });
         $emit('click');
       "
+      :elevation="elevation"
     />
     <div v-if="datas.length && !total">
       <v-card
@@ -40,6 +41,7 @@ export default {
     datas: Array,
     type: String,
     total: Boolean,
+    elevation: Boolean,
   },
   data() {
     return {};

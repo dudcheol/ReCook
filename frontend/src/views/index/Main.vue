@@ -15,7 +15,7 @@
       </v-col>
     </v-row>
     <!-- 추천 레시피 -->
-    <v-row class="mb-2 py-4 white">
+    <v-row class="mb-4 py-4 white">
       <v-col>
         <v-row>
           <v-col class="d-flex justify-space-between align-center pb-5">
@@ -61,8 +61,8 @@
               rounded="xl"
               class="pa-4 text-center caption-1 grey--text"
               @click="$router.push({ path: '/login' })"
-              >레시피를 추천받고 싶다면 <span class="dahong--text"><u>로그인</u></span
-              >해주세요</v-sheet
+              ><span class="dahong--text"><u>로그인</u></span
+              >이 필요한 서비스입니다</v-sheet
             >
           </v-col>
         </v-row>
@@ -70,7 +70,7 @@
     </v-row>
 
     <!-- 인기 레시피 -->
-    <v-row class="pt-2 pb-4 mb-2 white">
+    <v-row class="pt-2 pb-4 mb-4 white">
       <v-col>
         <v-row>
           <v-col class="d-flex justify-space-between align-center">

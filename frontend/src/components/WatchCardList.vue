@@ -7,7 +7,7 @@
       :title="item.videoTitle"
       :username="item.videoChannel"
       :usersrc="item.videoChannelImg"
-      class="white mb-3"
+      class="white mb-4"
       @click="$router.push({ path: `/watch/${item.videoId}` })"
     />
   </div>
