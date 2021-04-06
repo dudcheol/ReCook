@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import com.web.project.model.review.Review;
 
@@ -16,7 +17,8 @@ public interface ReviewDao extends JpaRepository<Review, String> {
 	
 	public List<Review> findAllByUserId(String userId);
 
-//	public List<Review> findAllByRecipeId(int recipeId);
+	@Query(value = "SELECT * FROM review WHERE recipe_id = :recipeId AND review_image is not null", nativeQuery = true)
+	public List<Review> findAllByRecipeId(@Param("recipeId")int recipeId);
 	
 	public Page<Review> findAllByOrderByReviewIdDesc(Pageable pageable);
 	

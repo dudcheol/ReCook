@@ -22,6 +22,6 @@ public interface ReviewService {
 	
 	public ResponseEntity<List<Review>> findByUser(String userName);
 	
-	public ResponseEntity<List<Review>> findByRecipe(int recipeSubId);
+	public ResponseEntity<List<Review>> findByRecipe(int recipeId);
 	
 }
