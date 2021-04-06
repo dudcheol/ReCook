@@ -42,17 +42,39 @@
           />
         </div>
         <div v-else class="d-flex flex-column justify-center align-center">
-          <VueLottiePlayer
-            name="survey"
-            loop
-            height="100%"
-            width="200px"
-            path="https://assets7.lottiefiles.com/packages/lf20_fefIZO.json"
-          />
-          <span class="caption-1 font-weight-regular grey--text text--darken-1"
-            >현재 레시피와 <span class="font-weight-black dahong--text">관련된 추천 레시피</span>를
-            불러오고 있어요</span
+          <div
+            v-if="$store.state.user.user.userId"
+            class="d-flex flex-column justify-center align-center"
           >
+            <VueLottiePlayer
+              name="survey"
+              loop
+              height="100%"
+              width="200px"
+              path="https://assets7.lottiefiles.com/packages/lf20_fefIZO.json"
+            />
+            <span class="caption-1 font-weight-regular grey--text text--darken-1 pt-4 text-center"
+              ><strong class="black--text">{{
+                recipeInfo['recipe-title'] | truncate(14, '..')
+              }}</strong
+              >와 관련된<br />회원님만을 위한<span class="font-weight-black dahong--text">
+                추천 레시피</span
+              >를 불러오고 있어요</span
+            >
+          </div>
+          <div v-else class="py-0 px-4 mt-8">
+            <v-sheet
+              rounded="xl"
+              class="pa-4 text-center caption-1 grey--text"
+              @click="$router.push({ path: '/login' })"
+              ><strong class="black--text">{{
+                recipeInfo['recipe-title'] | truncate(14, '..')
+              }}</strong
+              >와 관련된<br />
+              레시피를 추천받고 싶다면 <span class="dahong--text"><u>로그인</u></span
+              >해주세요</v-sheet
+            >
+          </div>
         </div>
       </v-col>
     </v-row>

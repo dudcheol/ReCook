@@ -71,4 +71,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style>
+.theme--light.v-btn.v-btn--disabled.v-btn--has-bg {
+  background-color: gainsboro !important;
+}
+</style>

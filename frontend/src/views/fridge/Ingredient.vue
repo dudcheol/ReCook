@@ -81,14 +81,14 @@
         :style="{ maxHeight: windowHeight + 'px', overflow: 'auto', paddingBottom: 200 + 'px' }"
         class="px-0"
       >
-        <v-list class="pa-0">
+        <v-list class="pa-0" flat>
           <v-list-group
             v-for="item in middleList"
             :key="'mid' + item.midId"
             color="yellow"
             :ripple="false"
             @click="GET_SMALL_LIST(item.midId)"
-            class="font-weight-black"
+            class="font-weight-black grey lighten-4"
           >
             <template v-slot:activator>
               <v-list-item-title>{{ item.middleName }}</v-list-item-title>
@@ -98,6 +98,7 @@
               :key="'small' + item.smallId"
               link
               @click="ADD_INGREDIENT_ITEM(item)"
+              class="white"
             >
               <v-list-item-content>
                 <v-list-item-title
