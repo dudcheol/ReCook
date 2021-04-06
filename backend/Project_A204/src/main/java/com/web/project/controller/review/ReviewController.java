@@ -64,10 +64,10 @@ public class ReviewController {
 		return reviewService.findByUser(userName);
 	}
 	
-	@ApiOperation(value = "레시피 SUB ID로 리뷰 조회", notes = "레시피 SUB ID에 맞는 리뷰를 조회합니다.")
-	@GetMapping("/recipe/{recipeSubId}")
-	public ResponseEntity<List<Review>> findByRecipe(@PathVariable("recipeSubId") int recipeSubId) {
-		return reviewService.findByRecipe(recipeSubId);
+	@ApiOperation(value = "레시피 ID로 리뷰 조회", notes = "레시피 ID에 맞는 리뷰를 조회합니다.")
+	@GetMapping("/recipe/{recipeId}")
+	public ResponseEntity<List<Review>> findByRecipe(@PathVariable("recipeId") int recipeId) {
+		return reviewService.findByRecipe(recipeId);
 	}
 	
 }

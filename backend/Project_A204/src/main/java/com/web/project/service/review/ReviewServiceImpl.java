@@ -160,9 +160,9 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public ResponseEntity<List<Review>> findByRecipe(int recipeSubId) {
+	public ResponseEntity<List<Review>> findByRecipe(int recipeId) {
 		HttpStatus status = null;
-		List<Review> reviewList = reviewDao.findAllByRecipeSubId(recipeSubId);
+		List<Review> reviewList = reviewDao.findAllByRecipeId(recipeId);
 		
 		try {
 			if(reviewList != null) {
