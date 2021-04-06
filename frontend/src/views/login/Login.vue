@@ -5,8 +5,8 @@
         <v-row>
           <v-col>
             <div class="pl-3">
-              <span class="h2"
-                ><strong>로그인</strong>이<br />
+              <span class="h2 font-weight-thin"
+                ><span class="font-weight-black">로그인</span>이<br />
                 필요한<br />
                 서비스입니다</span
               >
@@ -59,6 +59,7 @@ export default {
   data() {
     return {
       prevRoute: null,
+      windowWidth: 0,
     };
   },
   computed: {},
@@ -89,11 +90,10 @@ export default {
         });
     },
   },
-  // beforeRouteEnter(to, from, next) {
-  //   next((vm) => {
-  //     vm.prevRoute = to;
-  //   });
-  // },
+  mounted() {
+    this.windowWidth = window.innerWidth;
+    console.log('%cLogin.vue line:95 window.innerHeight', 'color: #007acc;', this.windowWidth);
+  },
 };
 </script>
 

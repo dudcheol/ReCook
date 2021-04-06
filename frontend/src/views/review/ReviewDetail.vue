@@ -1,12 +1,17 @@
 <template>
-  <v-container>
+  <v-container class="pt-14 white">
     <v-row>
       <v-col>
         <ProfileSimpleItem
           v-if="info.review || false"
           :username="info.review.user.userName"
           :src="info.review.user.userImage"
-          @click="$router.push({ path: `/user/${info.review.user.userName}` })"
+          @click="
+            $router.push({
+              path: `/user/${info.review.user.userName}`,
+              query: { user: info.review.user },
+            })
+          "
         />
       </v-col>
     </v-row>
@@ -22,13 +27,13 @@
           :title="info.recipeTitle"
           :rating="info.recipeRating"
           :src="info.recipeImage"
-          @click="$router.push({ path: `/recipe/${info.review.recipeSubId}` })"
+          @click="$router.push({ path: `/recipe/${info.review.recipeId}` })"
         />
       </v-col>
     </v-row>
     <v-divider class="my-3"></v-divider>
     <v-row>
-      <v-col class="text-body-1 font-weight-regular">
+      <v-col class="font-weight-regular">
         {{ info.review ? info.review.reviewContext : '' }}
       </v-col>
     </v-row>

@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <v-app>
-      <router-view class="fill-height"></router-view>
+      <transition name="slide">
+        <router-view class="fill-height"></router-view>
+      </transition>
     </v-app>
   </div>
 </template>
@@ -16,28 +18,37 @@ export default {
 <style>
 * {
   font-family: 'Spoqa Han Sans Neo', 'sans-serif' !important;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
 }
 
 .h1 {
   font-weight: 300;
   font-size: 6rem;
   letter-spacing: -0.015625em;
+  line-height: 1.1;
 }
 .h2 {
   font-weight: 300;
   font-size: 3.75rem;
   letter-spacing: -0.05em;
-  line-height: 1;
+  line-height: 1.1;
 }
 .h3 {
   font-weight: 400;
   font-size: 3rem;
   letter-spacing: normal;
+  line-height: 1.1;
 }
 .h4 {
   font-weight: 400;
   font-size: 2.125rem;
   letter-spacing: -0.0073529412em;
+  line-height: 1.1;
 }
 .h5 {
   font-weight: 400;
@@ -67,7 +78,6 @@ export default {
 .pointer {
   cursor: pointer;
 }
-
 .bg-color {
   background-color: #f8f9fb;
 }

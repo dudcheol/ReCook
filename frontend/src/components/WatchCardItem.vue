@@ -5,10 +5,9 @@
       <div class="subtitle-1 font-weight-medium pt-2">{{ title | truncate(10, '..') }}</div>
       <ProfileSimpleItem
         :username="username || ''"
-        :src="'mdi-information-outline'"
+        :src="usersrc || 'mdi-account'"
         :iconSize="24"
-        :fontSize="14"
-        icon
+        :fontSize="12"
       />
     </div>
   </div>

@@ -1,5 +1,8 @@
 <template>
-  <div class="d-flex align-center" @click="$emit('click')">
+  <div
+    class="d-flex align-center"
+    @click="$store.state.user.user.userName === username ? '' : $emit('click')"
+  >
     <div>
       <v-avatar :size="iconSize || 36">
         <v-img v-if="!icon" :src="src" /> <v-icon v-else>{{ src }}</v-icon>
@@ -8,14 +11,13 @@
         username
       }}</span>
     </div>
-    <div
+    <v-avatar
       v-if="$store.state.user.user.userName === username"
-      class="d-flex align-center justify-center ml-auto"
+      class="d-flex align-center justify-center ml-auto rounded-circle dahong white--text caption pa-1 font-weight-medium"
+      size="24"
     >
-      <v-btn text x-small class="px-1 caption-1">
-        프로필 수정
-      </v-btn>
-    </div>
+      ME
+    </v-avatar>
   </div>
 </template>
 

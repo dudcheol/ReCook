@@ -3,12 +3,18 @@ import { createInstance } from './index.js';
 const instance = createInstance();
 const COMMON = 'video';
 
-// 여기에 코드 작성
 async function getVideoById(video_id, success, fail) {
-    await instance
-      .get(`${COMMON}/detail/${video_id}`)
-      .then(success)
-      .catch(fail);
-  }
+  await instance
+    .get(`${COMMON}/detail/${video_id}`)
+    .then(success)
+    .catch(fail);
+}
 
-export { getVideoById };
+function getVideoList(page, size, success, fail) {
+  instance
+    .get(`${COMMON}/all`, { params: { page, size } })
+    .then(success)
+    .catch(fail);
+}
+
+export { getVideoById, getVideoList };

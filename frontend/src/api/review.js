@@ -12,14 +12,14 @@ function getReviewById(reviewId, success, fail) {
 
 function getAllReviews(page, size, success, fail) {
   instance
-    .get(`${COMMON}/all`, { params: { page, size } })
+    .get(`${COMMON}/all/image`, { params: { page, size } })
     .then(success)
     .catch(fail);
 }
 
-function writeReview(recipeId, reviewContext, reviewImage, reviewRating, userId, success, fail) {
+function writeReview(formData, success, fail) {
   instance
-    .post(`${COMMON}/create`, { recipeId, reviewContext, reviewImage, reviewRating, userId })
+    .post(`${COMMON}/create`, formData)
     .then(success)
     .catch(fail);
 }

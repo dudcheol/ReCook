@@ -4,15 +4,10 @@
       <v-col cols="12">
         <ProfileSimpleItem :username="user.userName || ''" :src="user.userImage || ''" />
       </v-col>
-      <v-col
-        cols="12"
-        class="pa-1 grey lighten-4 text-center caption-1 white--text font-weight-medium"
-      >
-      </v-col>
     </v-row>
-    <v-row class="pt-14 pb-4" no-gutters>
+    <v-row class="py-13 my-14" no-gutters>
       <v-col>
-        <WatchCardItem
+        <!-- <WatchCardItem
           v-for="item in likeRecipeList"
           :key="'likelist' + item.recipeId"
           :src="item.recipeMainImage"
@@ -20,14 +15,23 @@
           :username="item.recipeTime"
           :usersrc="'mdi-information-outline'"
           @click="$router.push(`/recipe/${item.recipeId}`)"
-        />
+        /> -->
+        <recipe-recomm-card-item
+          v-for="item in likeRecipeList"
+          :key="'likelist' + item.recipeId"
+          :data="item"
+          @click="$router.push(`/recipe/${item.recipeId}`)"
+          class="mb-4"
+        ></recipe-recomm-card-item>
       </v-col>
     </v-row>
     <infinite-loading @infinite="infiniteHandler">
       <div slot="spinner">
         <v-skeleton-loader class="mx-auto px-4" max-width="100%" type="card"></v-skeleton-loader>
       </div>
-      <div slot="no-results"></div>
+      <div slot="no-results">
+        <message-empty :width="200" :text="'찜한 레시피가 없어요'"></message-empty>
+      </div>
       <div slot="no-more"></div>
       <div slot="error"></div>
     </infinite-loading>
@@ -35,12 +39,16 @@
 </template>
 <script>
 import ProfileSimpleItem from '@/components/ProfileSimpleItem.vue';
-import WatchCardItem from '@/components/WatchCardItem';
+// import WatchCardItem from '@/components/WatchCardItem';
 import { getLikeListByUserId } from '@/api/user';
+import MessageEmpty from '@/components/common/MessageEmpty.vue';
+import RecipeRecommCardItem from '@/components/RecipeRecommCardItem.vue';
 export default {
   components: {
     ProfileSimpleItem,
-    WatchCardItem,
+    // WatchCardItem,
+    MessageEmpty,
+    RecipeRecommCardItem,
   },
   props: {
     user: Object,
@@ -62,8 +70,6 @@ export default {
         this.size,
         (response) => {
           const data = response.data;
-
-          console.log('%cUserLike.vue line:53 response.data', 'color: #007acc;', response.data);
 
           if (data.length) {
             this.page += 1;
