@@ -2,11 +2,11 @@
   <div class="d-flex flex-wrap align-center justify-center fill-height">
     <div>
       <div>
-        <div class="d-flex align-center pa-3">
-          <v-avatar size="48">
+        <div class="d-flex align-center pa-3 white">
+          <v-avatar size="36">
             <img :src="videoInfo.videoChannelImg" />
           </v-avatar>
-          <span class="pl-2 h6">{{ videoInfo.videoChannel }}</span>
+          <span class="pl-2 subtitle-1">{{ videoInfo.videoChannel }}</span>
         </div>
       </div>
       <youtube
@@ -15,7 +15,9 @@
         @ready="ready"
         @playing="playing"
       />
-      <div class="pa-3 subtitle-1">{{ videoInfo.videoTitle }}</div>
+      <div class="py-3 px-4 subtitle-1 white rounded-xl black--text ma-3 h6 font-weight-medium">
+        {{ videoInfo.videoTitle }}
+      </div>
     </div>
   </div>
 </template>
