@@ -2,16 +2,25 @@
   <v-container fluid class="pb-10 my-14">
     <v-row>
       <v-col class="pa-0">
-        <div class="banner">banner area</div>
+        <swiper ref="swiper" class="swiper" :options="swiperOption">
+          <swiper-slide v-for="(item, index) in 3" :key="'banner' + index">
+            <v-img
+              :src="`http://j4a204.p.ssafy.io/img/banner/banner${index + 1}.png`"
+              max-height="210"
+              min-height="210"
+            ></v-img>
+          </swiper-slide>
+          <div class="swiper-pagination" slot="pagination"></div>
+        </swiper>
       </v-col>
     </v-row>
     <!-- 추천 레시피 -->
-    <v-row class="mb-2 py-2 white">
+    <v-row class="mb-2 py-4 white">
       <v-col>
         <v-row>
           <v-col class="d-flex justify-space-between align-center pb-5">
-            <span class="h6 font-weight-regular"
-              ><span class="pa-1 dahong white--text rounded-lg font-weight-black">{{
+            <span class="h6 font-weight-regular d-flex align-center"
+              ><span class="px-1 dahong white--text rounded-lg font-weight-black mr-1">{{
                 isLogin ? `${$store.state.user.user.userName}` : '추천'
               }}</span>
               {{ isLogin ? '님을 위한' : '' }} 레시피</span
@@ -61,11 +70,15 @@
     </v-row>
 
     <!-- 인기 레시피 -->
-    <v-row class="pb-2 mb-2 white">
+    <v-row class="pt-2 pb-4 mb-2 white">
       <v-col>
         <v-row>
           <v-col class="d-flex justify-space-between align-center">
-            <span class="h6 font-weight-regular"><strong>인기</strong> 레시피</span>
+            <span class="h6 font-weight-regular d-flex align-center"
+              ><v-avatar color="red lighten-5" size="32" class="mr-1"
+                ><v-icon color="dahong">mdi-fire</v-icon></v-avatar
+              ><strong>인기</strong> 레시피</span
+            >
             <v-btn icon small class="pa-1" @click="$router.push({ path: `recipe/list/popular` })"
               ><v-icon>mdi-chevron-right</v-icon></v-btn
             >
@@ -80,11 +93,15 @@
     </v-row>
 
     <!-- 최신 레시피 -->
-    <v-row class="pb-2 white">
+    <v-row class="pt-2 pb-4 white">
       <v-col>
         <v-row>
           <v-col class="d-flex justify-space-between align-center">
-            <span class="h6 font-weight-regular"><strong>최신</strong> 레시피</span>
+            <span class="h6 font-weight-regular d-flex align-center"
+              ><v-avatar color="amber lighten-5" size="32" class="mr-1"
+                ><v-icon color="yellow">mdi-new-box</v-icon></v-avatar
+              ><strong>최신</strong> 레시피</span
+            >
             <v-btn icon small class="pa-1" @click="$router.push({ path: `recipe/list/recent` })"
               ><v-icon>mdi-chevron-right</v-icon></v-btn
             >
@@ -101,15 +118,28 @@
 </template>
 
 <script>
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
 import RecipeCardList from '@/components/RecipeCardList.vue';
 import VueLottiePlayer from 'vue-lottie-player';
 import { mapActions, mapState } from 'vuex';
 export default {
-  components: { VueLottiePlayer, RecipeCardList },
+  components: { VueLottiePlayer, RecipeCardList, Swiper, SwiperSlide },
   props: {},
   data() {
     return {
       isLogin: false,
+      swiperOption: {
+        observer: true,
+        observeParents: true,
+        autoHeight: false,
+        slidesPerView: 1,
+        spaceBetween: 0,
+        pagination: { el: '.swiper-pagination', clickable: true },
+        autoplay: {
+          delay: 5000,
+        },
+        loop: true,
+      },
     };
   },
   computed: {
@@ -142,13 +172,8 @@ export default {
 };
 </script>
 
-<style scoped>
-.banner {
-  height: 128px;
-  background-color: lightgrey;
-}
-.recipe-box {
-  height: 196px;
-  background-color: lightgrey;
+<style>
+:root {
+  --swiper-theme-color: white;
 }
 </style>
