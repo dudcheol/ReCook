@@ -3,7 +3,6 @@ from django.db import models
 from django.db import connection
 from pandas import Series, DataFrame
 
-
 def review_test():
     review = Review.objects.all()
 
