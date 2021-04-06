@@ -24,4 +24,11 @@ function getSmallList(midId, success, fail) {
     .catch(fail);
 }
 
-export { getBigList, getMiddleList, getSmallList };
+async function getUserAllergyIngredients(userId, success, fail) {
+  await instance
+    .get(`${COMMON}/allergy/${userId}`)
+    .then(success)
+    .catch(fail);
+}
+
+export { getBigList, getMiddleList, getSmallList, getUserAllergyIngredients };

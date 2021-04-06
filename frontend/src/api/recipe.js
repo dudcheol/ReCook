@@ -63,6 +63,13 @@ function getRecommRecipeByIngredients(ingredientList, userId, allergy, success, 
     .catch(fail);
 }
 
+function getIngredientsInRecipe(recipeId, success, fail) {
+  instance
+    .get(`${COMMON}/ingredients/${recipeId}`)
+    .then(success)
+    .catch(fail);
+}
+
 export {
   getRecipeById,
   getRecipeNewList,
@@ -72,4 +79,5 @@ export {
   getRecommRecipeListByUser,
   getRecommRecipeByRecipeTitle,
   getRecommRecipeByIngredients,
+  getIngredientsInRecipe,
 };
