@@ -36,13 +36,13 @@ public class ReviewController {
 	
 	@ApiOperation(value = "모든 리뷰 조회", notes = "모든 리뷰를 최신순으로 조회합니다.")
 	@GetMapping("/all")
-	public ResponseEntity<Page<Review>> findAll(Pageable pageable) {
+	public ResponseEntity<List<Map<String, Object>>> findAll(Pageable pageable) {
 		return reviewService.findAll(pageable);
 	}
 	
 	@ApiOperation(value = "모든 리뷰 중 사진 있는 것만 조회", notes = "모든 리뷰 중 사진 있는 것만 최신순으로 조회합니다.")
 	@GetMapping("/all/image")
-	public ResponseEntity<Page<Review>> findAllImage(Pageable pageable) {
+	public ResponseEntity<List<Map<String, Object>>> findAllImage(Pageable pageable) {
 		return reviewService.findAllImage(pageable);
 	}
 	
