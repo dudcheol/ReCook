@@ -77,6 +77,11 @@ const routes = [
         name: 'Main#Search',
         component: () => import('@/views/index/Search'),
       },
+      {
+        path: 'fridge/recomm',
+        name: 'Fridge',
+        component: () => import('@/views/fridge/Recommend'),
+      },
     ],
   },
   {
@@ -88,11 +93,6 @@ const routes = [
         path: 'fridge/ingredient',
         name: 'FridgeIngredient',
         component: () => import('@/views/fridge/Ingredient'),
-      },
-      {
-        path: 'fridge/recomm',
-        name: 'FridgeRecomm',
-        component: () => import('@/views/fridge/Recommend'),
       },
       {
         path: 'recipe/:recipe_id',

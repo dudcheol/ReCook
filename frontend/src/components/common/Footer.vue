@@ -8,7 +8,12 @@
       <v-icon>mdi-view-dashboard</v-icon>
     </v-btn>
 
-    <v-btn class="bottom-btn" value="Fridge" x-large @click="sheet = !sheet">
+    <v-btn
+      class="bottom-btn"
+      value="Fridge"
+      x-large
+      @click="$router.push({ name: 'FridgeIngredient' })"
+    >
       <v-img
         src="http://j4a204.p.ssafy.io/img/logo/RECOOK_logo.png"
         style="position:absolute"
@@ -25,29 +30,6 @@
     <v-btn class="bottom-btn" value="Mypage">
       <v-icon>mdi-account</v-icon>
     </v-btn>
-
-    <v-bottom-sheet v-model="sheet">
-      <v-card class="rounded-t-xl pa-1">
-        <v-list>
-          <v-subheader>
-            <span class="h5 font-weight-black black--text">나의 냉장고</span>
-          </v-subheader>
-          <v-list-item v-for="tile in tiles" :key="tile.title" @click="sheet = false">
-            <!-- <v-list-item-avatar>
-              <v-avatar size="32px" tile>
-                <img
-                  :src="`https://cdn.vuetifyjs.com/images/bottom-sheets/${tile.img}`"
-                  :alt="tile.title"
-                />
-              </v-avatar>
-            </v-list-item-avatar> -->
-            <v-list-item-title class="pl-3" @click="$router.push({ name: tile.type })">{{
-              tile.title
-            }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-card>
-    </v-bottom-sheet>
   </v-bottom-navigation>
 </template>
 
@@ -57,21 +39,7 @@ export default {
   components: {},
   props: {},
   data() {
-    return {
-      sheet: false,
-      tiles: [
-        {
-          // img: 'messenger.png',
-          title: '재료 선택',
-          type: 'FridgeIngredient',
-        },
-        {
-          // img: 'google.png',
-          title: '선택한 재료로 레시피 추천받기',
-          type: 'FridgeRecomm',
-        },
-      ],
-    };
+    return {};
   },
   computed: {
     ...mapState({
@@ -84,6 +52,7 @@ export default {
       },
       set(value) {
         if (value === 'Fridge') {
+          this.$router.push({ name: 'FridgeIngredient' }).catch(() => {});
           return;
         }
         this.$router.replace({ name: value }).catch(() => {});

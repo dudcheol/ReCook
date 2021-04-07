@@ -42,6 +42,8 @@ export default {
         case 'Feed':
           if (split[1]) return HeaderBack;
           return HeaderFeed;
+        case 'Fridge':
+          return null;
         case 'Watch':
           return HeaderWatch;
         case 'Mypage':

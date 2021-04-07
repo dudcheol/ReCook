@@ -1,9 +1,13 @@
 <template>
   <div style="height:100%" class="grey lighten-4">
-    <v-container fluid class="white rounded-b-xl elevation-24" style="position:fixed; z-index:1">
+    <v-container
+      fluid
+      class="white rounded-b-xl elevation-24 pt-6"
+      style="position:fixed; z-index:1"
+    >
       <v-row>
         <v-col cols="12" class="d-flex align-center justify-space-between pt-1 pb-2">
-          <span class="h5 font-weight-black pl-2">나의 냉장고</span>
+          <span class="h5 font-weight-black">나의 냉장고</span>
           <v-checkbox
             class="px-0 ma-0"
             color="dahong"
@@ -13,7 +17,7 @@
             hide-details
           ></v-checkbox>
         </v-col>
-        <v-col cols="12" class="pb-3 pt-0">
+        <v-col cols="12" class="pb-3 pt-1">
           <v-row>
             <v-col cols="10" class="pb-2 pt-1">
               <v-chip-group :column="isExpanded">
@@ -21,9 +25,11 @@
                   v-for="item in $store.state.user.selectedIngredients"
                   :key="'ingredients' + item.smallId"
                   color="yellow"
-                  class="pt-1"
                 >
                   {{ item.smallName }}
+                </v-chip>
+                <v-chip v-if="$store.state.user.selectedIngredients.length === 0" disabled>
+                  선택된 재료가 없습니다
                 </v-chip>
               </v-chip-group>
             </v-col>
@@ -36,7 +42,11 @@
         </v-col>
       </v-row>
     </v-container>
-    <div class="pt-10 mt-14 px-4 pb-4" v-if="$store.state.recipe.recipeRecomm.length">
+    <div
+      class="px-4 pb-2 mb-16"
+      v-if="$store.state.recipe.recipeRecomm.length"
+      style="paddingTop:108px"
+    >
       <RecipeRecommCardItem
         v-for="item in $store.state.recipe.recipeRecomm"
         :key="item.recipeId"
