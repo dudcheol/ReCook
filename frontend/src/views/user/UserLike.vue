@@ -1,19 +1,26 @@
 <template>
-  <div>
-    <v-container fluid>
-      <v-row class="header-profile white pt-14">
-        <v-col cols="12">
-          <ProfileSimpleItem :username="user.userName || ''" :src="user.userImage || ''" />
-        </v-col>
-      </v-row>
-      <v-row class="py-13 mt-14 mb-4" no-gutters>
-        <v-col>
-          <div>
-            <RecipeRecommCardList :datas="likeRecipeList" />
-          </div>
-        </v-col>
-      </v-row>
-    </v-container>
+  <v-container fluid>
+    <v-row class="header-profile white pt-14">
+      <v-col cols="12">
+        <ProfileSimpleItem :username="user.userName || ''" :src="user.userImage || ''" />
+      </v-col>
+    </v-row>
+    <!-- <v-container fluid v-if="likeRecipeList.length"> -->
+    <v-row class="py-13 mt-14 mb-4" no-gutters v-if="likeRecipeList.length">
+      <v-col>
+        <div>
+          <RecipeRecommCardList :datas="likeRecipeList" />
+        </div>
+      </v-col>
+    </v-row>
+    <!-- </v-container> -->
+    <!-- <v-container fill-height v-else> -->
+    <v-row class="fill-height" style="height:100vh" v-else>
+      <v-col class="d-flex align-center justify-center">
+        <message-empty :width="200" :text="'찜한 레시피가 없어요'"></message-empty>
+      </v-col>
+    </v-row>
+    <!-- </v-container> -->
     <infinite-loading ref="InfiniteLoading" @infinite="infiniteHandler">
       <div slot="spinner" class="">
         <loading-cheers
@@ -22,13 +29,11 @@
           class="white rounded-circle mx-auto"
         ></loading-cheers>
       </div>
-      <div slot="no-results">
-        <message-empty :width="200" :text="'찜한 레시피가 없어요'"></message-empty>
-      </div>
+      <div slot="no-results"></div>
       <div slot="no-more"></div>
       <div slot="error"></div>
     </infinite-loading>
-  </div>
+  </v-container>
 </template>
 <script>
 import ProfileSimpleItem from '@/components/ProfileSimpleItem.vue';
@@ -64,6 +69,7 @@ export default {
         this.size,
         (response) => {
           const data = response.data;
+          console.log('%cUserLike.vue line:72 data', 'color: #007acc;', data);
           if (data.length) {
             this.page += 1;
             this.likeRecipeList.push(...data);

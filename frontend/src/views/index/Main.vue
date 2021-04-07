@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="pb-10 my-14">
+  <v-container fluid class="pb-16 mt-14">
     <v-row>
       <v-col class="pa-0">
         <swiper ref="swiper" class="swiper" :options="swiperOption">

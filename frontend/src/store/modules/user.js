@@ -24,7 +24,11 @@ const state = () => ({
 });
 
 // getters
-const getters = {};
+const getters = {
+  hasAllergy(state) {
+    return state.selectedSurveyAllergyIdx.length !== 0;
+  },
+};
 
 // actions
 const actions = {
