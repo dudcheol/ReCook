@@ -72,6 +72,11 @@ const routes = [
         name: 'Feed#Detail',
         component: () => import('@/views/review/ReviewDetail'),
       },
+      {
+        path: 'search',
+        name: 'Main#Search',
+        component: () => import('@/views/index/Search'),
+      },
     ],
   },
   {
@@ -141,13 +146,6 @@ const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes,
-  // scrollBehavior(to, from, savedPosition) {
-  //   if (savedPosition) {
-  //     return savedPosition;
-  //   } else {
-  //     return { x: 0, y: 0 };
-  //   }
-  // },
 });
 
 export default router;

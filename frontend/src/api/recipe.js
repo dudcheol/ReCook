@@ -70,6 +70,13 @@ function getIngredientsInRecipe(recipeId, success, fail) {
     .catch(fail);
 }
 
+function getRecipeByTitle(title, page, size, success, fail) {
+  instance
+    .get(`${COMMON}/recipe/title/${title}`, { params: { page, size } })
+    .then(success)
+    .catch(fail);
+}
+
 export {
   getRecipeById,
   getRecipeNewList,
@@ -80,4 +87,5 @@ export {
   getRecommRecipeByRecipeTitle,
   getRecommRecipeByIngredients,
   getIngredientsInRecipe,
+  getRecipeByTitle,
 };

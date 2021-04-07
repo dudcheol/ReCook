@@ -1,7 +1,7 @@
 <template>
   <div class="grey lighten-4">
     <Header />
-    <keep-alive include="Watch,UserLike,Feed">
+    <keep-alive include="Watch,UserLike,Feed,Search">
       <router-view></router-view>
     </keep-alive>
     <Footer />

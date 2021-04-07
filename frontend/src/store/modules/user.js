@@ -19,6 +19,7 @@ const state = () => ({
   selectedBigIdx: 0,
   selectedSurveyFoodIdx: [],
   selectedSurveyAllergyIdx: [],
+  searchTitle: '',
 });
 
 // getters
@@ -132,6 +133,9 @@ const mutations = {
   },
   setUserAllergyIngredients(state, payload) {
     state.user.allergyList = payload;
+  },
+  setSearchTitle(state, payload) {
+    state.searchTitle = payload;
   },
 };
 
