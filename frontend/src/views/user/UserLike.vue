@@ -1,30 +1,19 @@
 <template>
-  <v-container fluid>
-    <v-row class="header-profile white pt-14">
-      <v-col cols="12">
-        <ProfileSimpleItem :username="user.userName || ''" :src="user.userImage || ''" />
-      </v-col>
-    </v-row>
-    <v-row class="py-13 my-14" no-gutters>
-      <v-col>
-        <!-- <WatchCardItem
-          v-for="item in likeRecipeList"
-          :key="'likelist' + item.recipeId"
-          :src="item.recipeMainImage"
-          :title="item.recipeTitle"
-          :username="item.recipeTime"
-          :usersrc="'mdi-information-outline'"
-          @click="$router.push(`/recipe/${item.recipeId}`)"
-        /> -->
-        <recipe-recomm-card-item
-          v-for="item in likeRecipeList"
-          :key="'likelist' + item.recipeId"
-          :data="item"
-          @click="$router.push(`/recipe/${item.recipeId}`)"
-          class="mb-4"
-        ></recipe-recomm-card-item>
-      </v-col>
-    </v-row>
+  <div>
+    <v-container fluid>
+      <v-row class="header-profile white pt-14">
+        <v-col cols="12">
+          <ProfileSimpleItem :username="user.userName || ''" :src="user.userImage || ''" />
+        </v-col>
+      </v-row>
+      <v-row class="py-13 mt-14 mb-4" no-gutters>
+        <v-col>
+          <div>
+            <RecipeRecommCardList :datas="likeRecipeList" />
+          </div>
+        </v-col>
+      </v-row>
+    </v-container>
     <infinite-loading ref="InfiniteLoading" @infinite="infiniteHandler">
       <div slot="spinner" class="">
         <loading-cheers
@@ -39,22 +28,21 @@
       <div slot="no-more"></div>
       <div slot="error"></div>
     </infinite-loading>
-  </v-container>
+  </div>
 </template>
 <script>
 import ProfileSimpleItem from '@/components/ProfileSimpleItem.vue';
-// import WatchCardItem from '@/components/WatchCardItem';
 import { getLikeListByUserId } from '@/api/user';
 import MessageEmpty from '@/components/common/MessageEmpty.vue';
-import RecipeRecommCardItem from '@/components/RecipeRecommCardItem.vue';
 import LoadingCheers from '@/components/common/LoadingCheers.vue';
+import RecipeRecommCardList from '@/components/RecipeRecommCardList.vue';
 export default {
+  name: 'UserLike',
   components: {
     ProfileSimpleItem,
-    // WatchCardItem,
     MessageEmpty,
-    RecipeRecommCardItem,
     LoadingCheers,
+    RecipeRecommCardList,
   },
   props: {
     user: Object,
@@ -62,7 +50,7 @@ export default {
   data() {
     return {
       page: 0,
-      size: 5,
+      size: 10,
       likeRecipeList: [],
     };
   },
@@ -75,9 +63,7 @@ export default {
         this.page,
         this.size,
         (response) => {
-          console.log('%cUserLike.vue line:72 response.data', 'color: #007acc;', response.data);
           const data = response.data;
-
           if (data.length) {
             this.page += 1;
             this.likeRecipeList.push(...data);
@@ -86,18 +72,13 @@ export default {
             $state.complete();
           }
         },
-        (error) => {
-          console.log('%cUserLike.vue line:61 error', 'color: #007acc;', error);
+        () => {
+          $state.error();
         }
       );
     },
   },
-  created() {
-    // console.log('%cUserLike.vue line:107 ', 'color: #007acc;');
-    // if (this.$refs.InfiniteLoading) {
-    //   this.$refs.InfiniteLoading.stateChanger.reset();
-    // }
-  },
+  created() {},
   mounted() {},
 };
 </script>

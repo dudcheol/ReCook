@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <v-app>
-      <transition name="slide">
-        <router-view class="fill-height"></router-view>
-      </transition>
+      <router-view class="fill-height"></router-view>
     </v-app>
   </div>
 </template>

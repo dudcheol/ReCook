@@ -9,10 +9,13 @@
     </v-btn>
 
     <v-btn class="bottom-btn" value="Fridge" x-large @click="sheet = !sheet">
-      <!-- <v-icon large>mdi-fridge-outline</v-icon> -->
-      <v-avatar size="110" style="position:absolute" class="pb-8"
-        ><v-img src="http://j4a204.p.ssafy.io/img/logo/RECOOK_logo.png"></v-img
-      ></v-avatar>
+      <v-img
+        src="http://j4a204.p.ssafy.io/img/logo/RECOOK_logo.png"
+        style="position:absolute"
+        max-width="72"
+        contain
+        class="mb-8"
+      ></v-img>
     </v-btn>
 
     <v-btn class="bottom-btn" value="Watch">
