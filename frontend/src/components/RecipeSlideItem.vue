@@ -37,7 +37,7 @@ export default {
       more: false,
       windowHeight: 0,
       moreBtn:
-        '...<span class="font-weight-bold subtitle-2 grey--text text--darken-1">더 보기</span>',
+        '...<span class="font-weight-bold sub-title-2 grey--text text--darken-1">더 보기</span>',
     };
   },
   computed: {},

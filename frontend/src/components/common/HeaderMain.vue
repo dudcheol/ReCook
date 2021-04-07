@@ -20,7 +20,7 @@
       <!-- <span class="text-uppercase font-weight-black">recook</span> -->
     </v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-btn icon>
+    <v-btn icon @click="$router.replace({ path: 'search' })">
       <v-icon>mdi-magnify</v-icon>
     </v-btn>
   </v-app-bar>

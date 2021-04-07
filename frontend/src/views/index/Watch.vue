@@ -16,6 +16,7 @@
 import WatchCardList from '@/components/WatchCardList.vue';
 import { getVideoList } from '@/api/video';
 export default {
+  name: 'Watch',
   components: { WatchCardList },
   data() {
     return {

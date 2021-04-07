@@ -5,33 +5,31 @@
         <ProfileSimpleItem :username="user.userName || ''" :src="user.userImage || ''" />
       </v-col>
     </v-row>
-    <v-row class="py-13 my-14" no-gutters>
+    <!-- <v-container fluid v-if="likeRecipeList.length"> -->
+    <v-row class="py-13 mt-14 mb-4" no-gutters v-if="likeRecipeList.length">
       <v-col>
-        <!-- <WatchCardItem
-          v-for="item in likeRecipeList"
-          :key="'likelist' + item.recipeId"
-          :src="item.recipeMainImage"
-          :title="item.recipeTitle"
-          :username="item.recipeTime"
-          :usersrc="'mdi-information-outline'"
-          @click="$router.push(`/recipe/${item.recipeId}`)"
-        /> -->
-        <recipe-recomm-card-item
-          v-for="item in likeRecipeList"
-          :key="'likelist' + item.recipeId"
-          :data="item"
-          @click="$router.push(`/recipe/${item.recipeId}`)"
-          class="mb-4"
-        ></recipe-recomm-card-item>
+        <div>
+          <RecipeRecommCardList :datas="likeRecipeList" />
+        </div>
       </v-col>
     </v-row>
-    <infinite-loading @infinite="infiniteHandler">
-      <div slot="spinner">
-        <v-skeleton-loader class="mx-auto px-4" max-width="100%" type="card"></v-skeleton-loader>
-      </div>
-      <div slot="no-results">
+    <!-- </v-container> -->
+    <!-- <v-container fill-height v-else> -->
+    <v-row class="fill-height" style="height:100vh" v-else>
+      <v-col class="d-flex align-center justify-center">
         <message-empty :width="200" :text="'찜한 레시피가 없어요'"></message-empty>
+      </v-col>
+    </v-row>
+    <!-- </v-container> -->
+    <infinite-loading ref="InfiniteLoading" @infinite="infiniteHandler">
+      <div slot="spinner" class="">
+        <loading-cheers
+          :width="150"
+          :height="150"
+          class="white rounded-circle mx-auto"
+        ></loading-cheers>
       </div>
+      <div slot="no-results"></div>
       <div slot="no-more"></div>
       <div slot="error"></div>
     </infinite-loading>
@@ -39,16 +37,17 @@
 </template>
 <script>
 import ProfileSimpleItem from '@/components/ProfileSimpleItem.vue';
-// import WatchCardItem from '@/components/WatchCardItem';
 import { getLikeListByUserId } from '@/api/user';
 import MessageEmpty from '@/components/common/MessageEmpty.vue';
-import RecipeRecommCardItem from '@/components/RecipeRecommCardItem.vue';
+import LoadingCheers from '@/components/common/LoadingCheers.vue';
+import RecipeRecommCardList from '@/components/RecipeRecommCardList.vue';
 export default {
+  name: 'UserLike',
   components: {
     ProfileSimpleItem,
-    // WatchCardItem,
     MessageEmpty,
-    RecipeRecommCardItem,
+    LoadingCheers,
+    RecipeRecommCardList,
   },
   props: {
     user: Object,
@@ -56,7 +55,7 @@ export default {
   data() {
     return {
       page: 0,
-      size: 5,
+      size: 10,
       likeRecipeList: [],
     };
   },
@@ -70,7 +69,7 @@ export default {
         this.size,
         (response) => {
           const data = response.data;
-
+          console.log('%cUserLike.vue line:72 data', 'color: #007acc;', data);
           if (data.length) {
             this.page += 1;
             this.likeRecipeList.push(...data);
@@ -79,12 +78,14 @@ export default {
             $state.complete();
           }
         },
-        (error) => {
-          console.log('%cUserLike.vue line:61 error', 'color: #007acc;', error);
+        () => {
+          $state.error();
         }
       );
     },
   },
+  created() {},
+  mounted() {},
 };
 </script>
 <style scoped>

@@ -1,8 +1,8 @@
 <template>
   <div class="d-flex pl-4" style="overflow:auto">
     <RecipeCardItem
-      v-for="item in datas"
-      :key="item['recipe-id']"
+      v-for="(item, index) in datas"
+      :key="index + 'recipe' + item['recipe-id']"
       :data="item"
       @click="
         $router.push({
@@ -10,6 +10,7 @@
         });
         $emit('click');
       "
+      :elevation="elevation"
     />
     <div v-if="datas.length && !total">
       <v-card
@@ -40,6 +41,7 @@ export default {
     datas: Array,
     type: String,
     total: Boolean,
+    elevation: Boolean,
   },
   data() {
     return {};

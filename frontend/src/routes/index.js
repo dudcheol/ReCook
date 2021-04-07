@@ -72,6 +72,16 @@ const routes = [
         name: 'Feed#Detail',
         component: () => import('@/views/review/ReviewDetail'),
       },
+      {
+        path: 'search',
+        name: 'Main#Search',
+        component: () => import('@/views/index/Search'),
+      },
+      {
+        path: 'fridge/recomm',
+        name: 'Fridge',
+        component: () => import('@/views/fridge/Recommend'),
+      },
     ],
   },
   {
@@ -85,11 +95,6 @@ const routes = [
         component: () => import('@/views/fridge/Ingredient'),
       },
       {
-        path: 'fridge/recomm',
-        name: 'FridgeRecomm',
-        component: () => import('@/views/fridge/Recommend'),
-      },
-      {
         path: 'recipe/:recipe_id',
         name: 'RecipeDetail',
         component: () => import('@/views/recipe/RecipeDetail'),
@@ -97,7 +102,7 @@ const routes = [
       {
         path: 'recipe/list/:type',
         name: 'RecipeList',
-        beforeEnter: requireAuth(),
+        // beforeEnter: requireAuth(),
         component: () => import('@/views/recipe/RecipeList'),
       },
       {
@@ -141,13 +146,6 @@ const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes,
-  // scrollBehavior(to, from, savedPosition) {
-  //   if (savedPosition) {
-  //     return savedPosition;
-  //   } else {
-  //     return { x: 0, y: 0 };
-  //   }
-  // },
 });
 
 export default router;

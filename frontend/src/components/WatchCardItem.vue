@@ -2,12 +2,13 @@
   <div class="pa-4" @click="$emit('click')">
     <v-img min-height="200" max-height="200" :src="src || ''" class="rounded-lg"> </v-img>
     <div class="px-1">
-      <div class="subtitle-1 font-weight-medium pt-2">{{ title | truncate(10, '..') }}</div>
+      <div class="sub-title-2 font-weight-regular pt-2">{{ title }}</div>
       <ProfileSimpleItem
         :username="username || ''"
         :src="usersrc || 'mdi-account'"
         :iconSize="24"
         :fontSize="12"
+        class="pt-1"
       />
     </div>
   </div>

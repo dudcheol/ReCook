@@ -18,7 +18,9 @@
         :color="btnColor"
         :disabled="$route.path == '/survey/food' && !$store.state.user.selectedSurveyFoodIdx.length"
         :class="btnDark ? 'white--text' : 'dahong--text'"
-        >{{ btnText }}</v-btn
+        >{{
+          btnText === 'Allergy' ? (hasAllergy ? '선택 완료' : '알러지가 없습니다') : btnText
+        }}</v-btn
       >
     </div>
     <v-overlay :value="overlay">
@@ -32,7 +34,7 @@
 
 <script>
 import LoadingCheers from '@/components/common/LoadingCheers.vue';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 export default {
   components: { LoadingCheers },
   props: {},
@@ -49,7 +51,9 @@ export default {
       overlay: false,
     };
   },
-  computed: {},
+  computed: {
+    ...mapGetters(['hasAllergy']),
+  },
   watch: {
     '$route.path': {
       immediate: true,
@@ -84,7 +88,7 @@ export default {
             break;
           case '/survey/allergy':
             this.btnStyle = 'chevron-left';
-            this.btnText = '완료';
+            this.btnText = 'Allergy';
             this.btnColor = 'dahong';
             this.bgClass = 'white';
             this.btnDark = true;

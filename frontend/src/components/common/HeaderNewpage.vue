@@ -21,15 +21,15 @@
       </div>
     </div> -->
     <v-row>
-      <v-col cols="3" class="d-flex align-center pa-0">
+      <v-col cols="2" class="d-flex align-center pa-0">
         <v-btn icon @click="$router.go(-1)" color="black">
           <v-icon>mdi-{{ left }}</v-icon>
         </v-btn>
       </v-col>
       <v-col class="d-flex justify-space-around align-center">
-        <span class="font-weight-medium subtitle-1">{{ center }}</span>
+        <span class="font-weight-regular">{{ center }}</span>
       </v-col>
-      <v-col cols="3" class="d-flex align-center justify-end pa-0 mr-1">
+      <v-col cols="2" class="d-flex align-center justify-end pa-0 mr-1">
         <!-- <v-btn v-for="(item, index) in right.split('#')" :key="'nheader' + index" icon>
           <v-icon>mdi-{{ item }}</v-icon>
         </v-btn> -->
@@ -108,12 +108,12 @@ export default {
         switch (value.name) {
           case 'FridgeIngredient':
             this.left = 'close';
-            this.center = '남은 재료 선택';
+            this.center = '재료 선택';
             this.right = '';
             break;
           case 'FridgeRecomm':
             this.left = 'chevron-left';
-            this.center = '남은 재료로 추천받기';
+            this.center = '선택한 재료로 추천받기';
             this.right = '';
             break;
           case 'RecipeDetail':

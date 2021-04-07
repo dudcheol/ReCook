@@ -25,7 +25,7 @@
       <v-col>
         <RecipeSimpleItem
           :title="info.recipeTitle"
-          :rating="info.recipeRating"
+          :rating="(info.review || '').reviewRating"
           :src="info.recipeImage"
           @click="$router.push({ path: `/recipe/${info.review.recipeId}` })"
         />

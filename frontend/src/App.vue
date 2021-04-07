@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <v-app>
-      <transition name="slide">
-        <router-view class="fill-height"></router-view>
-      </transition>
+      <router-view class="fill-height"></router-view>
     </v-app>
   </div>
 </template>
@@ -54,18 +52,19 @@ export default {
   font-weight: 400;
   font-size: 1.5rem;
   letter-spacing: normal;
+  line-height: 1.2;
 }
 .h6 {
   font-weight: 500;
   font-size: 1.25rem;
   letter-spacing: -0.0125em;
 }
-.subtitle-1 {
+.sub-title-1 {
   font-weight: 400;
   font-size: 1.1rem;
   letter-spacing: -0.009375em;
 }
-.subtitle-2 {
+.sub-title-2 {
   font-weight: 500;
   font-size: 0.875rem;
   letter-spacing: -0.0071428571em;

@@ -4,7 +4,7 @@
       <v-btn
         rounded
         depressed
-        class="subtitle-1"
+        class="sub-title-1"
         :color="toggle ? 'dahong' : 'white'"
         :class="toggle ? 'font-weight-black white--text' : 'font-weight-medium'"
         @click="
@@ -16,7 +16,7 @@
       <v-btn
         rounded
         depressed
-        class="subtitle-1"
+        class="sub-title-1"
         :color="!toggle ? 'dahong' : 'white'"
         :class="!toggle ? 'font-weight-black white--text' : 'font-weight-medium'"
         @click="
@@ -31,10 +31,10 @@
     </div>
     <v-dialog v-model="dialog" max-width="290">
       <v-card>
-        <v-card-title class="headline">
-          🥺
+        <v-card-title class="h6">
+          알림
         </v-card-title>
-        <v-card-text>정말 로그아웃하시겠습니까?</v-card-text>
+        <v-card-text class="sub-title-1">정말 로그아웃하시겠습니까?</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="dahong" text @click="dialog = false">
