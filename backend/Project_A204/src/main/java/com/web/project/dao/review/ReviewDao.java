@@ -15,10 +15,11 @@ public interface ReviewDao extends JpaRepository<Review, String> {
 
 	public Review findReviewByReviewId(int reviewId);
 	
-	public List<Review> findAllByUserId(String userId);
+	@Query(value = "SELECT * FROM review WHERE user_id = :userId ORDER BY review_id DESC", nativeQuery = true)
+	public List<Review> findAllByUserId(@Param("userId") String userId);
 
 	@Query(value = "SELECT * FROM review WHERE recipe_id = :recipeId AND review_image is not null", nativeQuery = true)
-	public List<Review> findAllByRecipeId(@Param("recipeId")int recipeId);
+	public List<Review> findAllByRecipeId(@Param("recipeId") int recipeId);
 	
 	public Page<Review> findAllByOrderByReviewIdDesc(Pageable pageable);
 	
