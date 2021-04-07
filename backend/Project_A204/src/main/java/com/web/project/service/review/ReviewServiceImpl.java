@@ -2,7 +2,9 @@ package com.web.project.service.review;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -71,12 +73,26 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 	
 	@Override
-	public ResponseEntity<Page<Review>> findAll(Pageable pageable) {
+	public ResponseEntity<List<Map<String, Object>>> findAll(Pageable pageable) {
+		List<Map<String, Object>> resultList = new ArrayList<Map<String,Object>>();
+		
 		HttpStatus status = null;
 		Page<Review> reviewList = reviewDao.findAllByOrderByReviewIdDesc(pageable);
 		
 		try {
 			if(reviewList != null) {
+				Iterator<Review> iterator = reviewList.iterator();
+				while (iterator.hasNext()) {
+					Review review = iterator.next();
+					
+					Map<String, Object> resultMap = new HashMap<String, Object>();
+					
+					resultMap.put("review", review);
+					resultMap.put("recipeTitle", recipeDao.findRecipeByRecipeId(review.getRecipeId()).getRecipeTitle());
+					
+					resultList.add(resultMap);
+				}
+				
 				status = HttpStatus.OK;
 			}else {
 				status = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -87,16 +103,30 @@ public class ReviewServiceImpl implements ReviewService{
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
 		
-		return new ResponseEntity<Page<Review>>(reviewList, status);
+		return new ResponseEntity<List<Map<String, Object>>>(resultList, status);
 	}
 	
 	@Override
-	public ResponseEntity<Page<Review>> findAllImage(Pageable pageable) {
+	public ResponseEntity<List<Map<String, Object>>> findAllImage(Pageable pageable) {
+		List<Map<String, Object>> resultList = new ArrayList<Map<String,Object>>();
+		
 		HttpStatus status = null;
 		Page<Review> reviewList = reviewDao.findAllImageByOrderByReviewIdDesc(pageable);
 		
 		try {
 			if(reviewList != null) {
+				Iterator<Review> iterator = reviewList.iterator();
+				while (iterator.hasNext()) {
+					Review review = iterator.next();
+					
+					Map<String, Object> resultMap = new HashMap<String, Object>();
+					
+					resultMap.put("review", review);
+					resultMap.put("recipeTitle", recipeDao.findRecipeByRecipeId(review.getRecipeId()).getRecipeTitle());
+					
+					resultList.add(resultMap);
+				}
+				
 				status = HttpStatus.OK;
 			}else {
 				status = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -107,7 +137,7 @@ public class ReviewServiceImpl implements ReviewService{
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
 		
-		return new ResponseEntity<Page<Review>>(reviewList, status);
+		return new ResponseEntity<List<Map<String, Object>>> (resultList, status);
 	}
 	
 	@Override
