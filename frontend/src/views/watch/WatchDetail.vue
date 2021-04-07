@@ -4,9 +4,9 @@
       <div>
         <div class="d-flex align-center pa-3 white">
           <v-avatar size="36">
-            <img :src="videoInfo.videoChannelImg" />
+            <img :src="videoInfo.videoChannelImg || ''" />
           </v-avatar>
-          <span class="pl-2 sub-title-1">{{ videoInfo.videoChannel }}</span>
+          <span class="pl-2 sub-title-1">{{ videoInfo.videoChannel || '' }}</span>
         </div>
       </div>
       <youtube
@@ -16,7 +16,7 @@
         @playing="playing"
       />
       <div class="py-3 px-4 sub-title-1 white rounded-xl black--text ma-3 h6 font-weight-medium">
-        {{ videoInfo.videoTitle }}
+        {{ videoInfo.videoTitle || '' }}
       </div>
     </div>
   </div>
@@ -50,8 +50,10 @@ export default {
     $route: {
       immediate: true,
       async handler(value) {
-        await this.addVideoById(value.params['video_id']);
-        this.getVideoId(this.videoInfo.videoUrl);
+        if (value.params['video_id']) {
+          await this.addVideoById(value.params['video_id']);
+          this.getVideoId(this.videoInfo.videoUrl);
+        }
       },
     },
   },
