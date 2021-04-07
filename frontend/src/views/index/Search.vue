@@ -8,8 +8,8 @@
             <v-icon size="16" color="grey lighten-1">mdi-information</v-icon>검색어 작성 팁
           </v-col>
           <v-col cols="12">
-            파스타, 스프, 치킨, 볶음밥 등 레시피 이름으로 검색해주세요<br />구체적일 수록 검색
-            정확도가 높아집니다
+            파스타, 스프, 치킨, 볶음밥 등 레시피 이름으로 검색해주세요<br />이미 알고있는 레시피
+            이름은 그대로 입력하세요
           </v-col>
         </v-row>
       </v-container>

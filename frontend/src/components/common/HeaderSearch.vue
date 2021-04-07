@@ -6,7 +6,7 @@
     <v-text-field
       ref="search"
       v-model="searchBar"
-      placeholder="레시피 이름을 입력하세요"
+      placeholder="레시피 이름으로 검색"
       filled
       rounded
       dense
