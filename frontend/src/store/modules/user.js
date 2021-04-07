@@ -20,6 +20,7 @@ const state = () => ({
   selectedSurveyFoodIdx: [],
   selectedSurveyAllergyIdx: [],
   searchTitle: '',
+  beginAlert: false,
 });
 
 // getters
@@ -136,6 +137,9 @@ const mutations = {
   },
   setSearchTitle(state, payload) {
     state.searchTitle = payload;
+  },
+  isBeginAlertReaded(state, payload) {
+    state.beginAlert = payload;
   },
 };
 

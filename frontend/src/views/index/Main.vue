@@ -113,6 +113,33 @@
         </v-row>
       </v-col>
     </v-row>
+
+    <v-bottom-sheet v-model="beginAlert" persistent>
+      <v-card class="rounded-t-xl pa-4 text-center">
+        <v-btn
+          icon
+          color="black"
+          right
+          x-large
+          style="position:absolute; right:2px; top:2px; z-index:3"
+          @click="$store.commit('isBeginAlertReaded', true)"
+          ><v-icon>mdi-close</v-icon></v-btn
+        >
+        <v-img
+          src="http://j4a204.p.ssafy.io/img/image/write_review.png"
+          max-height="375"
+          contain
+        ></v-img>
+        <div class="pa-2 h4 font-weight-thin">
+          <span class="font-weight-black">리뷰</span>를 작성해보세요
+        </div>
+        <div class="font-weight-regular caption-1">
+          레시피에 리뷰를 작성할수록<br />
+          더 정확한 <strong>개인별 맞춤 레시피</strong> 추천이 가능합니다<br />
+          레시피에서 <v-icon size="14" color="black">mdi-pencil</v-icon> 버튼을 클릭해 보세요!
+        </div>
+      </v-card>
+    </v-bottom-sheet>
   </v-container>
 </template>
 
@@ -147,6 +174,12 @@ export default {
       recipeHotList: (state) => state.recipe.recipeHotList,
       recipeRecommMainList: (state) => state.recipe.recipeRecommMainList,
     }),
+    beginAlert: {
+      get() {
+        if (this.$store.state.user.user.userId) return !this.$store.state.user.beginAlert;
+        return false;
+      },
+    },
   },
   watch: {
     '$store.state.user.user': {
