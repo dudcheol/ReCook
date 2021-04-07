@@ -74,7 +74,7 @@
         color="dahong"
         height="56"
         tile
-        class="white--text font-weight-black subtitle-1 pt-1"
+        class="white--text font-weight-black sub-title-1 pt-1"
         :disabled="btnActive || loading"
         depressed
         @click="onReviewWrited"
@@ -165,6 +165,7 @@ export default {
         },
         () => {
           this.loading = false;
+          alert('리뷰 작성을 실패했습니다.');
         }
       );
     },

@@ -10,7 +10,7 @@
         />
       </swiper-slide>
       <swiper-slide class="py-3">
-        <RecipeSlideInfo :data="recipeInfo" :hashtag="hashtag" />
+        <RecipeSlideInfo :data="recipeInfo" :hashtag="hashtag" :review="recipeReviews" />
       </swiper-slide>
       <swiper-slide v-for="(item, index) in recipeContext" :key="item['recipe_id']">
         <RecipeSlideItem
@@ -18,17 +18,36 @@
           :imageUrl="recipeImages[index]"
           :content="item"
         />
-        <v-container v-else :style="{ minHeight: windowHeight + 'px' }">
-          <v-row>
-            <v-col cols="12" class="h4 mt-4">모두 보셨습니다</v-col>
-            <v-col class="pa-0 pl-3">
-              <v-btn dark depressed rounded @click="swiper.slideTo(0)">첫 페이지로 가기</v-btn>
-            </v-col>
-            <v-col class="font-weight-thin h5" style="position:absolute; bottom:0px"
-              >이런 <strong>레시피</strong>는 어때요?
-            </v-col>
-          </v-row>
-        </v-container>
+        <div
+          v-else
+          :style="{ minHeight: windowHeight + 'px' }"
+          class="d-flex align-center justify-center"
+        >
+          <div
+            class="d-flex align-center justify-center flex-column py-8"
+            style="height:100%; width:100%; overflow:auto"
+          >
+            <v-img
+              height="120"
+              width="120"
+              :src="recipeInfo['recipe-main-image']"
+              class="rounded-xl elevation-24 mb-4"
+            >
+            </v-img>
+            <div
+              class="h5 font-weight-bold py-3 px-8 text-center"
+              v-html="$options.filters.spaceCutter(recipeInfo['recipe-title'] || '')"
+            ></div>
+            <span class="h6 pb-2 font-weight-regular">레시피를 모두 보셨습니다</span>
+            <v-btn dark depressed rounded @click="swiper.slideTo(0)">첫 페이지로 가기</v-btn>
+          </div>
+          <div
+            class="font-weight-thin h5 pa-0 pl-3"
+            style="position:absolute; bottom:0px; left:0px"
+          >
+            이런 <strong>레시피</strong>는 어때요?
+          </div>
+        </div>
       </swiper-slide>
       <div class="swiper-pagination" slot="pagination"></div>
     </swiper>
@@ -42,10 +61,7 @@
           />
         </div>
         <div v-else class="d-flex flex-column justify-center align-center">
-          <div
-            v-if="$store.state.user.user.userId"
-            class="d-flex flex-column justify-center align-center"
-          >
+          <div class="d-flex flex-column justify-center align-center">
             <VueLottiePlayer
               name="survey"
               loop
@@ -57,22 +73,9 @@
               ><strong class="black--text">{{
                 recipeInfo['recipe-title'] | truncate(14, '..')
               }}</strong
-              >와 관련된<br />회원님만을 위한<span class="font-weight-black dahong--text">
-                추천 레시피</span
-              >를 불러오고 있어요</span
-            >
-          </div>
-          <div v-else class="py-0 px-4 mt-8">
-            <v-sheet
-              rounded="xl"
-              class="pa-4 text-center caption-1 grey--text"
-              @click="$router.push({ path: '/login' })"
-              ><strong class="black--text">{{
-                recipeInfo['recipe-title'] | truncate(14, '..')
-              }}</strong
-              >와 관련된<br />
-              레시피를 추천받고 싶다면 <span class="dahong--text"><u>로그인</u></span
-              >해주세요</v-sheet
+              >와(과) 관련된<br /><span v-if="$store.state.user.user.userId">회원님만을 위한</span
+              ><span class="font-weight-black dahong--text"> 추천 레시피</span>를 불러오고
+              있어요</span
             >
           </div>
         </div>
@@ -123,8 +126,9 @@ export default {
       recipeInfo: (state) => state.recipe.recipeInfo,
       hashtag: (state) => state.hashtag.curRecipeHashtag,
       recipeRecommRelateList: (state) => state.recipe.recipeRecommRelateList,
+      recipeReviews: (state) => state.recipe.recipeReviews,
     }),
-    thumbnailBoxHeight: function() {
+    thumbnailBoxHeight() {
       return this.$refs.thumbnailBox.clientHeight;
     },
     recommShow() {
@@ -134,25 +138,10 @@ export default {
         );
       else return false;
     },
-    // recipeInfo: function() {
-    //   const ret = this.recipeNewList.filter((v) => {
-    //     return v['recipe-id'] == this.$route.params.id;
-    //   });
-    //   return ret[0];
-    // },
-    // recipeIngredient: function() {
-    //   const tmp = [];
-    //   const parse = this.parseString(this.recipeInfo['recipe-ingredient']);
-    //   for (let i = 0; i < parse.length; i += 2) {
-    //     if (!parse[i]) continue;
-    //     tmp.push({ name: parse[i], quantity: parse[i + 1] });
-    //   }
-    //   return tmp;
-    // },
-    recipeContext: function() {
+    recipeContext() {
       return this.parseString(this.recipeInfo['recipe-context']);
     },
-    recipeImages: function() {
+    recipeImages() {
       return this.parseString(this.recipeInfo['recipe-image']);
     },
   },
@@ -160,39 +149,27 @@ export default {
     $route: {
       immediate: true,
       async handler(value) {
-        // this.addRecipeById(value.params['recipe_id']);
-        // this.GET_HASHTAGS_BY_RECIPE_ID(value.params['recipe_id']);
-        if (this.recipeInfo['recipe-id'] != value.params['recipe_id']) {
+        const recipeId = value.params['recipe_id'];
+        if (this.recipeInfo['recipe-id'] != recipeId) {
           this.$store.commit('clearRecipeInfo');
           this.$store.commit('clearRecipeRecommRelateList');
-          await this.addRecipeById(value.params['recipe_id']);
-          this.GET_HASHTAGS_BY_RECIPE_ID(value.params['recipe_id']);
-          if (this.$store.state.user.user.userId) {
-            this.GET_RECOMM_RECIPE_BY_RECIPETITLE({
-              recipeTitle: this.recipeInfo['recipe-title'],
-              userId: this.$store.state.user.user.userId,
-            });
-          }
+          await this.addRecipeById(recipeId);
+          this.GET_HASHTAGS_BY_RECIPE_ID(recipeId);
+          this.GET_REVIEW_BY_RECIPEID(recipeId);
+          this.GET_RECOMM_RECIPE_BY_RECIPETITLE({
+            recipeTitle: this.recipeInfo['recipe-title'],
+            userId: this.$store.state.user.user.userId,
+          });
         }
       },
     },
-    // 'recipeInfo["recipe-title"]': {
-    //   handler(value) {
-    //     if (this.$store.state.user.user.userId) {
-    //       this.GET_RECOMM_RECIPE_BY_RECIPETITLE(
-    //         // value['recipe-title'],
-    //         value,
-    //         this.$store.state.user.user.userId
-    //       );
-    //     }
-    //   },
-    // },
   },
   methods: {
     ...mapActions([
       'addRecipeById',
       'GET_HASHTAGS_BY_RECIPE_ID',
       'GET_RECOMM_RECIPE_BY_RECIPETITLE',
+      'GET_REVIEW_BY_RECIPEID',
     ]),
     parseString(str) {
       if (str) return str.split('####');
@@ -205,23 +182,9 @@ export default {
       console.log('slide change');
     },
   },
-  async created() {
-    // if (this.recipeInfo['recipe-id'] != this.$route.params['recipe_id']) {
-    //   this.$store.commit('clearRecipeInfo');
-    //   this.$store.commit('clearRecipeRecommRelateList');
-    //   await this.addRecipeById(this.$route.params['recipe_id']);
-    //   this.GET_HASHTAGS_BY_RECIPE_ID(this.$route.params['recipe_id']);
-    //   if (this.$store.state.user.user.userId) {
-    //     this.GET_RECOMM_RECIPE_BY_RECIPETITLE(
-    //       this.recipeInfo['recipe-title'],
-    //       this.$store.state.user.user.userId
-    //     );
-    //   }
-    // }
-  },
   mounted() {
     this.swiper = this.$refs.swiper.$swiper;
-    this.windowHeight = window.innerHeight - 56 - 268;
+    this.windowHeight = window.innerHeight - 56 - 246;
   },
   beforeDestroy() {},
 };

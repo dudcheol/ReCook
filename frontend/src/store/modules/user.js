@@ -1,3 +1,4 @@
+import { getUserAllergyIngredients } from '@/api/ingredients';
 import {
   getUserInfoByAuthToken,
   getUserInfoByName,
@@ -18,10 +19,16 @@ const state = () => ({
   selectedBigIdx: 0,
   selectedSurveyFoodIdx: [],
   selectedSurveyAllergyIdx: [],
+  searchTitle: '',
+  beginAlert: false,
 });
 
 // getters
-const getters = {};
+const getters = {
+  hasAllergy(state) {
+    return state.selectedSurveyAllergyIdx.length !== 0;
+  },
+};
 
 // actions
 const actions = {
@@ -34,6 +41,7 @@ const actions = {
         localStorage.setItem('authToken', response.data['authToken']);
         setAuthTokenToHeader(response.data['authToken']);
         await dispatch('GET_USER_CHECK_SURVEY', response.data['userId']);
+        await dispatch('GET_USER_ALLERGY_INGREDIENT', response.data['userId']);
         result = true;
       },
       (error) => {
@@ -60,6 +68,7 @@ const actions = {
         response.data.user.authToken = authToken;
         commit('setUser', response.data.user);
         await dispatch('GET_USER_CHECK_SURVEY', response.data['userId']);
+        await dispatch('GET_USER_ALLERGY_INGREDIENT', response.data['userId']);
       },
       () => {}
     );
@@ -75,6 +84,15 @@ const actions = {
       userId,
       (response) => {
         commit('setUserCheckSurvey', response.data);
+      },
+      () => {}
+    );
+  },
+  async GET_USER_ALLERGY_INGREDIENT({ commit }, userId) {
+    await getUserAllergyIngredients(
+      userId,
+      (response) => {
+        commit('setUserAllergyIngredients', response.data);
       },
       () => {}
     );
@@ -117,6 +135,15 @@ const mutations = {
   },
   setSelectedSurveyAllergyIdx(state, payload) {
     state.selectedSurveyAllergyIdx = payload;
+  },
+  setUserAllergyIngredients(state, payload) {
+    state.user.allergyList = payload;
+  },
+  setSearchTitle(state, payload) {
+    state.searchTitle = payload;
+  },
+  isBeginAlertReaded(state, payload) {
+    state.beginAlert = payload;
   },
 };
 

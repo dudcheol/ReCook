@@ -24,17 +24,17 @@
             />
           </v-col>
         </v-row>
-        <v-row no-gutters>
+        <v-row no-gutters style="position:fixed; bottom:0; width:100%" class="mb-6">
           <v-col class="d-flex align-center justify-center">
             <div @click="googleLogin">
-              <v-btn outlined color="grey">
+              <v-btn outlined color="grey" class="white py-7 px-10" elevation="24" rounded>
                 <v-img
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
                   height="18"
                   width="18"
                   contain
                 ></v-img>
-                <span class="black--text subtitle-2 pl-3" style="font-size:14px"
+                <span class="black--text sub-title-2 pl-3" style="font-size:14px"
                   >Google 계정으로 로그인</span
                 >
               </v-btn>

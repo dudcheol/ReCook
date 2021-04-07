@@ -22,13 +22,16 @@
             width="100px"
             path="https://assets5.lottiefiles.com/packages/lf20_C2NTmv.json"
           />
-          <div class="font-weight-medium subtitle-2">
+          <div class="font-weight-medium sub-title-2">
             밀어서 레시피 보기
           </div>
         </div>
 
         <div class="d-flex flex-column pa-2">
-          <span class="h2 font-weight-thin" v-html="$options.filters.spaceCutter(title)"></span>
+          <span
+            class="h2 font-weight-thin"
+            v-html="$options.filters.spaceCutter(title || '')"
+          ></span>
           <div class="pl-2 pt-2">
             <v-icon small color="white">mdi-timer</v-icon>
             <span>

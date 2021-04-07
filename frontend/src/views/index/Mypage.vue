@@ -4,6 +4,7 @@
 
 <script>
 export default {
+  name: 'Mypage',
   components: {},
   props: {},
   data() {

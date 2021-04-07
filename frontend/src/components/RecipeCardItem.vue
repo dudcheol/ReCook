@@ -4,9 +4,10 @@
       rounded="xl"
       width="150"
       height="230"
-      class="text-center mr-4"
+      class="text-center mr-4 my-1"
       outlined
       @click="$emit('click')"
+      :elevation="elevation ? 3 : 0"
     >
       <v-img :src="data['recipe-main-image']" max-height="150" min-height="150" />
       <v-container class="mb-3">
@@ -43,6 +44,7 @@ export default {
   components: {},
   props: {
     data: Object,
+    elevation: Boolean,
   },
   data() {
     return {};

@@ -1,12 +1,11 @@
 <template>
-  <v-container fluid class="pb-10 my-14">
+  <v-container fluid class="pb-16 mt-14">
     <v-row>
       <v-col class="pa-0">
         <swiper ref="swiper" class="swiper" :options="swiperOption">
           <swiper-slide v-for="(item, index) in 3" :key="'banner' + index">
             <v-img
               :src="`http://j4a204.p.ssafy.io/img/banner/banner${index + 1}.png`"
-              max-height="210"
               min-height="210"
             ></v-img>
           </swiper-slide>
@@ -15,7 +14,7 @@
       </v-col>
     </v-row>
     <!-- 추천 레시피 -->
-    <v-row class="mb-2 py-4 white">
+    <v-row class="mb-4 py-4 white">
       <v-col>
         <v-row>
           <v-col class="d-flex justify-space-between align-center pb-5">
@@ -61,8 +60,8 @@
               rounded="xl"
               class="pa-4 text-center caption-1 grey--text"
               @click="$router.push({ path: '/login' })"
-              >레시피를 추천받고 싶다면 <span class="dahong--text"><u>로그인</u></span
-              >해주세요</v-sheet
+              ><span class="dahong--text"><u>로그인</u></span
+              >이 필요한 서비스입니다</v-sheet
             >
           </v-col>
         </v-row>
@@ -70,7 +69,7 @@
     </v-row>
 
     <!-- 인기 레시피 -->
-    <v-row class="pt-2 pb-4 mb-2 white">
+    <v-row class="pt-2 pb-4 mb-4 white">
       <v-col>
         <v-row>
           <v-col class="d-flex justify-space-between align-center">
@@ -114,6 +113,33 @@
         </v-row>
       </v-col>
     </v-row>
+
+    <v-bottom-sheet v-model="beginAlert" persistent>
+      <v-card class="rounded-t-xl pa-4 text-center">
+        <v-btn
+          icon
+          color="black"
+          right
+          x-large
+          style="position:absolute; right:2px; top:2px; z-index:3"
+          @click="$store.commit('isBeginAlertReaded', true)"
+          ><v-icon>mdi-close</v-icon></v-btn
+        >
+        <v-img
+          src="http://j4a204.p.ssafy.io/img/image/write_review.png"
+          max-height="375"
+          contain
+        ></v-img>
+        <div class="pa-2 h4 font-weight-thin">
+          <span class="font-weight-black">리뷰</span>를 작성해보세요
+        </div>
+        <div class="font-weight-regular caption-1">
+          레시피에 리뷰를 작성할수록<br />
+          더 정확한 <strong>개인별 맞춤 레시피</strong> 추천이 가능합니다<br />
+          레시피에서 <v-icon size="14" color="black">mdi-pencil</v-icon> 버튼을 클릭해 보세요!
+        </div>
+      </v-card>
+    </v-bottom-sheet>
   </v-container>
 </template>
 
@@ -148,6 +174,12 @@ export default {
       recipeHotList: (state) => state.recipe.recipeHotList,
       recipeRecommMainList: (state) => state.recipe.recipeRecommMainList,
     }),
+    beginAlert: {
+      get() {
+        if (this.$store.state.user.user.userId) return !this.$store.state.user.beginAlert;
+        return false;
+      },
+    },
   },
   watch: {
     '$store.state.user.user': {

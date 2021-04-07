@@ -7,7 +7,7 @@
       class="mt-4"
       @click="$router.push({ path: `/recipe/${item.recipeId || item['recipe-id']}` })"
     />
-    <infinite-loading @infinite="infiniteHandler">
+    <infinite-loading ref="InfiniteLoading" @infinite="infiniteHandler">
       <div slot="spinner">
         <v-skeleton-loader class="mx-auto px-4" max-width="100%" type="card"></v-skeleton-loader>
       </div>
@@ -29,17 +29,25 @@ export default {
       page: 0,
       size: 5,
       list: [],
+      onLoad: false,
     };
   },
   computed: {},
-  watch: {},
+  watch: {
+    $route: {
+      immediate: true,
+      handler() {
+        // console.log(
+        //   '%cRecipeList.vue line:39 this.$refs.InfiniteLoading',
+        //   'color: #007acc;',
+        //   this.$refs.InfiniteLoading
+        // );
+      },
+    },
+  },
   methods: {
     infiniteHandler($state) {
       switch (this.$route.path.split('/')[3]) {
-        case 'recommend':
-          this.list = this.$store.state.recipe.recipeRecommMainList;
-          $state.complete();
-          break;
         case 'popular':
           getRecipeHotListAll(
             this.page,
@@ -81,6 +89,9 @@ export default {
         default:
       }
     },
+  },
+  mounted() {
+    this.$refs.InfiniteLoading.stateChanger.reset();
   },
 };
 </script>
