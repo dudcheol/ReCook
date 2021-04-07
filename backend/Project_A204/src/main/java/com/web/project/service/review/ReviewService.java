@@ -14,9 +14,9 @@ public interface ReviewService {
 	
 	public ResponseEntity<Review> createReview(ReviewUpload reviewUpload);
 
-	public ResponseEntity<Page<Review>> findAll(Pageable pageable);
+	public ResponseEntity<List<Map<String, Object>>> findAll(Pageable pageable);
 	
-	public ResponseEntity<Page<Review>> findAllImage(Pageable pageable);
+	public ResponseEntity<List<Map<String, Object>>> findAllImage(Pageable pageable);
 	
 	public ResponseEntity<Map<String, Object>> findByReview(int reviewId);
 	
