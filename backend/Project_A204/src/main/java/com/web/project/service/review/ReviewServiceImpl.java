@@ -42,7 +42,7 @@ public class ReviewServiceImpl implements ReviewService{
 	public ResponseEntity<Review> createReview(ReviewUpload reviewUpload) {
 		HttpStatus status = null;
 		
-		String filePath = "/home/ubuntu/img";
+		String filePath = "/home/ubuntu/img/review";
 		String fileName = "review" + (reviewDao.count() + 1) + "." + reviewUpload.getReviewImage().getContentType().split("/")[1];
 
 		File saveFile = new File(filePath, fileName);
@@ -51,7 +51,7 @@ public class ReviewServiceImpl implements ReviewService{
 
 		try {
 			reviewUpload.getReviewImage().transferTo(saveFile);
-			fileName = "http://j4a204.p.ssafy.io/img/" + fileName;
+			fileName = "http://j4a204.p.ssafy.io/img/review/" + fileName;
 			
 			review.setRecipeId(reviewUpload.getRecipeId());
 			review.setRecipeSubId(recipeDao.findRecipeByRecipeId(reviewUpload.getRecipeId()).getRecipeSubId());
