@@ -11,7 +11,7 @@
         </v-img>
         <div
           class="h4 font-weight-bold pt-3 px-8 text-center"
-          v-html="$options.filters.spaceCutter(data['recipe-title'])"
+          v-html="$options.filters.spaceCutter(data['recipe-title'] || '')"
         ></div>
         <div
           class="caption-1 grey lighten-3 rounded-xl d-flex align-center justify-center py-1 px-2 mt-2"
@@ -93,17 +93,18 @@
       <v-col class="d-flex justify-space-between align-center pt-3 px-2 pb-2">
         <span v-if="$store.state.user.user.userId" class="h6 font-weight-regular"
           ><span class="grey lighten-3 rounded-lg black--text pa-1 mr-1 font-weight-black">{{
-            $store.state.user.user.userName | truncate(16, '..')
+            ($store.state.user.user.userName || '') | truncate(16, '..')
           }}</span
           >님, 이 <strong>레시피</strong>는 어때요?<br /><span
             class="caption d-flex align-center pt-2"
             ><v-icon size="18" class="pr-1" color="grey lighten-1">mdi-information</v-icon>회원님의
-            취향과 {{ data['recipe-title'] | truncate(10, '..') }} 관련 추천 레시피입니다</span
+            취향과 {{ (data['recipe-title'] || '') | truncate(10, '..') }} 관련 추천
+            레시피입니다</span
           ></span
         >
         <span v-else class="h6 font-weight-regular"
           ><span class="grey lighten-3 rounded-lg black--text pa-1 mr-1 font-weight-black">{{
-            data['recipe-title'] | truncate(10, '..')
+            (data['recipe-title'] || '') | truncate(10, '..')
           }}</span>
           관련 레시피</span
         >

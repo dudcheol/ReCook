@@ -52,6 +52,7 @@
 <script>
 import { getAllReviews } from '@/api/review';
 export default {
+  name: 'Feed',
   components: {},
   props: {},
   data() {

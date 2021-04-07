@@ -1,8 +1,8 @@
 <template>
   <div class="d-flex pl-4" style="overflow:auto">
     <RecipeCardItem
-      v-for="item in datas"
-      :key="item['recipe-id']"
+      v-for="(item, index) in datas"
+      :key="index + 'recipe' + item['recipe-id']"
       :data="item"
       @click="
         $router.push({

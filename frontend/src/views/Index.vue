@@ -1,7 +1,9 @@
 <template>
   <div class="grey lighten-4">
     <Header />
-    <router-view></router-view>
+    <keep-alive include="Watch,UserLike,Feed">
+      <router-view></router-view>
+    </keep-alive>
     <Footer />
   </div>
 </template>
@@ -22,6 +24,7 @@ export default {
   computed: {},
   watch: {},
   methods: {},
+  created() {},
 };
 </script>
 
