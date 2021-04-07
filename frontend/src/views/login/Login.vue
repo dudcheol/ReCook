@@ -34,7 +34,7 @@
                   width="18"
                   contain
                 ></v-img>
-                <span class="black--text subtitle-2 pl-3" style="font-size:14px"
+                <span class="black--text sub-title-2 pl-3" style="font-size:14px"
                   >Google 계정으로 로그인</span
                 >
               </v-btn>

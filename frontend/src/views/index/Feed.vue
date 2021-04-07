@@ -41,7 +41,7 @@
       <div class="thumbnail">
         <img :src="item.review.reviewImage" />
       </div>
-      <div class="subtitle-2 text-center font-weight-bold">
+      <div class="sub-title-2 text-center font-weight-bold">
         {{ item.recipeTitle | truncate(12, '..') }}
       </div>
       <div class="caption-1 text-center">{{ item.review.user.userName | truncate(10, '..') }}</div>

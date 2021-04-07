@@ -72,7 +72,7 @@
               "
               :disabled="i === bigList.length - 1"
             >
-              <span class="subtitle-2 pl-1 font-weight-bold">{{ item.bigName }}</span>
+              <span class="sub-title-2 pl-1 font-weight-bold">{{ item.bigName }}</span>
             </v-list-item>
           </v-list-item-group>
         </v-list>
@@ -103,7 +103,7 @@
               <v-list-item-content>
                 <v-list-item-title
                   v-text="item.smallName"
-                  class="px-2 subtitle-2"
+                  class="px-2 sub-title-2"
                 ></v-list-item-title>
               </v-list-item-content>
             </v-list-item>
