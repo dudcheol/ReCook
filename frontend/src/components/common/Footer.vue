@@ -59,12 +59,12 @@ export default {
       tiles: [
         {
           // img: 'messenger.png',
-          title: '남은 재료 고르기',
+          title: '재료 선택',
           type: 'FridgeIngredient',
         },
         {
           // img: 'google.png',
-          title: '남은 재료로 레시피 추천받기',
+          title: '선택한 재료로 레시피 추천받기',
           type: 'FridgeRecomm',
         },
       ],

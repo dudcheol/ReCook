@@ -6,7 +6,7 @@
           <v-avatar size="36">
             <img :src="videoInfo.videoChannelImg" />
           </v-avatar>
-          <span class="pl-2 subtitle-1">{{ videoInfo.videoChannel }}</span>
+          <span class="pl-2 sub-title-1">{{ videoInfo.videoChannel }}</span>
         </div>
       </div>
       <youtube
@@ -15,7 +15,7 @@
         @ready="ready"
         @playing="playing"
       />
-      <div class="py-3 px-4 subtitle-1 white rounded-xl black--text ma-3 h6 font-weight-medium">
+      <div class="py-3 px-4 sub-title-1 white rounded-xl black--text ma-3 h6 font-weight-medium">
         {{ videoInfo.videoTitle }}
       </div>
     </div>
