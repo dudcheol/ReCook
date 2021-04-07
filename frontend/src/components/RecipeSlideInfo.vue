@@ -85,7 +85,37 @@
     <v-row>
       <v-col class="d-flex justify-space-between align-center">
         <span class="h6 font-weight-black">리뷰</span>
-        <!-- <v-btn text x-small class="pa-1">전체보기</v-btn> -->
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-row v-if="review.length">
+          <v-col
+            v-for="item in review"
+            :key="'review' + item.reviewId"
+            class="d-flex child-flex pa-0"
+            cols="3"
+          >
+            <v-img
+              v-if="item.reviewImage"
+              :src="item.reviewImage"
+              aspect-ratio="1"
+              class="grey lighten-2"
+              @click="$router.push({ path: `/review/${item.reviewId}` })"
+            >
+              <template v-slot:placeholder>
+                <v-row class="fill-height ma-0" align="center" justify="center">
+                  <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                </v-row>
+              </template>
+            </v-img>
+          </v-col>
+        </v-row>
+        <v-row v-else>
+          <v-col class="d-flex align-center justify-center">
+            <span class="caption-1 grey--text py-2">작성된 리뷰가 없어요</span>
+          </v-col>
+        </v-row>
       </v-col>
     </v-row>
     <v-row class="pa-2 grey lighten-4"></v-row>
@@ -143,6 +173,7 @@ export default {
   props: {
     data: Object,
     hashtag: Array,
+    review: Array,
   },
   data() {
     return {

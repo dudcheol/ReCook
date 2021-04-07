@@ -31,4 +31,11 @@ function getReviewByUserName(userName, success, fail) {
     .catch(fail);
 }
 
-export { getReviewById, getAllReviews, writeReview, getReviewByUserName };
+function getReviewByRecipeId(recipeId, success, fail) {
+  instance
+    .get(`${COMMON}/recipe/${recipeId}`)
+    .then(success)
+    .catch(fail);
+}
+
+export { getReviewById, getAllReviews, writeReview, getReviewByUserName, getReviewByRecipeId };

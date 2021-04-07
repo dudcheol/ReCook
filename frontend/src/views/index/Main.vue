@@ -6,7 +6,6 @@
           <swiper-slide v-for="(item, index) in 3" :key="'banner' + index">
             <v-img
               :src="`http://j4a204.p.ssafy.io/img/banner/banner${index + 1}.png`"
-              max-height="210"
               min-height="210"
             ></v-img>
           </swiper-slide>

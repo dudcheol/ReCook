@@ -52,6 +52,7 @@ export default {
   font-weight: 400;
   font-size: 1.5rem;
   letter-spacing: normal;
+  line-height: 1.2;
 }
 .h6 {
   font-weight: 500;

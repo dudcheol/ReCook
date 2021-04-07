@@ -1,3 +1,4 @@
+import { getReviewByRecipeId } from '@/api/review';
 import {
   getRecipeById,
   getRecipeNewList,
@@ -21,6 +22,7 @@ const state = () => ({
   recipeRecommMainList: [],
   recipeRecommRelateList: [],
   recipeIngredients: [],
+  recipeReviews: [],
 });
 
 // getters
@@ -140,6 +142,15 @@ const actions = {
       () => {}
     );
   },
+  GET_REVIEW_BY_RECIPEID({ commit }, recipeId) {
+    getReviewByRecipeId(
+      recipeId,
+      (response) => {
+        commit('setRecipeReviews', response.data);
+      },
+      () => {}
+    );
+  },
 };
 
 // mutations
@@ -179,6 +190,9 @@ const mutations = {
   },
   setRecipeIngredients(state, payload) {
     state.recipeIngredients = payload;
+  },
+  setRecipeReviews(state, payload) {
+    state.recipeReviews = payload;
   },
 };
 
