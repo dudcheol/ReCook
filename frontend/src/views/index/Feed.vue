@@ -33,18 +33,18 @@
       </v-row>
     </div>
     <div
-      class="review"
+      class="review py-2"
       v-for="item in list"
-      :key="'reviewItem' + item.reviewId"
-      @click="$router.push({ path: `review/${item.reviewId}` })"
+      :key="'reviewItem' + item.review.reviewId"
+      @click="$router.push({ path: `review/${item.review.reviewId}` })"
     >
       <div class="thumbnail">
-        <img :src="item.reviewImage" />
+        <img :src="item.review.reviewImage" />
       </div>
       <div class="subtitle-2 text-center font-weight-bold">
         {{ item.recipeTitle | truncate(12, '..') }}
       </div>
-      <div class="caption-1 text-center">{{ item.user.userName | truncate(10, '..') }}</div>
+      <div class="caption-1 text-center">{{ item.review.user.userName | truncate(10, '..') }}</div>
     </div>
   </GridLayout>
 </template>
@@ -70,21 +70,11 @@ export default {
         this.pageNumber,
         this.pageSize,
         (response) => {
-          // console.log('%cFeed.vue line:72 response.data', 'color: #007acc;', response.data.content);
-          console.log(
-            '%cFeed.vue line:73 response.data.content',
-            'color: #007acc;',
-            response.data.content
-          );
-          if (response.data.content.length) {
-            // const responseList = response.data.content;
-            const result = response.data.content.filter((e) => e.reviewImage);
+          if (response.data.length) {
             const list = this.list;
-
             this.pageNumber += 1;
             startLoading();
-            this.list = list.concat(result);
-            console.log('%cFeed.vue line:82 this.list', 'color: #007acc;', this.list);
+            this.list = list.concat(response.data);
           } else {
             endLoading();
           }
