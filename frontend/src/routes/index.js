@@ -140,6 +140,15 @@ const routes = [
       },
     ],
   },
+  {
+    path: '/404',
+    name: 'notFound',
+    component: () => import('@/views/NotFound'),
+  },
+  {
+    path: '*',
+    redirect: '/404',
+  },
 ];
 
 const router = new Router({
