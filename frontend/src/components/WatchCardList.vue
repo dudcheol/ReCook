@@ -1,8 +1,8 @@
 <template>
   <div>
     <WatchCardItem
-      v-for="item in datas"
-      :key="'watchlist' + item.videoId"
+      v-for="(item, index) in datas"
+      :key="'watchlist' + index + '/' + item.videoId"
       :src="item.videoThumbnail"
       :title="item.videoTitle"
       :username="item.videoChannel"

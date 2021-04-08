@@ -188,7 +188,6 @@ export default {
   background: #f8f9fb;
 }
 .swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
-  /* background: #ff4b3a; */
   background: #ff5f2e;
 }
 </style>

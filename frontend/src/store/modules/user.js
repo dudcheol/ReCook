@@ -46,9 +46,7 @@ const actions = {
         await dispatch('GET_USER_ALLERGY_INGREDIENT', response.data['userId']);
         result = true;
       },
-      (error) => {
-        console.log('%cuser.js line:21 error', 'color: #007acc;', error);
-      }
+      () => {}
     );
     commit('clearRecentRecipe');
     return result;
@@ -59,9 +57,7 @@ const actions = {
       (response) => {
         commit('setSelectedUserInfo', response.data);
       },
-      (error) => {
-        console.log('%cuser.js line:17 error', 'color: #007acc;', error);
-      }
+      () => {}
     );
   },
   async GET_USERINFO_BY_AUTHTOKEN({ commit, dispatch }, authToken) {

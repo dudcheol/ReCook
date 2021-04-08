@@ -21,18 +21,6 @@
             }}
           </span>
         </div>
-        <!-- <v-chip-group active-class="none">
-          <v-chip
-            color="grey lighten-3"
-            text-color="grey darken-2"
-            v-for="(item, index) in ingredients"
-            :key="index"
-            small
-            class="px-2 mr-1 mb-1"
-          >
-            {{ item }}
-          </v-chip>
-        </v-chip-group> -->
       </div>
     </div>
   </v-card>
@@ -47,13 +35,7 @@ export default {
   data() {
     return {};
   },
-  computed: {
-    // ingredients() {
-    //   const ret = (this.data.recipeIngredient || this.data['recipe-ingredient']).split('####');
-    //   ret.splice(ret.length - 1, 1);
-    //   return ret;
-    // },
-  },
+  computed: {},
   watch: {},
   methods: {},
 };

@@ -1,8 +1,8 @@
 <template>
   <div>
     <RecipeRecommCardItem
-      v-for="item in datas"
-      :key="'likelist' + item.recipeId"
+      v-for="(item, index) in datas"
+      :key="'likelist' + index + '/' + item.recipeId"
       :data="item"
       @click="$router.push(`/recipe/${item.recipeId}`)"
       class="mb-4"

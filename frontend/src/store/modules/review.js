@@ -17,9 +17,7 @@ const actions = {
       (response) => {
         commit('setReviewInfo', response.data);
       },
-      (error) => {
-        console.log('%creview.js line:20 error', 'color: #007acc;', error);
-      }
+      () => {}
     );
   },
   GET_REVIEW_LIST_BY_USERNAME({ commit }, userName) {
@@ -28,13 +26,7 @@ const actions = {
       (response) => {
         commit('setSelectedUserReviewList', response.data);
       },
-      (error) => {
-        console.log(
-          '%cerror review.js line:32 ',
-          'color: red; display: block; width: 100%;',
-          error
-        );
-      }
+      () => {}
     );
   },
 };

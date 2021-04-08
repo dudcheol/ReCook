@@ -11,7 +11,12 @@
     </v-row>
     <v-row class="mb-14 pb-3">
       <v-item-group v-model="selected" multiple class="d-flex flex-wrap">
-        <v-col v-for="item in $store.state.survey.foodList" :key="item.recipeId" cols="6" md="4">
+        <v-col
+          v-for="item in $store.state.survey.foodList"
+          :key="'food' + item.recipeId"
+          cols="6"
+          md="4"
+        >
           <v-item v-slot="{ active, toggle }">
             <div>
               <v-card

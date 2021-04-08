@@ -64,7 +64,7 @@
           <v-list-item-group :value="selectedBigIdx" mandatory color="dahong">
             <v-list-item
               v-for="(item, i) in bigList"
-              :key="i"
+              :key="'big' + i"
               class="py-0"
               @click="
                 GET_MIDDLE_LIST(item.bigId);

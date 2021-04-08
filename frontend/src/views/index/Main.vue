@@ -24,14 +24,6 @@
               }}</span>
               {{ isLogin ? '님을 위한' : '' }} 레시피</span
             >
-            <!-- <v-btn
-              v-if="isLogin && recipeRecommMainList.length"
-              text
-              small
-              class="pa-1"
-              @click="$router.push({ path: `recipe/list/recommend` })"
-              >전체보기</v-btn
-            > -->
           </v-col>
         </v-row>
         <v-row>
@@ -160,7 +152,7 @@
               </v-col>
             </v-row>
             <v-row class="pt-16">
-              <v-col class="font-weight-regular sub-title-2">
+              <v-col class="font-weight-black sub-title-2">
                 최근 본 레시피
               </v-col>
             </v-row>
@@ -171,11 +163,12 @@
                     <v-list-item
                       v-for="(item, index) in recentRecipe"
                       :key="'recentRecipe' + index + '/' + item['recipe-id']"
+                      @click="$router.push({ path: `/recipe/${item['recipe-id']}` })"
                       dense
                     >
                       <v-list-item-content>
                         <div class="d-flex align-center sub-title-2 font-weight-regular">
-                          <v-avatar rounded="lg" class="mr-2" size="36"
+                          <v-avatar rounded="lg" class="mr-4" size="36"
                             ><v-img :src="item['recipe-image']"></v-img
                           ></v-avatar>
                           {{ item['recipe-title'] | truncate(10, '..') }}

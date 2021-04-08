@@ -66,11 +66,7 @@ export default {
       },
     },
   },
-  methods: {
-    fridgeActive() {
-      console.log('%cFooter.vue line:97 active!!', 'color: #007acc;');
-    },
-  },
+  methods: {},
 };
 </script>
 

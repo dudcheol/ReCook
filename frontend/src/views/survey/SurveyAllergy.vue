@@ -11,18 +11,13 @@
     </v-row>
     <v-row class="mb-14 pb-3">
       <v-item-group v-model="selected" multiple class="d-flex flex-wrap">
-        <v-col v-for="item in $store.state.survey.allergyList" :key="item.recipeId" cols="6" md="4">
+        <v-col
+          v-for="item in $store.state.survey.allergyList"
+          :key="'allergy' + item.recipeId"
+          cols="6"
+          md="4"
+        >
           <v-item v-slot="{ active, toggle }">
-            <!-- <v-card
-              :color="active ? 'deep-orange lighten-5' : ''"
-              class="d-flex align-center py-4 align-center justify-center"
-              rounded="lg"
-              @click="toggle"
-            >
-              <span :class="active ? 'font-weight-bold' : 'font-weight-regular'">
-                {{ item.split(' ')[0] }}
-              </span>
-            </v-card> -->
             <div>
               <v-card class="d-flex align-center" rounded="xl" outlined @click="toggle">
                 <v-img
