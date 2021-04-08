@@ -52,7 +52,6 @@ export default {
       },
       set(value) {
         if (value === 'Fridge') {
-          this.$router.push({ name: 'FridgeIngredient' }).catch(() => {});
           return;
         }
         this.$router.replace({ name: value }).catch(() => {});

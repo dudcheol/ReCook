@@ -34,8 +34,8 @@
     </div>
     <div
       class="review py-2"
-      v-for="item in list"
-      :key="'reviewItem' + item.review.reviewId"
+      v-for="(item, index) in list"
+      :key="'reviewItem' + index + '/' + item.review.reviewId"
       @click="$router.push({ path: `review/${item.review.reviewId}` })"
     >
       <div class="thumbnail">
