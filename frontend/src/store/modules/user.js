@@ -21,6 +21,8 @@ const state = () => ({
   selectedSurveyAllergyIdx: [],
   searchTitle: '',
   beginAlert: false,
+  drawerState: false,
+  recentRecipe: [],
 });
 
 // getters
@@ -48,6 +50,7 @@ const actions = {
         console.log('%cuser.js line:21 error', 'color: #007acc;', error);
       }
     );
+    commit('clearRecentRecipe');
     return result;
   },
   GET_USERINFO_BY_NAME({ commit }, userName) {
@@ -72,11 +75,13 @@ const actions = {
       },
       () => {}
     );
+    commit('clearRecentRecipe');
   },
   LOGOUT({ commit }) {
     removeAuthTokenToHeader();
     localStorage.removeItem('authToken');
     commit('setUser', {});
+    commit('clearRecentRecipe');
     router.replace({ path: '/' });
   },
   async GET_USER_CHECK_SURVEY({ commit }, userId) {
@@ -144,6 +149,24 @@ const mutations = {
   },
   isBeginAlertReaded(state, payload) {
     state.beginAlert = payload;
+  },
+  changeDrawerState(state, payload) {
+    state.drawerState = payload;
+  },
+  clearRecentRecipe(state) {
+    state.recentRecipe = [];
+  },
+  addRecentRecipe(state, payload) {
+    const tmp = [];
+    tmp.push(payload);
+    for (let i = 0; i < state.recentRecipe.length; i++) {
+      if (tmp.length >= 10) break;
+      const e = state.recentRecipe[i];
+      if (e['recipe-id'] !== payload['recipe-id']) {
+        tmp.push(e);
+      }
+    }
+    state.recentRecipe = tmp;
   },
 };
 
