@@ -36,7 +36,6 @@
             ><v-icon color="red" small>mdi-alert</v-icon>알러지 재료가 포함된 레시피입니다</span
           >
         </div>
-        <!-- <v-btn text x-small class="pa-1">전체보기</v-btn> -->
       </v-col>
     </v-row>
     <v-row>
@@ -91,8 +90,8 @@
       <v-col>
         <v-row v-if="review.length">
           <v-col
-            v-for="item in review"
-            :key="'review' + item.reviewId"
+            v-for="(item, index) in review"
+            :key="'review' + index + '/' + item.reviewId"
             class="d-flex child-flex pa-0"
             cols="3"
           >
@@ -128,7 +127,7 @@
           >님, 이 <strong>레시피</strong>는 어때요?<br /><span
             class="caption d-flex align-center pt-2"
             ><v-icon size="18" class="pr-1" color="grey lighten-1">mdi-information</v-icon>회원님의
-            취향과 {{ (data['recipe-title'] || '') | truncate(10, '..') }} 관련 추천
+            취향을 반영한 {{ (data['recipe-title'] || '') | truncate(10, '..') }} 관련 추천
             레시피입니다</span
           ></span
         >
@@ -140,35 +139,11 @@
         >
       </v-col>
     </v-row>
-    <!-- <v-row>
-      <v-col style="height:300px;">
-        <div v-if="recipeRecommRelateList.length">
-          <RecipeCardList :datas="recipeRecommRelateList" />
-        </div>
-        <div v-else class="d-flex flex-column justify-center align-center">
-          <VueLottiePlayer
-            name="survey"
-            loop
-            height="100%"
-            width="200px"
-            path="https://assets7.lottiefiles.com/packages/lf20_fefIZO.json"
-          />
-          <span class="caption font-weight-regular grey--text text--darken-1"
-            >현재 레시피와 <span class="font-weight-black dahong--text">관련된 레시피</span>를
-            불러오고 있어요</span
-          >
-        </div>
-      </v-col>
-    </v-row> -->
   </div>
 </template>
 <script>
 import { mapGetters } from 'vuex';
-// import RecipeCardList from '@/components/RecipeCardList.vue';
-// import VueLottiePlayer from 'vue-lottie-player';
-// import { mapActions, mapState } from 'vuex';
 export default {
-  // components: { VueLottiePlayer, RecipeCardList },
   components: {},
   props: {
     data: Object,
@@ -183,9 +158,6 @@ export default {
   },
   computed: {
     ...mapGetters(['hasAllergyOfUser']),
-    // ...mapState({
-    //   recipeRecommRelateList: (state) => state.recipe.recipeRecommRelateList,
-    // }),
     recipeIngredient: function() {
       const tmp = [];
       const parse = this.parseString(this.data['recipe-ingredient']);
@@ -196,26 +168,8 @@ export default {
       return tmp;
     },
   },
-  watch: {
-    // data: {
-    //   immediate: true,
-    //   handler(value) {
-    //     if (this.$store.state.user.user.userId)
-    //       this.GET_RECOMM_RECIPE_BY_RECIPETITLE(
-    //         value['recipe-title'],
-    //         this.$store.state.user.user.userId
-    //       );
-    //   },
-    // },
-  },
+  watch: {},
   methods: {
-    // ...mapActions(['GET_RECOMM_RECIPE_BY_RECIPETITLE']),
-    onScroll() {
-      this.windowTop = window.top.scrollY;
-      if (this.windowTop >= this.thumbnailBoxHeight) {
-        console.log('%cRecipeDetail.vue line:142', 'color: #007acc;');
-      }
-    },
     parseString(str) {
       if (str) return str.split('####');
       return [];

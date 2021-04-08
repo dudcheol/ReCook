@@ -16,9 +16,7 @@ const actions = {
       (response) => {
         commit('setCurRecipeHashtag', response.data);
       },
-      (error) => {
-        console.log('%chashtag.js line:20 error', 'color: #007acc;', error);
-      }
+      () => {}
     );
   },
 };

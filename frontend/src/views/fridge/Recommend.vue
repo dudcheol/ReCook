@@ -22,8 +22,8 @@
             <v-col cols="10" class="pb-2 pt-1">
               <v-chip-group :column="isExpanded">
                 <v-chip
-                  v-for="item in $store.state.user.selectedIngredients"
-                  :key="'ingredients' + item.smallId"
+                  v-for="(item, index) in $store.state.user.selectedIngredients"
+                  :key="'ingredients' + index + '/' + item.smallId"
                   color="yellow"
                 >
                   {{ item.smallName }}
@@ -48,8 +48,8 @@
       style="paddingTop:108px"
     >
       <RecipeRecommCardItem
-        v-for="item in $store.state.recipe.recipeRecomm"
-        :key="item.recipeId"
+        v-for="(item, index) in $store.state.recipe.recipeRecomm"
+        :key="'reciperecomm' + index + '/' + item.recipeId"
         :data="item"
         class="mt-4"
         @click="$router.push({ path: `/recipe/${item.recipeId}` })"

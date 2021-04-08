@@ -2,9 +2,7 @@
   <GridLayout
     ref="ig"
     :options="{
-      align: 'center',
-      transitionDuration: 0.2,
-      isOverflowScroll: false,
+      options,
     }"
     :layoutOptions="{
       margin: 10,
@@ -12,10 +10,8 @@
     }"
     @append="onAppend"
     @layout-complete="onLayoutComplete"
-    @image-error="onImageError"
     class="my-14 white"
   >
-    <!-- Loading element via named slot -->
     <div slot="loading" style="width:100%">
       <v-row>
         <v-col>
@@ -61,37 +57,50 @@ export default {
       pageSize: 10,
       loading: false,
       list: [],
+      isEnded: false,
+      options: {
+        isOverflowScroll: false,
+        useFit: true,
+        useRecycle: true,
+        horizontal: false,
+        align: 'center',
+        transitionDuration: 0.2,
+      },
     };
   },
   computed: {},
   watch: {},
   methods: {
-    onAppend({ startLoading, endLoading }) {
-      getAllReviews(
+    async onAppend({ startLoading, currentTarget }) {
+      if (this.isEnded || currentTarget.isProcessing()) {
+        return;
+      }
+
+      let res = [];
+      startLoading();
+
+      await getAllReviews(
         this.pageNumber,
         this.pageSize,
         (response) => {
-          if (response.data.length) {
-            const list = this.list;
-            this.pageNumber += 1;
-            startLoading();
-            this.list = list.concat(response.data);
-          } else {
-            endLoading();
-          }
+          res = response.data;
         },
-        (error) => {
-          console.log('%cFeed.vue line:88 error', 'color: #007acc;', error);
-        }
+        () => {}
       );
+
+      this.pageNumber += 1;
+
+      if (res.length === 0) {
+        this.isEnded = true;
+        this.$refs.ig.endLoading();
+      }
+
+      this.list = this.list.concat(res);
     },
     onLayoutComplete({ isLayout, endLoading }) {
       if (!isLayout) {
         endLoading();
       }
-    },
-    onImageError({ totalIndex }) {
-      this.list.splice(totalIndex, 1);
     },
   },
   mounted() {},

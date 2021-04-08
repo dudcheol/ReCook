@@ -51,9 +51,7 @@ const actions = {
         commit('addRecentRecipe', response.data);
         dispatch('GET_RECIPE_INGREDIENTS', response.data['recipe-id']);
       },
-      (error) => {
-        console.log('%crecipe.js line:21 error', 'color: #007acc;', error);
-      }
+      () => {}
     );
   },
   addRecipeNewList({ commit }) {
@@ -61,9 +59,7 @@ const actions = {
       (response) => {
         commit('setRecipeNewList', response.data);
       },
-      (error) => {
-        console.log('%crecipe.js line:19 error', 'color: #007acc;', error);
-      }
+      () => {}
     );
   },
   addRecipeNewListAll({ commit }, page, size) {
@@ -73,9 +69,7 @@ const actions = {
       (response) => {
         commit('setRecipeNewListAll', response.data);
       },
-      (error) => {
-        console.log('%crecipe.js line:19 error', 'color: #007acc;', error);
-      }
+      () => {}
     );
   },
   addRecipeHotList({ commit }) {
@@ -83,9 +77,7 @@ const actions = {
       (response) => {
         commit('setRecipeHotList', response.data);
       },
-      (error) => {
-        console.log('%crecipe.js line:19 error', 'color: #007acc;', error);
-      }
+      () => {}
     );
   },
   addRecipeHotListAll({ commit }, page, size) {
@@ -95,9 +87,7 @@ const actions = {
       (response) => {
         commit('setRecipeHotListAll', response.data);
       },
-      (error) => {
-        console.log('%crecipe.js line:19 error', 'color: #007acc;', error);
-      }
+      () => {}
     );
   },
   GET_RECOMM_RECIPE_LIST_BY_USER({ commit }, userId) {
@@ -105,7 +95,7 @@ const actions = {
     getRecommRecipeListByUser(
       userId,
       (response) => {
-        console.log('%crecipe.js line:88 response.data', 'color: #007acc;', response.data);
+        console.log('추천 레시피 리스트를 받아왔습니다.');
         commit('setRecipeRecommMainList', response.data);
       },
       () => {}
@@ -117,6 +107,7 @@ const actions = {
       recipeTitle,
       userId,
       (response) => {
+        console.log('현재 레시피와 관련된 추천 레시피 리스트를 받아왔습니다.');
         commit('setRecipeRecommRelateList', response.data);
       },
       () => {}
