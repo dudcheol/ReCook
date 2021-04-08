@@ -106,8 +106,20 @@
     # 오류나는 모듈은 수동으로 깔아주세요
     ```
 
-  - Run
+  - DB Connection
 
+    ```bash
+    $ python manage.py inspectdb
+    ```
+  
+  - migration
+  
+    ``` bash
+    $ python manage.py makemigrations
+    ```
+  
+  - Run
+  
     ```bash
     $ python manage.py runserver
     ```
