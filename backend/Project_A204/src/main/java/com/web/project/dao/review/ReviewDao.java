@@ -27,4 +27,8 @@ public interface ReviewDao extends JpaRepository<Review, String> {
 	public Page<Review> findAllImageByOrderByReviewIdDesc(Pageable pageable);
 	
 	public List<Review> findAllByRecipeSubId(int recipeSubId);
+	
+	@Query(value = "select max(review_id) from review", nativeQuery = true)
+	public int findMaxReviewId();
+
 }

@@ -43,7 +43,7 @@ public class ReviewServiceImpl implements ReviewService{
 		HttpStatus status = null;
 		
 		String filePath = "/home/ubuntu/img/review";
-		String fileName = "review" + (reviewDao.count() + 1) + "." + reviewUpload.getReviewImage().getContentType().split("/")[1];
+		String fileName = "review" + (reviewDao.findMaxReviewId() + 1) + "." + reviewUpload.getReviewImage().getContentType().split("/")[1];
 
 		File saveFile = new File(filePath, fileName);
 		
