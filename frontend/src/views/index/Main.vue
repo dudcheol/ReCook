@@ -141,6 +141,60 @@
         </div>
       </v-card>
     </v-bottom-sheet>
+
+    <v-navigation-drawer v-model="drawer" left temporary fixed app>
+      <v-container fluid>
+        <v-row no-gutters>
+          <v-col>
+            <v-row style="position:fixed" class="white">
+              <v-col class="d-flex align-center">
+                <v-avatar size="36"
+                  ><v-img v-if="user.userImage" :src="user.userImage"></v-img
+                  ><v-icon v-else color="grey lighten-2">mdi-account-circle</v-icon></v-avatar
+                >
+                <span
+                  :class="user.userId ? 'sub-title-1' : 'sub-title-2 grey--text text--lighten-1'"
+                  class="pl-1 font-weight-medium"
+                  >{{ user.userName || '로그인되어 있지 않습니다' }}</span
+                >
+              </v-col>
+            </v-row>
+            <v-row class="pt-16">
+              <v-col class="font-weight-regular sub-title-2">
+                최근 본 레시피
+              </v-col>
+            </v-row>
+            <v-row v-if="recentRecipe.length" no-gutters>
+              <v-col cols="12">
+                <v-list dense rounded class="pa-0 pt-2">
+                  <v-list-item-group color="dahong">
+                    <v-list-item
+                      v-for="(item, index) in recentRecipe"
+                      :key="'recentRecipe' + index + '/' + item['recipe-id']"
+                      dense
+                    >
+                      <v-list-item-content>
+                        <div class="d-flex align-center sub-title-2 font-weight-regular">
+                          <v-avatar rounded="lg" class="mr-2" size="36"
+                            ><v-img :src="item['recipe-image']"></v-img
+                          ></v-avatar>
+                          {{ item['recipe-title'] | truncate(10, '..') }}
+                        </div>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list-item-group>
+                </v-list>
+              </v-col>
+            </v-row>
+            <v-row v-else>
+              <v-col class="caption-1 d-flex align-center justify-center grey--text">
+                최근에 본 레시피가 없어요
+              </v-col>
+            </v-row>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-navigation-drawer>
   </v-container>
 </template>
 
@@ -172,6 +226,8 @@ export default {
   },
   computed: {
     ...mapState({
+      user: (state) => state.user.user,
+      recentRecipe: (state) => state.user.recentRecipe,
       recipeNewList: (state) => state.recipe.recipeNewList,
       recipeHotList: (state) => state.recipe.recipeHotList,
       recipeRecommMainList: (state) => state.recipe.recipeRecommMainList,
@@ -180,6 +236,14 @@ export default {
       get() {
         if (this.$store.state.user.user.userId) return !this.$store.state.user.beginAlert;
         return false;
+      },
+    },
+    drawer: {
+      get() {
+        return this.$store.state.user.drawerState;
+      },
+      set(value) {
+        this.$store.commit('changeDrawerState', value);
       },
     },
   },
