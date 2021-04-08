@@ -48,6 +48,7 @@ const actions = {
       recipe_id,
       (response) => {
         commit('setRecipeInfo', response.data);
+        commit('addRecentRecipe', response.data);
         dispatch('GET_RECIPE_INGREDIENTS', response.data['recipe-id']);
       },
       (error) => {
