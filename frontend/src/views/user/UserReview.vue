@@ -3,9 +3,8 @@
     <v-row class="header-profile white pt-14">
       <v-col>
         <profile-simple-item
-          v-if="user || query"
-          :username="(user || query).userName || ''"
-          :src="(user || query).userImage || ''"
+          :username="selectedUser.userName || ''"
+          :src="selectedUser.userImage || ''"
         ></profile-simple-item>
       </v-col>
     </v-row>
@@ -56,34 +55,27 @@ export default {
     ProfileSimpleItem,
     MessageEmpty,
   },
-  props: {
-    user: Object,
-  },
   data() {
-    return {
-      query: {},
-    };
+    return {};
   },
   computed: {
     ...mapState({
       reviewList: (state) => state.review.selectedUserReviewList,
+      selectedUser: (state) => state.user.selectedUserInfo,
     }),
   },
   watch: {
     $route: {
       immediate: true,
       handler(value) {
-        if (value.query.user) {
-          this.query = value.query.user;
-          this.GET_REVIEW_LIST_BY_USERNAME(this.query.userName);
-        } else {
-          this.GET_REVIEW_LIST_BY_USERNAME(value.params.user_name);
-        }
+        const userName = value.params.user_name;
+        this.GET_REVIEW_LIST_BY_USERNAME(value.params.user_name);
+        this.GET_USERINFO_BY_NAME(userName);
       },
     },
   },
   methods: {
-    ...mapActions(['GET_REVIEW_LIST_BY_USERNAME']),
+    ...mapActions(['GET_REVIEW_LIST_BY_USERNAME', 'GET_USERINFO_BY_NAME']),
   },
 };
 </script>

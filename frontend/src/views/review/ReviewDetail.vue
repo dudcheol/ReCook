@@ -9,7 +9,6 @@
           @click="
             $router.push({
               path: `/user/${info.review.user.userName}`,
-              query: { user: info.review.user },
             })
           "
         />
