@@ -177,6 +177,7 @@ export default {
   },
   mounted() {
     this.windowHeight = window.innerHeight - 56 - 246;
+    this.swiper = this.$refs.swiper.$swiper;
   },
   beforeDestroy() {},
 };
