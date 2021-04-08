@@ -1,7 +1,7 @@
 # RECOOK
 
 > #### Welcome to 👉 [Recook](http://j4a204.p.ssafy.io/) 👈
-size : Responsive(387 x 858)
+> size : Responsive(387 x 858)
 
 
 <br>
