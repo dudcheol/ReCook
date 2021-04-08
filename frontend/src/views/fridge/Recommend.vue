@@ -93,11 +93,12 @@ export default {
   methods: {
     ...mapActions(['GET_RECOMM_RECIPE_LIST_BY_INGREDIENTS']),
     getRecommRecipe() {
-      this.GET_RECOMM_RECIPE_LIST_BY_INGREDIENTS({
-        ingredientList: this.$store.state.user.selectedIngredients,
-        userId: this.$store.state.user.user.userId ? this.$store.state.user.user.userId : '',
-        allergy: this.$store.state.user.allergyCheck,
-      });
+      if (this.$store.state.user.selectedIngredients.length <= 3)
+        this.GET_RECOMM_RECIPE_LIST_BY_INGREDIENTS({
+          ingredientList: this.$store.state.user.selectedIngredients,
+          userId: this.$store.state.user.user.userId ? this.$store.state.user.user.userId : '',
+          allergy: this.$store.state.user.allergyCheck,
+        });
     },
     onAllergyCheckClick() {
       if (this.$store.state.user.user.userId) {

@@ -7,7 +7,7 @@
             <span class="pl-1">
               선택된 재료 총
               <span class="dahong--text font-weight-black">{{ selectedIngredients.length }}</span
-              >개</span
+              >/3 개</span
             >
             <v-btn icon @click="isExpanded = !isExpanded">
               <v-icon>mdi-unfold-{{ isExpanded ? 'less' : 'more' }}-horizontal</v-icon>
@@ -46,10 +46,14 @@
             text
             rounded
             block
-            :disabled="selectedIngredients.length == 0 ? true : false"
+            :disabled="
+              selectedIngredients.length == 0 || selectedIngredients.length > 3 ? true : false
+            "
             @click="$router.push({ path: `/fridge/recomm` })"
           >
-            요리 시작하기
+            {{
+              selectedIngredients.length > 3 ? '재료는 3개 이상 선택할 수 없어요' : '요리 시작하기'
+            }}
           </v-btn>
         </v-card-actions>
       </v-card>
