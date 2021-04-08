@@ -18,7 +18,6 @@
 [이수진의 블로그](https://lsjsj92.tistory.com/565?category=853217)
 
 ### 2) Collaborative Filtering
-
 (1) 정의
 
 - 사용자의 행동양식 기반으로 추천
@@ -101,4 +100,3 @@
 (3) 알고리즘 설계
 
 - 레시피 별 좋아요 개수 내림차순 정렬
-

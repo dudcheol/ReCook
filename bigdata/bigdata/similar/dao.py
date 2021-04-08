@@ -3,13 +3,11 @@ from django.db import models
 from django.db import connection
 from pandas import Series, DataFrame
 
-
 def review_test():
     review = Review.objects.all()
 
     for hi in review:
         print(hi.review_context)
-
 
 def recipe_test():
     total_recipe = {}
