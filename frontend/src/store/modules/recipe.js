@@ -29,10 +29,12 @@ const state = () => ({
 const getters = {
   hasAllergyOfUser(state, getters, rootState) {
     const allergyList = rootState.user.user.allergyList;
-    for (let i = 0; i < state.recipeIngredients.length; i++) {
-      const e = state.recipeIngredients[i];
-      if (allergyList.includes(e)) {
-        return true;
+    if (allergyList) {
+      for (let i = 0; i < state.recipeIngredients.length; i++) {
+        const e = state.recipeIngredients[i];
+        if (allergyList.includes(e)) {
+          return true;
+        }
       }
     }
     return false;
