@@ -2,6 +2,10 @@
 
 > #### Welcome to 👉🏻 [Recook](http://j4a204.p.ssafy.io/) 👈🏻
 
+
+
+<br>
+
 ## Project Summary 🧭
 
 재료 기반 레시피 추천 서비스
@@ -32,6 +36,10 @@
 - [UCC]()
 
 
+
+
+
+<br>
 
 ## Project Info :pushpin:
 
@@ -100,6 +108,10 @@
     $ python manage.py runserver
     ```
 
+<br>
+
+
+
 ### Tech Stack 🧩
 
 - Backend : Spring Boot, Django, MariaDB
@@ -107,9 +119,15 @@
 
 ![image](/uploads/5b788ee36c740c2adbdcbcc78fa569a7/image.png)
 
+
+
 ### Database Modeling :link:
 
 ![image](/uploads/f3b7b3bc1348160f884823b1186bd184/image.png)
+
+
+
+<br>
 
 
 
@@ -138,6 +156,8 @@
 ##### 	🎓 사용한 빅데이터 추천 알고리즘
 - 협업 필터링 Collaborative Filtering
 - 컨텐츠 기반 필터링 Content based Filtering
+
+<br>
 
 
 
