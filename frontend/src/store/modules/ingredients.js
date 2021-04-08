@@ -17,9 +17,7 @@ const actions = {
       (response) => {
         commit('setBigList', response.data);
       },
-      (error) => {
-        console.log('%cingredients.js line:21 error', 'color: #007acc;', error);
-      }
+      () => {}
     );
   },
   GET_MIDDLE_LIST({ commit }, bigId) {
@@ -28,9 +26,7 @@ const actions = {
       (response) => {
         commit('setMiddleList', response.data);
       },
-      (error) => {
-        console.log('%cingredients.js line:32 error', 'color: #007acc;', error);
-      }
+      () => {}
     );
   },
   GET_SMALL_LIST({ commit }, midId) {
@@ -40,9 +36,7 @@ const actions = {
       (response) => {
         commit('setSmallList', response.data);
       },
-      (error) => {
-        console.log('%cingredients.js line:43 error', 'color: #007acc;', error);
-      }
+      () => {}
     );
   },
   ADD_INGREDIENT_ITEM({ commit }, ingredient) {

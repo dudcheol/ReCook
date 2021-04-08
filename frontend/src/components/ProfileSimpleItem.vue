@@ -13,10 +13,10 @@
     </div>
     <v-avatar
       v-if="$store.state.user.user.userName === username"
-      class="d-flex align-center justify-center ml-auto rounded-circle dahong white--text caption pa-1 font-weight-medium"
+      class="d-flex align-center justify-center ml-auto rounded-circle grey lighten-2 white--text caption pa-1 font-weight-medium"
       size="24"
     >
-      ME
+      me
     </v-avatar>
   </div>
 </template>

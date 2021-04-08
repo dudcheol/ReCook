@@ -10,8 +10,8 @@ function getReviewById(reviewId, success, fail) {
     .catch(fail);
 }
 
-function getAllReviews(page, size, success, fail) {
-  instance
+async function getAllReviews(page, size, success, fail) {
+  await instance
     .get(`${COMMON}/all/image`, { params: { page, size } })
     .then(success)
     .catch(fail);

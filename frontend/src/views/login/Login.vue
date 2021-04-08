@@ -92,7 +92,6 @@ export default {
   },
   mounted() {
     this.windowWidth = window.innerWidth;
-    console.log('%cLogin.vue line:95 window.innerHeight', 'color: #007acc;', this.windowWidth);
   },
 };
 </script>

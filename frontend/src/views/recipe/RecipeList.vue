@@ -1,8 +1,8 @@
 <template>
   <div class="grey lighten-4 px-4 pb-4">
     <RecipeRecommCardItem
-      v-for="item in list"
-      :key="item.recipeId"
+      v-for="(item, index) in list"
+      :key="'reciperecomm' + index + '/' + item.recipeId"
       :data="item"
       class="mt-4"
       @click="$router.push({ path: `/recipe/${item.recipeId || item['recipe-id']}` })"
@@ -33,18 +33,7 @@ export default {
     };
   },
   computed: {},
-  watch: {
-    $route: {
-      immediate: true,
-      handler() {
-        // console.log(
-        //   '%cRecipeList.vue line:39 this.$refs.InfiniteLoading',
-        //   'color: #007acc;',
-        //   this.$refs.InfiniteLoading
-        // );
-      },
-    },
-  },
+  watch: {},
   methods: {
     infiniteHandler($state) {
       switch (this.$route.path.split('/')[3]) {

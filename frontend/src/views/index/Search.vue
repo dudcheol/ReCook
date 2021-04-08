@@ -57,7 +57,8 @@ export default {
         this.page = 0;
         this.list = [];
         this.title = value;
-        this.$refs.InfiniteLoading.stateChanger.reset();
+        if (this.$refs.InfiniteLoading && this.title)
+          this.$refs.InfiniteLoading.stateChanger.reset();
       },
     },
   },
@@ -70,8 +71,6 @@ export default {
         this.size,
         (response) => {
           const data = response.data.content;
-
-          console.log('%cSearch.vue line:49 data', 'color: #007acc;', data);
 
           if (data.length) {
             this.page += 1;
@@ -88,7 +87,6 @@ export default {
     },
   },
   deactivated() {
-    console.log('%cSearch.vue line:68', 'color: #007acc;');
     this.page = 0;
     this.list = [];
     this.$store.commit('setSearchTitle', '');

@@ -1,25 +1,5 @@
 <template>
   <v-app-bar flat color="white" fixed>
-    <!-- <div class="d-flex justify-space-between align-center" style="width:100%">
-      <div class="d-flex align-center justify-center">
-        <v-btn icon @click="$router.go(-1)">
-          <v-icon>mdi-{{ left }}</v-icon>
-        </v-btn>
-      </div>
-      <div class="d-flex justify-space-around align-center">
-        <span class="font-weight-medium text-subtitle-1">{{ center }}</span>
-      </div>
-      <div class="d-flex align-center justify-center">
-        <div v-if="right">
-          <v-btn
-            icon
-            @click="$router.push({ path: `${$route.params.recipe_id}/write`, name: 'RecipeWrite' })"
-            ><v-icon>mdi-pencil</v-icon></v-btn
-          >
-          <v-btn icon><v-icon>mdi-heart</v-icon></v-btn>
-        </div>
-      </div>
-    </div> -->
     <v-row>
       <v-col cols="2" class="d-flex align-center pa-0">
         <v-btn icon @click="$router.go(-1)" color="black">
@@ -30,9 +10,6 @@
         <span class="font-weight-regular">{{ center }}</span>
       </v-col>
       <v-col cols="2" class="d-flex align-center justify-end pa-0 mr-1">
-        <!-- <v-btn v-for="(item, index) in right.split('#')" :key="'nheader' + index" icon>
-          <v-icon>mdi-{{ item }}</v-icon>
-        </v-btn> -->
         <div v-if="right" class="d-flex">
           <v-btn
             icon
@@ -83,9 +60,7 @@ export default {
         (response) => {
           this.likeFlag = response.data;
         },
-        (error) => {
-          console.log(error);
-        }
+        () => {}
       );
     }
   },
@@ -180,9 +155,7 @@ export default {
             this.likeFlag = 'No';
           }
         },
-        (error) => {
-          console.log(error);
-        }
+        () => {}
       );
     },
   },
