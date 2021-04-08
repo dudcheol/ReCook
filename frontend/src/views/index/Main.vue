@@ -40,6 +40,7 @@
               v-if="recipeRecommMainList.length"
               :datas="recipeRecommMainList"
               :type="'recommend'"
+              total
             />
             <div v-else class="d-flex flex-column justify-center align-center pb-4">
               <VueLottiePlayer
@@ -165,6 +166,7 @@ export default {
           delay: 5000,
         },
         loop: true,
+        simulateTouch: false,
       },
     };
   },

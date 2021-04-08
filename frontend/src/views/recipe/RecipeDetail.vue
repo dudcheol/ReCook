@@ -1,6 +1,6 @@
 <template>
   <div>
-    <swiper ref="swiper" class="swiper" :options="swiperOption">
+    <swiper ref="swiper" class="swiper" :options="swiperOption" :auto-update="true">
       <swiper-slide>
         <RecipeSlideThumbnail
           :imageUrl="recipeInfo['recipe-main-image']"
@@ -86,8 +86,6 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
-import 'swiper/css/swiper.css';
 import RecipeSlideInfo from '@/components/RecipeSlideInfo.vue';
 import RecipeSlideItem from '@/components/RecipeSlideItem.vue';
 import RecipeSlideThumbnail from '@/components/RecipeSlideThumbnail.vue';
@@ -96,8 +94,6 @@ import VueLottiePlayer from 'vue-lottie-player';
 
 export default {
   components: {
-    Swiper,
-    SwiperSlide,
     RecipeSlideInfo,
     RecipeSlideItem,
     RecipeSlideThumbnail,
@@ -115,7 +111,10 @@ export default {
         slidesPerView: 1,
         spaceBetween: 30,
         pagination: { el: '.swiper-pagination', type: 'progressbar' },
-        navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+        watchSlidesVisibility: true,
+        watchSlidesProgress: true,
+        allowTouchMove: true,
+        simulateTouch: false,
       },
       swiper: null,
       windowHeight: 0,
@@ -175,15 +174,8 @@ export default {
       if (str) return str.split('####');
       return [];
     },
-    onSwiper(swiper) {
-      console.log(swiper);
-    },
-    onSlideChange() {
-      console.log('slide change');
-    },
   },
   mounted() {
-    this.swiper = this.$refs.swiper.$swiper;
     this.windowHeight = window.innerHeight - 56 - 246;
   },
   beforeDestroy() {},
