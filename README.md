@@ -1,6 +1,6 @@
 # RECOOK
 
-> #### Welcome to 👉🏻 [Recook](http://j4a204.p.ssafy.io/) 👈🏻
+> #### Welcome to 👉 [Recook](http://j4a204.p.ssafy.io/) 👈
 
 
 
@@ -93,6 +93,10 @@
 
 - Mariadb
 
+  - create tables
+
+    run dump.sql => [dump.sql](./document/dump.sql)
+
 - Django
 
   - Project Setup
@@ -165,17 +169,39 @@
 
 > 각 페이지 별 소개
 
-- Main
+- ##### Survey
+
+  ![취향조사](/uploads/600193d116666ca0fa3dc337a445d341/취향조사.gif)
+
+  
+
+- ##### Main
 
   ![메인화면](/uploads/70803c76aac1daa139723fa0ca8dd08f/메인화면.gif)
 
   
 
-- Recipe Detail
+- ##### Recipe Detail
 
   ![레시피_상세](/uploads/b975ec8ad5da02ede9100bbf5674bf37/레시피_상세.gif)
 
   
+
+- ##### Review
+
+  ![리뷰_모아보기](/uploads/123659d2da8190885fd68416ed0f0051/리뷰_모아보기.gif)
+
+  
+
+- ##### MyPage(My Review & Like)
+
+  ![리뷰_찜](/uploads/1bc248758e825f52e09be527d7284b0d/리뷰_찜.gif)
+
+  
+
+- ##### Cook Video
+
+  ![유튜브](/uploads/e0e5aa2d4841acd54d59da1a8c96aa01/유튜브.gif)
 
 ### Recipe Source 📕
 
