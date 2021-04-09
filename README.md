@@ -47,33 +47,35 @@
 
 #### 💻 Front-end
 
-- Project Setup
+- Vue.js
 
-  - ```bash
+  - Project Setup
+
+    ```bash
     $ npm install 
     ```
 
-- Compiles and hot-reloads for development
+  - Compiles and hot-reloads for development
 
-  - ```bash
+    ```bash
     $ npm run serve
     ```
 
-- Compiles and minifies for production
+  - Compiles and minifies for production
 
-  - ```bash
+    ```bash
     $ npm run build
     ```
 
-- Run your tests
+  - Run your tests
 
-  - ```bash
+    ```bash
     $ npm run test
     ```
 
-- Lints and fixes files
+  - Lints and fixes files
 
-  - ```bash
+    ```bash
     $ npm run lint
     ```
 
