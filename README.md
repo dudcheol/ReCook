@@ -33,7 +33,7 @@
 - [Architecture & Usecase_Diagram](./document/Architecture.md)
 - [Sequance_Diagram](./document/SequanceDiagram.md)
 - [PPT](./document/특화PJT_최종발표_A204_최종.pdf)
-- [UCC]()
+- [UCC](https://www.youtube.com/watch?v=tknwLMpBXCE)
 
 
 
