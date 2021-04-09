@@ -184,9 +184,6 @@
 - ##### Survey
 
   ![취향조사](/uploads/600193d116666ca0fa3dc337a445d341/취향조사.gif)
-
-  
-
 - ##### Main
 
   ![메인화면](/uploads/70803c76aac1daa139723fa0ca8dd08f/메인화면.gif)
