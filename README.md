@@ -135,13 +135,13 @@
 - Backend : Spring Boot, Django, MariaDB
 - Frontend : Vue.js
 
-![image](/uploads/5b788ee36c740c2adbdcbcc78fa569a7/image.png)
+![기술스택](https://user-images.githubusercontent.com/40655666/114400390-deeb3900-9bdc-11eb-8913-7719bd7beb6c.png)
 
 
 
 ### Database Modeling :link:
 
-![image](/uploads/f3b7b3bc1348160f884823b1186bd184/image.png)
+![erd](https://user-images.githubusercontent.com/40655666/114400394-e0b4fc80-9bdc-11eb-9483-1c6f6db300b4.png)
 
 
 
@@ -181,38 +181,38 @@
 
 ### Pages in Detail :mag:
 
-> 각 페이지 별 소개
+> 각 페이지 별 스크린샷 (GIF)
 
 - ##### Survey
 
-  ![취향조사](/uploads/600193d116666ca0fa3dc337a445d341/취향조사.gif)
+![취향조사](https://user-images.githubusercontent.com/40655666/114399700-2f15cb80-9bdc-11eb-996e-b978cfb64b7a.gif)
+
 - ##### Main
 
-  ![메인화면](/uploads/70803c76aac1daa139723fa0ca8dd08f/메인화면.gif)
 
   
 
 - ##### Recipe Detail
 
-  ![레시피_상세](/uploads/b975ec8ad5da02ede9100bbf5674bf37/레시피_상세.gif)
-
   
 
 - ##### Review
+![리뷰모아보기](https://user-images.githubusercontent.com/40655666/114399862-5a001f80-9bdc-11eb-9b41-d1e73b1e7633.gif)
 
-  ![리뷰_모아보기](/uploads/123659d2da8190885fd68416ed0f0051/리뷰_모아보기.gif)
 
   
 
 - ##### MyPage(My Review & Like)
+![리뷰찜](https://user-images.githubusercontent.com/40655666/114399877-5ec4d380-9bdc-11eb-91e2-0ea6ff1e74fa.gif)
 
-  ![리뷰_찜](/uploads/1bc248758e825f52e09be527d7284b0d/리뷰_찜.gif)
+
 
   
 
 - ##### Cook Video
+![유튜브](https://user-images.githubusercontent.com/40655666/114399903-63898780-9bdc-11eb-97aa-ce6ce053f159.gif)
 
-  ![유튜브](/uploads/e0e5aa2d4841acd54d59da1a8c96aa01/유튜브.gif)
+
 
 ### Recipe Source 📕
 
