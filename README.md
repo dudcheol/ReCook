@@ -188,13 +188,14 @@
 ![취향조사](https://user-images.githubusercontent.com/40655666/114399700-2f15cb80-9bdc-11eb-996e-b978cfb64b7a.gif)
 
 - ##### Main
+- ![메인_리뷰장려팝업](https://user-images.githubusercontent.com/40655666/114400961-72246e80-9bdd-11eb-9392-549aa1697d6d.png)![메인_로그인](https://user-images.githubusercontent.com/40655666/114400945-6fc21480-9bdd-11eb-95aa-43a5676f21fc.png)![메인_최근본레시피](https://user-images.githubusercontent.com/40655666/114400965-73559b80-9bdd-11eb-963b-e4b0fb54598c.png)
 
 
   
 
 - ##### Recipe Detail
 
-  
+![레시피_상세_썸네일2](https://user-images.githubusercontent.com/40655666/114401040-82d4e480-9bdd-11eb-9b63-9b9225d9aaa1.png)![레시피_상세_정보](https://user-images.githubusercontent.com/40655666/114401061-87010200-9bdd-11eb-9366-a560fd578714.png)![레시피_상세_정보2](https://user-images.githubusercontent.com/40655666/114401068-87999880-9bdd-11eb-9586-7ec211b948eb.png)![레시피_상세_요리순서](https://user-images.githubusercontent.com/40655666/114401054-85cfd500-9bdd-11eb-810e-df953ab57e5d.png)![레피시_상세_마지막](https://user-images.githubusercontent.com/40655666/114401072-88322f00-9bdd-11eb-80c9-dac8e3285c5f.png)
 
 - ##### Review
 ![리뷰모아보기](https://user-images.githubusercontent.com/40655666/114399862-5a001f80-9bdc-11eb-9b41-d1e73b1e7633.gif)
