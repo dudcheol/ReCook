@@ -1,0 +1,56 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@egjs/vue-infinitegrid": "^3.2.2",
+    "axios": "^0.21.1",
+    "core-js": "^3.6.5",
+    "firebase": "^8.3.2",
+    "sass-loader": "^10.1.1",
+    "swiper": "^5.3.7",
+    "vue": "^2.6.11",
+    "vue-awesome-swiper": "^4.1.0",
+    "vue-infinite-loading": "^2.4.5",
+    "vue-lottie-player": "^0.1.9",
+    "vue-router": "^3.5.1",
+    "vue-youtube": "^1.4.0",
+    "vue-youtube-embed": "^2.2.2",
+    "vuetify": "^2.4.6",
+    "vuex": "^3.6.2",
+    "vuex-persistedstate": "^4.0.0-beta.3"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
